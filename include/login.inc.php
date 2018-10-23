@@ -2,10 +2,9 @@
 session_start();
 if (isset($_POST['submit']))
 {
-    include_once 'install.inc.php';
-
-    $uid = mysqli_real_escape_string($conn, $_POST['uid']);
-    $pwd = mysqli_real_escape_string($conn, $_POST['pwd']);
+    include_once '../config/database.php';
+    $uid = mysqli_real_escape_string($connexion, $_POST['uid']);
+    $pwd = mysqli_real_escape_string($connexion, $_POST['pwd']);
 
     //Errors handlers
     //Check for empty fields
@@ -18,7 +17,7 @@ if (isset($_POST['submit']))
     {
         // Check if there is an user with this uid
         $sql = "SELECT * FROM users WHERE user_uid='$uid' OR user_email='$uid'";
-        $result = mysqli_query($conn, $sql);
+        $result = mysqli_query($connexion, $sql);
         $resultCheck = mysqli_num_rows($result);
         if ($resultCheck < 1)
         {

@@ -1,12 +1,13 @@
 <?PHP
 if (isset($_POST['submit']))
 {
-    include_once 'install.inc.php';
-    $first = mysqli_real_escape_string($conn, $_POST['first']);
-    $last = mysqli_real_escape_string($conn, $_POST['last']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $uid = mysqli_real_escape_string($conn, $_POST['uid']);
-    $pwd = mysqli_real_escape_string($conn, $_POST['pwd']);
+    include_once '../config/database.php';
+
+    $first = $connexion->quote($_POST['first']);
+    $last = $connexion->quote($_POST['last']);
+    $email = $connexion->quote($_POST['email']);
+    $uid = $connexion->quote($_POST['uid']);
+    $pwd = $connexion->quote($_POST['pwd']);
 
     //Errors handlers
     //Check for empty fields
@@ -35,7 +36,7 @@ if (isset($_POST['submit']))
             {
                 // Check if there is an user with this uid
                 $sql = "SELECT * FROM users WHERE user_uid='$uid'";
-                $result = mysqli_query($conn, $sql);
+                $result = mysqli_query($connexion, $sql);
                 $resultCheck = mysqli_num_rows($result);
                 if ($resultCheck > 0)
                 {
@@ -51,8 +52,8 @@ if (isset($_POST['submit']))
                     //Check the password > hashing ou hash("whirlpool", $pwd);
                     $hashpwd = password_hash($pwd, PASSWORD_DEFAULT);
                     //Inser the user into the database
-                    $sql = "INSERT INTO users (user_first, user_last, user_email, user_uid, user_pwd, user_admin) VALUES ('$first', '$last', '$email', '$uid', '$hashpwd', 0);";
-                    $result = mysqli_query($conn, $sql);
+                    $sql = "INSERT INTO users (user_id, user_first, user_last, user_email, user_uid, user_pwd, user_admin) VALUES (0, '$first', '$last', '$email', '$uid', '$hashpwd', 0);";
+                    $result = mysqli_query($connexion, $sql);
                     header("Location: ../signup.php?signup=success");
                     exit();
                 }
