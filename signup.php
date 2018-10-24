@@ -14,18 +14,10 @@
             </form>
         </div>
     </section>
-
 <?PHP
-    $sql = "SELECT * FROM users;";
-    $result = mysqli_query($connexion, $sql);
-    $resultCheck = mysqli_num_rows($result);
-
-    if ($resultCheck > 0)
+    if(isset($erreur))
     {
-        while ($row = mysqli_fetch_assoc($result))
-        {
-            echo $row['user_uid']."<br>";
-        }
+        echo '<font color="red">'.$erreur."</font>";
     }
 ?>
 <?PHP

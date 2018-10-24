@@ -21,14 +21,15 @@ if ($pdo = new PDO('mysql:host='.$DB_HOST, $DB_USER, $DB_PASSWORD))
     if($connexion)
     {
         // on créer la requête (créer la table users)
-        $requete = 'CREATE TABLE IF NOT EXISTS users (
+        $requete = "CREATE TABLE IF NOT EXISTS users (
             user_id int(11) not null PRIMARY kEY AUTO_INCREMENT,
             user_first varchar(256) not null,
             user_last varchar(256) not null,
             user_email varchar(256) not null,
             user_uid varchar(256) not null,
             user_pwd varchar(512) not null,
-            user_admin int(1) not null);';
+            user_key varchar(256) not null,
+            user_confirm int(1) not null DEFAULT '0');";
     
         // on prépare et on exécute la requête
         $connexion->prepare($requete)->execute();
