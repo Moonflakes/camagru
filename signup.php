@@ -19,6 +19,11 @@
     {
         echo '<font color="red">'.$erreur."</font>";
     }
+    if(isset($_SESSION))
+    {
+        echo $_SESSION['erreur'];
+        $_SESSION['erreur'] = "";
+    }
 ?>
 <?PHP
     include_once 'footer.php';

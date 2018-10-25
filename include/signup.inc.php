@@ -1,4 +1,6 @@
 <?PHP
+session_start();
+
 if (isset($_POST['submit']))
 {
     include_once '../config/database.php';
@@ -20,7 +22,7 @@ if (isset($_POST['submit']))
         //Check if input characters are valid
         if (!preg_match("/^[a-zA-Z]*$/", $first) || !preg_match("/^[a-zA-Z]*$/", $last))
         {
-            $erreur = "Nom/Prénom invalide !";
+            $_SESSION['erreur'] = "Nom/Prénom invalide !";
             header("Location: ../signup.php?signup=invalid");
             exit();
         }
@@ -29,7 +31,7 @@ if (isset($_POST['submit']))
             //Check if email is valid
             if (!filter_var($email, FILTER_VALIDATE_EMAIL))
             {
-                $erreur = "e-mail invalide !";
+                $_SESSION['erreur'] = "e-mail invalide !";
                 header("Location: ../signup.php?signup=email");
                 exit();
             }
@@ -42,7 +44,7 @@ if (isset($_POST['submit']))
                 $uidexist = $req->rowCount();
                 if ($uidexist > 0)
                 {
-                    $erreur = "Nom d'utilisateur déjà utilisé !";
+                    $_SESSION['erreur'] = "Nom d'utilisateur déjà utilisé !";
                     header("Location: ../signup.php?signup=usertaken");
                     exit();
                 }
@@ -60,9 +62,8 @@ if (isset($_POST['submit']))
                         VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
                     $connexion->prepare($reqinsert)->execute(array(0, $first, $last, $email, $uid, $hashpwd, $key, 0));
                     $header="MIME-Version: 1.0\r\n";
-                    $header.='From:"Camagru.com"<support@camagru.com>'."\n";
+                    $header.='From: Camagru.com <support@camagru.com>'."\n";
                     $header.='Content-Type:text/html; charset="uft-8"'."\n";
-                    $header.='Content-Transfer-Encoding: 8bit';
                     $message='
                     <html>
                         <body>
@@ -72,9 +73,9 @@ if (isset($_POST['submit']))
                         </body>
                     </html>
                     ';
-                    mail($email, "Confirmation de compte", $message, $header);
-                    $erreur = "Votre compte a bien été créé ! <a href=\"connexion.php\">Me connecter</a>";
-                    //header("Location: ../signup.php?signup=success");
+                    $mail = mail($email, "Confirmation de compte", $message, $header);
+                    $_SESSION['erreur'] = 'Votre compte a bien été créé ! </br> Veuillez vérifier votre boîte de réception.';
+                    header("Location: ../signup.php?signup=success");
                     exit();
                 }
             }
