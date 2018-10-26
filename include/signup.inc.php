@@ -4,17 +4,18 @@ session_start();
 if (isset($_POST['submit']))
 {
     include_once '../config/database.php';
-    $first = htmlspecialchars($_POST['first']);
-    $last = htmlspecialchars($_POST['last']);
-    $email = htmlspecialchars($_POST['email']);
-    $uid = htmlspecialchars($_POST['uid']);
-    $pwd = htmlspecialchars($_POST['pwd']);
+    $_SESSION['first'] = $first = htmlspecialchars($_POST['first']);
+    $_SESSION['last'] = $last = htmlspecialchars($_POST['last']);
+    $_SESSION['email'] = $email = htmlspecialchars($_POST['email']);
+    $_SESSION['uid'] = $uid = htmlspecialchars($_POST['uid']);
+    $_SESSION['pwd'] = $pwd = htmlspecialchars($_POST['pwd']);
 
     //Errors handlers
     //Check for empty fields
     if (empty($first) || empty($last) || empty($email) || empty($uid) || empty($pwd))
     {
-        header("Location: ../signup.php?signup=empty"); // ? include a message
+        $_SESSION['erreur'] = "Veuillez remplir tous les champs!";
+        header("Location: ../signup.php?error=empty"); // ? include a message
         exit();
     }
     else
@@ -22,8 +23,16 @@ if (isset($_POST['submit']))
         //Check if input characters are valid
         if (!preg_match("/^[a-zA-Z]*$/", $first) || !preg_match("/^[a-zA-Z]*$/", $last))
         {
-            $_SESSION['erreur'] = "Nom/Prénom invalide !";
-            header("Location: ../signup.php?signup=invalid");
+            if (!preg_match("/^[a-zA-Z]*$/", $last))
+            {
+                $_SESSION['erreur'] = "Nom invalide !";
+                header("Location: ../signup.php?error=last");
+            }
+            else
+            {
+                $_SESSION['erreur'] = "Prénom invalide !";
+                header("Location: ../signup.php?error=first");
+            }
             exit();
         }
         else
@@ -32,7 +41,7 @@ if (isset($_POST['submit']))
             if (!filter_var($email, FILTER_VALIDATE_EMAIL))
             {
                 $_SESSION['erreur'] = "e-mail invalide !";
-                header("Location: ../signup.php?signup=email");
+                header("Location: ../signup.php?error=email");
                 exit();
             }
             else
@@ -45,7 +54,7 @@ if (isset($_POST['submit']))
                 if ($uidexist > 0)
                 {
                     $_SESSION['erreur'] = "Nom d'utilisateur déjà utilisé !";
-                    header("Location: ../signup.php?signup=usertaken");
+                    header("Location: ../signup.php?error=uid");
                     exit();
                 }
                 else
@@ -75,7 +84,7 @@ if (isset($_POST['submit']))
                     ';
                     $mail = mail($email, "Confirmation de compte", $message, $header);
                     $_SESSION['erreur'] = 'Votre compte a bien été créé ! </br> Veuillez vérifier votre boîte de réception.';
-                    header("Location: ../signup.php?signup=success");
+                    header("Location: ../signup.php?error=success");
                     exit();
                 }
             }
