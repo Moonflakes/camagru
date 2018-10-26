@@ -50,8 +50,11 @@
     var type_erreur = <?PHP echo json_encode($_GET['error']); ?>;
         $(document).ready(function () 
         {
-            $("#"+type_erreur).after("<tr><td><font color='red'>"+ erreur +"</font></td></tr>");
-            $("#_"+type_erreur).css('backgroundColor', 'rgba(248, 207, 72, 0.3)');
+            if (erreur)
+            {
+                $("#"+type_erreur).after("<tr><td><font color='red'>"+ erreur +"</font></td></tr>");
+                $("#_"+type_erreur).css('backgroundColor', 'rgba(248, 207, 72, 0.3)');
+            }
         })
     </script>
 <?PHP
