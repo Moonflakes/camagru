@@ -74,7 +74,7 @@ if (isset($_POST['submit']))
         <html>
             <body>
                 <div align="center">
-                    <a href="http://'.$_SERVER['HTTP_HOST'].str_replace("include/signup.inc.php", "", $_SERVER['PHP_SELF']).'/include/confirm.php?uid='.urlencode($uid).'&key='.$key.'">Confirmez votre compte !</a>
+                    <a href="http://'.$_SERVER['HTTP_HOST'].str_replace("/include/signup.inc.php", "", $_SERVER['PHP_SELF']).'/include/confirm.php?uid='.urlencode($uid).'&key='.$key.'">Confirmez votre compte !</a>
                 </div>
             </body>
         </html>
