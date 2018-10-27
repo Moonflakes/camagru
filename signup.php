@@ -62,7 +62,7 @@
 <?PHP
     if(isset($_SESSION['erreur']))
         unset($_SESSION['erreur']);
-    if (isset($_SESSION['success']))
+    else if (isset($_SESSION['success']))
     {
         echo '<font color="red">'.$_SESSION['success'].'</font>';
         unset($_SESSION['success']);

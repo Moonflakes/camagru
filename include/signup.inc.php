@@ -40,10 +40,7 @@ if (isset($_POST['submit']))
         $req->execute(array($uid));
         $uidexist = $req->rowCount();
         if ($uidexist > 0)
-        {
             $_SESSION['erreur']['uid'] = "Nom d'utilisateur déjà utilisé !";
-            exit();
-        }
     }
     
     //Check for first password
@@ -52,7 +49,7 @@ if (isset($_POST['submit']))
 
     if (isset($_SESSION['erreur']))
     {
-        header("Location: ../signup.php?error");
+        header("Location: ../signup.php?signup=error");
         exit();
     }
     else
@@ -81,7 +78,7 @@ if (isset($_POST['submit']))
         ';
         $mail = mail($email, "Confirmation de compte", $message, $header);
         $_SESSION['success'] = 'Votre compte a bien été créé ! </br> Veuillez vérifier votre boîte de réception.';
-        header("Location: ../signup.php?success");
+        header("Location: ../signup.php?signup=success");
         exit();
     }
 }

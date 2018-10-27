@@ -18,18 +18,11 @@
 <?php
     if (isset($_SESSION['u_id']))
     {
-        echo '<form action="include/logout.inc.php" method="POST">
-                <button type="submit" name="submit">Logout</button>
-            </form>';
+        include_once 'logout.php';
     }
     else
     {
-        echo '<form id="login" action="include/login.inc.php" method="POST">
-                <input type="text" name="uid" placeholder="Username/e-mail">
-                <input type="password" name="pwd" placeholder="Password">
-                <button type="submit" name="submit">Login</button>
-            </form>
-            <a href="signup.php" id="signup-link">Sign up</a>';
+        include_once 'login.php';
     }
 ?>
                 </div>

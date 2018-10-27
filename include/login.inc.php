@@ -3,8 +3,8 @@ session_start();
 if (isset($_POST['submit']))
 {
     include_once '../config/setup.php';
-    $uid = mysqli_real_escape_string($connexion, $_POST['uid']);
-    $pwd = mysqli_real_escape_string($connexion, $_POST['pwd']);
+    $_SESSION['uid'] = $uid = htmlspecialchars($_POST['uid']);
+    $_SESSION['pwd'] = $pwd = htmlspecialchars($_POST['pwd']);
 
     //Errors handlers
     //Check for empty fields
@@ -16,41 +16,42 @@ if (isset($_POST['submit']))
     else
     {
         // Check if there is an user with this uid
-        $sql = "SELECT * FROM users WHERE user_uid='$uid' OR user_email='$uid'";
-        $result = mysqli_query($connexion, $sql);
-        $resultCheck = mysqli_num_rows($result);
-        if ($resultCheck < 1)
+        $requid = "SELECT * FROM users WHERE user_uid=? OR user_email=?";
+        $req = $connexion->prepare($requid);
+        $req->execute(array($uid, $uid));
+        $uidexist = $req->rowCount();
+        if ($uidexist < 1)
+            $_SESSION['erreur']['uid'] = "Nom d'utilisateur/e-mail est incorrect !";
+        else if ($userinfo = $req->fetch())
+        {
+            // fetch pour mettre toutes les informations de l'utilisateur dans un tableau de données
+            //De-hashing the password
+            $hashpwdCheck = password_verify($pwd, $userinfo['user_pwd']);
+            if ($hashpwdCheck == false)
+                $_SESSION['erreur']['pwd'] = "Mot de passe incorrect !";
+        }
+        if (isset($_SESSION['erreur']))
         {
             header("Location: ../index.php?login=error");
             exit();
         }
-        else if ($row = mysqli_fetch_assoc($result))
+        else
         {
-            //De-hashing the password
-            $hashpwdCheck = password_verify($pwd, $row['user_pwd']);
-            if ($hashpwdCheck == false)
-            {
-                header("Location: ../index.php?login=error");
-                exit();
-            }
-            else if ($hashpwdCheck == true)
-            {
-                //Log in the user here
-                $_SESSION['u_id'] = $row['user_id'];
-                $_SESSION['u_first'] = $row['user_first'];
-                $_SESSION['u_last'] = $row['user_last'];
-                $_SESSION['u_email'] = $row['user_email'];
-                $_SESSION['u_uid'] = $row['user_uid'];
-                $_SESSION['u_admin'] = $row['user_admin'];
-                header("Location: ../index.php?login=success");
-                exit();
-            }
+            //Log in the user here
+            $_SESSION['u_id'] = $userinfo['user_id'];
+            $_SESSION['u_first'] = $userinfo['user_first'];
+            $_SESSION['u_last'] = $userinfo['user_last'];
+            $_SESSION['u_email'] = $userinfo['user_email'];
+            $_SESSION['u_uid'] = $userinfo['user_uid'];
+            $_SESSION['u_admin'] = $userinfo['user_admin'];
+            header("Location: ../index.php?login=success");
+            exit();
         }
     }
 }
 else
 {
-    header("Location: ../index.php?login=error");
+    header("Location: ../index.php");
     exit();
 }
 
