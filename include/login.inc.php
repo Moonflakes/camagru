@@ -2,7 +2,7 @@
 session_start();
 if (isset($_POST['submit']))
 {
-    include_once '../config/database.php';
+    include_once '../config/setup.php';
     $uid = mysqli_real_escape_string($connexion, $_POST['uid']);
     $pwd = mysqli_real_escape_string($connexion, $_POST['pwd']);
 

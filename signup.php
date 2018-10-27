@@ -47,21 +47,25 @@
     </section>
     <script type="text/javascript">
     var erreur = <?PHP echo json_encode($_SESSION['erreur']); ?>;
-    var type_erreur = <?PHP echo json_encode($_GET['error']); ?>;
         $(document).ready(function () 
         {
             if (erreur)
             {
-                $("#"+type_erreur).after("<tr><td><font color='red'>"+ erreur +"</font></td></tr>");
-                $("#_"+type_erreur).css('backgroundColor', 'rgba(248, 207, 72, 0.3)');
+                $.each(erreur,function(index,element)
+                {
+                    $("#"+index).after("<tr><td><font color='red'>"+ element +"</font></td></tr>");
+                    $("#_"+index).css('backgroundColor', 'rgba(248, 207, 72, 0.3)');
+                })
             }
         })
     </script>
 <?PHP
-    if(isset($_SESSION))
+    if(isset($_SESSION['erreur']))
+        unset($_SESSION['erreur']);
+    if (isset($_SESSION['success']))
     {
-        echo '<font color="red">'.$_SESSION['erreur'].'</font>';
-        $_SESSION['erreur'] = "";
+        echo '<font color="red">'.$_SESSION['success'].'</font>';
+        unset($_SESSION['success']);
     }
 ?>
 <?PHP

@@ -1,5 +1,5 @@
 <?php
-include_once '../config/database.php';
+include_once '../config/setup.php';
 session_start();
 if(isset($_GET['uid'], $_GET['key']) AND !empty($_GET['uid']) AND !empty($_GET['key'])) 
 {
