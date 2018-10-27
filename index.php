@@ -20,9 +20,13 @@
 <?PHP
     if (isset($_SESSION['erreur']))
     {
-        //supprimer le message d'erreur
+        //supprimer le message d'erreur de login
         foreach ($_SESSION['erreur'] as $key => $value)
+        {
             echo '<font color="red">'.$value.'</font></br>';
+            if ($key == "uid")
+                echo "<font color='blue'>Si vous n'être pas encore inscrit, inscrivez-vous en cliquant sur Sign up !</font></br>";
+        }
         unset($_SESSION['erreur']);
     }
     else if (isset($_SESSION['u_id']))
