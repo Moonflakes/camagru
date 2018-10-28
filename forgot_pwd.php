@@ -8,8 +8,7 @@
                 <table class="signup-form">
                     <tr id="email" >
                         <td>
-                            <input id="_email" type="text" name="email" placeholder="E-mail" 
-                            value="<?php if(isset($_SESSION['email'])) { echo $_SESSION['email']; $_SESSION['email'] = "";} ?>">
+                            <input id="_email" type="text" name="email" placeholder="E-mail">
                         </td>
                     </tr>
                     <tr>

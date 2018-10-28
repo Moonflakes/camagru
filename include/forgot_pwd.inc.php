@@ -42,7 +42,8 @@ if (isset($_POST['submit']))
                 </body>
             </html>
             ';
-            if ($mail = mail($email, "Réinitialisation de votre mot de passe", $message, $header))
+            $mail = mail($email, "Réinitialisation de votre mot de passe", $message, $header);
+            if ($mail == TRUE)
             {
                 print($email);
                 print($message);
