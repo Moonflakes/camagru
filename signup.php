@@ -9,31 +9,56 @@
                     <tr id="first" >
                         <td>
                             <input id="_first" type="text" name="first" placeholder="Fisrtname" 
-                            value="<?php if(isset($_SESSION['first'])) { echo $_SESSION['first']; $_SESSION['first'] = "";} ?>">
+                            value="<?php 
+                                if(isset($_SESSION['first'])) 
+                                { 
+                                    echo $_SESSION['first']; 
+                                    $_SESSION['first'] = "";
+                                } ?>">
                         </td>
                     </tr>
                     <tr id="last" >
                         <td>
                             <input id="_last" type="text" name="last" placeholder="Lastname" 
-                            value="<?php if(isset($_SESSION['last'])) { echo $_SESSION['last']; $_SESSION['last'] = "";} ?>">
+                            value="<?php 
+                                if(isset($_SESSION['last'])) 
+                                {
+                                    echo $_SESSION['last']; 
+                                    $_SESSION['last'] = "";
+                                } ?>">
                         </td>
                     </tr>
                     <tr id="email">
                         <td>
                             <input id="_email" type="text" name="email" placeholder="E-mail" 
-                            value="<?php if(isset($_SESSION['email'])) { echo $_SESSION['email']; $_SESSION['email'] = "";} ?>">
+                            value="<?php 
+                                if(isset($_SESSION['email'])) 
+                                {
+                                    echo $_SESSION['email']; 
+                                    $_SESSION['email'] = "";
+                                } ?>">
                         </td>
                     </tr>
                     <tr id="uid">
                         <td>
                             <input id="_uid" type="text"  name="uid" placeholder="Username" 
-                            value="<?php if(isset($_SESSION['uid'])) { echo $_SESSION['uid']; $_SESSION['uid'] = ""; } ?>">
+                            value="<?php 
+                                if(isset($_SESSION['uid'])) 
+                                {
+                                    echo $_SESSION['uid'];
+                                    $_SESSION['uid'] = "";
+                                } ?>">
                         </td>
                     </tr>
                     <tr id="pwd">
                         <td>
                             <input id="_pwd" type="password" name="pwd" placeholder="Password" 
-                            value="<?php if(isset($_SESSION['pwd'])) { echo $_SESSION['pwd']; $_SESSION['pwd'] = "";} ?>">
+                            value="<?php 
+                                if(isset($_SESSION['pwd'])) 
+                                {
+                                    echo $_SESSION['pwd'];
+                                    $_SESSION['pwd'] = "";
+                                } ?>">
                         </td>
                     </tr>
                     <tr>

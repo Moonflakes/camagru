@@ -43,7 +43,8 @@ if (isset($_POST['submit']))
             $_SESSION['u_last'] = $userinfo['user_last'];
             $_SESSION['u_email'] = $userinfo['user_email'];
             $_SESSION['u_uid'] = $userinfo['user_uid'];
-            $_SESSION['u_admin'] = $userinfo['user_admin'];
+            $_SESSION['u_key'] = $userinfo['user_key'];
+            $_SESSION['u_confirm'] = $userinfo['user_confirm'];
             header("Location: ../index.php?login=success");
             exit();
         }

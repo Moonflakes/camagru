@@ -9,13 +9,22 @@
                     <tr id="uid">
                         <td>
                             <input id="_uid" type="text"  name="uid" placeholder="Username" 
-                            value="<?php if(isset($_GET['uid'])) { echo $_GET['uid']; } ?>">
+                            value="<?php 
+                                if(isset($_GET['uid'])) 
+                                { 
+                                    echo $_GET['uid']; 
+                                } ?>">
                         </td>
                     </tr>
                     <tr id="pwd">
                         <td>
                             <input id="_pwd" type="password" name="pwd" placeholder="New password" 
-                            value="<?php if(isset($_SESSION['pwd'])) { echo $_SESSION['pwd']; $_SESSION['pwd'] = "";} ?>">
+                            value="<?php 
+                                if(isset($_SESSION['pwd'])) 
+                                { 
+                                    echo $_SESSION['pwd']; 
+                                    $_SESSION['pwd'] = "";
+                                } ?>">
                         </td>
                     </tr>
                     <tr>
