@@ -76,9 +76,16 @@ if (isset($_POST['submit']))
             </body>
         </html>
         ';
-        $mail = mail($email, "Confirmation de compte", $message, $header);
-        $_SESSION['success'] = 'Votre compte a bien été créé ! </br> Veuillez vérifier votre boîte de réception.';
-        header("Location: ../signup.php?signup=success");
+        if ($mail = mail($email, "Confirmation de compte", $message, $header))
+        {
+            $_SESSION['success'] = 'Votre compte a bien été créé ! </br> Veuillez vérifier votre boîte de réception pour confirmer votre email.';
+            header("Location: ../signup.php?signup=success");
+        }
+        else
+        {
+            $_SESSION['success'] = "L'envoie de l'email à échoué !";
+            header("Location: ../signup_pwd.php?signup=email_echec");
+        }
         exit();
     }
 }

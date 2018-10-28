@@ -21,7 +21,7 @@ if (isset($_POST['submit']))
         $req->execute(array($uid, $uid));
         $uidexist = $req->rowCount();
         if ($uidexist < 1)
-            $_SESSION['erreur']['uid'] = "Nom d'utilisateur/e-mail est incorrect !";
+            $_SESSION['erreur']['uid'] = "Nom d'utilisateur/e-mail incorrect !";
         else if ($userinfo = $req->fetch())
         {
             // fetch pour mettre toutes les informations de l'utilisateur dans un tableau de données

@@ -7,11 +7,11 @@
         <tr>
             <td>
                 <input id="_uid" type="text" name="uid" placeholder="Username/e-mail" 
-                    value="<?php if(isset($_SESSION['uid'])) { echo $_SESSION['uid']; $_SESSION['uid'] = "";} ?>">
+                    value="<?php if(isset($_SESSION['uid'])) { if ($_GET['login'] == "error") {echo $_SESSION['uid'];} $_SESSION['uid'] = "";} ?>">
             </td>
             <td>
                 <input id="_pwd" type="password" name="pwd" placeholder="Password" 
-                    value="<?php if(isset($_SESSION['pwd'])) { echo $_SESSION['pwd']; $_SESSION['pwd'] = "";} ?>">
+                    value="<?php if(isset($_SESSION['pwd'])) { if ($_GET['login'] == "error") {echo $_SESSION['pwd'];} $_SESSION['pwd'] = "";} ?>">
             </td>
             <td>
                 <button type="submit" name="submit">Login</button>
