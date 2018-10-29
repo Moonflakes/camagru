@@ -16,19 +16,19 @@ if (isset($_POST['submit']))
         $_SESSION['erreur']['first'] = "Veuillez indiquer votre prénom!";
     else if (!preg_match("/^[a-zA-Z]*$/", $first))
         $_SESSION['erreur']['first'] = "Prénom invalide !";
-    
+
     //Check for last
     if (empty($last))
         $_SESSION['erreur']['last'] = "Veuillez indiquer votre nom!";
     else if (!preg_match("/^[a-zA-Z]*$/", $last))
         $_SESSION['erreur']['last'] = "Nom invalide !";
-    
+
     //Check for email
     if (empty($email))
         $_SESSION['erreur']['email'] = "Veuillez indiquer votre email!";
     else if (!filter_var($email, FILTER_VALIDATE_EMAIL))
         $_SESSION['erreur']['email'] = "E-mail invalide !";
-    
+
     //Check for user name
     if (empty($uid))
         $_SESSION['erreur']['uid'] = "Veuillez indiquer votre nom d'utilisateur!";
@@ -42,7 +42,7 @@ if (isset($_POST['submit']))
         if ($uidexist > 0)
             $_SESSION['erreur']['uid'] = "Nom d'utilisateur déjà utilisé !";
     }
-    
+
     //Check for first password
     if (empty($pwd))
         $_SESSION['erreur']['pwd'] = "Veuillez indiquer votre mot de passe!";
@@ -61,7 +61,7 @@ if (isset($_POST['submit']))
         //Check the password > hashing ou hash("whirlpool", $pwd);
         $hashpwd = password_hash($pwd, PASSWORD_DEFAULT);
         //Inser the user into the database
-        $reqinsert = 'INSERT INTO users (`user_id`, `user_first`, `user_last`, `user_email`, `user_uid`, `user_pwd`, `user_key`, `user_confirm`) 
+        $reqinsert = 'INSERT INTO users (`user_id`, `user_first`, `user_last`, `user_email`, `user_uid`, `user_pwd`, `user_key`, `user_confirm`)
                         VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
         $connexion->prepare($reqinsert)->execute(array(0, $first, $last, $email, $uid, $hashpwd, $key, 0));
         $header="MIME-Version: 1.0\r\n";
@@ -83,8 +83,8 @@ if (isset($_POST['submit']))
         }
         else
         {
-            $_SESSION['success'] = "L'envoie de l'email à échoué !";
-            header("Location: ../signup_pwd.php?signup=email_echec");
+            $_SESSION['success'] = "L'envoi de l'email à échoué !";
+            header("Location: ../signup.php?signup=email_echec");
         }
         exit();
     }
