@@ -6,7 +6,7 @@
     <table class="login">
         <tr>
             <td>
-                <input id="_uid" type="text" name="uid" placeholder="Username/e-mail" 
+                <input id="_login_uid" type="text" name="uid" placeholder="Username/e-mail" 
                     value="<?php 
                             if(isset($_SESSION['uid'])) 
                             { 
@@ -16,7 +16,7 @@
                             } ?>">
             </td>
             <td>
-                <input id="_pwd" type="password" name="pwd" placeholder="Password" 
+                <input id="_login_pwd" type="password" name="pwd" placeholder="Password" 
                     value="<?php 
                             if(isset($_SESSION['pwd'])) 
                             { 
@@ -34,14 +34,14 @@
 <a href="signup.php" id="signup-link">Sign up</a>
     <script type="text/javascript">
     var erreur = <?PHP echo json_encode($_SESSION['erreur']); ?>;
-    var login = <?PHP echo json_encode($_GET['login']) ?>;
+    var get = <?PHP echo json_encode($_GET) ?>;
         $(document).ready(function () 
         {
-            if (erreur && login)
+            if (erreur && get['login'])
             {
                 $.each(erreur,function(index,element)
                 {
-                    $("#_"+index).css('backgroundColor', 'rgba(248, 207, 72, 0.3)');
+                    $("#_login_"+index).css('backgroundColor', 'rgba(248, 207, 72, 0.3)');
                 })
             }
         })

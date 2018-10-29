@@ -63,7 +63,13 @@
         {
             if (get['modif'])
             {
-                $("#_"+get['modif']).css('backgroundColor', 'rgba(248, 207, 72, 0.3)');
+                if (get['modif'] == "pwd")
+                {
+                    $("#_oldpwd").css('backgroundColor', 'rgba(248, 207, 72, 0.3)');
+                    $("#_newpwd").css('backgroundColor', 'rgba(248, 207, 72, 0.3)');
+                }
+                else
+                    $("#_"+get['modif']).css('backgroundColor', 'rgba(248, 207, 72, 0.3)');
             }
             if (erreur && get['error'])
             {

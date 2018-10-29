@@ -45,11 +45,11 @@ if (isset($_POST['submit']))
             $mail = mail($email, "Réinitialisation de votre mot de passe", $message, $header);
             if ($mail == TRUE)
             {
-                print($email);
-                print($message);
-                print($mail);
-                print($header);
-                die();
+            //    print($email);
+            //    print($message);
+            //    print($mail);
+            //    print($header);
+            //    die();
                 $_SESSION['success'] = 'Un e-mail de réinisalisation vient de vous être envoyé ! </br> Veuillez vérifier votre boîte de réception.';
                 header("Location: ../forgot_pwd.php?forgot=success");
             }

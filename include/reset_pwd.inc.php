@@ -38,7 +38,6 @@ if (isset($_POST['submit']))
         else
         {
             $hashpwd = password_hash($pwd, PASSWORD_DEFAULT);
-            //update new pwd
             $requpdate = 'UPDATE users SET user_pwd=? WHERE user_uid=?';
             $connexion->prepare($requpdate)->execute(array($hashpwd, $uid));
             $_SESSION['success'] = 'Votre mot de passe a bien été réinitialiser !';

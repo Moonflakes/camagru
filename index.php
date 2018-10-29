@@ -5,9 +5,10 @@
         <div class="main-wrapper">
     <script type="text/javascript">
         var erreur = <?PHP echo json_encode($_SESSION['erreur']); ?>;
+        var get = <?PHP echo json_encode($_GET); ?>;
             $(document).ready(function () 
             {
-                if (erreur)
+                if (erreur && get['login'])
                 {
                     $.each(erreur,function(index,element)
                     {

@@ -13,7 +13,7 @@ function modif($modif)
                             echo "password";
                         else
                             echo "text";
-    echo ' name="'.$modif.'" 
+    echo '" name="'.$modif.'" 
             value="';
                         if(isset($_SESSION["u_".$modif]))
                             echo $_SESSION["u_".$modif];

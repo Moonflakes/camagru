@@ -1,7 +1,7 @@
 <?PHP
 session_start();
 
-if ($_GET['modif'] == "pwd")
+if ($_GET['modif'] == "pwd" || $_GET['modif'] == 'oldpwd' || $_GET['modif'] == 'newpwd')
 {
 ?>
     <tr id="oldpwd">
@@ -10,7 +10,7 @@ if ($_GET['modif'] == "pwd")
             <input style="width: 100%;
                         margin-left: 10px;
                         margin-right: 10px;" 
-                    id="_<?php echo 'oldpwd'?>" type="password" name="<?php echo $_GET['modif']?>"
+                    id="_<?php echo 'oldpwd'?>" type="password" name="<?php echo 'oldpwd'?>"
                     value="<?php 
                                 if(isset($_SESSION['oldpwd']))
                                 {
@@ -26,7 +26,7 @@ if ($_GET['modif'] == "pwd")
             <input style="width: 100%;
                         margin-left: 10px;
                         margin-right: 10px;" 
-                    id="_<?php echo 'newpwd'?>" type="password" name="<?php echo $_GET['modif']?>"
+                    id="_<?php echo 'newpwd'?>" type="password" name="<?php echo 'newpwd'?>"
                     value="<?php 
                                 if(isset($_SESSION['newpwd']))
                                 {
@@ -40,8 +40,10 @@ if ($_GET['modif'] == "pwd")
                             width: 84px;
                             border-left-width: 2px;
                             padding-bottom: 1px;
-                            margin-left: 10%;" 
-                    type="submit" name="update" value="<?php echo $_GET['modif']?>">Valider</button>
+                            margin-left: 10%;
+                            background-color: rgb(225, 255, 245);
+                            color: rgb(48, 133, 104);" 
+                    type="submit" name="update" value="pwd">Valider</button>
         </td>
     </tr>
 <?php

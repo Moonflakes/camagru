@@ -19,6 +19,8 @@ session_start();
                     width: 84px;
                     border-left-width: 2px;
                     padding-bottom: 1px;
-                    margin-left: 10%;" 
+                    margin-left: 10%;
+                    background-color: rgb(225, 255, 245);
+                    color: rgb(48, 133, 104);" 
             type="submit" name="update" value="<?php echo $_GET['modif']?>">Valider</button>
 </td>
