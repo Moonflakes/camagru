@@ -10,7 +10,7 @@
                         <td>
                             <input id="_first" type="text" name="first" placeholder="Fisrtname" 
                             value="<?php 
-                                if(isset($_SESSION['first'])) 
+                                if(isset($_SESSION['first']) && isset($_GET['signup'])) 
                                 { 
                                     echo $_SESSION['first']; 
                                     $_SESSION['first'] = "";
@@ -21,7 +21,7 @@
                         <td>
                             <input id="_last" type="text" name="last" placeholder="Lastname" 
                             value="<?php 
-                                if(isset($_SESSION['last'])) 
+                                if(isset($_SESSION['last']) && isset($_GET['signup'])) 
                                 {
                                     echo $_SESSION['last']; 
                                     $_SESSION['last'] = "";
@@ -32,7 +32,7 @@
                         <td>
                             <input id="_email" type="text" name="email" placeholder="E-mail" 
                             value="<?php 
-                                if(isset($_SESSION['email'])) 
+                                if(isset($_SESSION['email']) && isset($_GET['signup'])) 
                                 {
                                     echo $_SESSION['email']; 
                                     $_SESSION['email'] = "";
@@ -43,7 +43,7 @@
                         <td>
                             <input id="_uid" type="text"  name="uid" placeholder="Username" 
                             value="<?php 
-                                if(isset($_SESSION['uid'])) 
+                                if(isset($_SESSION['uid']) && isset($_GET['signup'])) 
                                 {
                                     echo $_SESSION['uid'];
                                     $_SESSION['uid'] = "";
@@ -54,7 +54,7 @@
                         <td>
                             <input id="_pwd" type="password" name="pwd" placeholder="Password" 
                             value="<?php 
-                                if(isset($_SESSION['pwd'])) 
+                                if(isset($_SESSION['pwd']) && isset($_GET['signup'])) 
                                 {
                                     echo $_SESSION['pwd'];
                                     $_SESSION['pwd'] = "";

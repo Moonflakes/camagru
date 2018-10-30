@@ -11,8 +11,9 @@
                             if(isset($_SESSION['uid'])) 
                             { 
                                 if ($_GET['login'] == "error") 
-                                    echo $_SESSION['uid']; 
-                                $_SESSION['uid'] = "";
+                                    echo $_SESSION['uid'];
+                                if ($_GET['reset'] != "error" && $_GET['signup'] != "error")
+                                    $_SESSION['uid'] = "";
                             } ?>">
             </td>
             <td>

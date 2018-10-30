@@ -8,9 +8,17 @@ if (isset($_POST['submit']))
 
     //Errors handlers
     //Check for empty fields
-    if (empty($uid) || empty($pwd))
+    if (empty($uid))
     {
-        header("Location: ../index.php?login=empty");
+        $_SESSION['erreur']['uid'] = "Veuillez indiquer votre nom d'utilisateur !";
+    }
+    if (empty($pwd))
+    {
+        $_SESSION['erreur']['pwd'] = "Veuillez indiquer votre nouveau mot de passe !";
+    }
+    if (isset($_SESSION['erreur']))
+    {
+        header("Location: ../index.php?login=error");
         exit();
     }
     else
@@ -26,6 +34,10 @@ if (isset($_POST['submit']))
         {
             // fetch pour mettre toutes les informations de l'utilisateur dans un tableau de données
             //De-hashing the password
+            $_SESSION['u_uid'] = $userinfo['user_uid'];
+            $_SESSION['u_email'] = $userinfo['user_email'];
+            $_SESSION['u_confirm'] = $userinfo['user_confirm'];
+            $_SESSION['u_key'] = $userinfo['user_key'];
             $hashpwdCheck = password_verify($pwd, $userinfo['user_pwd']);
             if ($hashpwdCheck == false)
                 $_SESSION['erreur']['pwd'] = "Mot de passe incorrect !";

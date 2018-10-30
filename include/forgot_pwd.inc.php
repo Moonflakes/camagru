@@ -16,9 +16,9 @@ if (isset($_POST['submit']))
     else
     {
         // Check if there is an user with this email
-        $requemail = "SELECT * FROM users WHERE user_email=?";
+        $requemail = "SELECT * FROM users WHERE user_email=? AND user_uid=?";
         $req = $connexion->prepare($requemail);
-        $req->execute(array($email));
+        $req->execute(array($email, $_SESSION['u_uid']));
         $emailexist = $req->rowCount();
         if ($emailexist < 1)
             $_SESSION['erreur']['email'] = "E-mail incorrect !";
@@ -30,6 +30,18 @@ if (isset($_POST['submit']))
         else
         {
             $userinfo = $req->fetch();
+
+            // initialisation d'une clé de sécurité
+            $key = "";
+            for($i=1 ; $i<15 ; $i++)
+                $key .= mt_rand(0,9);
+            $_SESSION['u_key'] = $key;
+            //print($key);
+            //die();
+            $requpdate = 'UPDATE users SET user_key=?, user_confirm=? WHERE user_uid=?';
+            $connexion->prepare($requpdate)->execute(array($key, 2, $userinfo['user_uid']));
+            $_SESSION['u_confirm'] = 2;
+
             $header="MIME-Version: 1.0\r\n";
             $header.='From: Camagru.com <support@camagru.com>'."\n";
             $header.='Content-Type:text/html; charset="uft-8"'."\n";
@@ -37,7 +49,7 @@ if (isset($_POST['submit']))
             <html>
                 <body>
                     <div align="center">
-                        <a href="http://'.$_SERVER['HTTP_HOST'].str_replace("/include/forgot_pwd.inc.php", "", $_SERVER['PHP_SELF']).'/reset_pwd.php?uid='.urlencode($userinfo['user_uid']).'">Réinitialisez votre mot de passe !</a>
+                        <a href="http://'.$_SERVER['HTTP_HOST'].str_replace("/include/forgot_pwd.inc.php", "", $_SERVER['PHP_SELF']).'/reset_pwd.php?uid='.urlencode($userinfo['user_uid']).'&key='.$key.'">Réinitialisez votre mot de passe !</a>
                     </div>
                 </body>
             </html>
@@ -45,11 +57,6 @@ if (isset($_POST['submit']))
             $mail = mail($email, "Réinitialisation de votre mot de passe", $message, $header);
             if ($mail == TRUE)
             {
-            //    print($email);
-            //    print($message);
-            //    print($mail);
-            //    print($header);
-            //    die();
                 $_SESSION['success'] = 'Un e-mail de réinisalisation vient de vous être envoyé ! </br> Veuillez vérifier votre boîte de réception.';
                 header("Location: ../forgot_pwd.php?forgot=success");
             }

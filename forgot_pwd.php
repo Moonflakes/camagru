@@ -8,7 +8,8 @@
                 <table class="signup-form">
                     <tr id="email" >
                         <td>
-                            <input id="_email" type="text" name="email" placeholder="E-mail">
+                            <input id="_email" type="text" name="email" placeholder="E-mail" 
+                            <?php if ($_SESSION['u_confirm'] == 0) echo "readonly"; ?>>
                         </td>
                     </tr>
                     <tr>
@@ -22,9 +23,15 @@
     </section>
     <script type="text/javascript">
     var erreur = <?PHP echo json_encode($_SESSION['erreur']); ?>;
+    var confirm = <?PHP echo json_encode($_SESSION['u_confirm']); ?>;
+    var get = <?PHP echo json_encode($_GET); ?>;
         $(document).ready(function () 
         {
-            if (erreur)
+            if (confirm == 0 && get['email'] == undefined)
+            {
+                $("#email").after("<tr><td><font color='red'>Attention votre adresse e-mail n'a pas été confirmée !</br></br>Vous ne pouvez pas procéder à la réinitialisation de votre mot de passe sans avoir validé votre adresse e-mail !</br></br>Veuillez vérifier votre boîte de réception ou <a href='send_confirm.php' id='fpwd-link'>cliquez ici </a>pour qu'un mail de confirmation vous soit envoyé. </font></td></tr>");
+            }
+            if (erreur && confirm)
             {
                 $.each(erreur,function(index,element)
                 {

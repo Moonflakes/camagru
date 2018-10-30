@@ -5,7 +5,8 @@ if (isset($_POST['submit']))
     include_once '../config/setup.php';
     $_SESSION['uid'] = $uid = htmlspecialchars($_POST['uid']);
     $_SESSION['pwd'] = $pwd = htmlspecialchars($_POST['pwd']);
-
+    $key = htmlspecialchars($_POST['submit']);
+    
     //Errors handlers
     //Check for empty fields
     if (empty($uid))
@@ -18,7 +19,10 @@ if (isset($_POST['submit']))
     }
     if (isset($_SESSION['erreur']))
     {
-        header("Location: ../reset_pwd.php?reset=error");
+        //print_r($_SESSION);
+    //print_r($_POST);
+    //die();
+        header("Location: ../reset_pwd.php?reset=error&key=".$key);
         exit();
     }
     else
@@ -32,17 +36,42 @@ if (isset($_POST['submit']))
             $_SESSION['erreur']['uid'] = "Nom d'utilisateur incorrect !";
         if (isset($_SESSION['erreur']))
         {
-            header("Location: ../reset_pwd.php?reset=error");
+            header("Location: ../reset_pwd.php?reset=error&key=".$key);
             exit();
         }
         else
         {
-            $hashpwd = password_hash($pwd, PASSWORD_DEFAULT);
-            $requpdate = 'UPDATE users SET user_pwd=? WHERE user_uid=?';
-            $connexion->prepare($requpdate)->execute(array($hashpwd, $uid));
-            $_SESSION['success'] = 'Votre mot de passe a bien été réinitialiser !';
-            header("Location: ../reset_pwd.php?reset=success");
+            // vérifier si la clé de sécurité est la même que celle de l'utilisateur
+            $reqkey = "SELECT * FROM users WHERE user_uid=? AND user_key=? AND user_confirm=?";
+            $req = $connexion->prepare($reqkey);
+            $req->execute(array($uid, $key, 2));
+            $keyexist = $req->rowCount();
+            if ($keyexist < 1)
+                $_SESSION['erreur']['key'] = "Utilisateur invalide ! </br> 
+                                                Veuillez vérifier si vous avez bien reçu votre mail de réinitialisation ! </br>
+                                                Si vous n'avez reçu votre mail de réinitialisation 
+                                                <a href='forgot_pwd.php' id='fpwd-link'>cliquez ici !</a>";
+            if (isset($_SESSION['erreur']))
+            {
+                header("Location: ../reset_pwd.php?reset=error&key=".$key);
+                exit();
+            }
+            else
+            {
+                // réattribuer une nouvelle clé a l'utilisateur
+                $key = "";
+                for($i=1 ; $i<15 ; $i++)
+                    $key .= mt_rand(0,9);
+                $_SESSION['u_key'] = $key;
+
+                $hashpwd = password_hash($pwd, PASSWORD_DEFAULT);
+                $requpdate = 'UPDATE users SET user_pwd=?, user_key=?, user_confirm=? WHERE user_uid=?';
+                $connexion->prepare($requpdate)->execute(array($hashpwd, $key, 1, $uid));
+                $_SESSION['u_confirm'] = 1;
+                $_SESSION['success'] = 'Votre mot de passe a bien été réinitialiser !';
+                header("Location: ../reset_pwd.php?reset=success");
             exit();
+            }
         }
     }
 }

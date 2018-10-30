@@ -13,6 +13,12 @@
                                 if(isset($_GET['uid'])) 
                                 { 
                                     echo $_GET['uid']; 
+                                }
+                                if(isset($_SESSION['uid'])) 
+                                { 
+                                    if ($_GET['reset'] == 'error') 
+                                        echo $_SESSION['uid']; 
+                                    $_SESSION['uid'] = "";
                                 } ?>">
                         </td>
                     </tr>
@@ -23,7 +29,10 @@
                     </tr>
                     <tr>
                         <td>
-                            <button type="submit" name="submit">Réinitialiser</button>
+                            <button type="submit" name="submit" 
+                            value="<?php 
+                                if(isset($_GET['key']))
+                                    echo $_GET['key']; ?>">Réinitialiser</button>
                         </td>
                     </tr>
                 </table>
@@ -46,7 +55,11 @@
     </script>
 <?PHP
     if(isset($_SESSION['erreur']))
+    {
+        if ($_SESSION['erreur']['key'])
+            echo "<font color='red'>".$_SESSION['erreur']['key']."</font>";
         unset($_SESSION['erreur']);
+    }
     else if (isset($_SESSION['success']))
     {
         echo '<font color="red">'.$_SESSION['success'].'</font>';
