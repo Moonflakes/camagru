@@ -72,8 +72,7 @@ a
     height: 40px;
     padding: 0px 5%;
     margin-bottom: 4px;
-    border: none;
-    background-color: rgba(224, 224, 224, 0.3);
+    background-color: rgba(255, 255, 255, 0.95);
     font-family: arial;
     font-size: 16px;
 }
@@ -95,11 +94,12 @@ a
     cursor: pointer;
 	margin-top: 2em;
 }
-.h2sign
+h2
 {
 	text-align: center;
 	color: rgb(19, 53, 41);
-	font-family: arial;
+    font-family: arial;
+    text-shadow: 4px 0 0 #fff, -4px 0 0 #fff, 0 4px 0 #fff, 0 -4px 0 #fff, 2px 2px #fff, -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff;
 }
 #signup-link
 {
@@ -118,10 +118,8 @@ section .main-wrapper
     margin-top: 8px;
     background: url("photos/background.png") repeat; 
     background-size: 450px;
-}
-table
-{
-    background-color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 
 div.gallery {

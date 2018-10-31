@@ -80,7 +80,7 @@
                 $.each(erreur,function(index,element)
                 {
                     $("#"+index).after("<tr><td><font color='red'>"+ element +"</font></td></tr>");
-                    $("#_"+index).css('backgroundColor', 'rgba(248, 207, 72, 0.3)');
+                    $("#_"+index).css('backgroundColor', 'rgba(255, 238, 181, 0.8)');
                 })
             }
         })
