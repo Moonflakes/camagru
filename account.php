@@ -82,8 +82,8 @@
         })
     </script>
 <?PHP
-print_r($_SESSION);
-print("la");
+//print_r($_SESSION);
+//print("la");
     if(isset($_SESSION['erreur']))
         unset($_SESSION['erreur']);
     else if (isset($_SESSION['success']))

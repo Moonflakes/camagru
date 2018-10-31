@@ -49,7 +49,7 @@ if (isset($_POST['submit']))
             if ($keyexist < 1)
                 $_SESSION['erreur']['key'] = "Utilisateur invalide ! </br> 
                                                 Veuillez vérifier si vous avez bien reçu votre mail de réinitialisation ! </br>
-                                                Si vous n'avez reçu votre mail de réinitialisation 
+                                                Si vous n'avez pas reçu votre mail de réinitialisation 
                                                 <a href='forgot_pwd.php' id='fpwd-link'>cliquez ici !</a>";
             if (isset($_SESSION['erreur']))
             {
