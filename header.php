@@ -10,7 +10,7 @@
     </head>
     <body>
 		<div id="header">
-			<a href="index.php"><h1>Camagru</h1></a>
+        <img src="background/licorne7.png" class="image"><a href="index.php"><h1>Camagru</h1></a><img src="background/licorne6.png" class="image">
 		</div>
         <nav>
             <div class="main-wrapper">
