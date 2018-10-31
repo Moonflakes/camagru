@@ -1,12 +1,40 @@
 <?php
-if (isset($_GET))
-{
+session_start();
 
-}
-else
+//si $GET pas pris remplacer par une variable array et envoyer $GET dans la fonction
+function check_user_is_connect()
 {
-    $_SESSION['erreur']['connect'] = "Vous ne pouvez pas accéder à cette page si vous n'êtes pas connecté";
-    header("Location: ../index.php?connect=error");
-    exit();
+    if (isset($_GET))
+    {
+        include_once '../config/setup.php';
+        if (isset($_GET['uid']) && isset($_GET['key']))
+        {
+            // Check if there is an user with this email
+            $requser = "SELECT * FROM users WHERE user_uid=? AND user_key=?";
+            $req = $connexion->prepare($requser);
+            $req->execute(array($_GET['uid'], $_GET['key']));
+            $connectexist = $req->rowCount();
+            if ($connectexist < 1 || !isset($_SESSION['u_id']))
+            {
+                $_SESSION['erreur']['connect'] = "Vous ne pouvez pas accéder à cette page si vous n'êtes pas connecté";
+                return (0);
+                // et faire header index.php?connect=error
+            }
+            else
+            {
+                return (1);
+            }
+        }
+        else
+        {
+            $_SESSION['erreur']['connect'] = "Vous ne pouvez pas accéder à cette page si vous n'êtes pas connecté";
+            return (0);
+        }
+    }
+    else
+    {
+        $_SESSION['erreur']['connect'] = "Vous ne pouvez pas accéder à cette page si vous n'êtes pas connecté";
+        return (0);
+    }
 }
 ?>
