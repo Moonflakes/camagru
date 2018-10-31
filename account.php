@@ -3,9 +3,9 @@
 ?>
     <section class="main-container">
         <div class="main-wrapper">
+        <h2 class="h2sign" >Mon compte</h2>
             <form  action="include/modif.inc.php" method="POST">
                 <table style="width: 50%;" class="signup-form">
-                    <tr><td colspan="3" ><h2 class="h2sign" >Mon compte</h2></td></tr>
                     <tr id="first" >
                         <td align="right">Prénom :</td>
                         <?php
