@@ -4,8 +4,8 @@
     <section class="main-container">
         <div class="main-wrapper">
         <h2 class="h2sign" >Mon compte</h2>
-            <form  action="include/modif.inc.php" method="POST">
                 <table style="width: 50%;" class="signup-form">
+                    <form  action="include/modif.inc.php" method="POST">
                     <tr id="first" >
                         <td align="right">Prénom :</td>
                         <?php
@@ -13,6 +13,8 @@
                             modif("first");
                         ?>
                     </tr>
+                    </form>
+                    <form  action="include/modif.inc.php" method="POST">
                     <tr id="last" >
                         <td align="right">Nom :</td>
                         <?php
@@ -20,6 +22,8 @@
                             modif("last");
                         ?>
                     </tr>
+                    </form>
+                    <form  action="include/modif.inc.php" method="POST">
                     <tr id="email">
                         <td align="right">E-mail :</td>
                         <?php
@@ -34,6 +38,8 @@
                             }
                         ?>
                     </tr>
+                    </form>
+                    <form  action="include/modif.inc.php" method="POST">
                     <tr id="uid">
                         <td align="right">Nom d'utilisateur :</td>
                         <?php
@@ -48,9 +54,12 @@
                             }
                         ?>
                     </tr>
+                    </form>
+                    <form  action="include/modif.inc.php" method="POST">
                     <?php
                         include_once 'modif_pwd.php';
                     ?>
+                    </form>
                 </table>
             </form>
         </div>
