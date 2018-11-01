@@ -10,9 +10,7 @@
 ?>
     <div class="responsive">
     <div class="gallery">
-        <a target="_blank" href="photos/swaggy_photo.png">
         <img src="photos/swaggy_photo.png" alt="Cinque Terre" width="600" height="400">
-        </a>
         <div class="desc">Add a description of the image here</div>
     </div>
     </div>
@@ -20,12 +18,15 @@
 
     <div class="responsive">
     <div class="gallery">
-        <a target="_blank" href="photos/img_forest.jpg">
         <img src="photos/img_forest.jpg" alt="Forest" width="600" height="400">
-        </a>
         <div class="desc">
-            <div class="element">Add a description of the image here</div>
+            <div>Add a description of the image here</div>
             <div class="cont">
+                <div class="infos">
+                    <div>4 J'aime</div>
+                    <div>5 Commentaires</div>
+                </div>
+                <div class="vide"></div>
                 <div class="action">
                     <form>
                         <input type="image" width="auto" height="25" alt="like" title="J'aime"

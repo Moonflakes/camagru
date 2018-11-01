@@ -183,12 +183,18 @@ div.cont
 {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
     height: 30px;
     margin-top: 10px;
 }
-
+div.vide
+{
+    flex-grow: 5;
+}
 div.action
 {
     margin-left: 10px;
+}
+div.infos
+{
+    text-align: left;
 }
