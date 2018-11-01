@@ -129,6 +129,7 @@ section .main-wrapper
 
 
 
+/* GALERIE */
 
 div.gallery {
     border: 1px solid #ccc;
@@ -176,4 +177,18 @@ div.desc {
     content: "";
     display: table;
     clear: both;
+}
+
+div.cont
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    height: 30px;
+    margin-top: 10px;
+}
+
+div.action
+{
+    margin-left: 10px;
 }

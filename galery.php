@@ -23,7 +23,23 @@
         <a target="_blank" href="photos/img_forest.jpg">
         <img src="photos/img_forest.jpg" alt="Forest" width="600" height="400">
         </a>
-        <div class="desc">Add a description of the image here</div>
+        <div class="desc">
+            <div class="element">Add a description of the image here</div>
+            <div class="cont">
+                <div class="action">
+                    <form>
+                        <input type="image" width="auto" height="25" alt="like" title="J'aime"
+                            src="background/coeur.png">
+                    </form>
+                </div>
+                <div class="action">
+                    <form>
+                        <input type="image" width="auto" height="30" alt="comment" title="Commenter"
+                            src="background/bulle_dialogue.png">
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     </div>
 
