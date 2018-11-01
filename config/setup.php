@@ -18,7 +18,7 @@ if ($pdo = new PDO('mysql:host='.$DB_HOST, $DB_USER, $DB_PASSWORD))
     if($connexion)
     {
         // on créer la requête (créer la table users)
-        $requete = "CREATE TABLE IF NOT EXISTS users (
+        $requsertable = "CREATE TABLE IF NOT EXISTS users (
             user_id int(11) not null PRIMARY kEY AUTO_INCREMENT,
             user_first varchar(256) not null,
             user_last varchar(256) not null,
@@ -29,7 +29,31 @@ if ($pdo = new PDO('mysql:host='.$DB_HOST, $DB_USER, $DB_PASSWORD))
             user_confirm int(1) not null DEFAULT '0');";
     
         // on prépare et on exécute la requête
-        $connexion->prepare($requete)->execute();
+        $connexion->prepare($requsertable)->execute();
+
+        // on créer la requête (créer la table pictures)
+        $reqpictable = "CREATE TABLE IF NOT EXISTS pictures (
+            picture_id int(11) not null PRIMARY kEY AUTO_INCREMENT,
+            picture_author varchar(256) not null,
+            picture_date varchar(256) not null,
+            picture_path varchar(256) not null,
+            picture_description varchar(256) not null,
+            picture_nb_like int(11) not null DEFAULT '0',
+            picture_nb_comment int(11) not null DEFAULT '0');";
+    
+        // on prépare et on exécute la requête
+        $connexion->prepare($reqpictable)->execute();
+
+        // on créer la requête (créer la table comments)
+        $reqcomtable = "CREATE TABLE IF NOT EXISTS comments (
+            comment_id int(11) not null PRIMARY kEY AUTO_INCREMENT,
+            comment_author varchar(256) not null,
+            comment_date varchar(256) not null,
+            comment_id_pict int(11) not null,
+            comment_text varchar(256) not null);";
+    
+        // on prépare et on exécute la requête
+        $connexion->prepare($reqcomtable)->execute();
     }
 }
 else
