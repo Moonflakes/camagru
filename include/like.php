@@ -7,7 +7,11 @@ if (check_user_is_connect())
 {
     if (isset($_POST['like']))
     {
-
+        // insert like
+    }
+    else if (isset($_POST['unlike']))
+    {
+        //delete like
     }
     else
     {

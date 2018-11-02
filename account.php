@@ -69,7 +69,7 @@
     var get = <?PHP if (isset($_GET)) echo json_encode($_GET); ?>;
         $(document).ready(function () 
         {
-            if (get['modif'])
+            if (get['modif'] && !erreur)
             {
                 if (get['modif'] == "pwd")
                 {

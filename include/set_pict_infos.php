@@ -1,5 +1,6 @@
 <?php
 include_once 'config/setup.php';
+include_once 'check_user.php';
 
 $reqpicture = "SELECT * FROM pictures ORDER BY picture_date DESC";
 $req = $connexion->prepare($reqpicture);
@@ -23,11 +24,23 @@ if ($pictinfo = $req->fetchall())
             if ($key2 === 'picture_description')
                 $descr = $value;
             if ($key2 === 'picture_nb_like')
-                $like = $value;
+                $nblike = $value;
             if ($key2 === 'picture_nb_comment')
-                $com = $value;
+                $nbcom = $value;
+            if (check_user_is_connect())
+            {
+                $reqlike = "SELECT * FROM likes WHERE like_author=? AND like_id_pict=?";
+                $req = $connexion->prepare($reqlike);
+                $req->execute(array($_SESSION['uid'], $id));
+
+                if ($likinfo = $req->fetch())
+                    $like = 1;
+                else
+                    $like = 0;
+            }
         }
-        $_SESSION['pict_'.++$i] = array('p_id' => $id, 'p_auth' => $auth, 'p_date' => $date, 'p_path' => $path, 'p_descr' => $descr, 'p_nblike' => $like, 'p_nbcom' => $com);
+        $_SESSION['pict_'.++$i] = array('p_id' => $id, 'p_auth' => $auth, 'p_date' => $date, 'p_path' => $path, 'p_descr' => $descr, 'p_nblike' => $nblike, 'p_nbcom' => $nbcom, 'p_like' => $like);
     }
 }
+
 ?>

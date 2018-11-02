@@ -17,6 +17,7 @@
             $nblike = 0;
             $nbcom = 0;
             $id = 0;
+            $like = 0;
             if (is_array($array))
             {
                 foreach ($array as $key => $value) 
@@ -31,6 +32,8 @@
                         $nbcom = $value;
                     if ($key === 'p_id')
                         $id = $value;
+                    if ($key === 'p_like')
+                        $like = $value;
                 }
             }
             if ($path)
@@ -49,8 +52,9 @@
                             <div class="vide"></div>
                             <div class="action">
                                 <form action="include/like.php" method="POST">
-                                    <input type="image" name="like" value="<?php echo $id;?>" width="auto" height="25" alt="like" title="J'aime"
-                                        src="background/coeur.png">
+                                    <input type="image" name="<?php if ($like == 1) echo "unlike"; else echo "like"; ?>" value="<?php echo $id;?>" width="auto" height="25" alt="like" 
+                                        title="<?php if ($like == 1) echo "Je n'aime pas"; else echo "J'aime"; ?>"
+                                        src="<?php if ($like == 1) echo "background/coeur_rouge.png"; else echo "background/coeur.png"; ?>">
                                 </form>
                             </div>
                             <div class="action">
