@@ -10,7 +10,7 @@
 ?>
     <div class="responsive">
     <div class="gallery">
-        <img src="photos/swaggy_photo.png" alt="Cinque Terre" width="600" height="400">
+        <img src="photos/swaggy.png" alt="Cinque Terre" width="600" height="400">
         <div class="desc">Add a description of the image here</div>
     </div>
     </div>
@@ -28,13 +28,13 @@
                 </div>
                 <div class="vide"></div>
                 <div class="action">
-                    <form>
+                    <form action="include/like.php" method="POST">
                         <input type="image" width="auto" height="25" alt="like" title="J'aime"
                             src="background/coeur.png">
                     </form>
                 </div>
                 <div class="action">
-                    <form>
+                    <form action="include/comment.php" method="POST">
                         <input type="image" width="auto" height="30" alt="comment" title="Commenter"
                             src="background/bulle_dialogue.png">
                     </form>
