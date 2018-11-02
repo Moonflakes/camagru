@@ -35,7 +35,7 @@ if ($pdo = new PDO('mysql:host='.$DB_HOST, $DB_USER, $DB_PASSWORD))
         $reqpictable = "CREATE TABLE IF NOT EXISTS pictures (
             picture_id int(11) not null PRIMARY kEY AUTO_INCREMENT,
             picture_author varchar(256) not null,
-            picture_date DATE not null,
+            picture_date DATETIME not null,
             picture_path varchar(256) not null,
             picture_description varchar(256) not null,
             picture_nb_like int(11) not null DEFAULT '0',
@@ -48,7 +48,7 @@ if ($pdo = new PDO('mysql:host='.$DB_HOST, $DB_USER, $DB_PASSWORD))
         $reqcomtable = "CREATE TABLE IF NOT EXISTS comments (
             comment_id int(11) not null PRIMARY kEY AUTO_INCREMENT,
             comment_author varchar(256) not null,
-            comment_date DATE not null,
+            comment_date DATETIME not null,
             comment_id_pict int(11) not null,
             comment_text varchar(256) not null);";
     

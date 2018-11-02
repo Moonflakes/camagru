@@ -1,7 +1,3 @@
-<?PHP
-    session_start();
-?>
-
 <form id="login" action="include/login.inc.php" method="POST">
     <table class="login">
         <tr>

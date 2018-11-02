@@ -1,6 +1,5 @@
 <?php
-include_once '../config/setup.php';
-session_start();
+include_once 'config/setup.php';
 
 $reqpicture = "SELECT * FROM pictures ORDER BY picture_date DESC";
 $req = $connexion->prepare($reqpicture);
@@ -29,9 +28,5 @@ if ($pictinfo = $req->fetchall())
         }
         $_SESSION[] = array('p_id' => $id, 'p_auth' => $auth, 'p_date' => $date, 'p_path' => $path, 'p_descr' => $descr, 'p_nblike' => $like, 'p_nbcom' => $com);
     }
-    //print_r($_SESSION);
-    //session_unset();
-    //session_destroy();
-    //die();
 }
 ?>
