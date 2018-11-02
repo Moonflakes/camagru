@@ -16,25 +16,16 @@ function check_user_is_connect()
             $connectexist = $req->rowCount();
             if ($connectexist < 1 || !isset($_SESSION['u_id']))
             {
-                $_SESSION['erreur']['connect'] = "Vous ne pouvez pas accéder à cette page si vous n'êtes pas connecté";
                 return (0);
                 // et faire header index.php?connect=error
             }
             else
-            {
                 return (1);
-            }
         }
         else
-        {
-            $_SESSION['erreur']['connect'] = "Vous ne pouvez pas accéder à cette page si vous n'êtes pas connecté";
             return (0);
-        }
     }
     else
-    {
-        $_SESSION['erreur']['connect'] = "Vous ne pouvez pas accéder à cette page si vous n'êtes pas connecté";
         return (0);
-    }
 }
 ?>

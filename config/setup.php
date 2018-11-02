@@ -54,6 +54,16 @@ if ($pdo = new PDO('mysql:host='.$DB_HOST, $DB_USER, $DB_PASSWORD))
     
         // on prépare et on exécute la requête
         $connexion->prepare($reqcomtable)->execute();
+
+        // on créer la requête (créer la table likes)
+        $reqcomtable = "CREATE TABLE IF NOT EXISTS likes (
+            like_id int(11) not null PRIMARY kEY AUTO_INCREMENT,
+            like_author varchar(256) not null,
+            like_date DATETIME not null,
+            like_id_pict int(11) not null);";
+    
+        // on prépare et on exécute la requête
+        $connexion->prepare($reqcomtable)->execute();
     }
 }
 else

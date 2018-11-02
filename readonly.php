@@ -1,5 +1,4 @@
 <?PHP
-session_start();
 
 function modif($modif)
 {

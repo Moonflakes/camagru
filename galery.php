@@ -16,6 +16,7 @@
             $descr = 0;
             $nblike = 0;
             $nbcom = 0;
+            $id = 0;
             if (is_array($array))
             {
                 foreach ($array as $key => $value) 
@@ -28,6 +29,8 @@
                         $nblike = $value;
                     if ($key === 'p_nbcom')
                         $nbcom = $value;
+                    if ($key === 'p_id')
+                        $id = $value;
                 }
             }
             if ($path)
@@ -46,13 +49,13 @@
                             <div class="vide"></div>
                             <div class="action">
                                 <form action="include/like.php" method="POST">
-                                    <input type="image" width="auto" height="25" alt="like" title="J'aime"
+                                    <input type="image" name="like" value="<?php echo $id;?>" width="auto" height="25" alt="like" title="J'aime"
                                         src="background/coeur.png">
                                 </form>
                             </div>
                             <div class="action">
                                 <form action="include/comment.php" method="POST">
-                                    <input type="image" width="auto" height="30" alt="comment" title="Commenter"
+                                    <input type="image" name="comment" width="auto" height="30" alt="comment" title="Commenter"
                                         src="background/bulle_dialogue.png">
                                 </form>
                             </div>

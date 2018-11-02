@@ -27,7 +27,7 @@
                     <tr id="email">
                         <td align="right">E-mail :</td>
                         <?php
-                            if ($_GET['modif'] == "email")
+                            if (isset($_GET['modif']) && $_GET['modif'] == "email")
                             {
                                 include_once 'modif.php';
                             }
@@ -43,7 +43,7 @@
                     <tr id="uid">
                         <td align="right">Nom d'utilisateur :</td>
                         <?php
-                            if ($_GET['modif'] == "uid")
+                            if (isset($_GET['modif']) && $_GET['modif'] == "uid")
                             {
                                 include_once 'modif.php';
                             }
@@ -65,8 +65,8 @@
         </div>
     </section>
     <script type="text/javascript">
-    var erreur = <?PHP echo json_encode($_SESSION['erreur']); ?>;
-    var get = <?PHP echo json_encode($_GET); ?>;
+    var erreur = <?PHP if (isset($_SESSION['erreur'])) echo json_encode($_SESSION['erreur']); ?>;
+    var get = <?PHP if (isset($_GET)) echo json_encode($_GET); ?>;
         $(document).ready(function () 
         {
             if (get['modif'])
@@ -90,8 +90,6 @@
         })
     </script>
 <?PHP
-//print_r($_SESSION);
-//print("la");
     if(isset($_SESSION['erreur']))
         unset($_SESSION['erreur']);
     else if (isset($_SESSION['success']))

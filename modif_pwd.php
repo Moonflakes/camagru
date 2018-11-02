@@ -1,7 +1,6 @@
 <?PHP
-session_start();
 
-if ($_GET['modif'] == "pwd" || $_GET['modif'] == 'oldpwd' || $_GET['modif'] == 'newpwd')
+if (isset($_GET['modif']) && ($_GET['modif'] == "pwd" || $_GET['modif'] == 'oldpwd' || $_GET['modif'] == 'newpwd'))
 {
 ?>
     <tr id="oldpwd">
@@ -54,7 +53,7 @@ else
     <tr id="pwd">
         <td align="right">Mot de passe :</td>
         <?php
-            if ($_GET['modif'] == "pwd")
+            if (isset($_GET['modif']) && $_GET['modif'] == "pwd")
             {
                 include_once 'modif.php';
             }

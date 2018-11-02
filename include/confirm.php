@@ -17,7 +17,7 @@ if(isset($_GET['uid'], $_GET['key']) AND !empty($_GET['uid']) AND !empty($_GET['
             $updateuser->execute(array($uid, $key));
             $_SESSION['u_confirm'] = 1;
             echo "Votre compte a bien été confirmé !";
-            if ($_GET['resend'])
+            if (isset($_GET['resend']))
                 echo  '</br><a href="http://'.$_SERVER['HTTP_HOST'].str_replace("/include/confirm.php", "", $_SERVER['PHP_SELF']).'/forgot_pwd.php?">Réinitialiser mon mot de passe</a>';
             else
                 echo '</br><a href="http://'.$_SERVER['HTTP_HOST'].str_replace("/include/confirm.php", "", $_SERVER['PHP_SELF']).'/index.php">Me connecter</a>';
