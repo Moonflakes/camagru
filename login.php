@@ -5,11 +5,11 @@
                 <input id="_login_uid" type="text" name="uid" placeholder="Username/e-mail" 
                     value="<?php 
                             if(isset($_SESSION['uid'])) 
-                            { 
-                                if ($_GET['login'] == "error") 
-                                    echo $_SESSION['uid'];
-                                if ($_GET['reset'] != "error" && $_GET['signup'] != "error")
-                                    $_SESSION['uid'] = "";
+                            {
+                                    if (isset($_GET['login']) && $_GET['login'] == "error") 
+                                        echo $_SESSION['uid'];
+                                    if (isset($_GET['reset']) && $_GET['reset'] != "error" && isset($_GET['signup']) && $_GET['signup'] != "error")
+                                        $_SESSION['uid'] = "";
                             } ?>">
             </td>
             <td>
@@ -17,7 +17,7 @@
                     value="<?php 
                             if(isset($_SESSION['pwd'])) 
                             { 
-                                if ($_GET['login'] == "error") 
+                                if (isset($_GET['login']) && $_GET['login'] == "error") 
                                     echo $_SESSION['pwd']; 
                                 $_SESSION['pwd'] = "";
                             } ?>">

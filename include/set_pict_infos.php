@@ -7,6 +7,7 @@ $req->execute();
 
 if ($pictinfo = $req->fetchall())
 {
+    $i = 0;
     foreach ($pictinfo as $key => $array) 
     {
         foreach ($array as $key2 => $value) 
@@ -26,7 +27,7 @@ if ($pictinfo = $req->fetchall())
             if ($key2 === 'picture_nb_comment')
                 $com = $value;
         }
-        $_SESSION[] = array('p_id' => $id, 'p_auth' => $auth, 'p_date' => $date, 'p_path' => $path, 'p_descr' => $descr, 'p_nblike' => $like, 'p_nbcom' => $com);
+        $_SESSION['pict_'.++$i] = array('p_id' => $id, 'p_auth' => $auth, 'p_date' => $date, 'p_path' => $path, 'p_descr' => $descr, 'p_nblike' => $like, 'p_nbcom' => $com);
     }
 }
 ?>

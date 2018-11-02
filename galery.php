@@ -8,7 +8,7 @@
         echo '<p>Pour ajouter vos propres photos à la galerie connectez vous !</p>';
     }
     include_once 'include/set_pict_infos.php';
-    if(isset($_SESSION[0]['p_id']))
+    if(isset($_SESSION['pict_1']['p_id']))
     {
         foreach ($_SESSION as $key => $array) 
         {
