@@ -5,13 +5,9 @@ include_once 'check_user.php';
 
 if (check_user_is_connect($connexion))
 {
-    //print_r($_POST);
-    //print_r($_SESSION);
-      //  die();
     if (isset($_POST['like']))
     {
         // insert like
-        
         $reqinslik = 'INSERT INTO `likes`(`like_id`, `like_author`, `like_date`, `like_id_pict`) 
                         VALUES (?, ?, NOW(), ?)';
         $connexion->prepare($reqinslik)->execute(array(0, $_SESSION['u_uid'], $_POST['like']));
@@ -21,6 +17,10 @@ if (check_user_is_connect($connexion))
     else if (isset($_POST['unlike']))
     {
         //delete like
+        $reqdellik = 'DELETE FROM `likes` WHERE `like_author`= ? AND `like_id_pict`= ?';
+        $connexion->prepare($reqdellik)->execute(array($_SESSION['u_uid'], $_POST['unlike']));
+        header("Location: ../index.php?unlike=success");
+        exit();
     }
     else
     {

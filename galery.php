@@ -38,7 +38,6 @@
             }
             if ($path)
             {
-                print($id);
 ?>
             <div class="responsive" style="position: relative">
             <img src="background/pince.png" alt="pince" style="width:50; position: absolute; left:25px; top: -40px;">
