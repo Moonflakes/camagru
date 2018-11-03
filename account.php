@@ -65,8 +65,10 @@
         </div>
     </section>
     <script type="text/javascript">
-    var erreur = <?PHP if (isset($_SESSION['erreur'])) echo json_encode($_SESSION['erreur']); ?>;
-    var get = <?PHP if (isset($_GET)) echo json_encode($_GET); ?>;
+    var erreur = <?PHP if (isset($_SESSION['erreur'])) echo json_encode($_SESSION['erreur']);
+                        else echo "null"; ?>;
+    var get = <?PHP if (isset($_GET)) echo json_encode($_GET);
+                        else echo "null"; ?>;
         $(document).ready(function () 
         {
             if (get['modif'] && !erreur)
