@@ -39,8 +39,9 @@
             if ($path)
             {
 ?>
-            <div class="responsive">
-                <div class="gallery">
+            <div class="responsive" style="position: relative">
+            <img src="background/pince.png" alt="pince" style="width:50; position: absolute; left:25px; top: -40px;">
+                <div class="gallery" style="padding-top:7; padding-left:7; padding-right:7; background-color: white;">
                     <img src="<?php echo $path;?>" alt="Forest" width="600" height="400">
                     <div class="desc">
                         <div><?php echo $descr;?></div>
