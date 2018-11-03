@@ -15,6 +15,15 @@
         <nav>
             <div class="main-wrapper">
                 <div class="nav-login">
+                    <a href="index.php">
+                        <img src="img_site/icones/home.png" alt="home" title="Home"
+                                    style="width:30; margin-right: 20px; cursor: pointer;">
+                    </a>
+                    <a href="settings.php">
+                        <img src="img_site/icones/settings.png" alt="paramètres" title="Paramètres"
+                                    style="width:30; cursor: pointer;">
+                    </a>
+                    <div style="width:55%"></div>
 <?php
     if (isset($_SESSION['u_id']))
     {

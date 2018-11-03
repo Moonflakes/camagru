@@ -66,8 +66,7 @@
                                 <button type="submit" name="comment" value="<?php echo $id;?>"
                                         style="border:none; padding: unset;">
                                         <img src="img_site/icones/bulle_dialogue.png" alt="comment" title="Commenter"
-                                            style="width:30; cursor: pointer;" alt="like" 
-                                            title="<?php if ($like === 1) echo "Je n'aime pas"; else echo "J'aime"; ?>"></button>
+                                            style="width:30; cursor: pointer;"></button>
                                 </form>
                             </div>
                         </div>
