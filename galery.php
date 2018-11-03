@@ -53,6 +53,7 @@
                             <div class="vide"></div>
                             <div class="action">
                                 <form action="include/like.php" method="POST">
+                                    <input name="nblike" type="hidden" value="<?php echo $nblike;?>">
                                     <button type="submit" name="<?php if ($like === 1) echo "unlike"; else echo "like"; ?>" value="<?php echo $id;?>"
                                         style="border:none; padding: unset;">
                                         <img src="<?php if ($like === 1) echo "background/coeur_rouge.png"; else echo "background/coeur.png"; ?>" 
