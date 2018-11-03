@@ -18,6 +18,7 @@
                     padding-bottom: 1px;
                     margin-left: 10%;
                     background-color: rgb(225, 255, 245);
-                    color: rgb(48, 133, 104);" 
+                    color: rgb(48, 133, 104);
+                    font-size: 15px;" 
             type="submit" name="update" value="<?php if (isset($_GET['modif'])) echo $_GET['modif'];?>">Valider</button>
 </td>

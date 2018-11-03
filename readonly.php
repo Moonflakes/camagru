@@ -27,7 +27,8 @@ function modif($modif)
                     width: 84px;
                     border-left-width: 2px;
                     padding-bottom: 1px;
-                    margin-left: 10%;" 
+                    margin-left: 10%;
+                    font-size: 15px;" 
             type="submit" name="reset" value="'.$modif.'">Modifier</button>
 </td>';
     }

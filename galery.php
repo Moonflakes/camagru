@@ -44,11 +44,11 @@
                 <div class="gallery" style="padding-top:7; padding-left:7; padding-right:7; background-color: white;">
                     <img src="<?php echo $path;?>" alt="Forest" width="600" height="400">
                     <div class="desc">
-                        <div><?php echo $descr;?></div>
+                        <div><big><?php echo $descr;?></big></div>
                         <div class="cont">
                             <div class="infos">
-                                <div><?php echo $nblike;?> J'aime</div>
-                                <div><?php echo $nbcom;?> Commentaires</div>
+                                <div style="color:ee2e87"><small><b><?php echo $nblike;?></b> J'aime</small></div>
+                                <div style="color:#308568"><small><b><?php echo $nbcom;?></b> Commentaires</small></div>
                             </div>
                             <div class="vide"></div>
                             <div class="action">

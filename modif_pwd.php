@@ -41,7 +41,8 @@ if (isset($_GET['modif']) && ($_GET['modif'] == "pwd" || $_GET['modif'] == 'oldp
                             padding-bottom: 1px;
                             margin-left: 10%;
                             background-color: rgb(225, 255, 245);
-                            color: rgb(48, 133, 104);" 
+                            color: rgb(48, 133, 104);
+                            font-size: 15px;" 
                     type="submit" name="update" value="pwd">Valider</button>
         </td>
     </tr>

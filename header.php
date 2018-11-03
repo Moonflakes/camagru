@@ -8,7 +8,7 @@
         <link rel="stylesheet" type="text/css" href="stylesheet.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
-    <body>
+    <body style="font-family:monospace">
 		<div id="header">
         <img src="background/licorne7.png" class="image"><a href="index.php"><h1>Camagru</h1></a><img src="background/licorne6.png" class="image">
 		</div>

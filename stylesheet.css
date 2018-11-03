@@ -7,7 +7,7 @@
 }
 h1
 {
-	font-family: arial;
+	font-family: monospace;
 	color: rgb(19, 53, 41);
 }
 #copyright
@@ -18,7 +18,7 @@ h1
 }
 nav
 {
-	background-color: rgba(127, 255, 212, 0.26);
+	background-color: #defff4;
 }
 .nav-login
 {
@@ -34,8 +34,8 @@ nav
     margin-right: 10px;
     border: none;
     background-color: rgb(48, 133, 104);
-    font-family: arial;
-    font-size: 14px;
+    font-family: monospace;
+    font-size: 15px;
     color: rgb(255, 255, 255);
     cursor: pointer;
 }
@@ -47,7 +47,7 @@ nav
     margin-right: 10px;
     border: none;
     background-color: rgba(74, 138, 117, 0.3);
-    font-family: arial;
+    font-family: monospace;
     font-size: 14px;
     line-height:30px;
 }
@@ -73,7 +73,7 @@ a
     padding: 0px 5%;
     margin-bottom: 4px;
     background-color: rgba(255, 255, 255, 0.95);
-    font-family: arial;
+    font-family: monospace;
     font-size: 16px;
 }
 .signup-form ::placeholder
@@ -87,8 +87,8 @@ a
     width: 30%;
     height: 40px;
     border: none;
-    background-color: rgb(48, 133, 104);
-    font-family: arial;
+    background-color: #308568;
+    font-family: monospace;
     font-size: 16px;
     color: white;
     cursor: pointer;
@@ -98,7 +98,7 @@ h2
 {
 	text-align: center;
 	color: rgb(19, 53, 41);
-    font-family: arial;
+    font-family: monospace;
     text-shadow: 4px 0 0 #fff, -4px 0 0 #fff, 0 4px 0 #fff, 0 -4px 0 #fff, 2px 2px #fff, -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff;
 }
 #signup-link
@@ -106,7 +106,7 @@ h2
 	color: rgb(19, 53, 41);
 	margin-left: 0.5em;
 	margin-right: 0.5em;
-	font-family: arial;
+	font-family: monospace;
 	font-size: 16px;
 	font-weight: bold;
     margin-top: 0.3em;
@@ -198,3 +198,5 @@ div.infos
 {
     text-align: left;
 }
+
+
