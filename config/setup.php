@@ -65,6 +65,11 @@ if ($pdo = new PDO('mysql:host='.$DB_HOST, $DB_USER, $DB_PASSWORD))
         // on prépare et on exécute la requête
         $connexion->prepare($reqcomtable)->execute();
     }
+    else
+    {
+        echo "Connection failed.";
+        die();
+    }
 }
 else
     echo "Connection failed.";

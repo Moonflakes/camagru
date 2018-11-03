@@ -27,7 +27,7 @@ if ($pictinfo = $req->fetchall())
                 $nblike = $value;
             if ($key2 === 'picture_nb_comment')
                 $nbcom = $value;
-            if (check_user_is_connect())
+            if (check_user_is_connect($connexion))
             {
                 $reqlike = "SELECT * FROM likes WHERE like_author=? AND like_id_pict=?";
                 $req = $connexion->prepare($reqlike);
@@ -38,6 +38,8 @@ if ($pictinfo = $req->fetchall())
                 else
                     $like = 0;
             }
+            else
+                $like = 0;
         }
         $_SESSION['pict_'.++$i] = array('p_id' => $id, 'p_auth' => $auth, 'p_date' => $date, 'p_path' => $path, 'p_descr' => $descr, 'p_nblike' => $nblike, 'p_nbcom' => $nbcom, 'p_like' => $like);
     }

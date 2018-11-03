@@ -1,18 +1,17 @@
 <?php
-session_start();
 
 //si $GET pas pris remplacer par une variable array et envoyer $GET dans la fonction
-function check_user_is_connect()
+function check_user_is_connect($connexion)
 {
-    if (isset($_GET))
+    if (isset($_SESSION))
     {
-        include_once '../config/setup.php';
-        if (isset($_GET['uid']) && isset($_GET['key']))
+        
+        if (isset($_SESSION['u_uid']) && isset($_SESSION['u_key']))
         {
             // Check if there is an user with this email
             $requser = "SELECT * FROM users WHERE user_uid=? AND user_key=?";
             $req = $connexion->prepare($requser);
-            $req->execute(array($_GET['uid'], $_GET['key']));
+            $req->execute(array($_SESSION['u_uid'], $_SESSION['u_key']));
             $connectexist = $req->rowCount();
             if ($connectexist < 1 || !isset($_SESSION['u_id']))
             {
