@@ -56,7 +56,7 @@
                                     <input name="nblike" type="hidden" value="<?php echo $nblike;?>">
                                     <button type="submit" name="<?php if ($like === 1) echo "unlike"; else echo "like"; ?>" value="<?php echo $id;?>"
                                         style="border:none; padding: unset;">
-                                        <img src="<?php if ($like === 1) echo "background/coeur_rouge.png"; else echo "background/coeur.png"; ?>" 
+                                        <img src="<?php if ($like === 1) echo "background/coeur_rose.png"; else echo "background/coeur.png"; ?>" 
                                             style="width:30; cursor: pointer;" alt="like" 
                                             title="<?php if ($like === 1) echo "Je n'aime pas"; else echo "J'aime"; ?>"></button>
                                 </form>
