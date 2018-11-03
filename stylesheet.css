@@ -116,7 +116,7 @@ h2
 section .main-wrapper
 {
     margin-top: 8px;
-    background: url("background/licorne.png") repeat; 
+    background: url("img_site/licorne.png") repeat; 
     background-size: 400px;
     padding-top: 5px;
     padding-bottom: 5px;

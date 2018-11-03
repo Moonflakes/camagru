@@ -40,7 +40,7 @@
             {
 ?>
             <div class="responsive" style="position: relative">
-            <img src="background/pince.png" alt="pince" style="width:50; position: absolute; left:25px; top: -40px;">
+            <img src="img_site/pince.png" alt="pince" style="width:50; position: absolute; left:25px; top: -40px;">
                 <div class="gallery" style="padding-top:7; padding-left:7; padding-right:7; background-color: white;">
                     <img src="<?php echo $path;?>" alt="Forest" width="600" height="400">
                     <div class="desc">
@@ -56,7 +56,7 @@
                                     <input name="nblike" type="hidden" value="<?php echo $nblike;?>">
                                     <button type="submit" name="<?php if ($like === 1) echo "unlike"; else echo "like"; ?>" value="<?php echo $id;?>"
                                         style="border:none; padding: unset;">
-                                        <img src="<?php if ($like === 1) echo "background/coeur_rose.png"; else echo "background/coeur.png"; ?>" 
+                                        <img src="<?php if ($like === 1) echo "img_site/icones/coeur_rose.png"; else echo "img_site/icones/coeur.png"; ?>" 
                                             style="width:30; cursor: pointer;" alt="like" 
                                             title="<?php if ($like === 1) echo "Je n'aime pas"; else echo "J'aime"; ?>"></button>
                                 </form>
@@ -65,7 +65,7 @@
                                 <form action="include/comment.php" method="POST">
                                 <button type="submit" name="comment" value="<?php echo $id;?>"
                                         style="border:none; padding: unset;">
-                                        <img src="background/bulle_dialogue.png" alt="comment" title="Commenter"
+                                        <img src="img_site/icones/bulle_dialogue.png" alt="comment" title="Commenter"
                                             style="width:30; cursor: pointer;" alt="like" 
                                             title="<?php if ($like === 1) echo "Je n'aime pas"; else echo "J'aime"; ?>"></button>
                                 </form>

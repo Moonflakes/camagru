@@ -10,7 +10,7 @@
     </head>
     <body style="font-family:monospace">
 		<div id="header">
-        <img src="background/licorne7.png" class="image"><a href="index.php"><h1>Camagru</h1></a><img src="background/licorne6.png" class="image">
+        <img src="img_site/licorne7.png" class="image"><a href="index.php"><h1>Camagru</h1></a><img src="img_site/licorne6.png" class="image">
 		</div>
         <nav>
             <div class="main-wrapper">
