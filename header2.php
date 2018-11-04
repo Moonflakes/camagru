@@ -10,8 +10,7 @@
     </head>
     <body style="font-family:monospace">
 		<div id="header">
-        <a href="index.php"><img src="img_site/logo.png" alt="home" title="Home"
-                                    style="width:200; cursor: pointer;"></a>
+        <img src="img_site/camera.png" class="image"><a href="index.php"><h1>Camagru</h1></a><img src="img_site/camera_2.png" class="image">
 		</div>
         <nav>
             <div class="main-wrapper">

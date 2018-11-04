@@ -1,6 +1,6 @@
 #header
 {
-	background-image: radial-gradient(circle, #7fffd4, #a2ffdf, #c0ffe9, #dcfff3, #f7fffc);
+	background-color: aquamarine;
 	display: flex;
 	flex: row;
 	justify-content: center;
@@ -18,7 +18,7 @@ h1
 }
 nav
 {
-    background-image: radial-gradient(circle, #fafffd, #f3fffb, #ecfff8, #e5fff6, #defff4);
+	background-color: #defff4;
 }
 .nav-login
 {
@@ -29,14 +29,13 @@ nav
 }
 .nav-login form button
 {
-    width: 140px;
-    height: 30px;
+    width: 70px;
+    height: 0px;
     margin-right: 10px;
     border: none;
-    background-color: rgb(48, 133, 104);
+    padding: unset;
     font-family: monospace;
     font-size: 15px;
-    color: rgb(255, 255, 255);
     cursor: pointer;
 }
 .nav-login form input
@@ -116,8 +115,8 @@ h2
 section .main-wrapper
 {
     margin-top: 8px;
-    background: url("img_site/licorne.png") repeat; 
-    background-size: 400px;
+    background: url("img_site/fond_1.png") no-repeat; 
+    background-size: 100%;
     padding-top: 5px;
     padding-bottom: 5px;
 }
