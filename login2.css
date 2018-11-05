@@ -1,0 +1,34 @@
+.message
+{
+	display: flex;
+	margin-top: 8px;
+	justify-content: flex-end;
+    padding: 12px;
+    border-radius: 20px;
+    background-image: linear-gradient(to top, #ffcceb, #ffd8f0, #ffe4f5, #fff0fa, #fffcfe);
+}
+form button
+{
+    width: 140px;
+    height: 30px;
+    margin-right: 10px;
+    border: none;
+    background-color: #e78fc4;
+    font-family: monospace;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    border-radius: 10px;
+}
+form input
+{
+    float: left;
+    width: 140px;
+    height: 30px;
+    margin-right: 10px;
+    border: none;
+    background-color: #9e7b902f;
+    font-family: monospace;
+    font-size: 14px;
+    line-height:30px;
+}

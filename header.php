@@ -2,41 +2,54 @@
     session_start();
 ?>
 
-<html>
-    <head>
-        <title>Camagru</title>
-        <link rel="stylesheet" type="text/css" href="stylesheet.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    </head>
-    <body style="font-family:monospace">
-		<div id="header">
-        <a href="index.php"><img src="img_site/logo.png" alt="home" title="Home"
-                                    style="width:200; cursor: pointer;"></a>
-		</div>
-        <nav>
-            <div class="main-wrapper">
-                <div class="nav-login">
-                    <a href="index.php">
-                        <img src="img_site/icones/home_1.png" alt="home" title="Home"
-                                    style="width:50; margin-right: 20px; cursor: pointer;">
-                    </a>
-                    <a href="settings.php">
-                        <img src="img_site/icones/settings_green.png" alt="paramètres" title="Paramètres"
-                                    style="width:50; cursor: pointer;">
-                    </a>
-                    <div style="width:55%"></div>
+<div class="header">
+            <div class="lien_logo">
+                <a href="index.php" title="Accueil">
+                    <img class="logo" src="img_site/logo.png" alt="home" title="Home">
+                </a>
+            </div>
+            <div>
+                <div class="icones">
+                        <a class="photo" href="webcam.php">
+                            <img src="img_site/icones/camera_1.png" alt="photo" title="Photo">
+                            <h4>Prendre une photo</h4>
+                        </a>
+                        <a class="home" href="home.php">
+                            <img src="img_site/icones/home_1.png" alt="home" title="Home">
+                            <h4>Home</h4>
+                        </a>
+                        <a class="settings" href="settings.php">
+                            <img src="img_site/icones/settings_green.png" alt="settings" title="Paramètres">
+                            <h4>Paramètres</h4>
+                        </a>
 <?php
     if (isset($_SESSION['u_id']))
     {
-        include_once 'logout.php';
+?>
+                        <a class="logout" href="logout.php">
+                            <img src="img_site/icones/logout_3.png" alt="logout" title="Logout">
+                            <h4>Login</h4>
+                        </a>
+                        <a class="sign" href="account.php">
+                            <img src="img_site/icones/account_green.png" alt="account" title="Mon compte">
+                            <h4>Sign Up</h4>
+                        </a>
+<?php
     }
     else
     {
-        include_once 'login.php';
+?>
+                        <a class="login" href="home.php?login=ask">
+                            <img src="img_site/icones/login_1.png" alt="login" title="Login">
+                            <h4>Login</h4>
+                        </a>
+                        <a class="sign" href="signup.php">
+                            <img src="img_site/icones/signup.png" alt="signup" title="Sign up">
+                            <h4>Sign Up</h4>
+                        </a>
+<?php
     }
 ?>
                 </div>
             </div>
-        </nav>
-    </body>
-</html>
+        </div>

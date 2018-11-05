@@ -1,0 +1,7 @@
+.galery
+{
+    height: 40%;
+    background-image: linear-gradient(to top, #fff5ba, #fef8c7, #fefad5, #fefde2, #ffffef);
+    border-radius: 20px;
+	margin-top: 8px;
+}
