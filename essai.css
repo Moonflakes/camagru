@@ -2,43 +2,24 @@ body
 {
     font-family: monospace;
 }
-
-ul
+.icones 
 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.icones a 
+{
+    transition: all 0.3s ease-out;
     text-align: center;
-    padding: unset;
 }
-li 
-{
-    display: inline;
-}
-li a 
-{
-    display: inline-block;
-    transition: all 0.3s ease-out;
-}
-li a img{
+.icones a img{
     width: 50;
     cursor: pointer;
     margin-right: 30px;
     margin-left: 30px;
 }
-table
-{
-    margin: auto;
-}
-tr td a
-{
-    transition: all 0.3s ease-out;
-}
-tr td a img
-{
-    width: 50;
-    cursor: pointer;
-    margin-right: 30px;
-    margin-left: 30px;
-}
-span
+.icones a h3
 {
     visibility: hidden;
 }
@@ -52,7 +33,11 @@ span
     margin: 20px 0px 40px;
 }
 .icones a:hover,
-.icones a:focus + span {
+.icones a:focus {
     transform: scale(1.2);
+}
+
+.icones a:hover + h3
+{
     visibility: visible;
 }
