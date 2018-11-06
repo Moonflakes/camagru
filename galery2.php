@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="galery2.css" type="text/css">
-<div class="galery">
+<section class="galery">
 <?php
     include_once 'include/set_pict_infos.php';
     if(isset($_SESSION['pict_1']['p_id']))
@@ -70,4 +70,4 @@
     }
 ?>
     <div class="clearfix"></div>
-</div>
+</section>

@@ -1,10 +1,24 @@
+<html>
+    <head>
+        <title>Camagru</title>
+        <meta charset='utf-8'>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <style>
+        body
+        {
+            font-family: monospace;
+        }
+    </style>
+    <body> 
 <?PHP
     include_once 'header.php';
 ?>
-    <section class="main-container">
-        <div class="main-wrapper">
+<link rel="stylesheet" href="account.css" type="text/css">
+
+    <section class="account">
         <h2 class="h2sign" >Mon compte</h2>
-                <table style="width: 50%;" class="signup-form">
+                <table style="width: 50%;" class="account-form">
                     <form  action="include/modif.inc.php" method="POST">
                     <tr id="first" >
                         <td align="right">Prénom :</td>
@@ -62,7 +76,6 @@
                     </form>
                 </table>
             </form>
-        </div>
     </section>
     <script type="text/javascript">
     var erreur = <?PHP if (isset($_SESSION['erreur'])) echo json_encode($_SESSION['erreur']);
@@ -103,3 +116,5 @@
 <?PHP
     include_once 'footer.php';
 ?>
+    </body>
+</html>
