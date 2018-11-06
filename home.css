@@ -2,6 +2,10 @@ body
 {
     font-family: monospace;
 }
+html
+{
+    background-color: blue;
+}
 .header
 {
     background-image: linear-gradient(to bottom, #59febc, #89ffce, #b0ffdf, #d3ffee, #f5fffb);
