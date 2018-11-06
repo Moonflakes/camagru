@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="login2.css" type="text/css">
-<div class="message">
+<div class="login-div">
 <form id="login" action="include/login.inc.php" method="POST">
     <table class="login">
         <tr>

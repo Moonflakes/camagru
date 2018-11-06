@@ -16,10 +16,7 @@
     {
         include_once 'login2.php';
     }
-    if (isset($_SESSION['erreur']))
-    {
-        include_once 'error_message.php';
-    }
+    include_once 'message.php';
     include_once 'galery2.php';
 ?>
     </body>

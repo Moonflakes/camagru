@@ -1,11 +1,111 @@
 .galery
 {
-    height: 40%;
     background-image: url("img_site/points.png"), 
     linear-gradient(to top, #fff5ba, #fef8c7, #fefad5, #fefde2, #ffffef);
     background-position: top, left;
     background-repeat: repeat, no-repeat;
     background-size: 10%, 100%;
     border-radius: 20px;
-	margin-top: 8px;
+    margin-top: 8px;
+    padding: 40px 30px 20px;
+}
+div.responsive
+{
+    position: relative;
+}
+div.pictures {
+    border: 1px solid #ccc;
+    padding-top:7; 
+    padding-left:7; 
+    padding-right:7; 
+    background-color: white;
+}
+
+div.pictures:hover {
+    border: 1px solid #777;
+}
+
+div.pictures img {
+    width: 100%;
+    height: auto;
+}
+
+div.infos {
+    padding: 15px;
+    text-align: center;
+    background-color: white;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.responsive {
+    padding: 0 6px;
+    float: left;
+    width: 24.99999%;
+}
+
+@media only screen and (max-width: 700px) {
+    .responsive {
+        width: 49.99999%;
+        margin: 6px 0;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .responsive {
+        width: 100%;
+    }
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+div.cont
+{
+    display: flex;
+    flex-direction: row;
+    height: 30px;
+    margin-top: 10px;
+}
+div.vide
+{
+    flex-grow: 5;
+}
+div.action
+{
+    margin-left: 10px;
+}
+div.action form button
+{
+    border:none; 
+    padding: unset; 
+}
+div.action form button img
+{
+    width: 30; 
+    cursor: pointer;
+}
+div.nb
+{
+    text-align: left;
+}
+.galery .responsive .pince
+{
+    width:50;
+    position: absolute;
+    left:25px;
+    top: -40px;
+}
+div.nblike
+{
+    color:#ee2e87;
+}
+div.nbcom
+{
+    color:#308568;
 }
