@@ -49,22 +49,28 @@ span
 .container
 {
     display: flex;
-    align-items: flex-end;
+    justify-content:center;
+    align-items:center;
 }
 .div1
 {
     text-align: right;
     display: flex;
+    flex-basis:40%;
+    justify-content:flex-end;
 }
 .div2
 {
     text-align: center;
     display: flex;
+    flex-basis:auto;
 }
 .div3
 {
     text-align: left;
     display: flex;
+    flex-basis:40%;
+    justify-content:flex-start;
 }
 .div2 .logo
 {
