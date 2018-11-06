@@ -1,14 +1,13 @@
-body
+.header
 {
-    font-family: monospace;
-}
-.container
-{
+    background-image: linear-gradient(to bottom, #59febc, #89ffce, #b0ffdf, #d3ffee, #f5fffb);
+    border-radius: 20px;
     display: flex;
     justify-content:center;
     align-items:flex-end;
+    padding-bottom: 80px;
 }
-.div1
+.icones-left
 {
     display: flex;
     flex-basis:40%;
@@ -16,15 +15,14 @@ body
     text-align: center;
     text-decoration:none;
 }
-.div2
+.logo
 {
     display: flex;
     flex-basis:auto;
     text-align: center;
     text-decoration:none;
-    
 }
-.div3
+.icones-right
 {
     display: flex;
     flex-basis:40%;
@@ -32,7 +30,7 @@ body
     text-align: center;
     text-decoration:none;
 }
-.div2 .logo
+.logo a img
 {
     width: 200;
     margin: 20px 0px -20px;
@@ -44,11 +42,15 @@ div a img
     margin-right: 30px;
     margin-left: 30px;
 }
-.container .div1 .photo img
+.photo img
 {
     margin-top: 10px; 
 }
-.container div a h4
+.header div a
+{
+    text-decoration:none;
+}
+.header div a h4
 {
     visibility: hidden;
     align-self: center;
@@ -57,19 +59,37 @@ div a img
     margin: 0;
     color: #266953;
 }
-.container div a:hover,
-.container div a:focus {
+.icones-right .account .compte img
+{
+    width: 50;
+    height: 50;
+    cursor: pointer;
+    margin-right: 0px;
+    margin-left: 30px;
+}
+.icones-right .account .compte
+{
+    display: flex;
+}
+.icones-right .name
+{
+    margin: auto 10px auto;
+    font-size: 150%;
+    color: #266953;
+    font-weight: bold;
+}
+.header div a:hover,
+.header div a:focus {
     transform: scale(1.2);
     visibility: visible;
 }
-
-.container div a:hover h4
+.header div a:hover h4
 {
     visibility: visible;
     margin: 5px auto -5px;
     width: 100px;
 }
-.container .div2 a:hover h4
+.header .logo a:hover h4
 {
     visibility: visible;
     margin: 30px auto -30px;

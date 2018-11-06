@@ -1,11 +1,3 @@
-body
-{
-    font-family: monospace;
-}
-html
-{
-    background-color: blue;
-}
 .header
 {
     background-image: linear-gradient(to bottom, #59febc, #89ffce, #b0ffdf, #d3ffee, #f5fffb);
@@ -34,6 +26,25 @@ html
     margin-right: 50px;
     margin-left: 50px;
 }
+.icones .account .compte img
+{
+    width: 50;
+    height: 50;
+    cursor: pointer;
+    margin-right: 0px;
+    margin-left: 50px;
+}
+.icones .account .compte
+{
+    display: flex;
+}
+.icones .name
+{
+    margin: auto 10px auto;
+    font-size: 150%;
+    color: #266953;
+    font-weight: bold;
+}
 .icones a h4
 {
     visibility: hidden;
@@ -57,14 +68,9 @@ html
     transform: scale(1.2);
 }
 
-.icones .photo:hover h4, .icones .settings:hover h4, .icones .sign:hover h4
+.icones a:hover h4
 {
     visibility: visible;
     margin: 5px auto 0px;
     width: 100px;
-}
-.icones .home:hover h4, .icones .login:hover h4
-{
-    visibility: visible;
-    margin: 5px auto 0px;
 }

@@ -1,11 +1,11 @@
 <?PHP
-if (isset($_POST['submit']))
-{
+/*if (isset($_POST['submit']))
+{*/
     session_start();
     session_unset();
     session_destroy();
-    header("Location: ../index.php");
+    header('Location: ../home.php');
     exit();
-}
+//}
 
 ?>

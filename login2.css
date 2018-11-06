@@ -5,7 +5,8 @@
 	justify-content: flex-end;
     padding: 12px;
     border-radius: 20px;
-    background-image: linear-gradient(to top, #ffcceb, #ffd8f0, #ffe4f5, #fff0fa, #fffcfe);
+    /*background-image: linear-gradient(to top, #ffcceb, #ffd8f0, #ffe4f5, #fff0fa, #fffcfe);*/
+    background-image: linear-gradient(to top, #fff0de, #fff3e5, #fff6ec, #fff9f2, #fffcf9);
 }
 form button
 {
@@ -13,7 +14,7 @@ form button
     height: 30px;
     margin-right: 10px;
     border: none;
-    background-color: #e78fc4;
+    background-color: /*#e78fc4*/ #c0a079;
     font-family: monospace;
     font-size: 15px;
     color: rgb(255, 255, 255);

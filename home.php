@@ -1,14 +1,18 @@
 <html>
     <head>
         <title>Camagru</title>
-        <link rel="stylesheet" type="text/css" href="home.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
-
+    <style>
+        body
+        {
+            font-family: monospace;
+        }
+    </style>
     <body>     
 <?php
     include_once 'header.php';
-    if (isset($_GET['login']))
+    if (isset($_GET['login']) && $_GET['login'] != "success")
     {
         include_once 'login2.php';
     }
