@@ -2,6 +2,7 @@
     <head>
         <title>Camagru</title>
         <meta charset='utf-8'>
+        <link rel="stylesheet" href="account.css" type="text/css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
     <style>
@@ -14,8 +15,6 @@
 <?PHP
     include_once 'header.php';
 ?>
-<link rel="stylesheet" href="account.css" type="text/css">
-
     <section class="account">
         <h2 class="h2sign" >Mon compte</h2>
                 <table style="width: 50%;" class="account-form">

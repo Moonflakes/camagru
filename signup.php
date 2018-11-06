@@ -1,8 +1,21 @@
+<html>
+    <head>
+        <title>Camagru</title>
+        <meta charset='utf-8'>
+        <link rel="stylesheet" href="signup.css" type="text/css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <style>
+        body
+        {
+            font-family: monospace;
+        }
+    </style>
+    <body> 
 <?PHP
     include_once 'header.php';
 ?>
-    <section class="main-container">
-        <div class="main-wrapper">
+    <section class="signup">
             <h2 class="h2sign" >Sign Up</h2>
             <form  action="include/signup.inc.php" method="POST">
                 <table class="signup-form">
@@ -68,11 +81,12 @@
                     </tr>
                 </table>
             </form>
-        </div>
     </section>
     <script type="text/javascript">
-    var erreur = <?PHP echo json_encode($_SESSION['erreur']); ?>;
-    var get = <?PHP echo json_encode($_GET); ?>;
+    var erreur = <?PHP if (isset($_SESSION['erreur'])) echo json_encode($_SESSION['erreur']);
+                        else echo "null"; ?>;
+    var get = <?PHP if (isset($_GET)) echo json_encode($_GET);
+                        else echo "null";; ?>;
         $(document).ready(function () 
         {
             if (erreur && get['signup'])
@@ -97,3 +111,5 @@
 <?PHP
     include_once 'footer.php';
 ?>
+    </body>
+</html>
