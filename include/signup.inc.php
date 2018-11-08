@@ -49,7 +49,7 @@ if (isset($_POST['submit']))
 
     if (isset($_SESSION['erreur']))
     {
-        header("Location: ../signup.php?signup=error");
+        header("Location: ../view/signup.php?signup=error");
         exit();
     }
     else
@@ -79,19 +79,19 @@ if (isset($_POST['submit']))
         if ($mail = mail($email, "Confirmation de compte", $message, $header))
         {
             $_SESSION['success'] = 'Votre compte a bien été créé ! </br> Veuillez vérifier votre boîte de réception pour confirmer votre email.';
-            header("Location: ../signup.php?signup=success");
+            header("Location: ../view/signup.php?signup=success");
         }
         else
         {
             $_SESSION['success'] = "L'envoi de l'email à échoué !";
-            header("Location: ../signup.php?signup=email_echec");
+            header("Location: ../view/signup.php?signup=email_echec");
         }
         exit();
     }
 }
 else
 {
-    header("Location: ../signup.php");
+    header("Location: ../view/signup.php");
     exit();
 }
 

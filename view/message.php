@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="message.css">
+<link rel="stylesheet" type="text/css" href="../css/message.css">
 <div class="message">
     <?php
     //supprimer le message d'erreur de login
@@ -14,11 +14,7 @@
         }
         unset($_SESSION['erreur']);
     }
-    if (isset($_SESSION['u_id']))
-    {
-        echo '<a href="webcam.php?uid='.$_SESSION['u_uid'].'&key='.$_SESSION['u_key'].'"><p>Ajouter</p></a>';
-    }
-    else
+    if (!isset($_SESSION['u_id']))
     {
         echo '<p>Pour ajouter vos propres photos à la galerie connectez vous !</p>';
     }

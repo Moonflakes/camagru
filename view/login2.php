@@ -1,6 +1,6 @@
-<link rel="stylesheet" href="login2.css" type="text/css">
+<link rel="stylesheet" href="../css/login2.css" type="text/css">
 <div class="login-div">
-<form id="login" action="include/login.inc.php" method="POST">
+<form id="login" action="../include/login.inc.php" method="POST">
     <table class="login">
         <tr>
             <td>

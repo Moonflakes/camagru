@@ -10,7 +10,7 @@ if (check_user_is_connect())
 else
 {
     $_SESSION['erreur']['connect'] = "Pour commenter des photos à votre guise connectez vous !";
-    header("Location: index.php?connect=error");
+    header("Location: ../view/home.php?connect=error");
     exit();
 }
 

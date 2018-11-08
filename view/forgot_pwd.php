@@ -4,7 +4,7 @@
     <section class="main-container">
         <div class="main-wrapper">
             <h2 class="h2sign" >Mot de passe oublié</h2>
-            <form  action="include/forgot_pwd.inc.php" method="POST">
+            <form  action="../include/forgot_pwd.inc.php" method="POST">
                 <table class="signup-form">
                     <tr id="email" >
                         <td>

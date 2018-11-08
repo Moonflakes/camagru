@@ -2,7 +2,7 @@
     <head>
         <title>Camagru</title>
         <meta charset='utf-8'>
-        <link rel="stylesheet" href="signup.css" type="text/css">
+        <link rel="stylesheet" href="../css/signup.css" type="text/css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
     <style>
@@ -17,7 +17,7 @@
 ?>
     <section class="signup">
             <h2 class="h2sign" >Sign Up</h2>
-            <form  action="include/signup.inc.php" method="POST">
+            <form  action="../include/signup.inc.php" method="POST">
                 <table class="signup-form">
                     <tr id="first" >
                         <td>

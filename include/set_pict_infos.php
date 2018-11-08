@@ -1,8 +1,20 @@
 <?php
-include_once 'config/setup.php';
+include_once '../config/setup.php';
 include_once 'check_user.php';
 
-$reqpicture = "SELECT * FROM pictures ORDER BY picture_date DESC";
+// compter le nb de photos dans la base de donnée
+$reqcount = "SELECT * FROM `pictures`";
+$req = $connexion->prepare($reqcount);
+$req->execute();
+$nb_pictures = $req->rowCount();
+
+//selectionner x images par pages (de base le nb d'image par page est a 10)
+// faire une fonction qui prend $nb_img_pg et $num_pg
+$nb_img_pg = 10;
+$num_pg = 0;
+$nb_pg = ceil($nb_pictures / $nb_img_pg);
+
+$reqpicture = "SELECT * FROM pictures ORDER BY picture_date DESC LIMIT $num_pg, $nb_img_pg";
 $req = $connexion->prepare($reqpicture);
 $req->execute();
 

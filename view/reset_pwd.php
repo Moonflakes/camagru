@@ -4,7 +4,7 @@
     <section class="main-container">
         <div class="main-wrapper">
             <h2 class="h2sign" >Réinitialisation du mot de passe</h2>
-            <form  action="include/reset_pwd.inc.php" method="POST">
+            <form  action="../include/reset_pwd.inc.php" method="POST">
                 <table class="signup-form">
                     <tr id="uid">
                         <td>

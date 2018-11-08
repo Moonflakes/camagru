@@ -18,14 +18,14 @@ if(isset($_GET['uid'], $_GET['key']) AND !empty($_GET['uid']) AND !empty($_GET['
             $_SESSION['u_confirm'] = 1;
             echo "Votre compte a bien été confirmé !";
             if (isset($_GET['resend']))
-                echo  '</br><a href="http://'.$_SERVER['HTTP_HOST'].str_replace("/include/confirm.php", "", $_SERVER['PHP_SELF']).'/forgot_pwd.php?">Réinitialiser mon mot de passe</a>';
+                echo  '</br><a href="http://'.$_SERVER['HTTP_HOST'].str_replace("/include/confirm.php", "", $_SERVER['PHP_SELF']).'/view/forgot_pwd.php?">Réinitialiser mon mot de passe</a>';
             else
-                echo '</br><a href="http://'.$_SERVER['HTTP_HOST'].str_replace("/include/confirm.php", "", $_SERVER['PHP_SELF']).'/index.php">Me connecter</a>';
+                echo '</br><a href="http://'.$_SERVER['HTTP_HOST'].str_replace("/include/confirm.php", "", $_SERVER['PHP_SELF']).'/view/home.php">Me connecter</a>';
         }
         else
         {
             echo "Votre compte a déjà été confirmé !";
-            echo '</br><a href="http://'.$_SERVER['HTTP_HOST'].str_replace("/include/confirm.php", "", $_SERVER['PHP_SELF']).'/index.php">Me connecter</a>';
+            echo '</br><a href="http://'.$_SERVER['HTTP_HOST'].str_replace("/include/confirm.php", "", $_SERVER['PHP_SELF']).'/view/home.php">Me connecter</a>';
         }
     }
     else

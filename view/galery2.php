@@ -1,7 +1,16 @@
-<link rel="stylesheet" href="galery2.css" type="text/css">
+<link rel="stylesheet" href="../css/galery2.css" type="text/css">
 <section class="galery">
+    <form action="/action_page.php">
+        <select name="cars">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="40">40</option>
+        </select>
+        <input type="submit" value="Submit">
+    </form>
 <?php
-    include_once 'include/set_pict_infos.php';
+    include_once '../include/set_pict_infos.php';
     if(isset($_SESSION['pict_1']['p_id']))
     {
         foreach ($_SESSION as $key => $array) 
@@ -34,7 +43,7 @@
             {
 ?>
             <div class="responsive">
-                <img class="pince" src="img_site/pince.png" alt="pince">
+                <img class="pince" src="../img_site/pince.png" alt="pince">
                 <div class="pictures">
                     <img src="<?php echo $path;?>" alt="Forest" width="600" height="400">
                     <div class="infos">
@@ -46,17 +55,17 @@
                             </div>
                             <div class="vide"></div>
                             <div class="action">
-                                <form action="include/like.php" method="POST">
+                                <form action="../include/like.php" method="POST">
                                     <input name="nblike" type="hidden" value="<?php echo $nblike;?>">
                                     <button type="submit" name="<?php if ($like === 1) echo "unlike"; else echo "like"; ?>" value="<?php echo $id;?>">
-                                        <img src="<?php if ($like === 1) echo "img_site/icones/coeur_rose.png"; else echo "img_site/icones/coeur.png"; ?>" 
+                                        <img src="<?php if ($like === 1) echo "../img_site/icones/coeur_rose.png"; else echo "../img_site/icones/coeur.png"; ?>" 
                                             alt="like" title="<?php if ($like === 1) echo "Je n'aime pas"; else echo "J'aime"; ?>"></button>
                                 </form>
                             </div>
                             <div class="action">
-                                <form action="include/comment.php" method="POST">
+                                <form action="../include/comment.php" method="POST">
                                 <button type="submit" name="comment" value="<?php echo $id;?>">
-                                        <img src="img_site/icones/bulle_dialogue.png" alt="comment" title="Commenter">
+                                        <img src="../img_site/icones/bulle_dialogue.png" alt="comment" title="Commenter">
                                 </button>
                                 </form>
                             </div>

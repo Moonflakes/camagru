@@ -2,7 +2,7 @@
     <head>
         <title>Camagru</title>
         <meta charset='utf-8'>
-        <link rel="stylesheet" href="account.css" type="text/css">
+        <link rel="stylesheet" href="../css/account.css" type="text/css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
     <style>
@@ -18,7 +18,7 @@
     <section class="account">
         <h2 class="h2sign" >Mon compte</h2>
                 <table style="width: 50%;" class="account-form">
-                    <form  action="include/modif.inc.php" method="POST">
+                    <form  action="../include/modif.inc.php" method="POST">
                     <tr id="first" >
                         <td align="right">Prénom :</td>
                         <?php
@@ -27,7 +27,7 @@
                         ?>
                     </tr>
                     </form>
-                    <form  action="include/modif.inc.php" method="POST">
+                    <form  action="../include/modif.inc.php" method="POST">
                     <tr id="last" >
                         <td align="right">Nom :</td>
                         <?php
@@ -36,7 +36,7 @@
                         ?>
                     </tr>
                     </form>
-                    <form  action="include/modif.inc.php" method="POST">
+                    <form  action="../include/modif.inc.php" method="POST">
                     <tr id="email">
                         <td align="right">E-mail :</td>
                         <?php
@@ -52,7 +52,7 @@
                         ?>
                     </tr>
                     </form>
-                    <form  action="include/modif.inc.php" method="POST">
+                    <form  action="../include/modif.inc.php" method="POST">
                     <tr id="uid">
                         <td align="right">Nom d'utilisateur :</td>
                         <?php
@@ -68,7 +68,7 @@
                         ?>
                     </tr>
                     </form>
-                    <form  action="include/modif.inc.php" method="POST">
+                    <form  action="../include/modif.inc.php" method="POST">
                     <?php
                         include_once 'modif_pwd.php';
                     ?>
