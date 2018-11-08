@@ -1,8 +1,5 @@
 <td>
-    <input style="width: 100%;
-                margin-left: 10px;
-                margin-right: 10px;" 
-            id="_<?php if (isset($_GET['modif'])) echo $_GET['modif'];?>" type="text" name="<?php if (isset($_GET['modif'])) echo $_GET['modif'];?>"
+    <input id="_<?php if (isset($_GET['modif'])) echo $_GET['modif'];?>" type="text" name="<?php if (isset($_GET['modif'])) echo $_GET['modif'];?>"
             value="<?php 
                         if(isset($_SESSION['param']))
                         {
@@ -11,14 +8,6 @@
                         } ?>">
 </td>
 <td>
-    <button style="margin-top: 0px;
-                    margin-right: 0px;
-                    width: 84px;
-                    border-left-width: 2px;
-                    padding-bottom: 1px;
-                    margin-left: 10%;
-                    background-color: rgb(225, 255, 245);
-                    color: rgb(48, 133, 104);
-                    font-size: 15px;" 
+    <button  class="valider"
             type="submit" name="update" value="<?php if (isset($_GET['modif'])) echo $_GET['modif'];?>">Valider</button>
 </td>

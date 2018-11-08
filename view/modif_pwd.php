@@ -6,10 +6,7 @@ if (isset($_GET['modif']) && ($_GET['modif'] == "pwd" || $_GET['modif'] == 'oldp
     <tr id="oldpwd">
         <td align="right">Ancien mot de passe :</td>
         <td>
-            <input style="width: 100%;
-                        margin-left: 10px;
-                        margin-right: 10px;" 
-                    id="_<?php echo 'oldpwd'?>" type="password" name="<?php echo 'oldpwd'?>"
+            <input id="_<?php echo 'oldpwd'?>" type="password" name="<?php echo 'oldpwd'?>"
                     value="<?php 
                                 if(isset($_SESSION['oldpwd']))
                                 {
@@ -22,10 +19,7 @@ if (isset($_GET['modif']) && ($_GET['modif'] == "pwd" || $_GET['modif'] == 'oldp
     <tr id="newpwd">
         <td align="right">Nouveau mot de passe :</td>
         <td>
-            <input style="width: 100%;
-                        margin-left: 10px;
-                        margin-right: 10px;" 
-                    id="_<?php echo 'newpwd'?>" type="password" name="<?php echo 'newpwd'?>"
+            <input id="_<?php echo 'newpwd'?>" type="password" name="<?php echo 'newpwd'?>"
                     value="<?php 
                                 if(isset($_SESSION['newpwd']))
                                 {
@@ -34,15 +28,7 @@ if (isset($_GET['modif']) && ($_GET['modif'] == "pwd" || $_GET['modif'] == 'oldp
                                 } ?>">
         </td>
         <td>
-            <button style="margin-top: 0px;
-                            margin-right: 0px;
-                            width: 84px;
-                            border-left-width: 2px;
-                            padding-bottom: 1px;
-                            margin-left: 10%;
-                            background-color: rgb(225, 255, 245);
-                            color: rgb(48, 133, 104);
-                            font-size: 15px;" 
+            <button class="valider" 
                     type="submit" name="update" value="pwd">Valider</button>
         </td>
     </tr>

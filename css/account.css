@@ -19,6 +19,8 @@ section.account
     height: 40px;
     padding: 0px 5%;
     margin-bottom: 4px;
+    margin-left: 10px;
+    margin-right: 10px;
     background-color: rgba(255, 255, 255, 0.95);
     font-family: monospace;
     font-size: 16px;
@@ -30,16 +32,26 @@ section.account
 .account-form button
 {
     display: block;
-    margin: 0 auto;
-    width: 30%;
     height: 40px;
     border: none;
-    background-color: #308568;
     font-family: monospace;
-    font-size: 16px;
-    color: white;
     cursor: pointer;
-	margin-top: 2em;
+    margin: 0px 0px 0px 20px;
+    width: 84px;
+    border-left-width: 2px;
+    padding-bottom: 1px;
+    font-size: 15px;
+    border-radius: 10px;
+}
+.account-form .modifier
+{
+    background-color: #308568;
+    color: white;
+}
+.account-form .valider
+{
+    background-color: rgb(225, 255, 245);
+    color: rgb(48, 133, 104);
 }
 h2
 {
