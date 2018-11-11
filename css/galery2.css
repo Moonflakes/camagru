@@ -1,6 +1,10 @@
 .galery
 {
-    padding: 40px 30px 20px;
+    padding: 20px 30px 20px;
+}
+.galery form[name=nbitem_pg]
+{
+    margin-bottom: 60px;
 }
 div.responsive
 {

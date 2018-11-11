@@ -4,7 +4,7 @@
     session_start();
     session_unset();
     session_destroy();
-    header('Location: ../view/home.php');
+    header('Location: ../fr/home.php');
     exit();
 //}
 

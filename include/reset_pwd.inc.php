@@ -22,7 +22,7 @@ if (isset($_POST['submit']))
         //print_r($_SESSION);
     //print_r($_POST);
     //die();
-        header("Location: ../view/reset_pwd.php?reset=error&key=".$key);
+        header("Location: ../fr/reset_pwd.php?reset=error&key=".$key);
         exit();
     }
     else
@@ -36,7 +36,7 @@ if (isset($_POST['submit']))
             $_SESSION['erreur']['uid'] = "Nom d'utilisateur incorrect !";
         if (isset($_SESSION['erreur']))
         {
-            header("Location: ../view/reset_pwd.php?reset=error&key=".$key);
+            header("Location: ../fr/reset_pwd.php?reset=error&key=".$key);
             exit();
         }
         else
@@ -53,7 +53,7 @@ if (isset($_POST['submit']))
                                                 <a href='forgot_pwd.php' id='fpwd-link'>cliquez ici !</a>";
             if (isset($_SESSION['erreur']))
             {
-                header("Location: ../view/reset_pwd.php?reset=error&key=".$key);
+                header("Location: ../fr/reset_pwd.php?reset=error&key=".$key);
                 exit();
             }
             else
@@ -69,7 +69,7 @@ if (isset($_POST['submit']))
                 $connexion->prepare($requpdate)->execute(array($hashpwd, $key, 1, $uid));
                 $_SESSION['u_confirm'] = 1;
                 $_SESSION['success'] = 'Votre mot de passe a bien été réinitialiser !';
-                header("Location: ../view/reset_pwd.php?reset=success");
+                header("Location: ../fr/reset_pwd.php?reset=success");
             exit();
             }
         }
@@ -77,7 +77,7 @@ if (isset($_POST['submit']))
 }
 else
 {
-    header("Location: ../view/reset_pwd.php");
+    header("Location: ../fr/reset_pwd.php");
     exit();
 }
 

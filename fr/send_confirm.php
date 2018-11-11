@@ -10,7 +10,7 @@ $message='
 <html>
     <body>
         <div align="center">
-            <a href="http://'.$_SERVER['HTTP_HOST'].str_replace("/view/send_confirm.php", "", $_SERVER['PHP_SELF']).'/include/confirm.php?uid='.urlencode($_SESSION['u_uid']).'&key='.urlencode($_SESSION['u_key']).'&resend=1">Confirmez votre compte !</a>
+            <a href="http://'.$_SERVER['HTTP_HOST'].str_replace("/fr/send_confirm.php", "", $_SERVER['PHP_SELF']).'/include/confirm.php?uid='.urlencode($_SESSION['u_uid']).'&key='.urlencode($_SESSION['u_key']).'&resend=1">Confirmez votre compte !</a>
         </div>
     </body>
 </html>

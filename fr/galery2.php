@@ -1,16 +1,16 @@
 <link rel="stylesheet" href="../css/galery2.css" type="text/css">
 <section class="galery">
-    <form action="/action_page.php">
-        <select name="cars">
+    <form name="nbitem_pg" action="../include/set_pict_infos.php" method="POST">
+        Nombre d'items par pages :
+        <select name="nb_items" onchange='this.form.submit()'>
             <option value="10">10</option>
             <option value="20">20</option>
             <option value="30">30</option>
             <option value="40">40</option>
         </select>
-        <input type="submit" value="Submit">
     </form>
 <?php
-    include_once '../include/set_pict_infos.php';
+   // include_once '../include/set_pict_infos.php';
     if(isset($_SESSION['pict_1']['p_id']))
     {
         foreach ($_SESSION as $key => $array) 
@@ -79,4 +79,7 @@
     }
 ?>
     <div class="clearfix"></div>
+<?php
+    include_once 'pagination.php';
+?>
 </section>

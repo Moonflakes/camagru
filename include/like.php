@@ -17,7 +17,7 @@ if (check_user_is_connect($connexion))
         $requpdnblik = 'UPDATE `pictures` SET `picture_nb_like`=? WHERE `picture_id`=?';
         $connexion->prepare($requpdnblik)->execute(array($up_nblike, $_POST['like']));
         
-        header("Location: ../view/home.php?like=success");
+        header("Location: ../fr/home.php?like=success");
         exit();
     }
     else if (isset($_POST['unlike']))
@@ -31,19 +31,19 @@ if (check_user_is_connect($connexion))
         $requpdnblik = 'UPDATE `pictures` SET `picture_nb_like`=? WHERE `picture_id`=?';
         $connexion->prepare($requpdnblik)->execute(array($down_nblike, $_POST['unlike']));
 
-        header("Location: ../view/home.php?unlike=success");
+        header("Location: ../fr/home.php?unlike=success");
         exit();
     }
     else
     {
-        header("Location: ../view/home.php?like=error");
+        header("Location: ../fr/home.php?like=error");
         exit();
     }
 }
 else
 {
     $_SESSION['erreur']['connect'] = "Pour liker des photos à votre guise connectez vous !";
-    header("Location: ../view/home.php?connect=error");
+    header("Location: ../fr/home.php?connect=error");
     exit();
 }
 

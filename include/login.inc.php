@@ -18,7 +18,7 @@ if (isset($_POST['submit']))
     }
     if (isset($_SESSION['erreur']))
     {
-        header("Location: ../view/home.php?login=error");
+        header("Location: ../fr/home.php?login=error");
         exit();
     }
     else
@@ -44,7 +44,7 @@ if (isset($_POST['submit']))
         }
         if (isset($_SESSION['erreur']))
         {
-            header("Location: ../view/home.php?login=error");
+            header("Location: ../fr/home.php?login=error");
             exit();
         }
         else
@@ -57,14 +57,14 @@ if (isset($_POST['submit']))
             $_SESSION['u_uid'] = $userinfo['user_uid'];
             $_SESSION['u_key'] = $userinfo['user_key'];
             $_SESSION['u_confirm'] = $userinfo['user_confirm'];
-            header("Location: ../view/home.php?login=success");
+            header("Location: ../fr/home.php?login=success");
             exit();
         }
     }
 }
 else
 {
-    header("Location: ../view/home.php");
+    header("Location: ../fr/home.php");
     exit();
 }
 

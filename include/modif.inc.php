@@ -3,12 +3,12 @@ session_start();
 
 if (isset($_POST['reset']))
 {
-    header("Location: ../view/account.php?modif=".$_POST['reset']);
+    header("Location: ../fr/account.php?modif=".$_POST['reset']);
     exit();
 }
 if (isset($_POST['update']))
 {
-    include_once '../view/config/setup.php';
+    include_once '../fr/config/setup.php';
     $update = $_POST['update'];
     $_SESSION['param'] = $param = htmlspecialchars($_POST[$update]);
     if ($update == "email")
@@ -50,7 +50,7 @@ if (isset($_POST['update']))
     }
     if (isset($_SESSION['erreur']))
     {
-        header("Location: ../view/account.php?modif=".$update."&error=".$update);
+        header("Location: ../fr/account.php?modif=".$update."&error=".$update);
         exit();
     }
     else
@@ -65,7 +65,7 @@ if (isset($_POST['update']))
             $_SESSION['erreur']['uid'] = "Nom d'utilisateur incorrect !";
         if (isset($_SESSION['erreur']))
         {
-            header("Location: ../view/account.php?modif=uid");
+            header("Location: ../fr/account.php?modif=uid");
             exit();
         }
         else
@@ -80,7 +80,7 @@ if (isset($_POST['update']))
                 }
                 if (isset($_SESSION['erreur']))
                 {
-                    header("Location: ../view/account.php?modif=oldpwd&error=oldpwd");
+                    header("Location: ../fr/account.php?modif=oldpwd&error=oldpwd");
                     exit();
                 }
                 else
@@ -91,14 +91,14 @@ if (isset($_POST['update']))
             $_SESSION['success'] = 'Votre '.$str_param.' a bien été modifié !';
             if ($update != "pwd")
                 $_SESSION["u_".$update] = $param;
-            header("Location: ../view/account.php?modif=success");
+            header("Location: ../fr/account.php?modif=success");
             exit();
         }
     }
 }
 else
 {
-    header("Location: ../view/account.php");
+    header("Location: ../fr/account.php");
     exit();
 }
 ?>

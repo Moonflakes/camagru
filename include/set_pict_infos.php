@@ -8,10 +8,21 @@ $req = $connexion->prepare($reqcount);
 $req->execute();
 $nb_pictures = $req->rowCount();
 
+if (isset($_POST['nb_items']))
+{
+    $nb_img_pg = $_POST['nb_items'];
+    $num_pg = 0;
+}
+else
+{
+    $nb_img_pg = 10;
+    $num_pg = 0;
+}
+
 //selectionner x images par pages (de base le nb d'image par page est a 10)
 // faire une fonction qui prend $nb_img_pg et $num_pg
-$nb_img_pg = 10;
-$num_pg = 0;
+//$nb_img_pg = 10;
+//$num_pg = 0;
 $nb_pg = ceil($nb_pictures / $nb_img_pg);
 
 $reqpicture = "SELECT * FROM pictures ORDER BY picture_date DESC LIMIT $num_pg, $nb_img_pg";
@@ -56,5 +67,7 @@ if ($pictinfo = $req->fetchall())
         $_SESSION['pict_'.++$i] = array('p_id' => $id, 'p_auth' => $auth, 'p_date' => $date, 'p_path' => $path, 'p_descr' => $descr, 'p_nblike' => $nblike, 'p_nbcom' => $nbcom, 'p_like' => $like);
     }
 }
+header("Location: ../fr/home.php");
+exit();
 
 ?>

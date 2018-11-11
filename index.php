@@ -1,4 +1,4 @@
 <?PHP
-    header("Location: view/home.php");
+    header("Location: fr/home.php");
     exit();
 ?>
