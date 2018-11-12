@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="../css/galery2.css" type="text/css">
 <section class="galery">
-    <form name="nbitem_pg" action="../include/set_pict_infos.php" method="POST">
+    <form name="nbitem_pg" action="../include/set_pag_infos.php" method="POST">
         Nombre d'items par pages :
         <select name="nb_items" onchange='this.form.submit()'>
             <option value="10">10</option>
@@ -10,11 +10,14 @@
         </select>
     </form>
 <?php
-   include_once '../include/set_pict_infos.php';
-   print_r($_SESSION);
-    if(isset($_SESSION['pict_1']['p_id']))
+    include_once '../include/set_pict_infos.php';
+    $num_pg = (isset($_GET['page'])) ? $_GET['page'] - 1 : 0;
+    $nb_img_pg = (isset($_GET['nb_item'])) ? $_GET['nb_item'] : 10;
+    set_pict($num_pg, $nb_img_pg);
+    //print_r($_SESSION);
+    if(isset($_SESSION['pictures']['pict_1']['p_id']))
     {
-        foreach ($_SESSION as $key => $array) 
+        foreach ($_SESSION['pictures'] as $key => $array) 
         {
             $path = 0;
             $descr = 0;

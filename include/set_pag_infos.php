@@ -10,6 +10,6 @@ else
     $nb_img_pg = 10;
     $num_pg = 0;
 }
-header("Location: ../fr/home.php");
+header("Location: ../fr/home.php?nb_item=$nb_img_pg");
 exit();
 ?>
