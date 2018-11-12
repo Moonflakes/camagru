@@ -1,23 +1,32 @@
 <link rel="stylesheet" href="../css/galery2.css" type="text/css">
+<link rel="stylesheet" href="../css/pagination.css" type="text/css">
 <section class="galery">
-    <form name="nbitem_pg" action="../include/set_pag_infos.php" method="POST">
+    <form name="nbitem_pg" action="../include/set_pag_infos.php?page=<?php if (isset($_GET['page'])) echo $_GET['page']; else echo '1';?>" method="POST">
         Nombre d'items par pages :
         <select name="nb_items" onchange='this.form.submit()'>
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="30">30</option>
-            <option value="40">40</option>
+            <option value="10" <?php if ((isset($_GET['limit']) && $_GET['limit'] == 10) || !isset($_GET['limit'])) echo "selected"?>>10</option>
+            <option value="20" <?php if (isset($_GET['limit']) && $_GET['limit'] == 20) echo "selected"?>>20</option>
+            <option value="30" <?php if (isset($_GET['limit']) && $_GET['limit'] == 30) echo "selected"?>>30</option>
+            <option value="40" <?php if (isset($_GET['limit']) && $_GET['limit'] == 40) echo "selected"?>>40</option>
         </select>
     </form>
 <?php
-    include_once '../include/set_pict_infos.php';
-    $num_pg = (isset($_GET['page'])) ? $_GET['page'] - 1 : 0;
-    $nb_img_pg = (isset($_GET['nb_item'])) ? $_GET['nb_item'] : 10;
-    set_pict($num_pg, $nb_img_pg);
-    //print_r($_SESSION);
-    if(isset($_SESSION['pictures']['pict_1']['p_id']))
+    include_once '../config/setup.php';
+    include_once '../include/paginator.php';
+    
+    $query = "SELECT * from pictures"; // requete sql
+    
+    $limit = (isset($_GET['limit'])) ? $_GET['limit'] : 10; // nombre de d'image par page (par defaut 5)
+    $page = (isset($_GET['page'])) ? $_GET['page'] : 1; // num de page
+    $links = 5; // links between ...
+    
+    $paginator = new Paginator($connexion, $query); // contructor called
+    $result = $paginator->getData($limit, $page); // set pictures infos
+    
+    //print_r($result->data);
+    if(isset($result->data))
     {
-        foreach ($_SESSION['pictures'] as $key => $array) 
+        foreach ($result->data as $key => $array) 
         {
             $path = 0;
             $descr = 0;
@@ -29,17 +38,17 @@
             {
                 foreach ($array as $key => $value) 
                 {
-                    if ($key === 'p_path')
+                    if ($key === 'picture_path')
                         $path = $value;
-                    if ($key === 'p_descr')
+                    if ($key === 'picture_description')
                         $descr = $value;
-                    if ($key === 'p_nblike')
+                    if ($key === 'picture_nb_like')
                         $nblike = $value;
-                    if ($key === 'p_nbcom')
+                    if ($key === 'picture_nb_comment')
                         $nbcom = $value;
-                    if ($key === 'p_id')
+                    if ($key === 'picture_id')
                         $id = $value;
-                    if ($key === 'p_like')
+                    if ($key === 'picture_like')
                         $like = $value;
                 }
             }
@@ -84,6 +93,6 @@
 ?>
     <div class="clearfix"></div>
 <?php
-    include_once 'pagination.php';
+    echo $paginator->createLinks($links, 'pagination');
 ?>
 </section>

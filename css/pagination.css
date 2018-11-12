@@ -15,13 +15,17 @@
     transition: background-color .3s;
 }
 
-.pagination a.active 
+.pagination .active 
 {
-    background-color: dodgerblue;
+    background-color: #308568;
+}
+
+.pagination .active a
+{
     color: white;
 }
 
-.pagination a:hover:not(.active) 
+.pagination li:hover:not(.active) 
 {
-    background-color: #ddd;
+    background-color: #d3ffee;
 }

@@ -6,23 +6,25 @@ class Paginator{
     private $_limit; //records (rows) to show per page
     private $_page; //current page
     private $_query;
-    private $total;
-    private $row_start;
+    private $_total;
+    private $_row_start;
 
     //constructor method is called autmaticall when object is instantiated with new keyword
     public function __construct($conn, $query)
     {
         //$this-> variables bocome available anywhere within THIS class
         $this->_conn = $conn; //mysql connection resource
-        $this->_query; //mysql query string
+        $this->_query = $query; //mysql query string
 
-        $rs = $this->_conn->query($this->_query);
-        $this->total = $rs->num_rows; // total number of row
+        $rs = $this->_conn->prepare($this->_query);
+        $rs->execute();
+        $this->_total = $rs->rowCount(); // total number of row
 
     }
 
     //LIMIT DATA
     //all it does is limits the date returned and returns everything as $result object
+    // pour set les photos
     public function getData($limit = 10, $page = 1) // set default argument values
     {
         $this->_limit = $limit;
@@ -36,17 +38,32 @@ class Paginator{
         else
         {
             //create the query, limiting records from page, to limit
-            $this->row_start = (($this->_page - 1) * $this->_limit);
-            $query = $this->_query."LIMIT{$this->_row_start}, $this->_limit";
+            $this->_row_start = (($this->_page - 1) * $this->_limit);
+            $query = $this->_query." ORDER BY picture_date DESC LIMIT {$this->_row_start}, $this->_limit";
                                     //add to orginal query: minus one because of the way SQL works
         }
+        $rs = $this->_conn->prepare($query);
+        $rs->execute();
 
-        $rs = $this->_conn->query($query) or die($this->_conn->error);
-
-        while ($row = $rs->fetch_assoc())
+        $i = 0;
+        include_once 'check_user.php';
+        while ($row = $rs->fetch(PDO::FETCH_ASSOC))
         {
             //store this arry in $result=>data below
-            $result[] = $row;
+            $results['pict_'.++$i] = $row;
+            if (check_user_is_connect($this->_conn))
+            {
+                $reqlike = "SELECT * FROM likes WHERE like_author=? AND like_id_pict=?";
+                $req = $this->_conn->prepare($reqlike);
+                $req->execute(array($_SESSION['uid'], $results['pict_'.$i]['picture_id']));
+
+                if ($likinfo = $req->fetch())
+                    $results['pict_'.$i]['picture_like'] = 1;
+                else
+                    $results['pict_'.$i]['picture_like'] = 0;
+            }
+            else
+                $results['pict_'.$i]['picture_like'] = 0;
         }
 
         //return data as object, new stdClass() creates new empty object
@@ -61,7 +78,7 @@ class Paginator{
 
     public function createLinks($links, $list_class)
     {
-        //retun empty result string, no links necessary
+        //return empty result string, no links necessary
         if ($this->_limit == 'all')
         {
             return ('');
@@ -94,7 +111,7 @@ class Paginator{
         //create the links and pass limit and page as $_GET parameters
 
         //$this->_page - 1 = previous page (<<< link)
-        $previous_page = ($this->_page - 1) ? 
+        $previous_page = ($this->_page == 1) ? 
             '<li class="'.$class.'"><a href="">&laquo;</a></li>' : // remove link from previous button
             '<li class="'.$class.'"><a href = "?limit='.$this->_limit.'&page='.($this->_page - 1).'">&laquo;</a></li>';
         
@@ -123,7 +140,7 @@ class Paginator{
 
         $class = ($this->_page == $last) ? "disabled" : ""; //disable next page link >>>
         //$this->_page + 1 = next page (>>> link)
-        $next_page = ($this->_page + $last) ? 
+        $next_page = ($this->_page == $last) ? 
             '<li class="'.$class.'"><a href="">&raquo;</a></li>' : // remove link from next button
             '<li class="'.$class.'"><a href = "?limit='.$this->_limit.'&page='.($this->_page + 1).'">&raquo;</a></li>';
         
