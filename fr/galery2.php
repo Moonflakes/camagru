@@ -10,7 +10,8 @@
         </select>
     </form>
 <?php
-   // include_once '../include/set_pict_infos.php';
+   include_once '../include/set_pict_infos.php';
+   print_r($_SESSION);
     if(isset($_SESSION['pict_1']['p_id']))
     {
         foreach ($_SESSION as $key => $array) 

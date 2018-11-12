@@ -64,10 +64,15 @@ if ($pictinfo = $req->fetchall())
             else
                 $like = 0;
         }
+        //print("je passe la");
+        //die();
         $_SESSION['pict_'.++$i] = array('p_id' => $id, 'p_auth' => $auth, 'p_date' => $date, 'p_path' => $path, 'p_descr' => $descr, 'p_nblike' => $nblike, 'p_nbcom' => $nbcom, 'p_like' => $like);
     }
 }
-header("Location: ../fr/home.php");
-exit();
+if (isset($_POST['nb_items']))
+{
+    header("Location: ../fr/home.php");
+    exit();
+}
 
 ?>
