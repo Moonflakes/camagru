@@ -19,7 +19,7 @@
         </div>
         <div class="logo">    
             <a href="home.php">
-                <img src="../img_site/logo.png" alt="accueil" title="Accueil">
+                <img src="../img_site/logo_3.png" alt="accueil" title="Accueil">
                 <h4>Acceuil</h4>
             </a>
         </div>
