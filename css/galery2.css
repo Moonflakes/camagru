@@ -9,6 +9,7 @@
 div.responsive
 {
     position: relative;
+    margin-bottom: 50px;
 }
 div.pictures {
     border: 1px solid #ccc;

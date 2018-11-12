@@ -58,7 +58,7 @@
             <div class="responsive">
                 <img class="pince" src="../img_site/pince.png" alt="pince">
                 <div class="pictures">
-                    <img src="<?php echo $path;?>" alt="Forest" width="600" height="400">
+                    <img src="<?php echo $path;?>" alt="photo">
                     <div class="infos">
                         <div><big><?php echo $descr;?></big></div>
                         <div class="cont">
@@ -76,7 +76,7 @@
                                 </form>
                             </div>
                             <div class="action">
-                                <form action="../include/comment.php" method="POST">
+                                <form action="../include/comment.inc.php" method="POST">
                                 <button type="submit" name="comment" value="<?php echo $id;?>">
                                         <img src="../img_site/icones/bulle_dialogue.png" alt="comment" title="Commenter">
                                 </button>

@@ -3,9 +3,10 @@ include_once '../config/setup.php';
 session_start();
 include_once 'check_user.php';
 
-if (check_user_is_connect())
+if (check_user_is_connect($connexion))
 {
-
+    header("Location: ../fr/comment.php");
+    exit();
 }
 else
 {
