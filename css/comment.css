@@ -4,32 +4,40 @@
 }
 .comment .com-user
 {
+    width: 55%;
     display: flex;
     flex-direction: column;
+    padding-top: 20px;
+    padding-left: 20px; 
 }
 .comment .com-user .image
 {
-    height: 50%;
+    width: 100%;
     margin-right: 10px;
     margin-bottom: 20px;
+    border-radius: 20px;
 }
-.comment .old-com
-{
+.talkbubble {
+    width: 45%;
+    background: #d3ffee93;
     position: relative;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    border : #59febc 1px solid;
+    margin : 30px 10px 20px;
+    padding: 10px;
 }
-.comment .old-com .com
-{
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-.comment .old-com iframe
-{
+.talkbubble:before {
+    content: "";
     position: absolute;
-    left: 130px;
-    top: 40px;
-    width: 470px;
-    border: none;
+    right: 100%;
+    top: 26px;
+    width: 0;
+    height: 0;
+    border-top: 13px solid transparent;
+    border-right: 26px solid #59febc8c;
+    border-bottom: 8px solid transparent;
 }
 .msg
 {
@@ -40,4 +48,9 @@
 {
     float: right;
     color: rgb(185, 185, 185);
+}
+textarea
+{
+    width: 80%;
+    height: 10%;
 }

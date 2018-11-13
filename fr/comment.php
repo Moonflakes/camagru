@@ -21,13 +21,14 @@
             <form>
                 <label for="comment">Commentaire :</label>
                 <br>
-                <textarea class="form-control" rows="10" cols="70" id="comment"></textarea>
+                <textarea class="form-control" id="comment"></textarea>
                 <button type="submit" name="envoyer">Envoyer</button>
             </form>
         </div>
-        <div class="old-com">
-            <img class="com" src="../img_site/icones/com.png" alt="photo">
-            <iframe src="old_comments.php"></iframe>
+        <div class="talkbubble">
+<?PHP
+    include_once 'old_comments.php';
+?>
         </div>
     </section>
 <?PHP
