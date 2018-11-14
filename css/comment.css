@@ -19,6 +19,7 @@
 }
 .talkbubble {
     width: 45%;
+    max-height: max-content;
     background: #d3ffee93;
     position: relative;
     -moz-border-radius: 10px;
