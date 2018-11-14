@@ -38,9 +38,11 @@
             </form>
         </div>
         <div class="talkbubble">
+            <div class="old">
 <?PHP
     include_once 'old_comments.php';
 ?>
+            </div>
         </div>
     </section>
 <?PHP

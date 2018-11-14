@@ -19,7 +19,7 @@
 }
 .talkbubble {
     width: 45%;
-    max-height: max-content;
+    max-height: min-content;
     background: #d3ffee93;
     position: relative;
     -moz-border-radius: 10px;
@@ -39,6 +39,10 @@
     border-top: 13px solid transparent;
     border-right: 26px solid #59febc8c;
     border-bottom: 8px solid transparent;
+}
+.old
+{
+    overflow: auto;
 }
 .msg
 {
