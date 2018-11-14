@@ -14,10 +14,22 @@
     <body> 
 <?PHP
     include_once 'header.php';
+    include_once '../config/setup.php';
+    include_once '../include/commentator.php';
+
+    $id_pict = (isset($_GET['img'])) ? $_GET['img'] : null;
+
+    $reqpath = "SELECT `picture_path` AS `path` FROM `pictures` WHERE `picture_id`=?";
+    $req = $connexion->prepare($reqpath);
+    $req->execute(array($id_pict));
+
+    if ($pict = $req->fetch())
+        $path = $pict['path'];
+
 ?>
     <section class="comment">
         <div class="com-user">
-            <img class="image" src="../photos/chalet_leat.jpg" alt="photo">
+            <img class="image" src="<?php if ($path) echo $path;?>" alt="photo">
             <form>
                 <label for="comment">Commentaire :</label>
                 <br>
