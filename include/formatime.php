@@ -13,6 +13,8 @@ function formatime($dif_time)
         $time = $dif_time->i." min";
     else if ($dif_time->s)
         $time = $dif_time->s." sec";
+    else
+        $time = "0 sec";
     
     return ($time);
 }
