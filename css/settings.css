@@ -2,7 +2,25 @@ h2
 {
     text-align: center;
 }
+h2.titre
+{
+    margin-top: 40px;
+}
+.settings
+{
+    padding-top: 20px;
+    padding-bottom: 20px; 
+}
 .settings form
 {
-    padding-left: 30%; 
+    padding-left: 25%;
+}
+.settings form table
+{
+    width: 20%;
+    margin: auto 25% auto;
+}
+.settings form table tr td
+{
+    width: 50%;
 }

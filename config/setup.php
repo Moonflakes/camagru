@@ -19,12 +19,13 @@ if ($pdo = new PDO('mysql:host='.$DB_HOST, $DB_USER, $DB_PASSWORD))
     {
         // on créer la requête (créer la table users)
         $requsertable = "CREATE TABLE IF NOT EXISTS users (
-            user_id int(11) not null PRIMARY kEY AUTO_INCREMENT,
+            user_id int(11) not null PRIMARY KEY AUTO_INCREMENT,
             user_first varchar(256) not null,
             user_last varchar(256) not null,
             user_email varchar(256) not null,
             user_uid varchar(256) not null,
             user_pwd varchar(512) not null,
+            user_notif int(1) not null DEFAULT '1',
             user_key varchar(256) not null,
             user_confirm int(1) not null DEFAULT '0');";
     
@@ -33,7 +34,7 @@ if ($pdo = new PDO('mysql:host='.$DB_HOST, $DB_USER, $DB_PASSWORD))
 
         // on créer la requête (créer la table pictures)
         $reqpictable = "CREATE TABLE IF NOT EXISTS pictures (
-            picture_id int(11) not null PRIMARY kEY AUTO_INCREMENT,
+            picture_id int(11) not null PRIMARY KEY AUTO_INCREMENT,
             picture_author varchar(256) not null,
             picture_date DATETIME not null,
             picture_path varchar(256) not null,
@@ -46,7 +47,7 @@ if ($pdo = new PDO('mysql:host='.$DB_HOST, $DB_USER, $DB_PASSWORD))
 
         // on créer la requête (créer la table comments)
         $reqcomtable = "CREATE TABLE IF NOT EXISTS comments (
-            comment_id int(11) not null PRIMARY kEY AUTO_INCREMENT,
+            comment_id int(11) not null PRIMARY KEY AUTO_INCREMENT,
             comment_author varchar(256) not null,
             comment_date DATETIME not null,
             comment_id_pict int(11) not null,
@@ -57,7 +58,7 @@ if ($pdo = new PDO('mysql:host='.$DB_HOST, $DB_USER, $DB_PASSWORD))
 
         // on créer la requête (créer la table likes)
         $reqcomtable = "CREATE TABLE IF NOT EXISTS likes (
-            like_id int(11) not null PRIMARY kEY AUTO_INCREMENT,
+            like_id int(11) not null PRIMARY KEY AUTO_INCREMENT,
             like_author varchar(256) not null,
             like_date DATETIME not null,
             like_id_pict int(11) not null);";

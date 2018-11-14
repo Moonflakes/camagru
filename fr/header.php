@@ -12,7 +12,7 @@
                 <img src="../img_site/icones/home_1.png" alt="home" title="Acceuil">
                 <h4>Acceuil</h4>
             </a>
-            <a class="settings" href="settings.php">
+            <a href="settings.php">
                 <img src="../img_site/icones/settings_green.png" alt="settings" title="Paramètres">
                 <h4>Paramètres</h4>
             </a>

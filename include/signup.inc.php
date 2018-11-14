@@ -61,9 +61,9 @@ if (isset($_POST['submit']))
         //Check the password > hashing ou hash("whirlpool", $pwd);
         $hashpwd = password_hash($pwd, PASSWORD_DEFAULT);
         //Inser the user into the database
-        $reqinsert = 'INSERT INTO users (`user_id`, `user_first`, `user_last`, `user_email`, `user_uid`, `user_pwd`, `user_key`, `user_confirm`)
+        $reqinsert = 'INSERT INTO users (`user_id`, `user_first`, `user_last`, `user_email`, `user_uid`, `user_pwd`, `user_notif`, `user_key`, `user_confirm`)
                         VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-        $connexion->prepare($reqinsert)->execute(array(0, $first, $last, $email, $uid, $hashpwd, $key, 0));
+        $connexion->prepare($reqinsert)->execute(array(0, $first, $last, $email, $uid, $hashpwd, 1, $key, 0));
         $header="MIME-Version: 1.0\r\n";
         $header.='From: Camagru.com <support@camagru.com>'."\n";
         $header.='Content-Type:text/html; charset="uft-8"'."\n";
