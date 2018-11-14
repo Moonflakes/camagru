@@ -6,6 +6,9 @@ foreach ($tab_chat as $tab)
 }*/
 ?>
 <?php
+    date_default_timezone_set('Europe/Paris');
+    include_once '../include/formatime.php';
+
     $query = "SELECT * from comments WHERE comment_id_pict = $id_pict"; // requete sql
     
     $commentator = new Commentator($connexion, $query); // contructor called
@@ -16,7 +19,7 @@ foreach ($tab_chat as $tab)
     {
         foreach ($result->data as $key => $array) 
         {
-            $time = 0;
+            $date = 0;
             $text = 0;
             $author = 0;
             $id = 0;
@@ -26,7 +29,12 @@ foreach ($tab_chat as $tab)
                 foreach ($array as $key => $value) 
                 {
                     if ($key === 'comment_date')
-                        $time = $value;
+                    {
+                        $date = new DateTime($value);
+                        $now = new DateTime("now");
+                        $dif_time = date_diff($now, $date);
+                        $time = formatime($dif_time);
+                    }
                     if ($key === 'comment_text')
                         $text = $value;
                     if ($key === 'comment_author')

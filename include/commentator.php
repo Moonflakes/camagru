@@ -22,7 +22,7 @@ class Commentator{
     // pour set les commentaires
     public function getData() // set default argument values
     {
-        $query = $this->_query;
+        $query = $this->_query." ORDER BY `comment_date` DESC";
 
         $rs = $this->_conn->prepare($query);
         $rs->execute();

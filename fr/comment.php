@@ -30,11 +30,11 @@
     <section class="comment">
         <div class="com-user">
             <img class="image" src="<?php if ($path) echo $path;?>" alt="photo">
-            <form>
+            <form action="../include/add_comment.php" method="POST">
                 <label for="comment">Commentaire :</label>
                 <br>
-                <textarea class="form-control" id="comment"></textarea>
-                <button type="submit" name="envoyer">Envoyer</button>
+                <textarea class="form-control" id="comment" name="comment"></textarea>
+                <button type="submit" name="envoyer" value="<?php echo $id_pict;?>">Envoyer</button>
             </form>
         </div>
         <div class="talkbubble">
