@@ -14,6 +14,7 @@
     <body> 
 <?PHP
     include_once 'header.php';
+    include_once 'message.php';
     include_once '../config/setup.php';
     include_once '../include/commentator.php';
 

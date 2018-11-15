@@ -62,7 +62,7 @@ if (isset($_POST['submit']))
         $hashpwd = password_hash($pwd, PASSWORD_DEFAULT);
         //Inser the user into the database
         $reqinsert = 'INSERT INTO users (`user_id`, `user_first`, `user_last`, `user_email`, `user_uid`, `user_pwd`, `user_notif`, `user_key`, `user_confirm`)
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
         $connexion->prepare($reqinsert)->execute(array(0, $first, $last, $email, $uid, $hashpwd, 1, $key, 0));
         $header="MIME-Version: 1.0\r\n";
         $header.='From: Camagru.com <support@camagru.com>'."\n";
@@ -78,8 +78,8 @@ if (isset($_POST['submit']))
         ';
         if ($mail = mail($email, "Confirmation de compte", $message, $header))
         {
-            $_SESSION['success'] = 'Votre compte a bien été créé ! </br> Veuillez vérifier votre boîte de réception pour confirmer votre email.';
-            header("Location: ../fr/signup.php?signup=success");
+            $_SESSION['erreur']['success'] = 'Votre compte a bien été créé ! </br> Veuillez vérifier votre boîte de réception pour confirmer votre email.';
+            header("Location: ../fr/home.php?signup=success");
         }
         else
         {

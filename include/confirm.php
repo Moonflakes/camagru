@@ -20,12 +20,12 @@ if(isset($_GET['uid'], $_GET['key']) AND !empty($_GET['uid']) AND !empty($_GET['
             if (isset($_GET['resend']))
                 echo  '</br><a href="http://'.$_SERVER['HTTP_HOST'].str_replace("/include/confirm.php", "", $_SERVER['PHP_SELF']).'/fr/forgot_pwd.php?">Réinitialiser mon mot de passe</a>';
             else
-                echo '</br><a href="http://'.$_SERVER['HTTP_HOST'].str_replace("/include/confirm.php", "", $_SERVER['PHP_SELF']).'/fr/home.php">Me connecter</a>';
+                echo '</br><a href="http://'.$_SERVER['HTTP_HOST'].str_replace("/include/confirm.php", "", $_SERVER['PHP_SELF']).'/fr/home.php?login=ask">Me connecter</a>';
         }
         else
         {
             echo "Votre compte a déjà été confirmé !";
-            echo '</br><a href="http://'.$_SERVER['HTTP_HOST'].str_replace("/include/confirm.php", "", $_SERVER['PHP_SELF']).'/fr/home.php">Me connecter</a>';
+            echo '</br><a href="http://'.$_SERVER['HTTP_HOST'].str_replace("/include/confirm.php", "", $_SERVER['PHP_SELF']).'/fr/home.php?login=ask">Me connecter</a>';
         }
     }
     else
