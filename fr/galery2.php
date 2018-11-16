@@ -10,7 +10,7 @@
             <option value="40" <?php if (isset($_GET['limit']) && $_GET['limit'] == 40) echo "selected"?>>40</option>
         </select>
     </form>
-    <div class="masonry">
+    <div class="grid">
 <?php
     include_once '../config/setup.php';
     include_once '../include/paginator.php';
@@ -56,37 +56,37 @@
             if ($path)
             {
 ?>
-            <div class="responsive">
-                <img class="pince" src="../img_site/pince.png" alt="pince">
-                <div class="pictures">
+        <div class="item_photo">
+            <div class="content_item">
+            <!--    <img class="pince" src="../img_site/pince.png" alt="pince"> -->
+                <figure>
                     <img src="<?php echo $path;?>" alt="photo">
-                    <div class="infos">
-                        <div><big><?php echo $descr;?></big></div>
-                        <div class="cont">
-                            <div class="nb">
-                                <div class="nblike"><small><b><?php echo $nblike;?></b> J'aime</small></div>
-                                <div class="nbcom"><small><b><?php echo $nbcom;?></b> Commentaires</small></div>
-                            </div>
-                            <div class="vide"></div>
-                            <div class="action">
-                                <form action="../include/like.php" method="POST">
-                                    <input name="nblike" type="hidden" value="<?php echo $nblike;?>">
-                                    <button type="submit" name="<?php if ($like === 1) echo "unlike"; else echo "like"; ?>" value="<?php echo $id;?>">
-                                        <img src="<?php if ($like === 1) echo "../img_site/icones/coeur_rose.png"; else echo "../img_site/icones/coeur.png"; ?>" 
-                                            alt="like" title="<?php if ($like === 1) echo "Je n'aime pas"; else echo "J'aime"; ?>"></button>
-                                </form>
-                            </div>
-                            <div class="action">
-                                <form action="../include/comment.inc.php" method="POST">
-                                <button type="submit" name="comment" value="<?php echo $id;?>">
-                                        <img src="../img_site/icones/bulle_dialogue.png" alt="comment" title="Commenter">
-                                </button>
-                                </form>
-                            </div>
-                        </div>
+                    <figcaption><big><?php echo $descr;?></big></figcaption>
+                </figure>
+                <div class="desc">
+                    <div class="nb">
+                        <div class="nblike"><small><b><?php echo $nblike;?></b> J'aime</small></div>
+                        <div class="nbcom"><small><b><?php echo $nbcom;?></b> Commentaires</small></div>
+                    </div>
+                    <div class="vide"></div>
+                    <div class="action">
+                        <form action="../include/like.php" method="POST">
+                            <input name="nblike" type="hidden" value="<?php echo $nblike;?>">
+                            <button type="submit" name="<?php if ($like === 1) echo "unlike"; else echo "like"; ?>" value="<?php echo $id;?>">
+                                <img src="<?php if ($like === 1) echo "../img_site/icones/coeur_rose.png"; else echo "../img_site/icones/coeur.png"; ?>" 
+                                    alt="like" title="<?php if ($like === 1) echo "Je n'aime pas"; else echo "J'aime"; ?>"></button>
+                        </form>
+                    </div>
+                    <div class="action">
+                        <form action="../include/comment.inc.php" method="POST">
+                            <button type="submit" name="comment" value="<?php echo $id;?>">
+                                <img src="../img_site/icones/bulle_dialogue.png" alt="comment" title="Commenter">
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
+        </div>
 <?php
             }
         }
@@ -97,4 +97,33 @@
 <?php
     echo $paginator->createLinks($links, 'pagination');
 ?>
+<script>
+    function resizeGridItem(item){
+    grid = document.getElementsByClassName("grid")[0];
+    rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
+    rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap'));
+    rowSpan = Math.ceil((item.querySelector('.content_item').getBoundingClientRect().height+rowGap)/(rowHeight+rowGap));
+      item.style.gridRowEnd = "span "+rowSpan;
+  }
+  
+  function resizeAllGridItems(){
+    allItems = document.getElementsByClassName("item_photo");
+    for(x=0;x<allItems.length;x++){
+      resizeGridItem(allItems[x]);
+    }
+  }
+  
+  function resizeInstance(instance){
+      item = instance.elements[0];
+    resizeGridItem(item);
+  }
+  
+  window.onload = resizeAllGridItems();
+  window.addEventListener("resize", resizeAllGridItems);
+  
+  allItems = document.getElementsByClassName("item_photo");
+  for(x=0;x<allItems.length;x++){
+    imagesLoaded( allItems[x], resizeInstance);
+  }
+    </script>
 </section>

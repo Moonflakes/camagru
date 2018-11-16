@@ -6,71 +6,13 @@
 {
     margin-bottom: 60px;
 }
-div.pictures {
-    border: 1px solid #ccc;
-    padding-top:7; 
-    padding-left:7; 
-    padding-right:7; 
-    background-color: white;
-}
-
-div.pictures:hover {
-    border: 1px solid #777;
-}
-
-div.pictures img {
-    width: 100%;
-    height: auto;
-}
-
-div.infos {
-    padding: 15px;
-    text-align: center;
-    background-color: white;
-}
 
 
-html {
-    box-sizing: border-box;
-  }
-  
-  *,
-  *:before,
-  *:after {
-    box-sizing: inherit;
-  }
-  
-  /* The Masonry Container */
-  .masonry {
-    column-gap: 1.5em;
-  }
-  
-  /* The Masonry Brick */
-  .responsive {
-    width: 24.99999%;
-    position: relative;
-    margin-bottom: 50px;
-  }
-  
-  /* Masonry on large screens */
-  @media only screen and (min-width: 1024px) {
-    .masonry {
-      column-count: 4;
-    }
-  }
-  
-  /* Masonry on medium-sized screens */
-  @media only screen and (max-width: 1023px) and (min-width: 768px) {
-    .masonry {
-      column-count: 3;
-    }
-  }
-  
-  /* Masonry on small screens */
-  @media only screen and (max-width: 767px) and (min-width: 540px) {
-    .masonry {
-      column-count: 2;
-    }
+.grid {
+    display: grid;
+    grid-gap: 50px 10px;
+    grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
+    grid-auto-rows: 20px;
   }
 /*
 * {
@@ -85,27 +27,27 @@ html {
     margin-bottom: 50px;
 }
 
-@media only screen and (max-width: 1150px) {
+@media only screen and (max-width: 1700px) {
     .responsive {
         width: 33.33333%;
     }
 }
 
-@media only screen and (max-width: 875px) {
+@media only screen and (max-width: 1200px) {
     .responsive {
         width: 49.99999%;
     }
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 715px) {
     .responsive {
         width: 100%;
     }
 }
 
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 400px) {
     .responsive {
-        width: 272px;
+        width: 312px;
     }
 }
 
@@ -114,42 +56,56 @@ html {
     display: table;
     clear: both;
 }
-*/
-div.cont
-{
-    display: flex;
-    flex-direction: row;
-    height: 30px;
-    margin-top: 10px;
-}
-div.vide
-{
-    flex-grow: 5;
-}
-div.action
-{
-    margin-left: 10px;
-}
-div.action form button
-{
-    border:none; 
-    padding: unset; 
-}
-div.action form button img
-{
-    width: 30; 
-    cursor: pointer;
-}
-div.nb
-{
-    text-align: left;
-}
 .galery .responsive .pince
 {
     width:50;
     position: absolute;
     left:25px;
     top: -40px;
+}*/
+
+
+.content_item
+  {
+      padding: 10px 10px 10px;
+  }
+.item_photo{
+    padding: 0 6px;
+    border: 1px solid #ccc;
+}
+  .item_photo:hover {
+    border: 1px solid #777;
+}
+  .item_photo {
+    background-color: #ffffff;
+  }
+  
+  figure{
+    width: 100%;
+    margin: unset;
+  }
+  figure figcaption {
+    font-size: .9rem;
+      color: #444;
+    line-height: 1.5;
+    padding: 15px;
+    text-align: center;
+    background-color: white;
+  }
+  figure img {
+    width: 100%; height: auto;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 15px;
+    margin-bottom: 5px;
+  }
+
+
+.desc
+{
+    display: flex;
+    flex-direction: row;
+    height: 30px;
+    margin-top: 10px;
 }
 div.nblike
 {
@@ -158,4 +114,26 @@ div.nblike
 div.nbcom
 {
     color:#308568;
+}
+.desc .vide
+{
+    flex-grow: 5;
+}
+.desc .action
+{
+    margin-left: 10px;
+}
+.desc .action form button
+{
+    border:none; 
+    padding: unset; 
+}
+.desc .action form button img
+{
+    width: 30; 
+    cursor: pointer;
+}
+.desc .nb
+{
+    text-align: left;
 }
