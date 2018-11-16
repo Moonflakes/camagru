@@ -6,11 +6,6 @@
 {
     margin-bottom: 60px;
 }
-div.responsive
-{
-    position: relative;
-    margin-bottom: 50px;
-}
 div.pictures {
     border: 1px solid #ccc;
     padding-top:7; 
@@ -34,6 +29,50 @@ div.infos {
     background-color: white;
 }
 
+
+html {
+    box-sizing: border-box;
+  }
+  
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
+  
+  /* The Masonry Container */
+  .masonry {
+    column-gap: 1.5em;
+  }
+  
+  /* The Masonry Brick */
+  .responsive {
+    width: 24.99999%;
+    position: relative;
+    margin-bottom: 50px;
+  }
+  
+  /* Masonry on large screens */
+  @media only screen and (min-width: 1024px) {
+    .masonry {
+      column-count: 4;
+    }
+  }
+  
+  /* Masonry on medium-sized screens */
+  @media only screen and (max-width: 1023px) and (min-width: 768px) {
+    .masonry {
+      column-count: 3;
+    }
+  }
+  
+  /* Masonry on small screens */
+  @media only screen and (max-width: 767px) and (min-width: 540px) {
+    .masonry {
+      column-count: 2;
+    }
+  }
+/*
 * {
     box-sizing: border-box;
 }
@@ -42,18 +81,31 @@ div.infos {
     padding: 0 6px;
     float: left;
     width: 24.99999%;
+    position: relative;
+    margin-bottom: 50px;
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 1150px) {
     .responsive {
-        width: 49.99999%;
-        margin: 6px 0;
+        width: 33.33333%;
     }
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 875px) {
+    .responsive {
+        width: 49.99999%;
+    }
+}
+
+@media only screen and (max-width: 650px) {
     .responsive {
         width: 100%;
+    }
+}
+
+@media only screen and (max-width: 375px) {
+    .responsive {
+        width: 272px;
     }
 }
 
@@ -62,7 +114,7 @@ div.infos {
     display: table;
     clear: both;
 }
-
+*/
 div.cont
 {
     display: flex;

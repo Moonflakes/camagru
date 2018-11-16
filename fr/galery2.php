@@ -10,6 +10,7 @@
             <option value="40" <?php if (isset($_GET['limit']) && $_GET['limit'] == 40) echo "selected"?>>40</option>
         </select>
     </form>
+    <div class="masonry">
 <?php
     include_once '../config/setup.php';
     include_once '../include/paginator.php';
@@ -91,6 +92,7 @@
         }
     }
 ?>
+    </div>
     <div class="clearfix"></div>
 <?php
     echo $paginator->createLinks($links, 'pagination');
