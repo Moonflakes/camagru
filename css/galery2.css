@@ -8,17 +8,43 @@
 }
 
 
+
+.grid
+{
+    display: flex;
+    flex-direction: row;
+    /* height a calculer en js */
+}
+/* calcul des positions en js */
+/*.grid :nth-child(1)
+{
+    order: 5;
+}
+.grid :nth-child(5)
+{
+    order: 7;
+}
+.grid :nth-child(8)
+{
+    order: 1;
+}*/
+
+/*
 .grid {
     display: grid;
     grid-gap: 20px;
     grid-template-columns: repeat(auto-fill, minmax(400px,1fr));
     grid-auto-rows: 20px;
   }
-/*
+
+
+
+*/
+
 * {
     box-sizing: border-box;
 }
-
+/*
 .responsive {
     padding: 0 6px;
     float: left;
@@ -26,31 +52,36 @@
     position: relative;
     margin-bottom: 50px;
 }
-
-@media only screen and (max-width: 1700px) {
-    .responsive {
-        width: 33.33333%;
+*/
+@media only screen and (max-width: 5000px) {
+    .column {
+        width: 35%;
+    }
+}
+@media only screen and (max-width: 1300px) {
+    .column {
+        width: 33%;
     }
 }
 
-@media only screen and (max-width: 1200px) {
-    .responsive {
-        width: 49.99999%;
+@media only screen and (max-width: 1100px) {
+    .column {
+        width: 50%;
     }
 }
 
-@media only screen and (max-width: 715px) {
-    .responsive {
+@media only screen and (max-width: 700px) {
+    .column {
         width: 100%;
     }
 }
 
 @media only screen and (max-width: 400px) {
-    .responsive {
+    .column {
         width: 312px;
     }
 }
-
+/*
 .clearfix:after {
     content: "";
     display: table;
@@ -72,13 +103,11 @@
 .item_photo{
     padding: 0 6px;
     border: 1px solid #ccc;
+    background-color: #ffffff;
 }
   .item_photo:hover {
     border: 1px solid #777;
 }
-  .item_photo {
-    background-color: #ffffff;
-  }
   
   figure{
     width: 100%;
@@ -102,6 +131,7 @@
 
 .desc
 {
+    /* a revoir parce que ca ne fonctionne plus */
     display: flex;
     flex-direction: row;
     height: 30px;

@@ -1,0 +1,208 @@
+.gridCentered .static {
+  position: absolute;
+  visibility: hidden;
+}
+.gridCentered {
+  margin-left: auto;
+  margin-right: auto;
+}
+.gridCentered .Masonry-Measuring,
+.gridCentered .Masonry-Measuring .AutoSizer,
+.gridCentered .Masonry-Measuring .Collection {
+  width: auto !important;
+}
+
+@media (min-width: 0px) and (max-width: 779px) {
+  .gridCentered .Masonry-Measuring .Collection-Item-Measuring:nth-child(-n+2),
+  .gridCentered .static:nth-child(-n+2) {
+    position: static !important;
+    visibility: visible !important;
+    float: left;
+    display: block;
+  }
+  .gridCentered {
+    width: 520px;
+  }
+}
+
+@media (min-width: 780px) and (max-width: 1039px) {
+  .gridCentered .Masonry-Measuring .Collection-Item-Measuring:nth-child(-n+3),
+  .gridCentered .static:nth-child(-n+3) {
+    position: static !important;
+    visibility: visible !important;
+    float: left;
+    display: block;
+  }
+  .gridCentered {
+    width: 780px;
+  }
+}
+
+@media (min-width: 1040px) and (max-width: 1299px) {
+  .gridCentered .Masonry-Measuring .Collection-Item-Measuring:nth-child(-n+4),
+  .gridCentered .static:nth-child(-n+4) {
+    position: static !important;
+    visibility: visible !important;
+    float: left;
+    display: block;
+  }
+  .gridCentered {
+    width: 1040px;
+  }
+}
+
+@media (min-width: 1300px) and (max-width: 1559px) {
+  .gridCentered .Masonry-Measuring .Collection-Item-Measuring:nth-child(-n+5),
+  .gridCentered .static:nth-child(-n+5) {
+    position: static !important;
+    visibility: visible !important;
+    float: left;
+    display: block;
+  }
+  .gridCentered {
+    width: 1300px;
+  }
+}
+
+@media (min-width: 1560px) and (max-width: 1819px) {
+  .gridCentered .Masonry-Measuring .Collection-Item-Measuring:nth-child(-n+6),
+  .gridCentered .static:nth-child(-n+6) {
+    position: static !important;
+    visibility: visible !important;
+    float: left;
+    display: block;
+  }
+  .gridCentered {
+    width: 1560px;
+  }
+}
+
+@media (min-width: 1820px) and (max-width: 2079px) {
+  .gridCentered .Masonry-Measuring .Collection-Item-Measuring:nth-child(-n+7),
+  .gridCentered .static:nth-child(-n+7) {
+    position: static !important;
+    visibility: visible !important;
+    float: left;
+    display: block;
+  }
+  .gridCentered {
+    width: 1820px;
+  }
+}
+
+@media (min-width: 2080px) and (max-width: 2339px) {
+  .gridCentered .Masonry-Measuring .Collection-Item-Measuring:nth-child(-n+8),
+  .gridCentered .static:nth-child(-n+8) {
+    position: static !important;
+    visibility: visible !important;
+    float: left;
+    display: block;
+  }
+  .gridCentered {
+    width: 2080px;
+  }
+}
+
+@media (min-width: 2340px) and (max-width: 2599px) {
+  .gridCentered .Masonry-Measuring .Collection-Item-Measuring:nth-child(-n+9),
+  .gridCentered .static:nth-child(-n+9) {
+    position: static !important;
+    visibility: visible !important;
+    float: left;
+    display: block;
+  }
+  .gridCentered {
+    width: 2340px;
+  }
+}
+
+@media (min-width: 2600px) and (max-width: 2859px) {
+  .gridCentered .Masonry-Measuring .Collection-Item-Measuring:nth-child(-n+10),
+  .gridCentered .static:nth-child(-n+10) {
+    position: static !important;
+    visibility: visible !important;
+    float: left;
+    display: block;
+  }
+  .gridCentered {
+    width: 2600px;
+  }
+}
+
+@media (min-width: 2860px) and (max-width: 3119px) {
+  .gridCentered .Masonry-Measuring .Collection-Item-Measuring:nth-child(-n+11),
+  .gridCentered .static:nth-child(-n+11) {
+    position: static !important;
+    visibility: visible !important;
+    float: left;
+    display: block;
+  }
+  .gridCentered {
+    width: 2860px;
+  }
+}
+
+@media (min-width: 3120px) and (max-width: 3379px) {
+  .gridCentered .Masonry-Measuring .Collection-Item-Measuring:nth-child(-n+12),
+  .gridCentered .static:nth-child(-n+12) {
+    position: static !important;
+    visibility: visible !important;
+    float: left;
+    display: block;
+  }
+  .gridCentered {
+    width: 3120px;
+  }
+}
+
+@media (min-width: 3380px) and (max-width: 3639px) {
+  .gridCentered .Masonry-Measuring .Collection-Item-Measuring:nth-child(-n+13),
+  .gridCentered .static:nth-child(-n+13) {
+    position: static !important;
+    visibility: visible !important;
+    float: left;
+    display: block;
+  }
+  .gridCentered {
+    width: 3380px;
+  }
+}
+
+@media (min-width: 3640px) and (max-width: 3899px) {
+  .gridCentered .Masonry-Measuring .Collection-Item-Measuring:nth-child(-n+14),
+  .gridCentered .static:nth-child(-n+14) {
+    position: static !important;
+    visibility: visible !important;
+    float: left;
+    display: block;
+  }
+  .gridCentered {
+    width: 3640px;
+  }
+}
+
+@media (min-width: 3900px) and (max-width: 4159px) {
+  .gridCentered .Masonry-Measuring .Collection-Item-Measuring:nth-child(-n+15),
+  .gridCentered .static:nth-child(-n+15) {
+    position: static !important;
+    visibility: visible !important;
+    float: left;
+    display: block;
+  }
+  .gridCentered {
+    width: 3900px;
+  }
+}
+
+@media (min-width: 4160px) and (max-width: 4419px) {
+  .gridCentered .Masonry-Measuring .Collection-Item-Measuring:nth-child(-n+16),
+  .gridCentered .static:nth-child(-n+16) {
+    position: static !important;
+    visibility: visible !important;
+    float: left;
+    display: block;
+  }
+  .gridCentered {
+    width: 4160px;
+  }
+}
