@@ -157,8 +157,8 @@ function createColumns(largeur)
 {
     var grid = document.getElementById("grid");
     var column1 = document.getElementById('column1');
-    var column2 = document.getElementById('column2');
     var column3 = document.getElementById('column3');
+    var column2 = document.getElementById('column2');
     var column4 = document.getElementById('column4');
     var nbcol = 0;
 
@@ -191,6 +191,10 @@ function createColumns(largeur)
             
             //remove column
             grid.removeChild(column2);
+            if (column3)
+                grid.removeChild(column3);
+            if (column4)
+                grid.removeChild(column4);
             return;
         }
     }
@@ -214,6 +218,8 @@ function createColumns(largeur)
 
             // remove column
             grid.removeChild(column3);
+            if (column4)
+                grid.removeChild(column4);
             return;
         }
     }

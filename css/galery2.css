@@ -1,6 +1,6 @@
 .galery
 {
-    padding: 20px 30px 20px;
+    padding: 20px;
 }
 .galery form[name=nbitem_pg]
 {
@@ -40,11 +40,11 @@
 
 
 */
-
+/*
 * {
     box-sizing: border-box;
 }
-/*
+
 .responsive {
     padding: 0 6px;
     float: left;
@@ -53,6 +53,10 @@
     margin-bottom: 50px;
 }
 */
+.column
+{
+    margin: 0 10px 0;
+}
 @media only screen and (max-width: 5000px) {
     .column {
         width: 35%;
@@ -98,35 +102,46 @@
 
 .content_item
   {
-      padding: 10px 10px 10px;
+      padding: 12px 12px 12px;
   }
 .item_photo{
-    padding: 0 6px;
+    margin-bottom: 60px;
     border: 1px solid #ccc;
     background-color: #ffffff;
+    position: relative;
 }
-  .item_photo:hover {
+.item_photo:hover {
     border: 1px solid #777;
 }
-  
-  figure{
+.item_photo:before {
+    content:"";
+    display:inline-block;
+    width:50px;
+    height:59px;
+    position: absolute;
+    top: -45px;
+    left: 10px;
+    background:url("../img_site/pince.png") no-repeat;
+    background-size:100%;
+}
+figure{
     width: 100%;
     margin: unset;
-  }
-  figure figcaption {
+}
+figure figcaption {
     font-size: .9rem;
       color: #444;
     line-height: 1.5;
     padding: 15px;
     text-align: center;
     background-color: white;
-  }
-  figure img {
+}
+figure img {
     width: 100%; height: auto;
     border-bottom: 1px solid #ccc;
     padding-bottom: 15px;
     margin-bottom: 5px;
-  }
+}
 
 
 .desc
@@ -135,7 +150,7 @@
     display: flex;
     flex-direction: row;
     height: 30px;
-    margin-top: 10px;
+    margin: 0px 15px 0;
 }
 div.nblike
 {
@@ -151,7 +166,7 @@ div.nbcom
 }
 .desc .action
 {
-    margin-left: 10px;
+    margin-left: 12px;
 }
 .desc .action form button
 {
@@ -166,4 +181,8 @@ div.nbcom
 .desc .nb
 {
     text-align: left;
+}
+small
+{
+    font-size: 90%;
 }
