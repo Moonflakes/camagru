@@ -56,9 +56,8 @@
             }
             if ($path)
             {
-                $i = $i++;
 ?>
-        <div class="item_photo" id="item<?php echo $i++;?>">
+        <div class="item_photo" id="item<?php echo ++$i;?>">
             <div class="content_item">
             <!--    <img class="pince" src="../img_site/pince.png" alt="pince"> -->
                 <figure>
@@ -100,55 +99,189 @@
     echo $paginator->createLinks($links, 'pagination');
 ?>
 <script type="text/javascript">
+
+function smallH()
+{
+    var smallH = 0;
+    var smallCol = 0;
+    var i = -1;
+    var j;
+
+    while (arguments[++i])
+    {
+        j = -1;
+        while (arguments[++j])
+        {
+            if (arguments[i] <= arguments[j])
+            {
+                if (smallH >= arguments[i] || smallH == 0)
+                {
+                    smallH = arguments[i];
+                    smallCol = i + 1;
+                }
+            }
+        }
+    }
+    return (smallCol);
+}
+
 function organisation(nbcol)
 {
-    var column1 = document.getElementById('column1');
-    var column2 = document.getElementById('column2');
-    var column3 = document.getElementById('column3');
-    var column4 = document.getElementById('column4');
+    var column;
     var item;
     var i = 0;
+    var h1 = 0;
+    var h2 = 0;
+    var h3 = 0;
+    var h4 = 0;
+
+    
     if (nbcol === 1)
     {
+        column = document.getElementById('column1');
         //mettre les éléments dans la div
-        while (item = document.getElementById('item'+(i++)))
-            column1.appendChild(item);
-        //list.removeChild(list.childNodes[0]);
+        while (item = document.getElementById('item'+(++i)))
+            column.appendChild(item);
     }
     else if (nbcol === 2)
     {
-        while (item = document.getElementById('item'+(i++)))
+        while (item = document.getElementById('item'+(++i)))
         {
-            if (i % 2 == 0)
-                column2.appendChild(item);
+            if (i == 1)
+            {
+                column = document.getElementById('column1');
+                column.appendChild(item);
+                h1 = item.offsetHeight + h1;
+                console.log("offsetH item", i," : ", h1, "colonne1");
+            }
+            else if (i == 2)
+            {
+                column = document.getElementById('column2');
+                column.appendChild(item);
+                h2 = item.offsetHeight + h2;
+                console.log("offsetH item", i," : ", h2, "colonne2");
+            }
             else
-                column1.appendChild(item);
+            {
+                column = document.getElementById('column'+smallH(h1, h2));
+                column.appendChild(item);
+                if (smallH(h1, h2) == 1)
+                {
+                    h1 = item.offsetHeight + h1;
+                    console.log("offsetH item", i," : ", h1, "colonne1");
+                }
+                else
+                {
+                    h2 = item.offsetHeight + h2;
+                    console.log("offsetH item", i," : ", h2, "colonne2");
+                }
+            }
         }
     }
     else if (nbcol === 3)
     {
-        while (item = document.getElementById('item'+(i++)))
+        while (item = document.getElementById('item'+(++i)))
         {
-            if (i % 3 == 0)
-                column3.appendChild(item);
-            else if (((i - 1) != 0 && (i - 1) % 3 == 0) || i == 1)
-                column1.appendChild(item);
-            else if (((i + 1) != 0 && (i + 1) % 3 == 0) || i == 2)
-                column2.appendChild(item);
+            if (i == 1)
+            {
+                column = document.getElementById('column1');
+                column.appendChild(item);
+                h1 = item.offsetHeight + h1;
+                console.log("offsetH item", i," : ", h1, "colonne1");
+            }
+            else if (i == 2)
+            {
+                column = document.getElementById('column2');
+                column.appendChild(item);
+                h2 = item.offsetHeight + h2;
+                console.log("offsetH item", i," : ", h2, "colonne2");
+            }
+            else if (i == 3)
+            {
+                column = document.getElementById('column3');
+                column.appendChild(item);
+                h3 = item.offsetHeight + h3;
+                console.log("offsetH item", i," : ", h3, "colonne3");
+            }
+            else
+            {
+                column = document.getElementById('column'+smallH(h1, h2, h3));
+                column.appendChild(item);
+                if (smallH(h1, h2, h3) == 1)
+                {
+                    h1 = item.offsetHeight + h1;
+                    console.log("offsetH item", i," : ", h1, "colonne1");
+                }
+                else if (smallH(h1, h2, h3) == 2)
+                {
+                    h2 = item.offsetHeight + h2;
+                    console.log("offsetH item", i," : ", h2, "colonne2");
+                }
+                else
+                {
+                    h3 = item.offsetHeight + h3;
+                    console.log("offsetH item", i," : ", h3, "colonne3");
+                }
+            }
         }
     }
     else if (nbcol === 4)
     {
-        while (item = document.getElementById('item'+(i++)))
+        while (item = document.getElementById('item'+(++i)))
         {
-            if (i % 4 == 0)
-                column4.appendChild(item);
-            else if (((i - 1) != 0 && (i - 1) % 4 == 0) || i == 1)
-                column1.appendChild(item);
-            else if (((i - 2) != 0 && (i - 2) % 4 == 0) || i == 2)
-                column2.appendChild(item);
-            else if (((i - 3) != 0 && (i - 3) % 4 == 0) || i == 3)
-                column3.appendChild(item);
+            if (i == 1)
+            {
+                column = document.getElementById('column1');
+                column.appendChild(item);
+                h1 = item.offsetHeight + h1;
+                console.log("offsetH item", i," : ", h1, "colonne1");
+            }
+            else if (i == 2)
+            {
+                column = document.getElementById('column2');
+                column.appendChild(item);
+                h2 = item.offsetHeight + h2;
+                console.log("offsetH item", i," : ", h2, "colonne2");
+            }
+            else if (i == 3)
+            {
+                column = document.getElementById('column3');
+                column.appendChild(item);
+                h3 = item.offsetHeight + h3;
+                console.log("offsetH item", i," : ", h3, "colonne3");
+            }
+            else if (i == 4)
+            {
+                column = document.getElementById('column4');
+                column.appendChild(item);
+                h4 = item.offsetHeight + h4;
+                console.log("offsetH item", i," : ", h4, "colonne4");
+            }
+            else
+            {
+                column = document.getElementById('column'+smallH(h1, h2, h3));
+                column.appendChild(item);
+                if (smallH(h1, h2, h3, h4) == 1)
+                {
+                    h1 = item.offsetHeight + h1;
+                    console.log("offsetH item", i," : ", h1, "colonne1");
+                }
+                else if (smallH(h1, h2, h3, h4) == 2)
+                {
+                    h2 = item.offsetHeight + h2;
+                    console.log("offsetH item", i," : ", h2, "colonne2");
+                }
+                else if (smallH(h1, h2, h3, h4) == 3)
+                {
+                    h3 = item.offsetHeight + h3;
+                    console.log("offsetH item", i," : ", h3, "colonne3");
+                }
+                else
+                {
+                    h4 = item.offsetHeight + h4;
+                    console.log("offsetH item", i," : ", h4, "colonne4");
+                }
+            }
         }
     }
 }
@@ -252,12 +385,12 @@ function createColumns(largeur)
 
 window.addEventListener('load',function(){
     var largeur = document.body.clientWidth;
+       
     createColumns(largeur);
 
 //controler la largeur de la fenetre
     this.addEventListener('resize',function(){
         largeur = document.body.clientWidth;
-        console.log(largeur);
         createColumns(largeur);
     });
 });
