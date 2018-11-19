@@ -200,7 +200,7 @@ function createColumns(largeur)
     }
     if (column3 == undefined)
     {
-        if (largeur > 1100)
+        if (largeur > 1300)
         {
             column3 = document.createElement('div');
             column3.setAttribute("id", "column3");
@@ -211,7 +211,7 @@ function createColumns(largeur)
     }
     else
     {
-        if (largeur < 1100)
+        if (largeur < 1300)
         {
             // reorganisation 
             organisation(2);
@@ -225,7 +225,7 @@ function createColumns(largeur)
     }
     if (column4 == undefined)
     {
-        if (document.body.clientWidth > 1300)
+        if (document.body.clientWidth > 1700)
         {
             column4 = document.createElement('div');
             column4.setAttribute("id", "column4");
@@ -236,7 +236,7 @@ function createColumns(largeur)
     }
     else
     {
-        if (document.body.clientWidth < 1300)
+        if (document.body.clientWidth < 1700)
         {
             // reorganisation 
             organisation(3);
@@ -257,6 +257,7 @@ window.addEventListener('load',function(){
 //controler la largeur de la fenetre
     this.addEventListener('resize',function(){
         largeur = document.body.clientWidth;
+        console.log(largeur);
         createColumns(largeur);
     });
 });
