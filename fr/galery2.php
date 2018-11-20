@@ -102,28 +102,10 @@
 
 function smallH()
 {
-    var smallH = 0;
-    var smallCol = 0;
-    var i = -1;
-    var j;
-
-    while (arguments[++i])
-    {
-        j = -1;
-        while (arguments[++j])
-        {
-            if (arguments[i] < arguments[j])
-            {
-                if (smallH > arguments[i] || smallH == 0)
-                {
-                    smallH = arguments[i];
-                    smallCol = i + 1;
-                }
-            }
-        }
-    }
-    return (smallCol);
+    tab = Array.prototype.slice.call(arguments);
+    return (tab.indexOf(Math.min(...tab)) + 1);
 }
+        
 
 function organisation(nbcol)
 {
