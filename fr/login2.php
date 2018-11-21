@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="../css/login2.css" type="text/css">
-<div class="login-div">
+
 <form id="login" action="../include/login.inc.php" method="POST">
     <table class="login">
         <tr>
@@ -44,4 +44,3 @@
             }
         })
     </script>
-</div>

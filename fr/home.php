@@ -13,12 +13,33 @@
     <body>     
 <?php
     include_once 'header.php';
+?>
+    <div class="login-div">
+<?php
     if (isset($_GET['login']) && $_GET['login'] != "success")
     {
         include_once 'login2.php';
     }
+?>
+    </div>
+<?php
     include_once 'message.php';
     include_once 'galery2.php';
 ?>
+    <script>
+	$('a.login').click(function() {
+	  loadContent( $(this).attr('href') );
+	  return false;
+	});
+	
+	function loadContent(page){
+		$.ajax({
+		  url: page,
+		  success: function(data) {
+			$('.login-div').html(data);
+		  }
+		});
+	}
+	</script>
     </body>
 </html>

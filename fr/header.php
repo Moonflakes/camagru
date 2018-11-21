@@ -46,7 +46,7 @@
     else
     {
 ?>
-            <a class="login" href="home.php?login=ask">
+            <a class="login" href="login2.php">
                 <img src="../img_site/icones/login_1.png" alt="login" title="Connexion">
                 <h4>Connexion</h4>
             </a>
