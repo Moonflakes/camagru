@@ -35,12 +35,10 @@ if ($pdo = new PDO('mysql:host='.$DB_HOST, $DB_USER, $DB_PASSWORD))
         // on créer la requête (créer la table pictures)
         $reqpictable = "CREATE TABLE IF NOT EXISTS pictures (
             picture_id int(11) not null PRIMARY KEY AUTO_INCREMENT,
-            picture_author varchar(256) not null,
+            picture_author int(11) not null,
             picture_date DATETIME not null,
             picture_path varchar(256) not null,
-            picture_description varchar(256) not null,
-            picture_nb_like int(11) not null DEFAULT '0',
-            picture_nb_comment int(11) not null DEFAULT '0');";
+            picture_description varchar(256) not null);";
     
         // on prépare et on exécute la requête
         $connexion->prepare($reqpictable)->execute();
@@ -48,7 +46,7 @@ if ($pdo = new PDO('mysql:host='.$DB_HOST, $DB_USER, $DB_PASSWORD))
         // on créer la requête (créer la table comments)
         $reqcomtable = "CREATE TABLE IF NOT EXISTS comments (
             comment_id int(11) not null PRIMARY KEY AUTO_INCREMENT,
-            comment_author varchar(256) not null,
+            comment_author int(11) not null,
             comment_date DATETIME not null,
             comment_id_pict int(11) not null,
             comment_text varchar(256) not null);";
@@ -59,7 +57,7 @@ if ($pdo = new PDO('mysql:host='.$DB_HOST, $DB_USER, $DB_PASSWORD))
         // on créer la requête (créer la table likes)
         $reqcomtable = "CREATE TABLE IF NOT EXISTS likes (
             like_id int(11) not null PRIMARY KEY AUTO_INCREMENT,
-            like_author varchar(256) not null,
+            like_author int(11) not null,
             like_date DATETIME not null,
             like_id_pict int(11) not null);";
     

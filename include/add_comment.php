@@ -14,19 +14,7 @@ if (check_user_is_connect($connexion))
             // insert comment
             $reqinscom = 'INSERT INTO `comments`(`comment_id`, `comment_author`, `comment_date`, `comment_id_pict`, `comment_text`) 
                             VALUES (?, ?, NOW(), ?, ?)';
-            $connexion->prepare($reqinscom)->execute(array(0, $_SESSION['u_uid'], $id_pict, $text_com));
-
-            // extract old nb comment
-            $reqnbcom = "SELECT `picture_nb_comment` AS `nbcom` FROM `pictures` WHERE `picture_id`=?";
-            $req = $connexion->prepare($reqnbcom);
-            $req->execute(array($id_pict));
-
-            if ($pict = $req->fetch())
-                $up_nbcomment = $pict['nbcom'] + 1;
-
-            //update nb comment of picture
-            $requpdnbcom = 'UPDATE `pictures` SET `picture_nb_comment`=? WHERE `picture_id`=?';
-            $connexion->prepare($requpdnbcom)->execute(array($up_nbcomment, $id_pict));
+            $connexion->prepare($reqinscom)->execute(array(0, $_SESSION['u_id'], $id_pict, $text_com));
             
             header("Location: ../fr/comment.php?img=".$id_pict."&comment=success");
             exit();

@@ -51,11 +51,24 @@ class Paginator{
         {
             //store this arry in $result=>data below
             $results['pict_'.++$i] = $row;
+
+            //set nb like of the picture
+            $reqnblike = "SELECT * FROM likes WHERE like_id_pict=?";
+            $req = $this->_conn->prepare($reqnblike);
+            $req->execute(array($results['pict_'.$i]['picture_id']));
+            $results['pict_'.$i]['picture_nb_like'] = $req->rowCount();
+
+            //set nb comment of the picture
+            $reqnbcom = "SELECT * FROM comments WHERE comment_id_pict=?";
+            $req = $this->_conn->prepare($reqnbcom);
+            $req->execute(array($results['pict_'.$i]['picture_id']));
+            $results['pict_'.$i]['picture_nb_comment'] = $req->rowCount();
+
             if (check_user_is_connect($this->_conn))
             {
                 $reqlike = "SELECT * FROM likes WHERE like_author=? AND like_id_pict=?";
                 $req = $this->_conn->prepare($reqlike);
-                $req->execute(array($_SESSION['uid'], $results['pict_'.$i]['picture_id']));
+                $req->execute(array($_SESSION['u_id'], $results['pict_'.$i]['picture_id']));
 
                 if ($likinfo = $req->fetch())
                     $results['pict_'.$i]['picture_like'] = 1;

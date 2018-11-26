@@ -10,12 +10,7 @@ if (check_user_is_connect($connexion))
         // insert like
         $reqinslik = 'INSERT INTO `likes`(`like_id`, `like_author`, `like_date`, `like_id_pict`) 
                         VALUES (?, ?, NOW(), ?)';
-        $connexion->prepare($reqinslik)->execute(array(0, $_SESSION['u_uid'], $_POST['like']));
-
-        //update nb like of picture
-        $up_nblike = $_POST['nblike'] + 1;
-        $requpdnblik = 'UPDATE `pictures` SET `picture_nb_like`=? WHERE `picture_id`=?';
-        $connexion->prepare($requpdnblik)->execute(array($up_nblike, $_POST['like']));
+        $connexion->prepare($reqinslik)->execute(array(0, $_SESSION['u_id'], $_POST['like']));
         
         header("Location: ../fr/home.php?like=success");
         exit();
@@ -24,12 +19,7 @@ if (check_user_is_connect($connexion))
     {
         //delete like
         $reqdellik = 'DELETE FROM `likes` WHERE `like_author`= ? AND `like_id_pict`= ?';
-        $connexion->prepare($reqdellik)->execute(array($_SESSION['u_uid'], $_POST['unlike']));
-
-        //update nb like of picture
-        $down_nblike = $_POST['nblike'] - 1;
-        $requpdnblik = 'UPDATE `pictures` SET `picture_nb_like`=? WHERE `picture_id`=?';
-        $connexion->prepare($requpdnblik)->execute(array($down_nblike, $_POST['unlike']));
+        $connexion->prepare($reqdellik)->execute(array($_SESSION['u_id'], $_POST['unlike']));
 
         header("Location: ../fr/home.php?unlike=success");
         exit();
