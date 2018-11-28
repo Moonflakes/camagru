@@ -7,34 +7,37 @@ if (check_user_is_connect($connexion))
 {
     if (isset($_POST['like']))
     {
-        // insert like
-        $reqinslik = 'INSERT INTO `likes`(`like_id`, `like_author`, `like_date`, `like_id_pict`) 
-                        VALUES (?, ?, NOW(), ?)';
-        $connexion->prepare($reqinslik)->execute(array(0, $_SESSION['u_id'], $_POST['like']));
-        
-        header("Location: ../fr/home.php?like=success");
-        exit();
-    }
-    else if (isset($_POST['unlike']))
-    {
-        //delete like
-        $reqdellik = 'DELETE FROM `likes` WHERE `like_author`= ? AND `like_id_pict`= ?';
-        $connexion->prepare($reqdellik)->execute(array($_SESSION['u_id'], $_POST['unlike']));
-
-        header("Location: ../fr/home.php?unlike=success");
-        exit();
+        //like exist ?
+        $reqlikexist = "SELECT * FROM `likes` WHERE `like_author`=? AND `like_id_pict`=?";
+        $req = $connexion->prepare($reqlikexist);
+        $req->execute(array($_SESSION['u_id'], $_POST['like']));
+        $likexist = $req->rowCount();
+        if ($likexist === 1)
+        {
+            //delete like
+            $reqdellik = 'DELETE FROM `likes` WHERE `like_author`= ? AND `like_id_pict`= ?';
+            $connexion->prepare($reqdellik)->execute(array($_SESSION['u_id'], $_POST['like']));
+            echo "unlike";
+        }
+        else
+        {
+            // insert like
+            $reqinslik = 'INSERT INTO `likes`(`like_id`, `like_author`, `like_date`, `like_id_pict`) 
+                            VALUES (?, ?, NOW(), ?)';
+            $connexion->prepare($reqinslik)->execute(array(0, $_SESSION['u_id'], $_POST['like']));
+            echo "like";
+        }
     }
     else
     {
-        header("Location: ../fr/home.php?like=error");
-        exit();
+        echo "error";
     }
 }
-else
+/*else
 {
     $_SESSION['erreur']['connect'] = "Pour liker des photos à votre guise connectez vous !";
     header("Location: ../fr/home.php?connect=error");
     exit();
-}
+}*/
 
 ?>

@@ -66,15 +66,15 @@
                 </figure>
                 <div class="desc">
                     <div class="nb">
-                        <div class="nblike"><small><b><?php echo $nblike;?></b> J'aime</small></div>
-                        <div class="nbcom"><small><b><?php echo $nbcom;?></b> Commentaires</small></div>
+                        <div class="nblike"><small><b id="nblike"><?php echo $nblike;?></b> J'aime</small></div>
+                        <div class="nbcom"><small><b id="nbcom"><?php echo $nbcom;?></b> Commentaires</small></div>
                     </div>
                     <div class="vide"></div>
                     <div class="action">
-                        <form action="../include/like.php" method="POST">
+                        <form method="POST">
                             <input name="nblike" type="hidden" value="<?php echo $nblike;?>">
-                            <button type="submit" name="<?php if ($like === 1) echo "unlike"; else echo "like"; ?>" value="<?php echo $id;?>">
-                                <img src="<?php if ($like === 1) echo "../img_site/icones/coeur_rose.png"; else echo "../img_site/icones/coeur.png"; ?>" 
+                            <button type="submit" id="coeur" name="like" value="<?php echo $id;?>">
+                                <img id="img_coeur" src="<?php if ($like === 1) echo "../img_site/icones/coeur_rose.png"; else echo "../img_site/icones/coeur.png"; ?>" 
                                     alt="like" title="<?php if ($like === 1) echo "Je n'aime pas"; else echo "J'aime"; ?>"></button>
                         </form>
                     </div>
@@ -376,11 +376,44 @@ window.addEventListener('load',function(){
         createColumns(largeur);
     });
 });
-
-//mettre les éléments dans la div
-//document.getElementById('div3').appendChild(document.getElementById('div1'))
-//document.getElementById('div3').appendChild(document.getElementById('div2'))
-//console.log(document.getElementById('div3').innerHTML)
-//list.removeChild(list.childNodes[0]);
 	</script>
+<script>
+ 
+$(document).ready(function(){
+var src_like = '../img_site/icones/coeur_rose.png';
+var src_unlike = '../img_site/icones/coeur.png';
+var nblike = $('#nblike').text();
+    $("#coeur").click(function(e){
+        e.preventDefault();
+  
+        $.post(
+            '../include/like.php', 
+            {
+                like : $("#coeur").val()
+            },
+  
+            function(data){
+                console.log(data);
+                if(data == 'like'){
+                    // mettre le coeur en rose
+                    $("#img_coeur").attr('src', src_like);
+                    $("#img_coeur").attr('title', "Je n'aime pas");
+                    nblike = nblike + 1;
+                    $('#nblike').text(nblike);
+                }
+                else if (data == 'unlike'){
+                    // mettre le coeur vide
+                    $("#img_coeur").attr('src', src_unlike);
+                    $("#img_coeur").attr('title', "J'aime");
+                    nblike = nblike - 1;
+                    $('#nblike').text(nblike);
+                }
+          
+            },
+            'text'
+        );
+    });
+});
+  
+</script>
 </section>
