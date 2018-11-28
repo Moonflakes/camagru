@@ -66,15 +66,14 @@
                 </figure>
                 <div class="desc">
                     <div class="nb">
-                        <div class="nblike"><small><b id="nblike"><?php echo $nblike;?></b> J'aime</small></div>
-                        <div class="nbcom"><small><b id="nbcom"><?php echo $nbcom;?></b> Commentaires</small></div>
+                        <div class="nblike"><small><b id="nblike_<?php echo $id;?>"><?php echo $nblike;?></b> J'aime</small></div>
+                        <div class="nbcom"><small><b id="nbcom_<?php echo $id;?>"><?php echo $nbcom;?></b> Commentaires</small></div>
                     </div>
                     <div class="vide"></div>
                     <div class="action">
                         <form method="POST">
-                            <input name="nblike" type="hidden" value="<?php echo $nblike;?>">
-                            <button type="submit" id="coeur" name="like" value="<?php echo $id;?>">
-                                <img id="img_coeur" src="<?php if ($like === 1) echo "../img_site/icones/coeur_rose.png"; else echo "../img_site/icones/coeur.png"; ?>" 
+                            <button type="submit" class="coeur" id="coeur_<?php echo $id;?>" name="like" value="<?php echo $id;?>">
+                                <img id="img_coeur_<?php echo $id;?>" src="<?php if ($like === 1) echo "../img_site/icones/coeur_rose.png"; else echo "../img_site/icones/coeur.png"; ?>" 
                                     alt="like" title="<?php if ($like === 1) echo "Je n'aime pas"; else echo "J'aime"; ?>"></button>
                         </form>
                     </div>
@@ -383,34 +382,38 @@ $(document).ready(function(){
 var src_like = '../img_site/icones/coeur_rose.png';
 var src_unlike = '../img_site/icones/coeur.png';
 var nblike = $('#nblike').text();
-    $("#coeur").click(function(e){
+    $(".coeur").click(function(e){
         e.preventDefault();
-  
+        var id = this.id;   // Getting Button id
+        var split_id = id.split("_");
+        var id = split_id[1];
+        
         $.post(
             '../include/like.php', 
             {
-                like : $("#coeur").val()
+                like : $("#coeur_"+id).val()
             },
   
             function(data){
-                console.log(data);
-                if(data == 'like'){
+                var nblike = data['nb_likes'];
+                var type = data['type'];
+                var id = data['id'];
+                
+                if(type == 'like'){
                     // mettre le coeur en rose
-                    $("#img_coeur").attr('src', src_like);
-                    $("#img_coeur").attr('title', "Je n'aime pas");
-                    nblike = nblike + 1;
-                    $('#nblike').text(nblike);
+                    $("#img_coeur_"+id).attr('src', src_like);
+                    $("#img_coeur_"+id).attr('title', "Je n'aime pas");
+                    $('#nblike_'+id).text(nblike);
                 }
-                else if (data == 'unlike'){
+                else if (type == 'unlike'){
                     // mettre le coeur vide
-                    $("#img_coeur").attr('src', src_unlike);
-                    $("#img_coeur").attr('title', "J'aime");
-                    nblike = nblike - 1;
-                    $('#nblike').text(nblike);
+                    $("#img_coeur_"+id).attr('src', src_unlike);
+                    $("#img_coeur_"+id).attr('title', "J'aime");
+                    $('#nblike_'+id).text(nblike);
                 }
           
             },
-            'text'
+            'json'
         );
     });
 });
