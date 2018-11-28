@@ -33,6 +33,12 @@ class Commentator{
         {
             //store this arry in $result=>data below
             $results['comment_'.++$i] = $row;
+
+            $requid = "SELECT * FROM `users` WHERE `user_id`=?";
+            $req = $this->_conn->prepare($requid);
+            $req->execute(array($_SESSION['u_id']));
+            $userinfo = $req->fetch();
+            $results['comment_'.$i]['comment_author'] = $userinfo['user_uid'];
            /* if (check_user_is_connect($this->_conn))
             {
                 $reqlike = "SELECT * FROM likes WHERE like_author=? AND like_id_pict=?";
