@@ -48,12 +48,12 @@ foreach ($tab_chat as $tab)
             if ($text)
             {
 ?>
-        <div class="old-msg">
+        <div class="old-msg_<?php echo $id;?>">
             <div class="msg">
                 <b><?php echo $author;?> </b>
                 <span> : <?php echo $text;?></span>
             </div>
-            <span class="time">il y a <?php echo $time;?></span>
+            <span class="time" id="time_<?php echo $id;?>">il y a <?php echo $time;?></span>
         </div><br>
 <?php
             }

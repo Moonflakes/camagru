@@ -31,11 +31,11 @@
     <section class="comment">
         <div class="com-user">
             <img class="image" src="<?php if ($path) echo $path;?>" alt="photo">
-            <form action="../include/add_comment.php" method="POST">
+            <form method="POST" action='../include/add_comment.php'>
                 <label for="comment">Commentaire :</label>
                 <br>
                 <textarea class="form-control" id="comment" name="comment"></textarea>
-                <button type="submit" name="envoyer" value="<?php echo $id_pict;?>">Envoyer</button>
+                <button type="submit" id="button" name="envoyer" value="<?php echo $id_pict;?>">Envoyer</button>
             </form>
         </div>
         <div class="talkbubble">
@@ -49,5 +49,39 @@
 <?PHP
     include_once 'footer.php';
 ?>
+    <script>
+        $(document).ready(function(){
+            $("#button").click(function(e){
+                e.preventDefault();
+                
+                $.post(
+                    '../include/add_comment.php', 
+                    {
+                        text : $("#comment").val(),
+                        id_pict : $("#button").val()
+                    },
+        
+                    function(data){
+                        var author = data['author'];
+                        console.log(author);
+                        var text = data['text'];
+                        console.log(text);
+                        var time = data['time'];
+                        console.log(time);
+                        var id = data['id']
+                        console.log(id);
+                        var id_next = data['id_next'];
+                        console.log(id_next);
+                        $(".old-msg_"+id_next).before('<div class="old-msg_'+id+'"><div class="msg"><b>'+author+'</b><span> : '+text+'</span></div><span class="time" id="time_'+id+'">il y a '+time[0]+'</span></div><br>');
+                        $.each(time,function(index,element){
+                            $('#time_'+index).text(element);
+                        });
+                
+                    },
+                    'json'
+                );
+            });
+        });
+    </script>
     </body>
 </html>
