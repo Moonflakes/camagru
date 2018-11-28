@@ -18,7 +18,7 @@ if (check_user_is_connect($connexion))
                             VALUES (?, ?, NOW(), ?, ?)';
             $connexion->prepare($reqinscom)->execute(array(0, $_SESSION['u_id'], $id_pict, $text_com));
             
-            $reqtime = "SELECT `comment_date`, `comment_id` FROM `comments` WHERE `comment_id_pict`=22 ORDER BY comment_date DESC";
+            $reqtime = "SELECT `comment_date`, `comment_id` FROM `comments` WHERE `comment_id_pict`=? ORDER BY comment_date DESC";
             $req = $connexion->prepare($reqtime);
             $req->execute(array($id_pict));
             $arr_time = $req->fetchall();

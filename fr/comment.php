@@ -31,7 +31,7 @@
     <section class="comment">
         <div class="com-user">
             <img class="image" src="<?php if ($path) echo $path;?>" alt="photo">
-            <form method="POST" action='../include/add_comment.php'>
+            <form method="POST">
                 <label for="comment">Commentaire :</label>
                 <br>
                 <textarea class="form-control" id="comment" name="comment"></textarea>
@@ -82,6 +82,6 @@
                 );
             });
         });
-    </script>
+    </script> 
     </body>
 </html>
