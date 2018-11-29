@@ -36,7 +36,9 @@ foreach ($tab_chat as $tab)
                         $time = formatime($dif_time);
                     }
                     if ($key === 'comment_text')
-                        $text = $value;
+                    {
+                        $text = nl2br($value);
+                    }
                     if ($key === 'comment_author')
                         $author = $value;
                     if ($key === 'comment_id')
@@ -51,7 +53,7 @@ foreach ($tab_chat as $tab)
         <div class="old-msg_<?php echo $id;?>">
             <div class="msg">
                 <b><?php echo $author;?> </b>
-                <span> : <?php echo $text;?></span>
+                <span> : <?php echo $text ?></span>
             </div>
             <span class="time" id="time_<?php echo $id;?>">il y a <?php echo $time;?></span>
         </div><br>

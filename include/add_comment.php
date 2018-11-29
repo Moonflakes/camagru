@@ -7,7 +7,7 @@ date_default_timezone_set('Europe/Paris');
 
 if (check_user_is_connect($connexion))
 {
-    if (isset($_POST['id_pict'])) //id_pict
+    if (isset($_POST['id_pict'])) //id-pict
     {
         $id_pict = $_POST['id_pict'];
         if (!empty($_POST['text'])) //text
