@@ -66,6 +66,7 @@
                     function(data){
                         var author = data['author'];
                         var text = data['text'];
+                        text = text.replace(/\n/g,'<br />');
                         var time = data['time'];
                         var id = data['id']
                         var id_next = data['id_next'];
