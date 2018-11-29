@@ -29,20 +29,22 @@
 
 ?>
     <section class="comment">
-        <div class="com-user">
+        <div class="photo-com">
             <img class="image" src="<?php if ($path) echo $path;?>" alt="photo">
+        </div>
+        <div class="com-user">
             <form method="POST">
                 <label for="comment">Commentaire :</label>
                 <br>
-                <textarea class="form-control" id="comment" name="comment"></textarea>
+                <textarea onkeyup="resize_area(this, 10)" class="form-control" id="comment" name="comment"></textarea>
                 <button type="submit" id="button" name="envoyer" value="<?php echo $id_pict;?>">Envoyer</button>
             </form>
-        </div>
-        <div class="talkbubble">
-            <div class="old">
+            <div class="talkbubble">
+                <div class="old">
 <?PHP
     include_once 'old_comments.php';
 ?>
+                </div>
             </div>
         </div>
     </section>
@@ -63,15 +65,10 @@
         
                     function(data){
                         var author = data['author'];
-                        console.log(author);
                         var text = data['text'];
-                        console.log(text);
                         var time = data['time'];
-                        console.log(time);
                         var id = data['id']
-                        console.log(id);
                         var id_next = data['id_next'];
-                        console.log(id_next);
                         $(".old-msg_"+id_next).before('<div class="old-msg_'+id+'"><div class="msg"><b>'+author+'</b><span> : '+text+'</span></div><span class="time" id="time_'+id+'">il y a '+time[0]+'</span></div><br>');
                         $.each(time,function(index,element){
                             $('#time_'+index).text(element);
@@ -80,8 +77,23 @@
                     },
                     'json'
                 );
+                $('#comment').val('');
+                $('#comment').css("height", "50");
             });
         });
     </script> 
+    <script type="text/javascript">
+        function resize_area(obj,minRows){
+            var txt = obj.value,
+            rows = obj.rows,
+            nbRows = txt.split('\n').length;
+            if (nbRows > rows){
+                obj.rows=obj.rows + 1;
+            }
+            else if (rows > minRows){
+                obj.rows = obj.rows - 1;
+            }
+        }
+    </script>
     </body>
 </html>

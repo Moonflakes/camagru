@@ -1,24 +1,30 @@
 .comment
 {
     display: flex;
+    flex-direction: row;
 }
-.comment .com-user
+.comment .photo-com
 {
-    width: 55%;
     display: flex;
     flex-direction: column;
+    width: 55%;
     padding-top: 20px;
     padding-left: 20px; 
 }
-.comment .com-user .image
+.comment .photo-com .image
 {
     width: 100%;
     margin-right: 10px;
     margin-bottom: 20px;
     border-radius: 20px;
 }
-.talkbubble {
+.com-user
+{
     width: 45%;
+    margin : 30px 10px 20px;
+}
+.talkbubble {
+    
     max-height: min-content;
     background: #d3ffee93;
     position: relative;
@@ -26,7 +32,6 @@
     -webkit-border-radius: 10px;
     border-radius: 10px;
     border : #59febc 1px solid;
-    margin : 30px 10px 20px;
     padding: 10px;
 }
 .talkbubble:before {
@@ -56,6 +61,41 @@
 }
 textarea
 {
-    width: 80%;
-    height: 10%;
+    width: 100%;
+    border-radius: 10px;
+    border-color: #e2cb46;
+    background-color: #fffff7;
+    font-family: monospace;
+    font-size: 12px;
+    resize: none;
+    padding: 10px;
+    margin-top: 5px;
+}
+textarea:focus:valid{
+    outline: none;
+    box-shadow: none;
+}
+#button
+{
+    position: absolute;
+    bottom: 5px;
+    right: 5;
+    border: none;
+    color: #e2cb46;
+    font-family: monospace;
+    font-size: 12px;
+    cursor: pointer;
+    background-color: #fffff7;
+}
+#button:focus:valid{
+    outline: none;
+    box-shadow: none;
+}
+.com-user form
+{
+    position: relative;
+}
+label
+{
+    color: #e2cb46;
 }
