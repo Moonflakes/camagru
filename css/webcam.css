@@ -17,6 +17,7 @@
 .camera {
   width: 340px;
   display:inline-block;
+  font-family: monospace;
 }
 
 .output {
@@ -33,14 +34,13 @@
   background-color: aquamarine;
   border: 2px solid black;
   font-size: 16px;
-  font-family: "Lucida Grande", "Arial", sans-serif;
+  font-family: monospace;
   color: black;
 }
 
 .contentarea {
   font-size: 16px;
-  font-family: "Lucida Grande", "Arial", sans-serif;
-  width: 760px;
+  font-family: monospace;
 }
 
 .flex-items {
@@ -67,7 +67,7 @@
   line-height: 50px;
   font-size: 30px;
   flex-grow: 1;
-  font-family: helvetica;
+  font-family: monospace;
   color: var(--light-txt-color);
   background-color: var(--dark-bg-color);
   border: 1px solid white;

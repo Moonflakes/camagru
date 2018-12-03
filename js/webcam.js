@@ -97,7 +97,7 @@
 		    video.src = window.URL.createObjectURL(stream);
 		  }
 		  video.onloadedmetadata = function(e) {
-		    video.play();
+        video.play();
 		  };
 		})
 	/*	.catch(function(err) {
