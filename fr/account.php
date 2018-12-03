@@ -17,8 +17,8 @@
 ?>
     <section class="account">
         <h2 class="h2sign" >Mon compte</h2>
-                <table style="width: 50%;" class="account-form">
-                    <form  action="../include/modif.inc.php" method="POST">
+            <table style="width: 50%;" class="account-form">
+                <form  action="../include/modif.inc.php" method="POST">
                     <tr id="first" >
                         <td align="right">Prénom :</td>
                         <?php
@@ -26,54 +26,54 @@
                             modif("first");
                         ?>
                     </tr>
-                    </form>
-                    <form  action="../include/modif.inc.php" method="POST">
+                </form>
+                <form  action="../include/modif.inc.php" method="POST">
                     <tr id="last" >
                         <td align="right">Nom :</td>
                         <?php
-                            include_once 'readonly.php';
-                            modif("last");
-                        ?>
+                                include_once 'readonly.php';
+                                modif("last");
+                            ?>
                     </tr>
-                    </form>
-                    <form  action="../include/modif.inc.php" method="POST">
+                </form>
+                <form  action="../include/modif.inc.php" method="POST">
                     <tr id="email">
                         <td align="right">E-mail :</td>
                         <?php
-                            if (isset($_GET['modif']) && $_GET['modif'] == "email")
-                            {
-                                include_once 'modif.php';
-                            }
-                            else
-                            {
-                                include_once 'readonly.php';
-                                modif("email");
-                            }
-                        ?>
+                                if (isset($_GET['modif']) && $_GET['modif'] == "email")
+                                {
+                                    include_once 'modif.php';
+                                }
+                                else
+                                {
+                                    include_once 'readonly.php';
+                                    modif("email");
+                                }
+                            ?>
                     </tr>
-                    </form>
-                    <form  action="../include/modif.inc.php" method="POST">
+                </form>
+                <form  action="../include/modif.inc.php" method="POST">
                     <tr id="uid">
                         <td align="right">Nom d'utilisateur :</td>
                         <?php
-                            if (isset($_GET['modif']) && $_GET['modif'] == "uid")
-                            {
-                                include_once 'modif.php';
-                            }
-                            else
-                            {
-                                include_once 'readonly.php';
-                                modif("uid");
-                            }
-                        ?>
+                                if (isset($_GET['modif']) && $_GET['modif'] == "uid")
+                                {
+                                    include_once 'modif.php';
+                                }
+                                else
+                                {
+                                    include_once 'readonly.php';
+                                    modif("uid");
+                                }
+                            ?>
                     </tr>
-                    </form>
-                    <form  action="../include/modif.inc.php" method="POST">
+                </form>
+                <form  action="../include/modif.inc.php" method="POST">
                     <?php
-                        include_once 'modif_pwd.php';
+                            include_once 'modif_pwd.php';
                     ?>
-                    </form>
-                </table>
+                </form>
+            </table>
             </form>
     </section>
     <script type="text/javascript">

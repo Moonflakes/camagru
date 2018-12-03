@@ -23,6 +23,7 @@ section
     align-items:flex-end;
     padding-bottom: 80px;
     margin-bottom: 8px;
+    font-family: monospace;
 }
 .icones-left
 {
