@@ -30,6 +30,39 @@
   height: 240;
 }
 
+.filtre
+{
+  position: absolute;
+  width: 70px;
+}
+#filtre_chapka, #filtre_couronne
+{
+  top: 0;
+  left: 35%;
+  width: 100;
+}
+#filtre_glasses
+{
+  left: 40%;
+  top: 30%;
+}
+#filtre_chain
+{
+  left: 40%;
+  top: 47%;
+}
+#filtre_canard
+{
+  left: 5;
+  bottom: 20;
+}
+#filtre_suit
+{
+  bottom: 35;
+  left: 11%;
+  width: 250;
+}
+
 .output {
   width: 340px;
   display:inline-block;

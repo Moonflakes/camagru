@@ -55,10 +55,10 @@
   				<span class="checkmark"></span>
 			</label>
 	  	</div>
-	  	<div class="camera">
+	  	<div class="camera" id="camera">
 	    	<video id="video">Video stream not available.</video>
 			<canvas id="canvas_vid" class="canvas_vid"></canvas>
-			<form>
+			<form id="take_picture">
 				<input id="startbutton" type="submit" value="Prendre une photo">
 			</form>
 		</div>
@@ -70,7 +70,7 @@
   		</div>
 	</div>
 </section>
-<script>
+<!-- <script>
 	function put_filter(checkbox) {
 		var id = checkbox.id.split('_');
 		id = id[1];
@@ -97,7 +97,7 @@
 			else if (id === "chapka" || id === "couronne")
 				context.drawImage(img, 110, 30, 100, 60);
 			else if (id === "chain")
-				context.drawImage(img, 120, 150, 90, 50);
+				context.drawImage(img, 12, 15, 90, 50);
 			else if (id === "canard")
 				context.drawImage(img, 0, 180, 60, 60);
 			else if (id === "suit")
@@ -106,6 +106,26 @@
 		else
 		{
 			context.clearRect(0, 0, newCanvas.width, newCanvas.height);
+		}
+	}
+</script> -->
+<script>
+	function put_filter(checkbox) {
+		var id = checkbox.id.split('_');
+		id = id[1];
+		var filtre_check = document.getElementById('filtre_'+id);
+		var form = document.getElementById('take_picture');
+		var camera = document.getElementById('camera');
+		if (!filtre_check) {
+			var filtre = new Image();
+			filtre.src = '../overlay/'+id+'.png';
+			filtre.setAttribute("id", 'filtre_'+id);
+			filtre.setAttribute("class", 'filtre');
+			form.before(filtre);
+		}
+		else
+		{
+			camera.removeChild(filtre_check);
 		}
 	}
 </script>
