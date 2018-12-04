@@ -18,6 +18,16 @@
   width: 340px;
   display:inline-block;
   font-family: monospace;
+  position: relative;
+}
+
+.canvas_vid
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 320;
+  height: 240;
 }
 
 .output {
@@ -27,7 +37,8 @@
 
 #startbutton {
   display:block;
-  position:relative;
+  position:absolute;
+  left: 20%;
   margin-left:auto;
   margin-right:auto;
   bottom:36px;

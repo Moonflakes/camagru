@@ -36,6 +36,7 @@
   function startup() {
     video = document.getElementById('video');
     canvas = document.getElementById('canvas');
+    canvas_vid = document.getElementById('canvas_vid');
     photo = document.getElementById('photo');
     startbutton = document.getElementById('startbutton');
 
@@ -52,12 +53,12 @@
     couronne = document.getElementById('couronne');
     couronne.setAttribute('crossOrigin', 'anonymous');
 
-    checkGlasses = document.getElementById("OKglasses");
-    checkChain = document.getElementById("OKchain");
-    checkCouronne = document.getElementById("OKcouronne");
-    checkSuit = document.getElementById("OKsuit");
-    checkCanard = document.getElementById("OKcanard");
-    checkChapka = document.getElementById("OKchapka");
+    checkGlasses = document.getElementById("OK_glasses");
+    checkChain = document.getElementById("OK_chain");
+    checkCouronne = document.getElementById("OK_couronne");
+    checkSuit = document.getElementById("OK_suit");
+    checkCanard = document.getElementById("OK_canard");
+    checkChapka = document.getElementById("OK_chapka");
 
     // Older browsers might not implement mediaDevices at all, so we set an empty object first
 		if (navigator.mediaDevices === undefined) {
@@ -120,6 +121,8 @@
         video.setAttribute('height', height);
         canvas.setAttribute('width', width);
         canvas.setAttribute('height', height);
+        canvas_vid.setAttribute('width', width);
+        canvas_vid.setAttribute('height', height);
         streaming = true;
       }
     }, false);
@@ -131,7 +134,8 @@
 
     clearphoto();
   }
-
+  
+  
   // Fill the photo with an indication that none has been
   // captured.
 
@@ -184,4 +188,6 @@
   // Set up our event listener to run the startup process
   // once loading is complete.
   window.addEventListener('load', startup, false);
+
 })();
+
