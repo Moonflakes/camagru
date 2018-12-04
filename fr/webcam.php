@@ -121,6 +121,7 @@
 			filtre.src = '../overlay/'+id+'.png';
 			filtre.setAttribute("id", 'filtre_'+id);
 			filtre.setAttribute("class", 'filtre');
+			filtre.setAttribute('draggable', "true");
 			form.before(filtre);
 		}
 		else

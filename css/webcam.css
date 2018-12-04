@@ -15,7 +15,7 @@
 }
 
 .camera {
-  width: 340px;
+  height: 244;
   display:inline-block;
   font-family: monospace;
   position: relative;
@@ -54,11 +54,11 @@
 #filtre_canard
 {
   left: 5;
-  bottom: 20;
+  bottom: 10;
 }
 #filtre_suit
 {
-  bottom: 35;
+  bottom: 25;
   left: 11%;
   width: 250;
 }
