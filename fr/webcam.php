@@ -122,17 +122,18 @@
 			filtre.setAttribute("id", 'filtre_'+id);
 			filtre.setAttribute("class", 'filtre');
 			form.before(filtre);
-			dnd(filtre, camera);
 		}
 		else
 		{
 			camera.removeChild(filtre_check);
 		}
+		dnd(id, camera);
 	}
 </script>
 <script>
-	function dnd(filtre, camera){
+	function dnd(id, camera){
 		var flag = false,
+			filtre = document.getElementById('filtre_'+id);
 		//	filtre_canard = document.getElementById('filtre_canard'),
 		//	filtre_chain = document.getElementById('filtre_chain'),
 		//	filtre_chapka = document.getElementById('filtre_chapka'),
@@ -153,8 +154,8 @@
 				return;
 			var x = e.clientX,
 				y = e.clientY;
-			filtre.style.left = x - cameraL - filtreW/2 + 'px';
-			filtre.style.top = y - cameraT - filtreH/2 + 'px';
+			filtre.style.left = x - cameraL - filtreW + 'px';
+			filtre.style.top = y - cameraT - filtreH + 'px';
 			console.log("L = "+filtre.style.left, "T = "+filtre.style.top, "x = "+x, "y = "+y);
 			filtre.style.cursor = 'move';
 		});
@@ -170,15 +171,15 @@
 			}
 			var x = e.clientX,
 				y = e.clientY,
-				cameraW = camera.clientWidth - filtreW/2,
-				cameraH = camera.clientHeight - filtreH/2,
+				cameraW = camera.clientWidth - filtreW,
+				cameraH = camera.clientHeight - filtreH,
 				cameraR = cameraL + cameraW,
 				cameraB = cameraT + cameraH;
 			console.log("filtre id  = "+filtre.id);
 			console.log("x = "+x, "y = "+y, "camL = "+cameraL, "camT = "+cameraT, "camW = "+cameraW, "camH = "+cameraH, "camR = "+cameraR, "camB = "+cameraB);
 			if (x >= cameraL && x <= cameraR && y >= cameraT && y <= cameraB){
-				filtre.style.left = x  - cameraL - filtreW/2 +  'px';
-				filtre.style.top = y - cameraT - filtreH/2 + 'px';
+				filtre.style.left = x  - cameraL - filtreW +  'px';
+				filtre.style.top = y - cameraT - filtreH + 'px';
 				console.log("filtreL = "+filtre.style.left, "filtreT = "+filtre.style.top);
 			}
 			else{
