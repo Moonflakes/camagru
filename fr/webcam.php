@@ -144,18 +144,18 @@
 			filtreW = filtre.clientWidth,
 			filtreH = filtre.clientHeight
 			cameraL = 11,
-			cameraT = 382;
+			cameraT = 421;
 		console.log("W = "+filtreW, "H = "+filtreH);
 
-		document.addEventListener('mousemove', function(e){
+		camera.addEventListener('mousemove', function(e){
 			console.log('je passe la');
 			e = e || window.event;
 			if (!flag)
 				return;
 			var x = e.clientX,
 				y = e.clientY;
-			filtre.style.left = x - cameraL - filtreW + 'px';
-			filtre.style.top = y - cameraT - filtreH + 'px';
+			filtre.style.left = x - cameraL - filtreW/2 + 'px';
+			filtre.style.top = y - cameraT - filtreH/2 + 'px';
 			console.log("L = "+filtre.style.left, "T = "+filtre.style.top, "x = "+x, "y = "+y);
 			filtre.style.cursor = 'move';
 		});
@@ -171,15 +171,15 @@
 			}
 			var x = e.clientX,
 				y = e.clientY,
-				cameraW = camera.clientWidth - filtreW,
-				cameraH = camera.clientHeight - filtreH,
+				cameraW = camera.clientWidth - filtreW/2,
+				cameraH = camera.clientHeight - filtreH/2,
 				cameraR = cameraL + cameraW,
 				cameraB = cameraT + cameraH;
 			console.log("filtre id  = "+filtre.id);
 			console.log("x = "+x, "y = "+y, "camL = "+cameraL, "camT = "+cameraT, "camW = "+cameraW, "camH = "+cameraH, "camR = "+cameraR, "camB = "+cameraB);
 			if (x >= cameraL && x <= cameraR && y >= cameraT && y <= cameraB){
-				filtre.style.left = x  - cameraL - filtreW +  'px';
-				filtre.style.top = y - cameraT - filtreH + 'px';
+				filtre.style.left = x  - cameraL - filtreW/2 +  'px';
+				filtre.style.top = y - cameraT - filtreH/2 + 'px';
 				console.log("filtreL = "+filtre.style.left, "filtreT = "+filtre.style.top);
 			}
 			else{
