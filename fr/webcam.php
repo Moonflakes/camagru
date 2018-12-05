@@ -121,13 +121,71 @@
 			filtre.src = '../overlay/'+id+'.png';
 			filtre.setAttribute("id", 'filtre_'+id);
 			filtre.setAttribute("class", 'filtre');
-			filtre.setAttribute('draggable', "true");
 			form.before(filtre);
+			dnd(filtre, camera);
 		}
 		else
 		{
 			camera.removeChild(filtre_check);
 		}
+	}
+</script>
+<script>
+	function dnd(filtre, camera){
+		var flag = false,
+		//	filtre_canard = document.getElementById('filtre_canard'),
+		//	filtre_chain = document.getElementById('filtre_chain'),
+		//	filtre_chapka = document.getElementById('filtre_chapka'),
+		//	filtre_couronne = document.getElementById('filtre_couronne'),
+		//	filtre = document.getElementById('filtre'),
+		//	filtre_suit = document.getElementById('filtre_suit'),
+		//	camera = document.getElementById('camera');
+			filtreW = filtre.clientWidth,
+			filtreH = filtre.clientHeight
+			cameraL = 11,
+			cameraT = 382;
+		console.log("W = "+filtreW, "H = "+filtreH);
+
+		document.addEventListener('mousemove', function(e){
+			console.log('je passe la');
+			e = e || window.event;
+			if (!flag)
+				return;
+			var x = e.clientX,
+				y = e.clientY;
+			filtre.style.left = x - cameraL - filtreW/2 + 'px';
+			filtre.style.top = y - cameraT - filtreH/2 + 'px';
+			console.log("L = "+filtre.style.left, "T = "+filtre.style.top, "x = "+x, "y = "+y);
+			filtre.style.cursor = 'move';
+		});
+		filtre.addEventListener('mousedown', function(e){
+			console.log('je passe ici');
+			flag = true;
+		});
+		document.addEventListener('mouseup', function(e){
+			console.log('je passe par ici aussi');
+			flag = false;
+			if (filtre){
+			filtre.style.cursor = 'default';
+			}
+			var x = e.clientX,
+				y = e.clientY,
+				cameraW = camera.clientWidth - filtreW/2,
+				cameraH = camera.clientHeight - filtreH/2,
+				cameraR = cameraL + cameraW,
+				cameraB = cameraT + cameraH;
+			console.log("filtre id  = "+filtre.id);
+			console.log("x = "+x, "y = "+y, "camL = "+cameraL, "camT = "+cameraT, "camW = "+cameraW, "camH = "+cameraH, "camR = "+cameraR, "camB = "+cameraB);
+			if (x >= cameraL && x <= cameraR && y >= cameraT && y <= cameraB){
+				filtre.style.left = x  - cameraL - filtreW/2 +  'px';
+				filtre.style.top = y - cameraT - filtreH/2 + 'px';
+				console.log("filtreL = "+filtre.style.left, "filtreT = "+filtre.style.top);
+			}
+			else{
+				filtre.style.left = '10%';
+				filtre.style.top = '10%';
+			}
+		});
 	}
 </script>
 <?PHP
