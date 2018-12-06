@@ -163,7 +163,7 @@
 			console.log('je passe ici');
 			flag = true;
 		});
-		document.addEventListener('mouseup', function(e){
+		filtre.addEventListener('mouseup', function(e){
 			console.log('je passe par ici aussi');
 			flag = false;
 			if (filtre){
