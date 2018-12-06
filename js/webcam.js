@@ -40,26 +40,6 @@
     photo = document.getElementById('photo');
     startbutton = document.getElementById('startbutton');
 
-    glasses = document.getElementById('glasses');
-    glasses.setAttribute('crossOrigin', 'anonymous');
-    chapka = document.getElementById('chapka');
-    chapka.setAttribute('crossOrigin', 'anonymous');
-    chain = document.getElementById('chain');
-    chain.setAttribute('crossOrigin', 'anonymous');
-    canard = document.getElementById('canard');
-    canard.setAttribute('crossOrigin', 'anonymous');
-    suit = document.getElementById('suit');
-    suit.setAttribute('crossOrigin', 'anonymous');
-    couronne = document.getElementById('couronne');
-    couronne.setAttribute('crossOrigin', 'anonymous');
-
-    checkGlasses = document.getElementById("OK_glasses");
-    checkChain = document.getElementById("OK_chain");
-    checkCouronne = document.getElementById("OK_couronne");
-    checkSuit = document.getElementById("OK_suit");
-    checkCanard = document.getElementById("OK_canard");
-    checkChapka = document.getElementById("OK_chapka");
-
     // Older browsers might not implement mediaDevices at all, so we set an empty object first
 		if (navigator.mediaDevices === undefined) {
 		  navigator.mediaDevices = {};
@@ -160,24 +140,31 @@
       canvas.width = width;
       canvas.height = height;
       context.drawImage(video, 0, 0, width, height);
-      if (checkGlasses.checked == true){
-        context.drawImage(glasses, 125, 100, 70, 15);
-      }
-      if (checkChapka.checked == true){
-        context.drawImage(chapka, 110, 30, 100, 60);
-      }
-      if (checkChain.checked == true){
-        context.drawImage(chain, 120, 150, 90, 50);
-      }
-      if (checkCanard.checked == true){
-        context.drawImage(canard, 0, 180, 60, 60);
-      }
-      if (checkCouronne.checked == true){
-        context.drawImage(couronne, 110, 20, 100, 60);
-      }
-      if (checkSuit.checked == true){
-        context.drawImage(suit, 40, 160, 250, 80);
-      }
+      var filtre_name = ["canard", "chain", "chapka", "couronne", "glasses"];
+      var filtre_infos = {};
+
+      filtre_name.forEach(function(element) {
+        checkFiltre = document.getElementById("OK_"+element);
+        if (checkFiltre.checked == true)
+        {
+          var filtre = document.getElementById('filtre_'+element);
+          var index = filtre.classList[1].split('_')[1];
+          filtre_infos[`${index}`] = element;
+        }
+      });
+      //console.log(filtre_infos);
+      filter = Object.values(filtre_infos);
+      filter.forEach(function(element) {
+        var img = new Image();
+        img.src = '../overlay/'+element+'.png';
+        filtre = document.getElementById('filtre_'+element);
+        h = filtre.height;
+        w = filtre.width;
+        t = filtre.offsetTop;
+        l = filtre.offsetLeft;
+        console.info(filtre.offsetTop);
+        context.drawImage(img, l, t, w, h);
+      });
       var data = canvas.toDataURL('image/png');
       photo.setAttribute('src', data);
     } else {

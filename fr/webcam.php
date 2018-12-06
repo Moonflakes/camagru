@@ -110,6 +110,7 @@
 	}
 </script> -->
 <script>
+	var index = 0;
 	function put_filter(checkbox) {
 		var id = checkbox.id.split('_');
 		id = id[1];
@@ -120,7 +121,8 @@
 			var filtre = new Image();
 			filtre.src = '../overlay/'+id+'.png';
 			filtre.setAttribute("id", 'filtre_'+id);
-			filtre.setAttribute("class", 'filtre');
+			index++;
+			filtre.classList.add('filtre', 'index_'+index);
 			form.before(filtre);
 		}
 		else
@@ -134,13 +136,6 @@
 	function dnd(id, camera){
 		var flag = false,
 			filtre = document.getElementById('filtre_'+id);
-		//	filtre_canard = document.getElementById('filtre_canard'),
-		//	filtre_chain = document.getElementById('filtre_chain'),
-		//	filtre_chapka = document.getElementById('filtre_chapka'),
-		//	filtre_couronne = document.getElementById('filtre_couronne'),
-		//	filtre = document.getElementById('filtre'),
-		//	filtre_suit = document.getElementById('filtre_suit'),
-		//	camera = document.getElementById('camera');
 			filtreW = filtre.clientWidth,
 			filtreH = filtre.clientHeight
 			cameraL = 11,
