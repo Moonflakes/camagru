@@ -24,6 +24,7 @@
 		2. Cliquez sur le bouton Prendre une Photo.
 	</p>
 		<div class="flex-items">
+		<form id="take_picture">
 			<label class="container">
 				<img id="glasses" alt="badass glasses" src="../overlay/glasses.png" style="width: 70px; height: auto"></img>
   				<input type="checkbox" id="OK_glasses" onchange="put_filter(this)">
@@ -54,13 +55,12 @@
   				<input type="checkbox" id="OK_suit" onchange="put_filter(this)">
   				<span class="checkmark"></span>
 			</label>
+			<input id="startbutton" type="submit" value="Prendre une photo">
+		</form>
 	  	</div>
 	  	<div class="camera" id="camera">
 	    	<video id="video">Video stream not available.</video>
 			<canvas id="canvas_vid" class="canvas_vid"></canvas>
-			<form id="take_picture">
-				<input id="startbutton" type="submit" value="Prendre une photo">
-			</form>
 		</div>
 
   	<canvas id="canvas"></canvas>
@@ -70,45 +70,6 @@
   		</div>
 	</div>
 </section>
-<!-- <script>
-	function put_filter(checkbox) {
-		var id = checkbox.id.split('_');
-		id = id[1];
-		var canvas_check = document.getElementById('canvas_'+id);
-		var video = document.getElementById('video');
-		if (!canvas_check) {
-			var newCanvas = document.createElement("canvas");
-			newCanvas.setAttribute("id", 'canvas_'+id);
-			newCanvas.setAttribute("class", 'canvas_vid');
-			video.after(newCanvas);
-			var context = newCanvas.getContext('2d');
-		}
-		else
-		{
-			var newCanvas = canvas_check;
-			var context = newCanvas.getContext('2d');
-		}
-		if (checkbox.checked === true){
-			var img = new Image();
-			img.src = '../overlay/'+id+'.png';
-			console.log(img.src);
-			if (id === "glasses")
-				context.drawImage(img, 125, 100, 70, 15);
-			else if (id === "chapka" || id === "couronne")
-				context.drawImage(img, 110, 30, 100, 60);
-			else if (id === "chain")
-				context.drawImage(img, 12, 15, 90, 50);
-			else if (id === "canard")
-				context.drawImage(img, 0, 180, 60, 60);
-			else if (id === "suit")
-				context.drawImage(img, 40, 160, 250, 80);
-		}
-		else
-		{
-			context.clearRect(0, 0, newCanvas.width, newCanvas.height);
-		}
-	}
-</script> -->
 <script>
 	var index = 0;
 	function put_filter(checkbox) {
