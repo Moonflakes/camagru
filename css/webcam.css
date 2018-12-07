@@ -1,123 +1,11 @@
-#video {
-  border: 2px solid black;
-  width:320px;
-  height:240px;
-}
-
-#photo {
-  border: 2px solid black;
-  width:320px;
-  height:240px;
-}
-
-#canvas {
-  display:none;
-}
-
-.camera {
-  height: 244;
-  display:inline-block;
-  font-family: monospace;
-  position: relative;
-}
-
-.canvas_vid
-{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 320;
-  height: 240;
-}
-
-.filtre
-{
-  position: absolute;
-  width: 70px;
-}
-#filtre_chapka, #filtre_couronne
-{
-  top: 0;
-  left: 35%;
-  width: 100;
-}
-#filtre_glasses
-{
-  left: 40%;
-  top: 30%;
-}
-#filtre_chain
-{
-  left: 40%;
-  top: 47%;
-}
-#filtre_canard
-{
-  left: 5;
-  bottom: 10;
-}
-#filtre_suit
-{
-  bottom: 25;
-  left: 11%;
-  width: 250;
-}
-
-.output {
-  width: 340px;
-  display:inline-block;
-}
-
-#startbutton {
-  display:block;
-  position:absolute;
-  left: 20%;
-  margin-left:auto;
-  margin-right:auto;
-  bottom:36px;
-  background-color: aquamarine;
-  border: 2px solid black;
-  font-size: 16px;
-  font-family: monospace;
-  color: black;
-}
-
 .contentarea {
   font-size: 16px;
   font-family: monospace;
+  padding: 10px 20px 10px;
 }
 
 .flex-items {
   display: flex;
-  justify-content: center;
-}
-
-.flex-container {
-  display: flex;
-  align-items: stretch;
-  background-color: var(--dark-bg-color);
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.flex-container > div {
-  background-color: DodgerBlue;
-  color: white;
-  width: 300px;
-  height: 400px;
-  margin: 0px;
-  padding: 10px 20px;
-  text-align: left;
-  line-height: 50px;
-  font-size: 30px;
-  flex-grow: 1;
-  font-family: monospace;
-  color: var(--light-txt-color);
-  background-color: var(--dark-bg-color);
-  border: 1px solid white;
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Do not repeat the image */
-  background-size: cover;
 }
 
 /* Customize the label (the container) */
@@ -186,3 +74,108 @@
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+
+.camera {
+  height: 244;
+  display:inline-block;
+  font-family: monospace;
+  position: relative;
+  margin-left: 20;
+}
+#video {
+  border: 2px solid black;
+  width:320px;
+  height:240px;
+}
+.canvas_vid
+{
+  position: absolute;
+  top: 2;
+  left: 2;
+  width: 320;
+  height: 240;
+}
+
+#photo {
+  border: 2px solid black;
+  width:320px;
+  height:240px;
+}
+
+#canvas {
+  display:none;
+}
+
+
+
+.filtre
+{
+  position: absolute;
+  width: 70px;
+}
+#filtre_chapka, #filtre_couronne
+{
+  top: 0;
+  left: 35%;
+  width: 100;
+}
+#filtre_glasses
+{
+  left: 40%;
+  top: 30%;
+}
+#filtre_chain
+{
+  left: 40%;
+  top: 47%;
+}
+#filtre_canard
+{
+  left: 5;
+  bottom: 10;
+}
+#filtre_suit
+{
+  bottom: 25;
+  left: 11%;
+  width: 250;
+}
+
+
+#startbutton {
+  display:block;
+  position:absolute;
+  left: 20%;
+  margin-left:auto;
+  margin-right:auto;
+  bottom:36px;
+  background-color: aquamarine;
+  border: 2px solid black;
+  font-size: 16px;
+  font-family: monospace;
+  color: black;
+}
+
+.flex-container > div {
+  /*background-color: DodgerBlue;
+  color: white;
+  width: 300px;
+  height: 400px;
+  margin: 0px;*/
+  padding: 20px;
+  /*text-align: left;
+  line-height: 50px;
+  font-size: 30px;
+  flex-grow: 1;
+  font-family: monospace;
+  color: var(--light-txt-color);
+  background-color: var(--dark-bg-color);
+  background-position: center;*/ /* Center the image */
+  /*background-repeat: no-repeat;  Do not repeat the image
+  background-size: cover; */
+}
+
+.output {
+  display:inline-block;
+}
+

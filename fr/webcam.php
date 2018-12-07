@@ -138,9 +138,10 @@
 			filtre = document.getElementById('filtre_'+id);
 			filtreW = filtre.clientWidth,
 			filtreH = filtre.clientHeight
-			cameraL = 11,
-			cameraT = 421;
+			cameraL = camera.offsetLeft,
+			cameraT = camera.offsetTop;
 		console.log("W = "+filtreW, "H = "+filtreH);
+		console.log("camL = "+cameraL, "camT = "+cameraT);
 
 		camera.addEventListener('mousemove', function(e){
 			console.log('je passe la');

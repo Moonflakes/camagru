@@ -166,6 +166,7 @@
         context.drawImage(img, l, t, w, h);
       });
       var data = canvas.toDataURL('image/png');
+      console.log(data);
       photo.setAttribute('src', data);
     } else {
       clearphoto();
