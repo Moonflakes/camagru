@@ -167,13 +167,15 @@
 			}
 			var x = e.clientX,
 				y = e.clientY,
+				limitL = cameraL + filtreW/2,
+				limitT = cameraT + filtreH/2,
 				cameraW = camera.clientWidth - filtreW/2,
 				cameraH = camera.clientHeight - filtreH/2,
-				cameraR = cameraL + cameraW,
-				cameraB = cameraT + cameraH;
+				limitR = cameraL + cameraW,
+				limitB = cameraT + cameraH;
 			console.log("filtre id  = "+filtre.id);
-			console.log("x = "+x, "y = "+y, "camL = "+cameraL, "camT = "+cameraT, "camW = "+cameraW, "camH = "+cameraH, "camR = "+cameraR, "camB = "+cameraB);
-			if (x >= cameraL && x <= cameraR && y >= cameraT && y <= cameraB){
+			console.log("x = "+x, "y = "+y, "limitL = "+limitL, "limitT = "+limitT, "limitR = "+limitR, "limitB = "+limitB);
+			if (x >= limitL && x <= limitR && y >= limitT && y <= limitB){
 				filtre.style.left = x  - cameraL - filtreW/2 +  'px';
 				filtre.style.top = y - cameraT - filtreH/2 + 'px';
 				console.log("filtreL = "+filtre.style.left, "filtreT = "+filtre.style.top);
