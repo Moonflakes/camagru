@@ -36,7 +36,6 @@
   function startup() {
     video = document.getElementById('video');
     canvas = document.getElementById('canvas');
-    canvas_vid = document.getElementById('canvas_vid');
     photo = document.getElementById('photo');
     startbutton = document.getElementById('startbutton');
 
@@ -101,8 +100,6 @@
         video.setAttribute('height', height);
         canvas.setAttribute('width', width);
         canvas.setAttribute('height', height);
-        canvas_vid.setAttribute('width', width);
-        canvas_vid.setAttribute('height', height);
         streaming = true;
       }
     }, false);

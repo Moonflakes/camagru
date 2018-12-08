@@ -60,7 +60,6 @@
 	  	</div>
 	  	<div class="camera" id="camera">
 	    	<video id="video">Video stream not available.</video>
-			<canvas id="canvas_vid" class="canvas_vid"></canvas>
 		</div>
 
   	<canvas id="canvas"></canvas>
@@ -76,7 +75,7 @@
 		var id = checkbox.id.split('_');
 		id = id[1];
 		var filtre_check = document.getElementById('filtre_'+id);
-		var form = document.getElementById('take_picture');
+		//var form = document.getElementById('canvas_vid');
 		var camera = document.getElementById('camera');
 		if (!filtre_check) {
 			var filtre = new Image();
@@ -84,7 +83,7 @@
 			filtre.setAttribute("id", 'filtre_'+id);
 			index++;
 			filtre.classList.add('filtre', 'index_'+index);
-			form.before(filtre);
+			camera.appendChild(filtre);
 		}
 		else
 		{
@@ -109,8 +108,8 @@
 			e = e || window.event;
 			if (!flag)
 				return;
-			var x = e.clientX,
-				y = e.clientY;
+			var x = e.pageX,
+				y = e.pageY;
 			filtre.style.left = x - cameraL - filtreW/2 + 'px';
 			filtre.style.top = y - cameraT - filtreH/2 + 'px';
 			console.log("L = "+filtre.style.left, "T = "+filtre.style.top, "x = "+x, "y = "+y);
@@ -126,18 +125,19 @@
 			if (filtre){
 			filtre.style.cursor = 'default';
 			}
-			var x = e.clientX,
-				y = e.clientY,
+			var x = e.pageX, // ou clientX
+				y = e.pageY,
 				limitL = cameraL + filtreW/2,
 				limitT = cameraT + filtreH/2,
 				cameraW = camera.clientWidth - filtreW/2,
 				cameraH = camera.clientHeight - filtreH/2,
 				limitR = cameraL + cameraW,
 				limitB = cameraT + cameraH;
-			console.log("filtre id  = "+filtre.id);
+			//console.log("filtre id  = "+filtre.id);
 			console.log("x = "+x, "y = "+y, "limitL = "+limitL, "limitT = "+limitT, "limitR = "+limitR, "limitB = "+limitB);
 			if (x >= limitL && x <= limitR && y >= limitT && y <= limitB){
-				filtre.style.left = x  - cameraL - filtreW/2 +  'px';
+				//console.log("est-ce que je passe la ?");
+				filtre.style.left = x - cameraL - filtreW/2 +  'px';
 				filtre.style.top = y - cameraT - filtreH/2 + 'px';
 				console.log("filtreL = "+filtre.style.left, "filtreT = "+filtre.style.top);
 			}
