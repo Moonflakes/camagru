@@ -23,51 +23,48 @@
 		1. Choisissez votre image.</br>
 		2. Cliquez sur le bouton Prendre une Photo.
 	</p>
-		<div class="flex-items">
+	<div class="flex-items">
 		<form id="take_picture">
 			<label class="container">
-				<img id="glasses" alt="badass glasses" src="../overlay/glasses.png" style="width: 70px; height: auto"></img>
   				<input type="checkbox" id="OK_glasses" onchange="put_filter(this)">
-  				<span class="checkmark"></span>
+				  <img id="glasses" alt="badass glasses" src="../overlay/glasses.png"/>
+				  <span></span>
 			</label>
 			<label class="container">
-				<img id="chapka" alt="Russian chapka" src="../overlay/chapka.png" style="width: 70px; height: auto"></img>
   				<input type="checkbox" id="OK_chapka" onchange="put_filter(this)">
-  				<span class="checkmark"></span>
+  				<img id="chapka" alt="Russian chapka" src="../overlay/chapka.png"/>
 			</label>
 			<label class="container">
-				<img id="chain" alt="gold chain" src="../overlay/chain.png" style="width: 70px; height: auto"></img>
   				<input type="checkbox" id="OK_chain" onchange="put_filter(this)">
-  				<span class="checkmark"></span>
+  				<img id="chain" alt="gold chain" src="../overlay/chain.png"/>
 			</label>
 			<label class="container">
-				<img id="canard" alt="canard sm" src="../overlay/canard.png" style="width: 70px; height: auto"></img>
   				<input type="checkbox" id="OK_canard" onchange="put_filter(this)">
-  				<span class="checkmark"></span>
+  				<img id="canard" alt="canard sm" src="../overlay/canard.png"/>
 			</label>
 			<label class="container">
-				<img id="couronne" alt="Queens crown" src="../overlay/couronne.png" style="width: 70px; height: auto"></img>
   				<input type="checkbox" id="OK_couronne" onchange="put_filter(this)">
-  				<span class="checkmark"></span>
+  				<img id="couronne" alt="Queens crown" src="../overlay/couronne.png"/>
 			</label>
 			<label class="container">
-				<img id="suit" alt="casual suit" src="../overlay/suit.png" style="width: 70px; height: auto"></img>
   				<input type="checkbox" id="OK_suit" onchange="put_filter(this)">
-  				<span class="checkmark"></span>
+  				<img id="suit" alt="casual suit" src="../overlay/suit.png"/>
 			</label>
 			<input id="startbutton" type="submit" value="Prendre une photo">
 		</form>
-	  	</div>
-	  	<div class="camera" id="camera">
-	    	<video id="video">Video stream not available.</video>
+		<div class="take_photo">
+			<div class="camera" id="camera">
+				<video id="video">Video stream not available.</video>
+			</div>
+			<canvas id="canvas"></canvas>
+			<div class="flex-container">
+				<div class="output">
+					<img id="photo" alt="The screen capture will appear in this box.">
+				</div>
+			</div>
 		</div>
-
-  	<canvas id="canvas"></canvas>
-  	<div class="flex-container">
-		<div class="output">
-    		<img id="photo" alt="The screen capture will appear in this box.">
-  		</div>
 	</div>
+	  	
 </section>
 <script>
 	var index = 0;
@@ -75,7 +72,6 @@
 		var id = checkbox.id.split('_');
 		id = id[1];
 		var filtre_check = document.getElementById('filtre_'+id);
-		//var form = document.getElementById('canvas_vid');
 		var camera = document.getElementById('camera');
 		if (!filtre_check) {
 			var filtre = new Image();
