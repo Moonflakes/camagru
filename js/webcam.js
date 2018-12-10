@@ -104,15 +104,12 @@
       }
     }, false);
 
-    startbutton.addEventListener('click', function(ev){
-      takepicture();
-      ev.preventDefault();
-    }, false);
-
     clearphoto();
   }
   
   
+  
+
   // Fill the photo with an indication that none has been
   // captured.
 
@@ -130,7 +127,7 @@
   // format data URL. By drawing it on an offscreen canvas and then
   // drawing that to the screen, we can change its size and/or apply
   // other changes before drawing it.
-
+  
   function takepicture() {
     var context = canvas.getContext('2d');
     if (width && height) {

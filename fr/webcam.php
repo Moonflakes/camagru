@@ -50,7 +50,6 @@
   				<input type="checkbox" id="OK_suit" onchange="put_filter(this)">
   				<img id="suit" alt="casual suit" src="../overlay/suit.png"/>
 			</label>
-			<input id="startbutton" type="submit" value="Prendre une photo">
 		</form>
 		<div class="take_photo">
 			<div class="camera" id="camera">
@@ -67,8 +66,52 @@
 	  	
 </section>
 <script>
+	
+	function verif_check(){
+		var filtre_name = ["canard", "chain", "chapka", "couronne", "glasses"];
+		var a = 0;
+		filtre_name.forEach(function(element) {
+			checkFiltre = document.getElementById("OK_"+element);
+			if (checkFiltre.checked == true)
+			{
+				a = 1;
+				make_button(a);
+			}
+		})
+		return remove_button(a);
+	}
+	function make_button(a){
+		var startbutton = document.getElementById('startbutton');
+		var form = document.getElementById('take_picture');
+    	if (!startbutton && a === 1)
+    	{
+			console.log("je passe ici");
+			startbutton = document.createElement("input");
+			console.log (startbutton);
+			startbutton.setAttribute("id", 'startbutton');
+			startbutton.setAttribute("type", 'submit');
+			startbutton.setAttribute("value", 'Prendre une photo');
+			form.appendChild(startbutton);
+		}
+		startbutton.addEventListener('click', function(ev){
+			takepicture();
+			ev.preventDefault();
+			}, false);
+	}
+
+	function remove_button(a){
+		var startbutton = document.getElementById('startbutton');
+		var form = document.getElementById('take_picture');
+		if (startbutton && a === 0)
+    	{
+			console.log("je remove");
+			form.removeChild(startbutton);
+		}
+  }
+
 	var index = 0;
 	function put_filter(checkbox) {
+		verif_check();
 		var id = checkbox.id.split('_');
 		id = id[1];
 		var filtre_check = document.getElementById('filtre_'+id);
