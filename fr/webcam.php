@@ -66,6 +66,47 @@
 	  	
 </section>
 <script>
+        $(document).ready(function(){
+			var startbutton = document.getElementById('startbutton');
+			if (startbutton){
+				startbutton.click(function(e){
+                e.preventDefault();
+                
+                $.post(
+                    '../include/take_photo.php', 
+                    {
+						filtre_canard : $("#OK_canard").val(),
+						filtre_glasses : $("#OK_glasses").val(),
+						filtre_chapka : $("#OK_chapka").val(),
+						filtre_chain : $("#OK_chain").val(),
+						filtre_couronne : $("#OK_couronne").val(),
+						filtre_suit : $("#OK_suit").val(),
+                        submi : $("#startbutton").val()
+                    },
+        
+                    function(data){
+                        var author = data['author'];
+                        var text = data['text'];
+                        text = text.replace(/\n/g,'<br />');
+                        var time = data['time'];
+                        var id = data['id']
+                        var id_next = data['id_next'];
+                        $(".old-msg_"+id_next).before('<div class="old-msg_'+id+'"><div class="msg"><b>'+author+'</b><span> : '+text+'</span></div><span class="time" id="time_'+id+'">il y a '+time[0]+'</span></div><br>');
+                        $.each(time,function(index,element){
+                            $('#time_'+index).text(element);
+                        });
+                
+                    },
+                    'json'
+                );
+                $('#comment').val('');
+                $('#comment').css("height", "50");
+            });
+
+			}
+        });
+    </script> 
+<script>
 	
 	function verif_check(){
 		var filtre_name = ["canard", "chain", "chapka", "couronne", "glasses"];
