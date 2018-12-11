@@ -24,30 +24,29 @@
 		2. Cliquez sur le bouton Prendre une Photo.
 	</p>
 	<div class="flex-items">
-		<form id="take_picture">
+		<form id="take_picture" method="POST" action="../include/take_photo.php">
 			<label class="container">
-  				<input type="checkbox" id="OK_glasses" onchange="put_filter(this)">
+  				<input type="checkbox" id="OK_glasses" onchange="put_filter(this)" name="glasses">
 				  <img id="glasses" alt="badass glasses" src="../overlay/glasses.png"/>
-				  <span></span>
 			</label>
 			<label class="container">
-  				<input type="checkbox" id="OK_chapka" onchange="put_filter(this)">
+  				<input type="checkbox" id="OK_chapka" onchange="put_filter(this)" name="chapka">
   				<img id="chapka" alt="Russian chapka" src="../overlay/chapka.png"/>
 			</label>
 			<label class="container">
-  				<input type="checkbox" id="OK_chain" onchange="put_filter(this)">
+  				<input type="checkbox" id="OK_chain" onchange="put_filter(this)" name="chain">
   				<img id="chain" alt="gold chain" src="../overlay/chain.png"/>
 			</label>
 			<label class="container">
-  				<input type="checkbox" id="OK_canard" onchange="put_filter(this)">
+  				<input type="checkbox" id="OK_canard" onchange="put_filter(this)" name="canard">
   				<img id="canard" alt="canard sm" src="../overlay/canard.png"/>
 			</label>
 			<label class="container">
-  				<input type="checkbox" id="OK_couronne" onchange="put_filter(this)">
+  				<input type="checkbox" id="OK_couronne" onchange="put_filter(this)" name="couronne">
   				<img id="couronne" alt="Queens crown" src="../overlay/couronne.png"/>
 			</label>
 			<label class="container">
-  				<input type="checkbox" id="OK_suit" onchange="put_filter(this)">
+  				<input type="checkbox" id="OK_suit" onchange="put_filter(this)" name="suit">
   				<img id="suit" alt="casual suit" src="../overlay/suit.png"/>
 			</label>
 		</form>
@@ -65,8 +64,8 @@
 	</div>
 	  	
 </section>
-<script>
-        $(document).ready(function(){
+<!-- <script>
+
 			var startbutton = document.getElementById('startbutton');
 			if (startbutton){
 				startbutton.click(function(e){
@@ -75,13 +74,13 @@
                 $.post(
                     '../include/take_photo.php', 
                     {
-						filtre_canard : $("#OK_canard").val(),
-						filtre_glasses : $("#OK_glasses").val(),
-						filtre_chapka : $("#OK_chapka").val(),
-						filtre_chain : $("#OK_chain").val(),
-						filtre_couronne : $("#OK_couronne").val(),
-						filtre_suit : $("#OK_suit").val(),
-                        submi : $("#startbutton").val()
+						canard : $("#OK_canard").val(),
+						glasses : $("#OK_glasses").val(),
+						chapka : $("#OK_chapka").val(),
+						chain : $("#OK_chain").val(),
+						couronne : $("#OK_couronne").val(),
+						suit : $("#OK_suit").val(),
+                        submit : $("#startbutton").val()
                     },
         
                     function(data){
@@ -104,8 +103,7 @@
             });
 
 			}
-        });
-    </script> 
+    </script> -->
 <script>
 	
 	function verif_check(){
@@ -131,13 +129,14 @@
 			console.log (startbutton);
 			startbutton.setAttribute("id", 'startbutton');
 			startbutton.setAttribute("type", 'submit');
+			startbutton.setAttribute("name", 'submit');
 			startbutton.setAttribute("value", 'Prendre une photo');
 			form.appendChild(startbutton);
 		}
-		startbutton.addEventListener('click', function(ev){
+		/*startbutton.addEventListener('click', function(ev){
 			takepicture();
 			ev.preventDefault();
-			}, false);
+			}, false);*/
 	}
 
 	function remove_button(a){

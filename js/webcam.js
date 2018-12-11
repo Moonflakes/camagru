@@ -128,7 +128,7 @@
   // drawing that to the screen, we can change its size and/or apply
   // other changes before drawing it.
   
-  function takepicture() {
+/*  function takepicture() {
     var context = canvas.getContext('2d');
     if (width && height) {
       canvas.width = width;
@@ -165,7 +165,7 @@
     } else {
       clearphoto();
     }
-  }
+  }*/
 
   // Set up our event listener to run the startup process
   // once loading is complete.

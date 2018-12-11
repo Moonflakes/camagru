@@ -45,10 +45,7 @@
   background-color: #ccc;
   border-radius: 20px;
   border: 4px solid #ccc;
-}
-
-span{
-  width: 70;
+  transform: scale(1.2);
 }
 
 /* On mouse-over, add a grey background color 
