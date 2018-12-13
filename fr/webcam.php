@@ -24,7 +24,7 @@
 		2. Cliquez sur le bouton Prendre une Photo.
 	</p>
 	<div class="flex-items">
-		<form id="take_picture" method="POST" action="../include/take_photo.php">
+		<form id="take_picture" method="POST">
 			<label class="container">
   				<input type="checkbox" id="OK_glasses" onchange="put_filter(this)" name="glasses">
 				  <img id="glasses" alt="badass glasses" src="../overlay/glasses.png"/>
@@ -64,16 +64,77 @@
 	</div>
 	  	
 </section>
-<!-- <script>
+<script>
+			function takepicture(){
+				var canvas = document.getElementById('canvas');
+				var video = document.getElementById('video');
+				var context = canvas.getContext('2d');
+				var width = 320;
+				var height = 240;
 
-			var startbutton = document.getElementById('startbutton');
-			if (startbutton){
-				startbutton.click(function(e){
-                e.preventDefault();
-                
-                $.post(
+				if (width && height) {
+					canvas.width = width;
+					canvas.height = height;
+					context.drawImage(video, 0, 0, width, height);
+					var data = canvas.toDataURL('image/png');
+					console.log(data);
+					merge_picture(data);
+					//photo.setAttribute('src', data);
+				}
+				else {
+					clearphoto();
+				}
+			}
+
+			function makeRequest(url) {
+				var xhr = null;
+	
+				if (window.XMLHttpRequest || window.ActiveXObject) {
+					if (window.ActiveXObject) {
+						try {
+							xhr = new ActiveXObject("Msxml2.XMLHTTP");
+						} catch(e) {
+							xhr = new ActiveXObject("Microsoft.XMLHTTP");
+						}
+					} else {
+						xhr = new XMLHttpRequest(); 
+					}
+					console.log("jaja");
+
+				}
+
+				if (!xhr) {
+					alert('Abandon :( Impossible de créer une instance XMLHTTP');
+					return false;
+				}
+				xhr.onreadystatechange = function() { alertContents(xhr); };
+				xhr.open('POST', url, true);
+				xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+				xhr.send("submit=truc&camera=bidule");
+
+			}
+
+			function alertContents(xhr) {
+
+				if (xhr.readyState == XMLHttpRequest.DONE) {
+					if (xhr.status == 200) {
+						console.log(xhr.responseText);
+					} else {
+						alert('Un problème est survenu avec la requête.');
+					}
+				}
+
+			}
+
+		function merge_picture(cam_pict){
+				
+
+				console.log ("aaaaaaaaaaaaaah");
+				makeRequest('../include/take_photo.php');
+				/*$.post(
                     '../include/take_photo.php', 
                     {
+						camera : cam_pict,
 						canard : $("#OK_canard").val(),
 						glasses : $("#OK_glasses").val(),
 						chapka : $("#OK_chapka").val(),
@@ -84,28 +145,16 @@
                     },
         
                     function(data){
-                        var author = data['author'];
-                        var text = data['text'];
-                        text = text.replace(/\n/g,'<br />');
-                        var time = data['time'];
-                        var id = data['id']
-                        var id_next = data['id_next'];
-                        $(".old-msg_"+id_next).before('<div class="old-msg_'+id+'"><div class="msg"><b>'+author+'</b><span> : '+text+'</span></div><span class="time" id="time_'+id+'">il y a '+time[0]+'</span></div><br>');
-                        $.each(time,function(index,element){
-                            $('#time_'+index).text(element);
-                        });
-                
+						console.log(data);
                     },
                     'json'
                 );
                 $('#comment').val('');
-                $('#comment').css("height", "50");
-            });
-
+                $('#comment').css("height", "50");*/
 			}
-    </script> -->
+    </script>
 <script>
-	
+
 	function verif_check(){
 		var filtre_name = ["canard", "chain", "chapka", "couronne", "glasses"];
 		var a = 0;
@@ -133,10 +182,11 @@
 			startbutton.setAttribute("value", 'Prendre une photo');
 			form.appendChild(startbutton);
 		}
-		/*startbutton.addEventListener('click', function(ev){
+		startbutton.addEventListener('click', function(ev){
 			takepicture();
 			ev.preventDefault();
-			}, false);*/
+			console.log(startbutton);
+			}, false);
 	}
 
 	function remove_button(a){
