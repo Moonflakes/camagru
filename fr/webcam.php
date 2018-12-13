@@ -77,7 +77,6 @@
 					canvas.height = height;
 					context.drawImage(video, 0, 0, width, height);
 					var data = canvas.toDataURL('image/png');
-					console.log(data);
 					merge_picture(data);
 					//photo.setAttribute('src', data);
 				}
@@ -86,7 +85,7 @@
 				}
 			}
 
-			function makeRequest(url) {
+			function makeRequest(url, cam_pict) {
 				var xhr = null;
 	
 				if (window.XMLHttpRequest || window.ActiveXObject) {
@@ -110,7 +109,59 @@
 				xhr.onreadystatechange = function() { alertContents(xhr); };
 				xhr.open('POST', url, true);
 				xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-				xhr.send("submit=truc&camera=bidule");
+				
+				var filtre_name = ["canard", "chain", "chapka", "couronne", "glasses"];
+				var filtre_infos = {};
+
+				filtre_name.forEach(function(element) {
+					checkFiltre = document.getElementById("OK_"+element);
+					if (checkFiltre.checked == true)
+					{
+					var filtre = document.getElementById('filtre_'+element);
+					var index = filtre.classList[1].split('_')[1];
+					filtre_infos[`${index}`] = element;
+					}
+				});
+				//console.log(filtre_infos);
+				filter = Object.values(filtre_infos);
+				var name = [];
+				var height = [];
+				var width = [];
+				var top = [];
+				var left = [];
+				var src = [];
+				var check = [];
+				filter.forEach(function(element) {
+					var img = new Image();
+					img.src = '../overlay/'+element+'.png';
+					filtre = document.getElementById('filtre_'+element);
+					ch = document.getElementById("OK_"+element).checked;
+					h = filtre.height;
+					w = filtre.width;
+					t = filtre.offsetTop;
+					l = filtre.offsetLeft;
+					name.push(element);
+					height.push(h);
+					width.push(w);
+					top.push(t);
+					left.push(l);
+					src.push(img.src);
+					check.push(ch);
+					//console.info(filtre.offsetTop);
+					//context.drawImage(img, l, t, w, h);
+				});
+				console.log(top);
+				var camera = cam_pict,
+					canard = document.getElementById("OK_canard").checked,
+					glasses = document.getElementById("OK_glasses").checked,
+					chapka = document.getElementById("OK_chapka").checked,
+					chain = document.getElementById("OK_chain").checked,
+					couronne = document.getElementById("OK_couronne").checked,
+					suit = document.getElementById("OK_suit").checked,
+					submit = document.getElementById("startbutton").value;
+				xhr.send("submit="+submit+"&top="+top+"&height="+height+"&width="+width+"&left="+left+"&scr="+scr+"&check="+check+"&name="+name);
+				/*xhr.send("submit="+submit+"&canard="+canard+"&glasses="+glasses+
+				"&chapka="+chapka+"&chain="+chain+"&couronne="+couronne+"&suit="+suit+"&camera="+camera);*/
 
 			}
 
@@ -130,7 +181,7 @@
 				
 
 				console.log ("aaaaaaaaaaaaaah");
-				makeRequest('../include/take_photo.php');
+				makeRequest('../include/take_photo.php', cam_pict);
 				/*$.post(
                     '../include/take_photo.php', 
                     {
