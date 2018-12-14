@@ -150,7 +150,13 @@
 					//console.info(filtre.offsetTop);
 					//context.drawImage(img, l, t, w, h);
 				});
+				console.log(name);
+				console.log(height);
+				console.log(width);
 				console.log(top);
+				console.log(left);
+				console.log(src);
+				console.log(check);
 				var camera = cam_pict,
 					canard = document.getElementById("OK_canard").checked,
 					glasses = document.getElementById("OK_glasses").checked,
@@ -159,7 +165,7 @@
 					couronne = document.getElementById("OK_couronne").checked,
 					suit = document.getElementById("OK_suit").checked,
 					submit = document.getElementById("startbutton").value;
-				xhr.send("submit="+submit+"&top="+top+"&height="+height+"&width="+width+"&left="+left+"&scr="+scr+"&check="+check+"&name="+name);
+				xhr.send("submit="+submit+"&top="+top+"&height="+height+"&width="+width+"&left="+left+"&check="+check+"&name="+name+"&src="+src);
 				/*xhr.send("submit="+submit+"&canard="+canard+"&glasses="+glasses+
 				"&chapka="+chapka+"&chain="+chain+"&couronne="+couronne+"&suit="+suit+"&camera="+camera);*/
 
