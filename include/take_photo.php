@@ -3,13 +3,10 @@ session_start();
 if (isset($_POST['submit']))
 {
     $camera = explode(",", $_POST['camera']);
-    $u = $_POST['camera'];
-    $name = json_decode($_POST['name']);
     $top = json_decode($_POST['top']);
     $left = json_decode($_POST['left']);
     $width = json_decode($_POST['width']);
     $height = json_decode($_POST['height']);
-    $check = json_decode($_POST['check']);
     $src = json_decode($_POST['src']);
 
     $img = str_replace(' ', '+', $camera[1]);
@@ -17,7 +14,7 @@ if (isset($_POST['submit']))
     
     $im = imagecreatefromstring($data); //créer l'image de la camera
 
-    foreach ($name as $key => $value) {
+    foreach ($src as $key => $value) {
         $im2 = imagecreatefrompng($src[$key]);
         $size = getimagesize($src[$key]);
 
@@ -31,7 +28,7 @@ if (isset($_POST['submit']))
             $str = $camera[0].",".$encode;
         }
     }
-    $arr = array("submit" => $_POST['submit'], "cam" => $u, "data" => $str, "o" => $size);
+    $arr = array("submit" => $_POST['submit'], "data" => $str, "o" => $size);
 }
 else
 {

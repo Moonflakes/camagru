@@ -125,29 +125,24 @@
 				});
 				//console.log(filtre_infos);
 				filter = Object.values(filtre_infos);
-				var name = [];
 				var height = [];
 				var width = [];
 				var top = [];
 				var left = [];
 				var src = [];
-				var check = [];
 				filter.forEach(function(element) {
 					var img = new Image();
 					img.src = '../overlay/'+element+'.png';
 					filtre = document.getElementById('filtre_'+element);
-					ch = document.getElementById("OK_"+element).checked;
 					h = filtre.height;
 					w = filtre.width;
 					t = filtre.offsetTop;
 					l = filtre.offsetLeft;
-					name.push(element);
 					height.push(h);
 					width.push(w);
 					top.push(t);
 					left.push(l);
 					src.push(img.src);
-					check.push(ch);
 				});
 				console.log("name : "+name);
 				console.log("height : "+height);
@@ -155,12 +150,10 @@
 				console.log("top : "+top);
 				console.log("left : "+left);
 				console.log("src : "+src);
-				console.log("check : "+check);
 				var submit = document.getElementById("startbutton").value;
 				xhr.send("submit="+submit+"&top="+JSON.stringify(top)+"&height="+
 				JSON.stringify(height)+"&width="+JSON.stringify(width)+"&left="+
-				JSON.stringify(left)+"&check="+JSON.stringify(check)+"&name="+
-				JSON.stringify(name)+"&src="+JSON.stringify(src)+"&camera="+cam_pict);
+				JSON.stringify(left)+"&src="+JSON.stringify(src)+"&camera="+cam_pict);
 				/*xhr.send("submit="+submit+"&canard="+canard+"&glasses="+glasses+
 				"&chapka="+chapka+"&chain="+chain+"&couronne="+couronne+"&suit="+suit+"&camera="+camera);*/
 
@@ -172,7 +165,7 @@
 					if (xhr.status == 200) {
 						resultat = JSON.parse(xhr.responseText);
 						console.log(resultat);
-						photo.setAttribute('src', resultat['data']);
+						photo.setAttribute('src', resultat['data']); // afficher l'image mergée
 						//console.log(xhr.responseText);
 					}
 					else {
@@ -183,30 +176,8 @@
 			}
 
 		function merge_picture(cam_pict){
-				
-
 				console.log ("merge_pict");
 				makeRequest('../include/take_photo.php', cam_pict);
-				/*$.post(
-                    '../include/take_photo.php', 
-                    {
-						camera : cam_pict,
-						canard : $("#OK_canard").val(),
-						glasses : $("#OK_glasses").val(),
-						chapka : $("#OK_chapka").val(),
-						chain : $("#OK_chain").val(),
-						couronne : $("#OK_couronne").val(),
-						suit : $("#OK_suit").val(),
-                        submit : $("#startbutton").val()
-                    },
-        
-                    function(data){
-						console.log(data);
-                    },
-                    'json'
-                );
-                $('#comment').val('');
-                $('#comment').css("height", "50");*/
 			}
     </script>
 <script>
