@@ -66,6 +66,7 @@
 </section>
 <script>
 			function takepicture(){
+				console.log("take picture");
 				var canvas = document.getElementById('canvas');
 				var video = document.getElementById('video');
 				var context = canvas.getContext('2d');
@@ -98,7 +99,7 @@
 					} else {
 						xhr = new XMLHttpRequest(); 
 					}
-					console.log("jaja");
+					console.log("il y a un XMLHTTP");
 
 				}
 
@@ -106,7 +107,7 @@
 					alert('Abandon :( Impossible de créer une instance XMLHTTP');
 					return false;
 				}
-				xhr.onreadystatechange = function() { alertContents(xhr); };
+				xhr.onreadystatechange = function() { console.log("ouiiiiii"); alertContents(xhr); };
 				xhr.open('POST', url, true);
 				xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 				
@@ -147,36 +148,34 @@
 					left.push(l);
 					src.push(img.src);
 					check.push(ch);
-					//console.info(filtre.offsetTop);
-					//context.drawImage(img, l, t, w, h);
 				});
-				console.log(name);
-				console.log(height);
-				console.log(width);
-				console.log(top);
-				console.log(left);
-				console.log(src);
-				console.log(check);
-				var camera = cam_pict,
-					canard = document.getElementById("OK_canard").checked,
-					glasses = document.getElementById("OK_glasses").checked,
-					chapka = document.getElementById("OK_chapka").checked,
-					chain = document.getElementById("OK_chain").checked,
-					couronne = document.getElementById("OK_couronne").checked,
-					suit = document.getElementById("OK_suit").checked,
-					submit = document.getElementById("startbutton").value;
-				xhr.send("submit="+submit+"&top="+top+"&height="+height+"&width="+width+"&left="+left+"&check="+check+"&name="+name+"&src="+src);
+				console.log("name : "+name);
+				console.log("height : "+height);
+				console.log("width : "+width);
+				console.log("top : "+top);
+				console.log("left : "+left);
+				console.log("src : "+src);
+				console.log("check : "+check);
+				var submit = document.getElementById("startbutton").value;
+				xhr.send("submit="+submit+"&top="+JSON.stringify(top)+"&height="+
+				JSON.stringify(height)+"&width="+JSON.stringify(width)+"&left="+
+				JSON.stringify(left)+"&check="+JSON.stringify(check)+"&name="+
+				JSON.stringify(name)+"&src="+JSON.stringify(src)+"&camera="+cam_pict);
 				/*xhr.send("submit="+submit+"&canard="+canard+"&glasses="+glasses+
 				"&chapka="+chapka+"&chain="+chain+"&couronne="+couronne+"&suit="+suit+"&camera="+camera);*/
 
 			}
 
 			function alertContents(xhr) {
-
+				//var photo = document.getElementById('photo');
 				if (xhr.readyState == XMLHttpRequest.DONE) {
 					if (xhr.status == 200) {
-						console.log(xhr.responseText);
-					} else {
+						resultat = JSON.parse(xhr.responseText);
+						console.log(resultat);
+						photo.setAttribute('src', resultat['data']);
+						//console.log(xhr.responseText);
+					}
+					else {
 						alert('Un problème est survenu avec la requête.');
 					}
 				}
@@ -186,7 +185,7 @@
 		function merge_picture(cam_pict){
 				
 
-				console.log ("aaaaaaaaaaaaaah");
+				console.log ("merge_pict");
 				makeRequest('../include/take_photo.php', cam_pict);
 				/*$.post(
                     '../include/take_photo.php', 
