@@ -18,7 +18,7 @@ if (isset($_POST['submit']))
         $im2 = imagecreatefrompng($src[$key]);
         $size = getimagesize($src[$key]);
 
-        if (imagecopyresized($im, $im2, $left[$key], $top[$key], 0, 0, $width[$key], $height[$key], $size[0], $size[1]))
+        if (imagecopyresampled($im, $im2, $left[$key], $top[$key], 0, 0, $width[$key], $height[$key], $size[0], $size[1]))
         {
             ob_start(); // Let's start output buffering.
                 imagepng($im); //This will normally output the image, but because of ob_start(), it won't.
