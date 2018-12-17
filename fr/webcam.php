@@ -65,31 +65,11 @@
 	  	
 </section>
 <script>
-			function register(xhr) {
-				//var photo = document.getElementById('photo');
+			function registerPict(xhr) {
 				if (xhr.readyState == XMLHttpRequest.DONE) {
-					var item = document.getElementById('blabla');
-					console.log(item);
 					if (xhr.status == 200) {
 						resultat = JSON.parse(xhr.responseText);
 						console.log(resultat);
-						photo.setAttribute('src', resultat['data']); // afficher l'image mergée
-						//console.log(xhr.responseText);
-
-						// prendre => reprendre
-						startbutton.setAttribute("value", 'Reprendre');
-						// creer bouton enregistrer
-						register = document.createElement("input");
-						register.setAttribute("id", 'register');
-						register.setAttribute("type", 'submit');
-						register.setAttribute("name", 'submit');
-						register.setAttribute("value", 'Enregistrer');
-						item.appendChild(register);
-						register.addEventListener('click', function(ev){
-							makeRequest('../include/register_photo.php', resultat['data'], 1);
-							ev.preventDefault();
-						}, false);
-
 					}
 					else {
 						alert('Un problème est survenu avec la requête.');
@@ -97,21 +77,25 @@
 				}
 			}
 
-			function sendReqregister(xhr, url, cam_pict) {
+			function sendReqregister(xhr, url, cam_pict, descr) {
 				xhr.onreadystatechange = function() {
-					register(xhr); 
+					console.log(xhr);
+					registerPict(xhr); 
 				};
 				xhr.open('POST', url, true);
 				xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 				
 				var submit = document.getElementById("startbutton").value;
-				xhr.send("submit="+submit+"&pict="+cam_pict);
+				xhr.send("submit="+submit+"&pict="+cam_pict+"&descr="+descr);
 			}
 
 			function alertDescr(path) {
 				var descr = prompt("Ajouter une description : ", "Description");
-				if (descr != null) {
+				if (descr) {
 					makeRequest('../include/register_photo.php', path, descr);
+				}
+				else {
+
 				}
 			}
 
@@ -214,7 +198,7 @@
 					return false;
 				}
 				if (action)
-					sendReqregister(xhr, url, cam_pict);
+					sendReqregister(xhr, url, cam_pict, action);
 				else
 					sendReqmerge(xhr, url, cam_pict);
 			}

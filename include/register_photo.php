@@ -7,13 +7,14 @@ if (check_user_is_connect($connexion))
 {
     if (isset($_POST['submit']) && isset($_POST['pict']))
     {
-        $pict = $_POST['pict'];
+        $path = $_POST['pict'];
+        $descr = $_POST['descr'];
         // insert comment
-        $reqinspict = 'INSERT INTO `pictures`(`picture_id`, `picture_author`, `picture_date`, `picture_path`, `picture_decription`) 
+        $reqinspict = 'INSERT INTO `pictures`(`picture_id`, `picture_author`, `picture_date`, `picture_path`, `picture_description`) 
         VALUES (?, ?, NOW(), ?, ?)';
-        $connexion->prepare($reqinscom)->execute(array(0, $_SESSION['u_id'], $pict, $descr));
+        $connexion->prepare($reqinspict)->execute(array(0, $_SESSION['u_id'], $path, $descr));
 
-        $arr = array("submit" => $_POST['submit'], "data" => $str, "o" => $size);
+        $arr = array("submit" => $_POST['submit'], "descr" => $descr, "path" => $path);
     }
     else
     {
