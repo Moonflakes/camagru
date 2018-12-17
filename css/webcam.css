@@ -153,10 +153,42 @@
 }
 
 
-#startbutton {
+#startbutton[value="Prendre une photo"] {
   display:block;
   position:absolute;
   left: 225;
+  top: 655;
+  margin-left:auto;
+  margin-right:auto;
+  background-color: aquamarine;
+  border: 2px solid black;
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: monospace;
+  color: black;
+  cursor: pointer;
+}
+
+#startbutton[value="Reprendre"] {
+  display:block;
+  position:absolute;
+  left: 180;
+  top: 655;
+  margin-left:auto;
+  margin-right:auto;
+  background-color: aquamarine;
+  border: 2px solid black;
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: monospace;
+  color: black;
+  cursor: pointer;
+}
+
+#register {
+  display:block;
+  position:absolute;
+  left: 320;
   top: 655;
   margin-left:auto;
   margin-right:auto;

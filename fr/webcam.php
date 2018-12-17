@@ -65,49 +65,92 @@
 	  	
 </section>
 <script>
-			function takepicture(){
-				console.log("take picture");
-				var canvas = document.getElementById('canvas');
-				var video = document.getElementById('video');
-				var context = canvas.getContext('2d');
-				var width = 320;
-				var height = 240;
+			function register(xhr) {
+				//var photo = document.getElementById('photo');
+				if (xhr.readyState == XMLHttpRequest.DONE) {
+					var item = document.getElementById('blabla');
+					console.log(item);
+					if (xhr.status == 200) {
+						resultat = JSON.parse(xhr.responseText);
+						console.log(resultat);
+						photo.setAttribute('src', resultat['data']); // afficher l'image mergée
+						//console.log(xhr.responseText);
 
-				if (width && height) {
-					canvas.width = width;
-					canvas.height = height;
-					context.drawImage(video, 0, 0, width, height);
-					var data = canvas.toDataURL('image/png');
-					merge_picture(data);
-					//photo.setAttribute('src', data);
-				}
-				else {
-					clearphoto();
+						// prendre => reprendre
+						startbutton.setAttribute("value", 'Reprendre');
+						// creer bouton enregistrer
+						register = document.createElement("input");
+						register.setAttribute("id", 'register');
+						register.setAttribute("type", 'submit');
+						register.setAttribute("name", 'submit');
+						register.setAttribute("value", 'Enregistrer');
+						item.appendChild(register);
+						register.addEventListener('click', function(ev){
+							makeRequest('../include/register_photo.php', resultat['data'], 1);
+							ev.preventDefault();
+						}, false);
+
+					}
+					else {
+						alert('Un problème est survenu avec la requête.');
+					}
 				}
 			}
 
-			function makeRequest(url, cam_pict) {
-				var xhr = null;
-	
-				if (window.XMLHttpRequest || window.ActiveXObject) {
-					if (window.ActiveXObject) {
-						try {
-							xhr = new ActiveXObject("Msxml2.XMLHTTP");
-						} catch(e) {
-							xhr = new ActiveXObject("Microsoft.XMLHTTP");
-						}
-					} else {
-						xhr = new XMLHttpRequest(); 
+			function sendReqregister(xhr, url, cam_pict) {
+				xhr.onreadystatechange = function() {
+					register(xhr); 
+				};
+				xhr.open('POST', url, true);
+				xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+				
+				var submit = document.getElementById("startbutton").value;
+				xhr.send("submit="+submit+"&pict="+cam_pict);
+			}
+
+			function alertDescr(path) {
+				var descr = prompt("Ajouter une description : ", "Description");
+				if (descr != null) {
+					makeRequest('../include/register_photo.php', path, descr);
+				}
+			}
+
+			function merge(xhr) {
+				//var photo = document.getElementById('photo');
+				if (xhr.readyState == XMLHttpRequest.DONE) {
+					var item = document.getElementById('blabla');
+					console.log(item);
+					if (xhr.status == 200) {
+						resultat = JSON.parse(xhr.responseText);
+						console.log(resultat);
+						photo.setAttribute('src', resultat['data']); // afficher l'image mergée
+						//console.log(xhr.responseText);
+
+						// prendre => reprendre
+						startbutton.setAttribute("value", 'Reprendre');
+						// creer bouton enregistrer
+						register = document.createElement("input");
+						register.setAttribute("id", 'register');
+						register.setAttribute("type", 'submit');
+						register.setAttribute("name", 'submit');
+						register.setAttribute("value", 'Enregistrer');
+						item.appendChild(register);
+						register.addEventListener('click', function(ev){
+							alertDescr(resultat['data']);
+							ev.preventDefault();
+						}, false);
+
 					}
-					console.log("il y a un XMLHTTP");
-
+					else {
+						alert('Un problème est survenu avec la requête.');
+					}
 				}
+			}
 
-				if (!xhr) {
-					alert('Abandon :( Impossible de créer une instance XMLHTTP');
-					return false;
-				}
-				xhr.onreadystatechange = function() { console.log("ouiiiiii"); alertContents(xhr); };
+			function sendReqmerge(xhr, url, cam_pict) {
+				xhr.onreadystatechange = function() {
+					merge(xhr); 
+				};
 				xhr.open('POST', url, true);
 				xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 				
@@ -123,7 +166,6 @@
 					filtre_infos[`${index}`] = element;
 					}
 				});
-				//console.log(filtre_infos);
 				filter = Object.values(filtre_infos);
 				var height = [];
 				var width = [];
@@ -144,51 +186,57 @@
 					left.push(l);
 					src.push(img.src);
 				});
-				console.log("name : "+name);
-				console.log("height : "+height);
-				console.log("width : "+width);
-				console.log("top : "+top);
-				console.log("left : "+left);
-				console.log("src : "+src);
 				var submit = document.getElementById("startbutton").value;
 				xhr.send("submit="+submit+"&top="+JSON.stringify(top)+"&height="+
 				JSON.stringify(height)+"&width="+JSON.stringify(width)+"&left="+
 				JSON.stringify(left)+"&src="+JSON.stringify(src)+"&camera="+cam_pict);
-				/*xhr.send("submit="+submit+"&canard="+canard+"&glasses="+glasses+
-				"&chapka="+chapka+"&chain="+chain+"&couronne="+couronne+"&suit="+suit+"&camera="+camera);*/
-
 			}
 
-			function alertContents(xhr) {
-				//var photo = document.getElementById('photo');
-				if (xhr.readyState == XMLHttpRequest.DONE) {
-					var item = document.getElementById('blabla');
-					console.log(item);
-					if (xhr.status == 200) {
-						resultat = JSON.parse(xhr.responseText);
-						console.log(resultat);
-						photo.setAttribute('src', resultat['data']); // afficher l'image mergée
-						//console.log(xhr.responseText);
-						// creer bouton enregistrer ou reprendre
-						startbutton.setAttribute("value", 'Reprendre');
-						register = document.createElement("input");
-						register.setAttribute("id", 'register');
-						register.setAttribute("type", 'submit');
-						register.setAttribute("name", 'submit');
-						register.setAttribute("value", 'Enregistrer');
-						item.appendChild(register);
+			function makeRequest(url, cam_pict, action) {
+				var xhr = null;
+	
+				if (window.XMLHttpRequest || window.ActiveXObject) {
+					if (window.ActiveXObject) {
+						try {
+							xhr = new ActiveXObject("Msxml2.XMLHTTP");
+						} catch(e) {
+							xhr = new ActiveXObject("Microsoft.XMLHTTP");
+						}
+					} else {
+						xhr = new XMLHttpRequest(); 
+					}
+					console.log("il y a un XMLHTTP");
 
-					}
-					else {
-						alert('Un problème est survenu avec la requête.');
-					}
 				}
 
+				if (!xhr) {
+					alert('Abandon :( Impossible de créer une instance XMLHTTP');
+					return false;
+				}
+				if (action)
+					sendReqregister(xhr, url, cam_pict);
+				else
+					sendReqmerge(xhr, url, cam_pict);
 			}
 
-		function merge_picture(cam_pict){
-				console.log ("merge_pict");
-				makeRequest('../include/take_photo.php', cam_pict);
+			function takepicture(){
+				console.log("take picture");
+				var canvas = document.getElementById('canvas');
+				var video = document.getElementById('video');
+				var context = canvas.getContext('2d');
+				var width = 320;
+				var height = 240;
+
+				if (width && height) {
+					canvas.width = width;
+					canvas.height = height;
+					context.drawImage(video, 0, 0, width, height);
+					var data = canvas.toDataURL('image/png');
+					makeRequest('../include/take_photo.php', data, 0);
+				}
+				else {
+					clearphoto();
+				}
 			}
     </script>
 <script>
