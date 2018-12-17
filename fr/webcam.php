@@ -23,7 +23,7 @@
 		1. Choisissez votre image.</br>
 		2. Cliquez sur le bouton Prendre une Photo.
 	</p>
-	<div class="flex-items">
+	<div class="flex-items" id="blabla">
 		<form id="take_picture" method="POST">
 			<label class="container">
   				<input type="checkbox" id="OK_glasses" onchange="put_filter(this)" name="glasses">
@@ -162,11 +162,22 @@
 			function alertContents(xhr) {
 				//var photo = document.getElementById('photo');
 				if (xhr.readyState == XMLHttpRequest.DONE) {
+					var item = document.getElementById('blabla');
+					console.log(item);
 					if (xhr.status == 200) {
 						resultat = JSON.parse(xhr.responseText);
 						console.log(resultat);
 						photo.setAttribute('src', resultat['data']); // afficher l'image mergée
 						//console.log(xhr.responseText);
+						// creer bouton enregistrer ou reprendre
+						startbutton.setAttribute("value", 'Reprendre');
+						register = document.createElement("input");
+						register.setAttribute("id", 'register');
+						register.setAttribute("type", 'submit');
+						register.setAttribute("name", 'submit');
+						register.setAttribute("value", 'Enregistrer');
+						item.appendChild(register);
+
 					}
 					else {
 						alert('Un problème est survenu avec la requête.');
