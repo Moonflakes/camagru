@@ -1,0 +1,126 @@
+.galery
+{
+    padding: 20px;
+}
+.galery form[name=nbitem_pg]
+{
+    margin-bottom: 60px;
+}
+
+.grid
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.column
+{
+    margin: 0 10px 0;
+}
+@media only screen and (max-width: 5000px) {
+    .column {
+        width: 35%;
+    }
+}
+@media only screen and (max-width: 1700px) {
+    .column {
+        width: 33%;
+    }
+}
+
+@media only screen and (max-width: 1315px) {
+    .column {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 715px) {
+    .column {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    .column {
+        width: 360px;
+    }
+}
+
+.content_item
+  {
+      padding: 12px 12px 12px;
+  }
+.item_photo{
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    background-color: #ffffff;
+    position: relative;
+}
+.item_photo:hover {
+    border: 1px solid #777;
+}
+
+figure{
+    width: 100%;
+    margin: unset;
+}
+figure figcaption {
+    font-size: .9rem;
+    color: #444;
+    line-height: 1.5;
+    text-align: center;
+    background-color: white;
+}
+figure img {
+    width: 200; 
+    height: auto;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 15px;
+    margin-bottom: 5px;
+}
+
+
+.desc
+{
+    /* a revoir parce que ca ne fonctionne plus */
+    display: flex;
+    flex-direction: row;
+    height: 30px;
+    margin: 0px 15px 0;
+}
+div.nblike
+{
+    color:#ee2e87;
+}
+div.nbcom
+{
+    color:#308568;
+}
+.desc .vide
+{
+    flex-grow: 5;
+}
+.desc .action
+{
+    margin-left: 12px;
+}
+.desc .action form button
+{
+    border:none; 
+    padding: unset; 
+}
+.desc .action form button img
+{
+    width: 30; 
+    cursor: pointer;
+}
+.desc .nb
+{
+    text-align: left;
+}
+small
+{
+    font-size: 90%;
+}

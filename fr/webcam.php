@@ -23,6 +23,7 @@
 		1. Choisissez votre image.</br>
 		2. Cliquez sur le bouton Prendre une Photo.
 	</p>
+	<div class="montage_page">
 	<div class="flex-items" id="blabla">
 		<form id="take_picture" method="POST">
 			<label class="container">
@@ -63,7 +64,13 @@
 			</div>
 		</div>
 	</div>
-	  	
+	<div class="galery_pict">
+			<h1>Ma galerie</h1>
+<?php
+    		include_once 'user_galery.php';
+?>
+		</div>
+	</div>
 </section>
 <script>
 			function registerPict(xhr) {

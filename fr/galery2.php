@@ -44,7 +44,7 @@
                         $path = str_replace(' ', '+', $value);
                     if ($key === 'picture_description')
                         $descr = $value;
-                   if ($key === 'picture_nb_like')
+                    if ($key === 'picture_nb_like')
                         $nblike = $value;
                     if ($key === 'picture_nb_comment')
                         $nbcom = $value;

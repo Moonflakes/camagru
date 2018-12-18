@@ -3,9 +3,13 @@
   font-family: monospace;
   padding: 10px 20px 10px;
 }
+.montage_page {
+  display: flex;
+}
 
 .flex-items {
   display: flex;
+  height: 570px;
 }
 
 .flex-items form{
@@ -48,50 +52,14 @@
   transform: scale(1.2);
 }
 
-/* On mouse-over, add a grey background color 
-.container:hover input ~ .checkmark {
-  background-color: #ccc;
-}*/
-
-/* When the checkbox is checked, add a blue background 
-.container input:checked ~ .checkmark {
-  background-color: aquamarine;
-}*/
-
-/* Create the checkmark/indicator (hidden when not checked) 
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}*/
-
-/* Show the checkmark when checked 
-.container input:checked ~ .checkmark:after {
-  display: block;
-}*/
-
-/* Style the checkmark/indicator 
-.container .checkmark:after {
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
-  border: solid black;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}*/
 .take_photo{
-  padding-top: 16px;
+  margin: 16 20 16;
 }
 .camera {
   height: 244;
   display:inline-block;
   font-family: monospace;
   position: relative;
-  margin-left: 20;
-  margin-bottom: 30;
 }
 #video {
   border: 2px solid black;
@@ -152,14 +120,13 @@
   width: 250;
 }
 
+#buttons {
+  text-align: center;
+  height: 50;
+}
 
-#startbutton[value="Prendre une photo"] {
-  display:block;
-  position:absolute;
-  left: 225;
-  top: 655;
-  margin-left:auto;
-  margin-right:auto;
+#startbutton {
+  margin-top: 4%;
   background-color: aquamarine;
   border: 2px solid black;
   border-radius: 10px;
@@ -170,28 +137,11 @@
 }
 
 #startbutton[value="Reprendre"] {
-  display:block;
-  position:absolute;
-  left: 180;
-  top: 655;
-  margin-left:auto;
-  margin-right:auto;
-  background-color: aquamarine;
-  border: 2px solid black;
-  border-radius: 10px;
-  font-size: 16px;
-  font-family: monospace;
-  color: black;
-  cursor: pointer;
+  margin-right: 50;
 }
 
 #register {
-  display:block;
-  position:absolute;
-  left: 320;
-  top: 655;
-  margin-left:auto;
-  margin-right:auto;
+  margin-top: 4%;
   background-color: aquamarine;
   border: 2px solid black;
   border-radius: 10px;
@@ -199,28 +149,13 @@
   font-family: monospace;
   color: black;
   cursor: pointer;
-}
-
-.flex-container > div {
-  /*background-color: DodgerBlue;
-  color: white;
-  width: 300px;
-  height: 400px;
-  margin: 0px;*/
-  padding: 20px;
-  /*text-align: left;
-  line-height: 50px;
-  font-size: 30px;
-  flex-grow: 1;
-  font-family: monospace;
-  color: var(--light-txt-color);
-  background-color: var(--dark-bg-color);
-  background-position: center;*/ /* Center the image */
-  /*background-repeat: no-repeat;  Do not repeat the image
-  background-size: cover; */
 }
 
 .output {
   display:inline-block;
+}
+
+.galery_pict {
+  margin: 0 20 20;
 }
 
