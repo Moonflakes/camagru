@@ -7,8 +7,8 @@ if (check_user_is_connect($connexion))
 {
     if (isset($_POST['submit']) && isset($_POST['pict']))
     {
-        $path = $_POST['pict'];
-        $descr = $_POST['descr'];
+        $path = htmlspecialchars($_POST['pict']);
+        $descr = htmlspecialchars($_POST['descr']);
         // insert comment
         $reqinspict = 'INSERT INTO `pictures`(`picture_id`, `picture_author`, `picture_date`, `picture_path`, `picture_description`) 
         VALUES (?, ?, NOW(), ?, ?)';

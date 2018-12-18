@@ -37,7 +37,7 @@ if ($pdo = new PDO('mysql:host='.$DB_HOST, $DB_USER, $DB_PASSWORD))
             picture_id int(11) not null PRIMARY KEY AUTO_INCREMENT,
             picture_author int(11) not null,
             picture_date DATETIME not null,
-            picture_path varchar(256) not null,
+            picture_path LONGTEXT not null,
             picture_description varchar(256) not null);";
     
         // on prépare et on exécute la requête

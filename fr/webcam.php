@@ -54,6 +54,7 @@
 			<div class="camera" id="camera">
 				<video id="video">Video stream not available.</video>
 			</div>
+			<div id="buttons"></div>
 			<canvas id="canvas"></canvas>
 			<div class="flex-container">
 				<div class="output">
@@ -99,10 +100,11 @@
 				}
 			}
 
-			function merge(xhr) {
+			function mergePict(xhr) {
 				//var photo = document.getElementById('photo');
 				if (xhr.readyState == XMLHttpRequest.DONE) {
-					var item = document.getElementById('blabla');
+					var item = document.getElementById('buttons'),
+						register = document.getElementById('register');
 					console.log(item);
 					if (xhr.status == 200) {
 						resultat = JSON.parse(xhr.responseText);
@@ -112,17 +114,20 @@
 
 						// prendre => reprendre
 						startbutton.setAttribute("value", 'Reprendre');
-						// creer bouton enregistrer
-						register = document.createElement("input");
-						register.setAttribute("id", 'register');
-						register.setAttribute("type", 'submit');
-						register.setAttribute("name", 'submit');
-						register.setAttribute("value", 'Enregistrer');
-						item.appendChild(register);
-						register.addEventListener('click', function(ev){
-							alertDescr(resultat['data']);
-							ev.preventDefault();
-						}, false);
+						if (!register)
+						{
+							// creer bouton enregistrer
+							register = document.createElement("input");
+							register.setAttribute("id", 'register');
+							register.setAttribute("type", 'submit');
+							register.setAttribute("name", 'submit');
+							register.setAttribute("value", 'Enregistrer');
+							item.appendChild(register);
+							register.addEventListener('click', function(ev){
+								alertDescr(resultat['data']);
+								ev.preventDefault();
+							}, false);
+						}
 
 					}
 					else {
@@ -133,7 +138,7 @@
 
 			function sendReqmerge(xhr, url, cam_pict) {
 				xhr.onreadystatechange = function() {
-					merge(xhr); 
+					mergePict(xhr); 
 				};
 				xhr.open('POST', url, true);
 				xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -240,7 +245,7 @@
 	}
 	function make_button(a){
 		var startbutton = document.getElementById('startbutton');
-		var form = document.getElementById('take_picture');
+		var form = document.getElementById('buttons');
     	if (!startbutton && a === 1)
     	{
 			console.log("je passe ici");

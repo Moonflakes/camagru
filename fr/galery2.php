@@ -41,7 +41,7 @@
                 foreach ($array as $key => $value) 
                 {
                     if ($key === 'picture_path')
-                        $path = $value;
+                        $path = str_replace(' ', '+', $value);
                     if ($key === 'picture_description')
                         $descr = $value;
                    if ($key === 'picture_nb_like')
