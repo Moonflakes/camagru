@@ -54,13 +54,14 @@
 					<div class="camera" id="camera">
 						<video id="video">Video stream not available.</video>
 					</div>
-					<div id="buttons"></div>
+					<div id="button1"></div>
 					<canvas id="canvas"></canvas>
 					<div class="flex-container">
 						<div class="output">
 							<img id="photo" alt="The screen capture will appear in this box.">
 						</div>
 					</div>
+					<div id="button2"></div>
 				</div>
 			</div>
 		</div>
@@ -97,30 +98,12 @@
 				xhr.send("submit="+submit+"&pict="+cam_pict+"&descr="+descr);
 			}
 
-			function alertDescr(path) {
-				var register_pict = document.getElementById('register_pict'),
-					registration = document.getElementById('registration'),
-					descr = document.getElementById("descr").value,
-					add = document.getElementById("add_pict");
-				registration.removeAttribute("height");
-				registration.setAttribute("visibility", "visible");
-				register_pict.setAttribute('src', path);
-				/*var descr = prompt("Ajouter une description : ", "Description");*/
-				add.addEventListener('click', function(ev){
-					if (descr) {
-						console.log(descr);
-						makeRequest('../include/register_photo.php', path, descr);
-					}
-					ev.preventDefault();
-				}, false);
-			}
-
 			function mergePict(xhr) {
 				//var photo = document.getElementById('photo');
 				if (xhr.readyState == XMLHttpRequest.DONE) {
-					var item = document.getElementById('buttons'),
+					var button2 = document.getElementById('button2'),
 						register = document.getElementById('register');
-					console.log(item);
+					console.log(button2);
 					if (xhr.status == 200) {
 						resultat = JSON.parse(xhr.responseText);
 						console.log(resultat);
@@ -131,15 +114,27 @@
 						startbutton.setAttribute("value", 'Reprendre');
 						if (!register)
 						{
+							//creer input description
+							descr = document.createElement("input");
+							descr.setAttribute("id", 'descr');
+							descr.setAttribute("type", 'text');
+							descr.setAttribute("name", 'descr');
+							descr.setAttribute("placeholder", 'Ajouter une description');
+							button2.appendChild(descr);
 							// creer bouton enregistrer
 							register = document.createElement("input");
 							register.setAttribute("id", 'register');
 							register.setAttribute("type", 'submit');
 							register.setAttribute("name", 'submit');
 							register.setAttribute("value", 'Enregistrer');
-							item.appendChild(register);
+							button2.appendChild(register);
 							register.addEventListener('click', function(ev){
-								alertDescr(resultat['data']);
+								var descr_val = document.getElementById("descr").value,
+									path = resultat['data'];
+								if (descr_val) {
+									console.log(descr_val);
+									makeRequest('../include/register_photo.php', path, descr_val);
+								}
 								ev.preventDefault();
 							}, false);
 						}
@@ -260,7 +255,7 @@
 	}
 	function make_button(a){
 		var startbutton = document.getElementById('startbutton');
-		var form = document.getElementById('buttons');
+		var form = document.getElementById('button1');
     	if (!startbutton && a === 1)
     	{
 			console.log("je passe ici");
