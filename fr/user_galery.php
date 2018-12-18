@@ -1,5 +1,12 @@
 <link rel="stylesheet" href="../css/user_galery.css" type="text/css">
 <link rel="stylesheet" href="../css/pagination.css" type="text/css">
+<div id="registration">
+    <div class="add_descr">
+        <img id="register_pict" alt="register_pict">
+        <figcaption><small><input id="descr" type="text" name="descr" placeholder="Description"></small></figcaption>
+        <input type="submit" id="add_pict" name="submit" value="Ajouter">
+    </div>
+</div>
 <div class="grid" id="grid">
 <?php
     include_once '../config/setup.php';
@@ -43,7 +50,7 @@
             <!--    <img class="pince" src="../img_site/pince.png" alt="pince"> -->
                 <figure>
                     <img src="<?php echo $path;?>" alt="photo">
-                    <figcaption><big><?php echo $descr;?></big></figcaption>
+                    <figcaption><small><?php echo $descr;?></small></figcaption>
                 </figure>
             </div>
         </div>

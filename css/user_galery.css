@@ -1,10 +1,18 @@
-.galery
-{
-    padding: 20px;
+#registration {
+    height: 0;
+    text-align: center;
+    visibility: hidden;
 }
-.galery form[name=nbitem_pg]
-{
-    margin-bottom: 60px;
+
+#register_pict {
+    padding-bottom: 5;
+}
+#add_pict {
+    margin-bottom: 20;
+}
+
+.add_descr figcaption {
+    padding-bottom: 5;
 }
 
 .grid
@@ -50,7 +58,7 @@
 
 .content_item
   {
-      padding: 12px 12px 12px;
+      padding: 5;
   }
 .item_photo{
     margin-bottom: 20px;
@@ -77,7 +85,7 @@ figure img {
     width: 200; 
     height: auto;
     border-bottom: 1px solid #ccc;
-    padding-bottom: 15px;
+    padding-bottom: 5px;
     margin-bottom: 5px;
 }
 

@@ -16,54 +16,54 @@
 	{
 ?>
 <section class="contentarea">
-	<h1>
-		Montage photo
-	</h1>
-	<p>
-		1. Choisissez votre image.</br>
-		2. Cliquez sur le bouton Prendre une Photo.
-	</p>
 	<div class="montage_page">
-	<div class="flex-items" id="blabla">
-		<form id="take_picture" method="POST">
-			<label class="container">
-  				<input type="checkbox" id="OK_glasses" onchange="put_filter(this)" name="glasses">
-				  <img id="glasses" alt="badass glasses" src="../overlay/glasses.png"/>
-			</label>
-			<label class="container">
-  				<input type="checkbox" id="OK_chapka" onchange="put_filter(this)" name="chapka">
-  				<img id="chapka" alt="Russian chapka" src="../overlay/chapka.png"/>
-			</label>
-			<label class="container">
-  				<input type="checkbox" id="OK_chain" onchange="put_filter(this)" name="chain">
-  				<img id="chain" alt="gold chain" src="../overlay/chain.png"/>
-			</label>
-			<label class="container">
-  				<input type="checkbox" id="OK_canard" onchange="put_filter(this)" name="canard">
-  				<img id="canard" alt="canard sm" src="../overlay/canard.png"/>
-			</label>
-			<label class="container">
-  				<input type="checkbox" id="OK_couronne" onchange="put_filter(this)" name="couronne">
-  				<img id="couronne" alt="Queens crown" src="../overlay/couronne.png"/>
-			</label>
-			<label class="container">
-  				<input type="checkbox" id="OK_suit" onchange="put_filter(this)" name="suit">
-  				<img id="suit" alt="casual suit" src="../overlay/suit.png"/>
-			</label>
-		</form>
-		<div class="take_photo">
-			<div class="camera" id="camera">
-				<video id="video">Video stream not available.</video>
+		<div class="montage">
+			<div class="explication">
+				<h1>
+					Montage photo
+				</h1>
 			</div>
-			<div id="buttons"></div>
-			<canvas id="canvas"></canvas>
-			<div class="flex-container">
-				<div class="output">
-					<img id="photo" alt="The screen capture will appear in this box.">
+			<div class="flex-items" id="blabla">
+				<form id="take_picture" method="POST">
+					<label class="container">
+						<input type="checkbox" id="OK_glasses" onchange="put_filter(this)" name="glasses">
+						<img id="glasses" alt="badass glasses" src="../overlay/glasses.png"/>
+					</label>
+					<label class="container">
+						<input type="checkbox" id="OK_chapka" onchange="put_filter(this)" name="chapka">
+						<img id="chapka" alt="Russian chapka" src="../overlay/chapka.png"/>
+					</label>
+					<label class="container">
+						<input type="checkbox" id="OK_chain" onchange="put_filter(this)" name="chain">
+						<img id="chain" alt="gold chain" src="../overlay/chain.png"/>
+					</label>
+					<label class="container">
+						<input type="checkbox" id="OK_canard" onchange="put_filter(this)" name="canard">
+						<img id="canard" alt="canard sm" src="../overlay/canard.png"/>
+					</label>
+					<label class="container">
+						<input type="checkbox" id="OK_couronne" onchange="put_filter(this)" name="couronne">
+						<img id="couronne" alt="Queens crown" src="../overlay/couronne.png"/>
+					</label>
+					<label class="container">
+						<input type="checkbox" id="OK_suit" onchange="put_filter(this)" name="suit">
+						<img id="suit" alt="casual suit" src="../overlay/suit.png"/>
+					</label>
+				</form>
+				<div class="take_photo">
+					<div class="camera" id="camera">
+						<video id="video">Video stream not available.</video>
+					</div>
+					<div id="buttons"></div>
+					<canvas id="canvas"></canvas>
+					<div class="flex-container">
+						<div class="output">
+							<img id="photo" alt="The screen capture will appear in this box.">
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 	<div class="galery_pict">
 			<h1>Ma galerie</h1>
 <?php
@@ -98,13 +98,21 @@
 			}
 
 			function alertDescr(path) {
-				var descr = prompt("Ajouter une description : ", "Description");
-				if (descr) {
-					makeRequest('../include/register_photo.php', path, descr);
-				}
-				else {
-
-				}
+				var register_pict = document.getElementById('register_pict'),
+					registration = document.getElementById('registration'),
+					descr = document.getElementById("descr").value,
+					add = document.getElementById("add_pict");
+				registration.removeAttribute("height");
+				registration.setAttribute("visibility", "visible");
+				register_pict.setAttribute('src', path);
+				/*var descr = prompt("Ajouter une description : ", "Description");*/
+				add.addEventListener('click', function(ev){
+					if (descr) {
+						console.log(descr);
+						makeRequest('../include/register_photo.php', path, descr);
+					}
+					ev.preventDefault();
+				}, false);
 			}
 
 			function mergePict(xhr) {
