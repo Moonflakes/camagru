@@ -14,7 +14,12 @@ if (check_user_is_connect($connexion))
         VALUES (?, ?, NOW(), ?, ?)';
         $connexion->prepare($reqinspict)->execute(array(0, $_SESSION['u_id'], $path, $descr));
 
-        $arr = array("submit" => $_POST['submit'], "descr" => $descr, "path" => $path);
+        $reqid = "SELECT `picture_id` AS `id` FROM `pictures` WHERE `picture_path` = ?";
+        $req = $connexion->prepare($reqid);
+        $req->execute(array($path));
+        $id = $req->fetch();
+
+        $arr = array("submit" => $_POST['submit'], "descr" => $descr, "path" => $path, "id" => $id['id']);
     }
     else
     {

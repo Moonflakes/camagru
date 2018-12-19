@@ -79,7 +79,11 @@
 					if (xhr.status == 200) {
 						resultat = JSON.parse(xhr.responseText);
 						//console.log(resultat['path']);
-						var new_pict = "<div class='item_photo'><div class='content_item'><figure><img class='my_photo' src='"+resultat['path'].replace(/ /g, '+')+"' alt='photo'><figcaption><small>"+resultat['descr']+"</small></figcaption></figure></div></div>"
+						var load = "<div class='action'><button type='submit' class='img_action' id='load_"+resultat['id']+"' name='load' value='"+resultat['id']+"'><img id='img_load_"+resultat['id']+"' src='../img_site/icones/icons8-télécharger-100.png' alt='load' title='Télécharger'></button><br/>"
+							trash = "<button type='submit' class='img_action' id='trash_"+resultat['id']+"' name='trash' value='"+resultat['id']+"'><img id='img_trash_"+resultat['id']+"' src='../img_site/icones/trash.png' alt='trash' title='Supprimer'></button>"
+							share = "<button type='submit' class='img_action' id='share_"+resultat['id']+"' name='share' value='"+resultat['id']+"'><img id='img_share_"+resultat['id']+"' src='../img_site/icones/icons8-partager-500 (1).png' alt='share' title='Partager'></button></div>"
+						var new_pict = "<div class='item_photo'><div class='content_item'><figure><img class='my_photo' src='"+resultat['path'].replace(/ /g, '+')+"' alt='photo'><figcaption><small>"+resultat['descr']+"</small></figcaption>"+load+trash+share+"</figure></div></div>"
+
 						//console.log(new_pict);
 						var grid = document.getElementById('grid'); 
 						grid.insertAdjacentHTML('afterbegin', new_pict);
