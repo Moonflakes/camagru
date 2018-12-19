@@ -33,7 +33,7 @@ class Paginator{
         //no limiting necessary, use query as it is
         if ($this->_limit == 'all')
         {
-            $query = $this->$_query;
+            $query = $this->_query." ORDER BY picture_date DESC";
         }
         else
         {
