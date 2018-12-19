@@ -38,9 +38,8 @@
             if ($path)
             {
 ?>
-        <div class="item_photo" id="item<?php echo ++$i;?>">
+        <div class="item_photo">
             <div class="content_item">
-            <!--    <img class="pince" src="../img_site/pince.png" alt="pince"> -->
                 <figure>
                     <img src="<?php echo $path;?>" alt="photo">
                     <figcaption><small><?php echo $descr;?></small></figcaption>

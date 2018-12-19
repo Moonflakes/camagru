@@ -78,7 +78,11 @@
 				if (xhr.readyState == XMLHttpRequest.DONE) {
 					if (xhr.status == 200) {
 						resultat = JSON.parse(xhr.responseText);
-						console.log(resultat);
+						//console.log(resultat['path']);
+						var new_pict = "<div class='item_photo'><div class='content_item'><figure><img src='"+resultat['path'].replace(/ /g, '+')+"' alt='photo'><figcaption><small>"+resultat['descr']+"</small></figcaption></figure></div></div>"
+						//console.log(new_pict);
+						var grid = document.getElementById('grid'); 
+						grid.insertAdjacentHTML('afterbegin', new_pict);
 					}
 					else {
 						alert('Un problème est survenu avec la requête.');
@@ -94,7 +98,7 @@
 				xhr.open('POST', url, true);
 				xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 				
-				var submit = document.getElementById("startbutton").value;
+				var submit = document.getElementById("register").value;
 				xhr.send("submit="+submit+"&pict="+cam_pict+"&descr="+descr);
 			}
 

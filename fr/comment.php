@@ -25,7 +25,7 @@
     $req->execute(array($id_pict));
 
     if ($pict = $req->fetch())
-        $path = $pict['path'];
+        $path = str_replace(' ', '+', $pict['path']);;
 
 ?>
     <section class="comment">
