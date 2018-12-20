@@ -44,7 +44,7 @@
                     <img class="my_photo" src="<?php echo $path;?>" alt="photo">
                     <figcaption><small><?php echo $descr;?></small></figcaption>
                     <div class="action">
-                        <button type="submit" class="img_action" id="load_<?php echo $id;?>" name="load" value="<?php echo $id;?>">
+                        <button type="submit" class="img_action load" id="load_<?php echo $id;?>" name="load" value="<?php echo $id;?>">
                             <img id="img_load_<?php echo $id;?>" src="../img_site/icones/icons8-télécharger-100.png" 
                                 alt="load" title="Télécharger"></button><br/>
                         <button type="submit" class="img_action" id="trash_<?php echo $id;?>" name="trash" value="<?php echo $id;?>">
@@ -66,13 +66,23 @@
     <script>
         function resize_item() {
             var content_item = document.getElementsByClassName('content_item'),
-                item = document.getElementsByClassName('item_photo');
-            var h_content = [];
+                item = document.getElementsByClassName('item_photo'),
+                action = document.getElementsByClassName('action'),
+                h_content = [];
             Array.from(content_item).forEach(function(element) {
                 h_content.push(element.clientHeight);
             });
             Array.from(item).forEach(function(element, index) {
                 element.style.height = h_content[index];
+            });
+            Array.from(action).forEach(function(element) {
+                console.log(element.clientHeight);
+                var h_load = (element.clientHeight * 40/100);
+                if (element.clientHeight > 190)
+                {
+                    h_load = 71;
+                }
+                element.style.paddingTop = ((element.clientHeight - (2 * h_load)) / 2) - 7;
             });
         }
         window.addEventListener('load', resize_item, false);
