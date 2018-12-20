@@ -63,6 +63,20 @@
     }
 ?>
     </div>
+    <script>
+        function resize_item() {
+            var content_item = document.getElementsByClassName('content_item'),
+                item = document.getElementsByClassName('item_photo');
+            var h_content = [];
+            Array.from(content_item).forEach(function(element) {
+                h_content.push(element.clientHeight);
+            });
+            Array.from(item).forEach(function(element, index) {
+                element.style.height = h_content[index];
+            });
+        }
+        window.addEventListener('load', resize_item, false);
+    </script>
 <?php
     echo $paginator->createLinks($links, 'pagination');
 ?>

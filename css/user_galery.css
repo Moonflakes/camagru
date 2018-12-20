@@ -63,7 +63,8 @@ small
     margin-bottom: 15;
 }
 .action img {
-    height: 70;
+    height: 40%;
+    max-height: 68;
 }
 figure:hover .action {
     opacity: 1;
