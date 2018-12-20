@@ -19,25 +19,84 @@
   var photo = null;
   var startbutton = null;
 
-  var glasses = null;
-  var chapka = null;
-  var canard = null;
-  var couronne = null;
-  var suit = null;
-  var chain = null;
+  var action = null;
 
-  var checkGlasses = null;
-  var checkChain = null;
-  var checkCouronne = null;
-  var checkSuit = null;
-  var checkCanard = null;
-  var checkChapka = null;
+  function trashPict(xhr) {
+    //var photo = document.getElementById('photo');
+    if (xhr.readyState == XMLHttpRequest.DONE) {
+      var button2 = document.getElementById('button2'),
+        register = document.getElementById('register');
+      console.log(button2);
+      if (xhr.status == 200) {
+        resultat = JSON.parse(xhr.responseText);
+        var pict = document.getElementById('pict_'+resultat['id']);
+        var grid = document.getElementById('grid');
+
+        grid.removeChild(pict);
+        console.log(resultat);
+      }
+      else {
+        alert('Un problème est survenu avec la requête.');
+      }
+    }
+  }
+
+  function sendTrash(xhr, url, id, action) {
+    xhr.onreadystatechange = function() {
+      trashPict(xhr); 
+    };
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    
+    xhr.send("id="+id+"&action="+action);
+  }
+
+  function makeRequest(url, id, action) {
+    var xhr = null;
+
+    if (window.XMLHttpRequest || window.ActiveXObject) {
+      if (window.ActiveXObject) {
+        try {
+          xhr = new ActiveXObject("Msxml2.XMLHTTP");
+        } catch(e) {
+          xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+      } else {
+        xhr = new XMLHttpRequest(); 
+      }
+      console.log("il y a un XMLHTTP");
+
+    }
+
+    if (!xhr) {
+      alert('Abandon :( Impossible de créer une instance XMLHTTP');
+      return false;
+    }
+    sendTrash(xhr, url, id, action);
+  }
 
   function startup() {
     video = document.getElementById('video');
     canvas = document.getElementById('canvas');
     photo = document.getElementById('photo');
     startbutton = document.getElementById('startbutton');
+    action = document.getElementsByClassName('img_action');
+
+    //console.log(action);
+    // ajouter fonction a l'action
+    Array.from(action).forEach(function(element) {
+      element.addEventListener('click', function(ev){
+        ev.preventDefault();
+        var id = this.id;   // Getting Button id
+          var split_id = id.split("_");
+          var id = split_id[1];
+          var action_img = split_id[0];
+          if (action_img === "trash")
+            makeRequest('../include/trash_img.php', id, action_img);
+          //console.log(split_id);
+      }, false);
+    });
+    
 
     // Older browsers might not implement mediaDevices at all, so we set an empty object first
 		if (navigator.mediaDevices === undefined) {
@@ -128,6 +187,7 @@
   // drawing that to the screen, we can change its size and/or apply
   // other changes before drawing it.
   
+  //merge picture en js
 /*  function takepicture() {
     var context = canvas.getContext('2d');
     if (width && height) {

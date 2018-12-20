@@ -38,7 +38,7 @@
             if ($path)
             {
 ?>
-        <div class="item_photo">
+        <div class="item_photo" id="pict_<?php echo $id;?>">
             <div class="content_item">
                 <figure>
                     <img class="my_photo" src="<?php echo $path;?>" alt="photo">
@@ -76,12 +76,9 @@
                 element.style.height = h_content[index];
             });
             Array.from(action).forEach(function(element) {
-                console.log(element.clientHeight);
                 var h_load = (element.clientHeight * 40/100);
                 if (element.clientHeight > 190)
-                {
                     h_load = 71;
-                }
                 element.style.paddingTop = ((element.clientHeight - (2 * h_load)) / 2) - 7;
             });
         }

@@ -87,6 +87,8 @@
 						//console.log(new_pict);
 						var grid = document.getElementById('grid'); 
 						grid.insertAdjacentHTML('afterbegin', new_pict);
+
+						//addEnventListener click pour les boutons ajoutés
 					}
 					else {
 						alert('Un problème est survenu avec la requête.');
