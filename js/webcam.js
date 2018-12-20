@@ -75,6 +75,15 @@
     sendTrash(xhr, url, id, action);
   }
 
+  function saveImageAs (imgOrURL) {
+    if (typeof imgOrURL == 'object')
+      imgOrURL = imgOrURL.src;
+    imgOrURL = imgOrURL.replace("image/png", "image/octet-stream");
+    window.win = open(imgOrURL);
+    console.log(window.win);
+    setTimeout('window.win.execCommand("SaveAs", false, "filename.png")', 500);
+  }
+
   function startup() {
     video = document.getElementById('video');
     canvas = document.getElementById('canvas');
@@ -88,11 +97,23 @@
       element.addEventListener('click', function(ev){
         ev.preventDefault();
         var id = this.id;   // Getting Button id
-          var split_id = id.split("_");
-          var id = split_id[1];
-          var action_img = split_id[0];
+        var split_id = id.split("_");
+        var id = split_id[1];
+        var action_img = split_id[0];
+        var img = document.getElementById('photo_'+id);
+        var fileName = "file_name.png";
+        console.log(img);
           if (action_img === "trash")
             makeRequest('../include/trash_img.php', id, action_img);
+          else if (action_img === "load")
+          {
+            console.log("je passe dans load");
+              if (document.execCommand)
+              {
+                console.log("je cree un window");
+               // saveImageAs(img);
+            }
+          }
           //console.log(split_id);
       }, false);
     });

@@ -41,7 +41,7 @@
         <div class="item_photo" id="pict_<?php echo $id;?>">
             <div class="content_item">
                 <figure>
-                    <img class="my_photo" src="<?php echo $path;?>" alt="photo">
+                    <img class="my_photo" id="photo_<?php echo $id;?>" src="<?php echo $path;?>" alt="photo">
                     <figcaption><small><?php echo $descr;?></small></figcaption>
                     <div class="action">
                         <button type="submit" class="img_action load" id="load_<?php echo $id;?>" name="load" value="<?php echo $id;?>">
