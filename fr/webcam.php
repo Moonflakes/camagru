@@ -74,21 +74,87 @@
 	</div>
 </section>
 <script>
+
+function trashPict(xhr) {
+    //var photo = document.getElementById('photo');
+    if (xhr.readyState == XMLHttpRequest.DONE) {
+      var button2 = document.getElementById('button2'),
+        register = document.getElementById('register');
+      console.log(button2);
+      if (xhr.status == 200) {
+        resultat = JSON.parse(xhr.responseText);
+        var pict = document.getElementById('pict_'+resultat['id']);
+        var grid = document.getElementById('grid');
+
+        grid.removeChild(pict);
+        console.log(resultat);
+      }
+      else {
+        alert('Un problème est survenu avec la requête.');
+      }
+    }
+  }
+
+  function sendTrash(xhr, url, id, action) {
+    xhr.onreadystatechange = function() {
+      trashPict(xhr); 
+    };
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    
+    xhr.send("id="+id+"&action="+action);
+  }
+
+  function makeRequestTrash(url, id, action) {
+    var xhr = null;
+
+    if (window.XMLHttpRequest || window.ActiveXObject) {
+      if (window.ActiveXObject) {
+        try {
+          xhr = new ActiveXObject("Msxml2.XMLHTTP");
+        } catch(e) {
+          xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+      } else {
+        xhr = new XMLHttpRequest(); 
+      }
+      console.log("il y a un XMLHTTP");
+
+    }
+
+    if (!xhr) {
+      alert('Abandon :( Impossible de créer une instance XMLHTTP');
+      return false;
+    }
+    sendTrash(xhr, url, id, action);
+  }
+
 			function registerPict(xhr) {
 				if (xhr.readyState == XMLHttpRequest.DONE) {
 					if (xhr.status == 200) {
 						resultat = JSON.parse(xhr.responseText);
 						//console.log(resultat['path']);
-						var load = "<div class='action'><button type='submit' class='img_action' id='load_"+resultat['id']+"' name='load' value='"+resultat['id']+"'><img id='img_load_"+resultat['id']+"' src='../img_site/icones/icons8-télécharger-100.png' alt='load' title='Télécharger'></button><br/>"
-							trash = "<button type='submit' class='img_action' id='trash_"+resultat['id']+"' name='trash' value='"+resultat['id']+"'><img id='img_trash_"+resultat['id']+"' src='../img_site/icones/trash.png' alt='trash' title='Supprimer'></button>"
-							share = "<button type='submit' class='img_action' id='share_"+resultat['id']+"' name='share' value='"+resultat['id']+"'><img id='img_share_"+resultat['id']+"' src='../img_site/icones/icons8-partager-500 (1).png' alt='share' title='Partager'></button></div>"
-						var new_pict = "<div class='item_photo'><div class='content_item'><figure><img class='my_photo' src='"+resultat['path'].replace(/ /g, '+')+"' alt='photo'><figcaption><small>"+resultat['descr']+"</small></figcaption>"+load+trash+share+"</figure></div></div>"
+						var load = "<div class='action'><button type='submit' class='img_action' id='load_"+resultat['id']+"' name='load' value='"+resultat['id']+"'><img id='img_load_"+resultat['id']+"' src='../img_site/icones/icons8-télécharger-100.png' alt='load' title='Télécharger'></button><br/>",
+							trash = "<button type='submit' class='img_action' id='trash_"+resultat['id']+"' name='trash' value='"+resultat['id']+"'><img id='img_trash_"+resultat['id']+"' src='../img_site/icones/trash.png' alt='trash' title='Supprimer'></button>",
+							share = "<button type='submit' class='img_action' id='share_"+resultat['id']+"' name='share' value='"+resultat['id']+"'><img id='img_share_"+resultat['id']+"' src='../img_site/icones/icons8-partager-500 (1).png' alt='share' title='Partager'></button></div>";
+						var new_pict = "<div class='item_photo' id='pict_"+resultat['id']+"'><div class='content_item'><figure><img class='my_photo' src='"+resultat['path'].replace(/ /g, '+')+"' alt='photo'><figcaption><small>"+resultat['descr']+"</small></figcaption>"+load+trash+share+"</figure></div></div>";
 
 						//console.log(new_pict);
 						var grid = document.getElementById('grid'); 
 						grid.insertAdjacentHTML('afterbegin', new_pict);
 
 						//addEnventListener click pour les boutons ajoutés
+						var trash_img = document.getElementById('trash_'+resultat['id']);
+						trash_img.addEventListener('click', function(ev){
+							ev.preventDefault();
+							var id = this.id;   // Getting Button id
+							var split_id = id.split("_");
+							var id = split_id[1];
+							var action_img = split_id[0];
+							if (action_img === "trash")
+								makeRequestTrash('../include/trash_img.php', id, action_img);
+							//console.log(split_id);
+						}, false);
 					}
 					else {
 						alert('Un problème est survenu avec la requête.');
