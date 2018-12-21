@@ -89,7 +89,7 @@
     canvas = document.getElementById('canvas');
     photo = document.getElementById('photo');
     startbutton = document.getElementById('startbutton');
-    action = document.getElementsByClassName('img_action');
+    action = document.getElementsByClassName('but_act');
 
     //console.log(action);
     // ajouter fonction a l'action
@@ -100,7 +100,6 @@
         var split_id = id.split("_");
         var id = split_id[1];
         var action_img = split_id[0];
-        console.log(img);
           if (action_img === "trash" && confirm("Voulez-vous vraiment supprimer cette image ?"))
             makeRequest('../include/trash_img.php', id, action_img);
           //console.log(split_id);
