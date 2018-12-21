@@ -229,7 +229,7 @@ function trashPict(xhr) {
 				xhr.open('POST', url, true);
 				xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 				
-				var filtre_name = ["canard", "chain", "chapka", "couronne", "glasses"];
+				var filtre_name = ["canard", "chain", "chapka", "couronne", "glasses", "suit"];
 				var filtre_infos = {};
 
 				filtre_name.forEach(function(element) {
@@ -317,7 +317,7 @@ function trashPict(xhr) {
 <script>
 
 	function verif_check(){
-		var filtre_name = ["canard", "chain", "chapka", "couronne", "glasses"];
+		var filtre_name = ["canard", "chain", "chapka", "couronne", "glasses", "suit"];
 		var a = 0;
 		filtre_name.forEach(function(element) {
 			checkFiltre = document.getElementById("OK_"+element);
