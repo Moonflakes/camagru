@@ -100,20 +100,9 @@
         var split_id = id.split("_");
         var id = split_id[1];
         var action_img = split_id[0];
-        var img = document.getElementById('photo_'+id);
-        var fileName = "file_name.png";
         console.log(img);
-          if (action_img === "trash")
+          if (action_img === "trash" && confirm("Voulez-vous vraiment supprimer cette image ?"))
             makeRequest('../include/trash_img.php', id, action_img);
-          else if (action_img === "load")
-          {
-            console.log("je passe dans load");
-              if (document.execCommand)
-              {
-                console.log("je cree un window");
-               // saveImageAs(img);
-            }
-          }
           //console.log(split_id);
       }, false);
     });

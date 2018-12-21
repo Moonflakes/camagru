@@ -147,13 +147,16 @@ function trashPict(xhr) {
 						var trash_img = document.getElementById('trash_'+resultat['id']);
 						trash_img.addEventListener('click', function(ev){
 							ev.preventDefault();
-							var id = this.id;   // Getting Button id
-							var split_id = id.split("_");
-							var id = split_id[1];
-							var action_img = split_id[0];
-							if (action_img === "trash")
-								makeRequestTrash('../include/trash_img.php', id, action_img);
-							//console.log(split_id);
+							if (confirm("Voulez-vous vraiment supprimer cette image ?"))
+							{
+								var id = this.id;   // Getting Button id
+								var split_id = id.split("_");
+								var id = split_id[1];
+								var action_img = split_id[0];
+								if (action_img === "trash")
+									makeRequestTrash('../include/trash_img.php', id, action_img);
+								//console.log(split_id);
+							}
 						}, false);
 					}
 					else {
