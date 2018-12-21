@@ -171,3 +171,22 @@
   border-left: 2px solid #308568;
 }
 
+.upload {
+  margin-bottom: 20;
+}
+
+.upl_file {
+  /*display: none;*/
+}
+
+.regist {
+  background-color: aquamarine;
+  border: 2px solid black;
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: monospace;
+  color: black;
+  cursor: pointer;
+  width: fit-content;
+}
+
