@@ -68,10 +68,13 @@
 	<div class="galery_pict">
 			<h1>Ma galerie</h1>
 			<div class="upload">
-				<label for="file" class="label-file">Choisir une image :</label>
-				<input type="file" id="myFile" class="upl_file">
-				<input type="text" placeholder="Ajouter une description" name="descr" id="descr">
-				<input class="regist" type="submit" value="Enregistrer" name="submit">
+				<label for="myFile" class="label-file">Choisir une image</label>
+				<input type="file" id="myFile" class="upl_file" accept=".jpg, .jpeg, .png"><br/>
+				<div id="preview">
+					<p>Aucun fichier sélectionné pour le moment</p>
+				</div>
+				<!--<input type="text" placeholder="Ajouter une description" name="descr" id="descr">
+				<input class="regist" type="submit" value="Enregistrer" name="submit">-->
 			</div>
 <?php
     		include_once 'user_galery.php';
@@ -290,7 +293,6 @@ function trashPict(xhr) {
 						xhr = new XMLHttpRequest(); 
 					}
 					console.log("il y a un XMLHTTP");
-
 				}
 
 				if (!xhr) {

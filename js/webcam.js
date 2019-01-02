@@ -17,12 +17,13 @@
   var video = null;
   var canvas = null;
   var photo = null;
-  var startbutton = null;
+  var choose_file = null;
+  var preview = null;
 
   var action = null;
 
+
   function trashPict(xhr) {
-    //var photo = document.getElementById('photo');
     if (xhr.readyState == XMLHttpRequest.DONE) {
       var button2 = document.getElementById('button2'),
         register = document.getElementById('register');
@@ -51,6 +52,55 @@
     xhr.send("id="+id+"&action="+action);
   }
 
+  function registerPict(xhr) {
+    if (xhr.readyState == XMLHttpRequest.DONE) {
+      if (xhr.status == 200) {
+        resultat = JSON.parse(xhr.responseText);
+        //console.log(resultat['path']);
+        var load = "<div class='action'><button type='submit' class='img_action' id='load_"+resultat['id']+"' name='load' value='"+resultat['id']+"'><img id='img_load_"+resultat['id']+"' src='../img_site/icones/icons8-télécharger-100.png' alt='load' title='Télécharger'></button><br/>",
+          trash = "<button type='submit' class='img_action' id='trash_"+resultat['id']+"' name='trash' value='"+resultat['id']+"'><img id='img_trash_"+resultat['id']+"' src='../img_site/icones/trash.png' alt='trash' title='Supprimer'></button>",
+          share = "<button type='submit' class='img_action' id='share_"+resultat['id']+"' name='share' value='"+resultat['id']+"'><img id='img_share_"+resultat['id']+"' src='../img_site/icones/icons8-partager-500 (1).png' alt='share' title='Partager'></button></div>";
+        var new_pict = "<div class='item_photo' id='pict_"+resultat['id']+"'><div class='content_item'><figure><img class='my_photo' src='"+resultat['path'].replace(/ /g, '+')+"' alt='photo'><figcaption><small>"+resultat['descr']+"</small></figcaption>"+load+trash+share+"</figure></div></div>";
+
+        //console.log(new_pict);
+        var grid = document.getElementById('grid'); 
+        grid.insertAdjacentHTML('afterbegin', new_pict);
+
+        //addEnventListener click pour les boutons ajoutés
+        var trash_img = document.getElementById('trash_'+resultat['id']);
+        trash_img.addEventListener('click', function(ev){
+          ev.preventDefault();
+          if (confirm("Voulez-vous vraiment supprimer cette image ?"))
+          {
+            var id = this.id;   // Getting Button id
+            var split_id = id.split("_");
+            var id = split_id[1];
+            var action_img = split_id[0];
+            if (action_img === "trash")
+              makeRequest('../include/trash_img.php', id, action_img);
+            //console.log(split_id);
+          }
+        }, false);
+      }
+      else {
+        alert('Un problème est survenu avec la requête.');
+      }
+    }
+  }
+
+  function sendReqregister(xhr, url, cam_pict, descr) {
+    xhr.onreadystatechange = function() {
+      console.log(xhr);
+      registerPict(xhr); 
+    };
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    
+    var submit = document.getElementById("register");
+    submit = (submit) ? submit.value : document.getElementById("register_upload").value;
+    xhr.send("submit="+submit+"&pict="+cam_pict+"&descr="+descr);
+  }
+
   function makeRequest(url, id, action) {
     var xhr = null;
 
@@ -64,7 +114,7 @@
       } else {
         xhr = new XMLHttpRequest(); 
       }
-      console.log("il y a un XMLHTTP");
+      console.log(action);
 
     }
 
@@ -72,26 +122,106 @@
       alert('Abandon :( Impossible de créer une instance XMLHTTP');
       return false;
     }
-    sendTrash(xhr, url, id, action);
+    if (action === "trash")
+      sendTrash(xhr, url, id, action);
+    else {
+      if (action)
+        sendReqregister(xhr, url, id, action);
+      else
+        sendReqmerge(xhr, url, id);
+    }
   }
 
-  function saveImageAs (imgOrURL) {
-    if (typeof imgOrURL == 'object')
-      imgOrURL = imgOrURL.src;
-    imgOrURL = imgOrURL.replace("image/png", "image/octet-stream");
-    window.win = open(imgOrURL);
-    console.log(window.win);
-    setTimeout('window.win.execCommand("SaveAs", false, "filename.png")', 500);
+  function returnFileSize(number) {
+    if(number < 1024) {
+      return number + ' octets';
+    }
+    else if(number >= 1024 && number < 1048576) {
+      return (number/1024).toFixed(1) + ' Ko';
+    }
+    else if(number >= 1048576) {
+      return (number/1048576).toFixed(1) + ' Mo';
+    }
+  }
+
+  function readFile(file, image) {
+  
+    if (file && file[0]) {
+      
+      var FR = new FileReader();
+      
+      FR.addEventListener("load", function(e) {
+        image.src = e.target.result;
+      }); 
+      
+      FR.readAsDataURL(file[0]);
+    }
+  }
+
+  function updateImageDisplay() {
+    while(preview.firstChild) {
+      preview.removeChild(preview.firstChild);
+    }
+  
+    var curFiles = choose_file.files;
+    console.log(curFiles[0].name);
+    if(curFiles.length === 0) {
+      var para = document.createElement('p');
+      para.textContent = 'Aucun fichier sélectionné pour le moment';
+      preview.appendChild(para);
+    }
+    else {
+        var item_img = document.createElement('div');
+        var para = document.createElement('p');
+        var image = document.createElement('img');
+        var descr = document.createElement('div');
+        var text = document.createElement('input');
+        var register_but = document.createElement('input');
+
+        para.textContent = 'Nom du fichier ' + curFiles[0].name + ', taille du fichier ' + returnFileSize(curFiles[0].size) + '.';
+        // src en base64
+        readFile(curFiles, image);
+        
+        item_img.appendChild(para);
+        item_img.appendChild(image);
+        item_img.setAttribute('style', 'margin-bottom:20');
+        preview.appendChild(item_img);
+
+        text.setAttribute('type', 'text');
+        text.setAttribute("id", 'descr_upload');
+        text.setAttribute("type", 'text');
+        text.setAttribute("name", 'descr');
+        text.setAttribute("placeholder", 'Ajouter une description');
+        descr.appendChild(text);
+
+        register_but = document.createElement("input");
+				register_but.setAttribute("id", 'register_upload');
+				register_but.setAttribute("type", 'submit');
+				register_but.setAttribute("name", 'submit');
+				register_but.setAttribute("value", 'Enregistrer');
+        descr.appendChild(register_but);
+        preview.appendChild(descr);
+				register_but.addEventListener('click', function(ev){
+          var descr_val = document.getElementById("descr_upload").value,
+              path = image.src;
+          if (descr_val) {
+              console.log(descr_val);
+              makeRequest('../include/register_photo.php', path, descr_val);
+          }
+            ev.preventDefault();
+				}, false);
+      }
   }
 
   function startup() {
     video = document.getElementById('video');
     canvas = document.getElementById('canvas');
     photo = document.getElementById('photo');
-    startbutton = document.getElementById('startbutton');
     action = document.getElementsByClassName('but_act');
+    choose_file = document.getElementById('myFile');
+    preview = document.getElementById('preview');
 
-    //console.log(action);
+    console.log(choose_file);
     // ajouter fonction a l'action
     Array.from(action).forEach(function(element) {
       element.addEventListener('click', function(ev){
@@ -105,8 +235,11 @@
           //console.log(split_id);
       }, false);
     });
-    
 
+    //fonction choose file
+    choose_file.addEventListener('change', updateImageDisplay);
+
+    
     // Older browsers might not implement mediaDevices at all, so we set an empty object first
 		if (navigator.mediaDevices === undefined) {
 		  navigator.mediaDevices = {};

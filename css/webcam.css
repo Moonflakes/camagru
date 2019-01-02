@@ -143,10 +143,11 @@
   cursor: pointer;
 }
 
-#descr {
+#descr, #descr_upload {
   font-size: 13px;
   font-family: monospace;
   height: 30;
+  min-width: 200;
 }
 
 #register {
@@ -176,10 +177,11 @@
 }
 
 .upl_file {
-  /*display: none;*/
+  margin-bottom: 20;
+  opacity: 0;
 }
 
-.regist {
+.label-file{
   background-color: aquamarine;
   border: 2px solid black;
   border-radius: 10px;
@@ -188,5 +190,18 @@
   color: black;
   cursor: pointer;
   width: fit-content;
+  padding: 5;
+}
+
+#register_upload {
+  background-color: aquamarine;
+  border: 2px solid black;
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: monospace;
+  color: black;
+  cursor: pointer;
+  width: fit-content;
+  margin-left: 10; 
 }
 
