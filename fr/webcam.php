@@ -136,19 +136,37 @@ function trashPict(xhr) {
     sendTrash(xhr, url, id, action);
   }
 
+  function resize_item(resultat) {
+    var content_item = document.getElementById('content_'+resultat['id']),
+        item = document.getElementById('pict_'+resultat['id']),
+        action = document.getElementById('action_'+resultat['id']),
+        h_content = content_item.clientHeight;
+        item.style.height = h_content;
+    var h_load = (action.clientHeight * 40/100);
+    if (action.clientHeight > 190)
+      h_load = 71;
+    action.style.paddingTop = ((action.clientHeight - (2 * h_load)) / 2) - 7;
+}
+
 			function registerPict(xhr) {
 				if (xhr.readyState == XMLHttpRequest.DONE) {
 					if (xhr.status == 200) {
 						resultat = JSON.parse(xhr.responseText);
 						//console.log(resultat['path']);
-						var load = "<div class='action'><button type='submit' class='img_action' id='load_"+resultat['id']+"' name='load' value='"+resultat['id']+"'><img id='img_load_"+resultat['id']+"' src='../img_site/icones/icons8-télécharger-100.png' alt='load' title='Télécharger'></button><br/>",
-							trash = "<button type='submit' class='img_action' id='trash_"+resultat['id']+"' name='trash' value='"+resultat['id']+"'><img id='img_trash_"+resultat['id']+"' src='../img_site/icones/trash.png' alt='trash' title='Supprimer'></button>",
-							share = "<button type='submit' class='img_action' id='share_"+resultat['id']+"' name='share' value='"+resultat['id']+"'><img id='img_share_"+resultat['id']+"' src='../img_site/icones/icons8-partager-500 (1).png' alt='share' title='Partager'></button></div>";
-						var new_pict = "<div class='item_photo' id='pict_"+resultat['id']+"'><div class='content_item'><figure><img class='my_photo' src='"+resultat['path'].replace(/ /g, '+')+"' alt='photo'><figcaption><small>"+resultat['descr']+"</small></figcaption>"+load+trash+share+"</figure></div></div>";
+						var img_load = "<img class='img_action' id='img_load_"+resultat['id']+"' src='../img_site/icones/icons8-télécharger-100.png' alt='load' title='Télécharger'>",
+							img_trash = "<img id='img_trash_"+resultat['id']+"' src='../img_site/icones/trash.png' alt='trash' title='Supprimer'>",
+							img_share = "<img id='img_share_"+resultat['id']+"' src='../img_site/icones/icons8-partager-500 (1).png' alt='share' title='Partager'>",
+							load = "<div class='action' id='action_"+resultat['id']+"'><a href='"+resultat['path'].replace(/ /g, '+')+"' class='ref' download='img_galerie.png'>"+img_load+"</a><br/>",
+							trash = "<button type='submit' class='img_action' id='trash_"+resultat['id']+"' name='trash' value='"+resultat['id']+"'>"+img_trash+"</button>",
+							share = "<button type='submit' class='img_action' id='share_"+resultat['id']+"' name='share' value='"+resultat['id']+"'>"+img_share+"</button></div>",
+							image = "<img class='my_photo' src='"+resultat['path'].replace(/ /g, '+')+"' alt='photo'>",
+							caption = "<figcaption><small>"+resultat['descr']+"</small></figcaption>";
+						var new_pict = "<div class='item_photo' id='pict_"+resultat['id']+"'><div class='content_item' id='content_"+resultat['id']+"'><figure>"+image+caption+load+trash+share+"</figure></div></div>";
 
 						//console.log(new_pict);
 						var grid = document.getElementById('grid'); 
 						grid.insertAdjacentHTML('afterbegin', new_pict);
+						resize_item(resultat);
 
 						//addEnventListener click pour les boutons ajoutés
 						var trash_img = document.getElementById('trash_'+resultat['id']);

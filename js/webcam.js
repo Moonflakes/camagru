@@ -177,13 +177,18 @@
     }
   }
 
+  function deleteUploadDiv() {
+    preview.innerHTML = '';
+    preview.innerHTML = '<p>Votre image a bien été enregistrée</p>'
+  }
+
   function updateImageDisplay() {
-    while(preview.firstChild) {
+    if (preview.firstChild) {
       preview.removeChild(preview.firstChild);
     }
   
     var curFiles = choose_file.files;
-    console.log(curFiles[0].name);
+    //console.log(curFiles[0].name);
     if(curFiles.length === 0) {
       var para = document.createElement('p');
       para.textContent = 'Aucun fichier sélectionné pour le moment';
@@ -227,6 +232,7 @@
           if (descr_val) {
               console.log(descr_val);
               makeRequest('../include/register_photo.php', path, descr_val);
+              deleteUploadDiv();
           }
             ev.preventDefault();
 				}, false);
