@@ -408,21 +408,7 @@
 		});
   }
   
-  function verif_check(){
-		var filtre_name = ["canard", "chain", "chapka", "couronne", "glasses", "suit"];
-		var a = 0;
-		filtre_name.forEach(function(element) {
-			checkFiltre = document.getElementById("OK_"+element);
-			if (checkFiltre.checked == true)
-			{
-				a = 1;
-				make_button(a);
-			}
-		})
-		return remove_button(a);
-	}
-
-	function make_button(a){
+  function make_button(a){
 		var startbutton = document.getElementById('startbutton');
 		var form = document.getElementById('button1');
     	if (!startbutton && a === 1)
@@ -445,13 +431,27 @@
 
 	function remove_button(a){
 		var startbutton = document.getElementById('startbutton');
-		var form = document.getElementById('take_picture');
+		var form = document.getElementById('button1');
 		if (startbutton && a === 0)
     	{
 			console.log("je remove");
 			form.removeChild(startbutton);
 		}
   }
+
+  function verif_check(){
+		var filtre_name = ["canard", "chain", "chapka", "couronne", "glasses", "suit"];
+		var a = 0;
+		filtre_name.forEach(function(element) {
+			checkFiltre = document.getElementById("OK_"+element);
+			if (checkFiltre.checked === true)
+			{
+				a = 1;
+				make_button(a);
+			}
+		})
+		remove_button(a);
+	}
 
   var index = 0;
 	function putFilter() {
