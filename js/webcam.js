@@ -19,6 +19,7 @@
   var photo = null;
   var choose_file = null;
   var preview = null;
+  var filter = null;
 
   var action = null;
 
@@ -118,6 +119,99 @@
     var submit = document.getElementById("register");
     submit = (submit) ? submit.value : document.getElementById("register_upload").value;
     xhr.send("submit="+submit+"&pict="+cam_pict+"&descr="+descr);
+  }
+
+  function mergePict(xhr) {
+    //var photo = document.getElementById('photo');
+    if (xhr.readyState == XMLHttpRequest.DONE) {
+      var button2 = document.getElementById('button2'),
+        register = document.getElementById('register');
+      console.log(button2);
+      if (xhr.status == 200) {
+        resultat = JSON.parse(xhr.responseText);
+        console.log(resultat);
+        photo.setAttribute('src', resultat['data']); // afficher l'image mergée
+        //console.log(xhr.responseText);
+
+        // prendre => reprendre
+        startbutton.setAttribute("value", 'Reprendre');
+        if (!register)
+        {
+          //creer input description
+          descr = document.createElement("input");
+          descr.setAttribute("id", 'descr');
+          descr.setAttribute("type", 'text');
+          descr.setAttribute("name", 'descr');
+          descr.setAttribute("placeholder", 'Ajouter une description');
+          button2.appendChild(descr);
+          // creer bouton enregistrer
+          register = document.createElement("input");
+          register.setAttribute("id", 'register');
+          register.setAttribute("type", 'submit');
+          register.setAttribute("name", 'submit');
+          register.setAttribute("value", 'Enregistrer');
+          button2.appendChild(register);
+          register.addEventListener('click', function(ev){
+            var descr_val = document.getElementById("descr").value,
+              path = resultat['data'];
+            if (descr_val) {
+              console.log(descr_val);
+              makeRequest('../include/register_photo.php', path, descr_val);
+            }
+            ev.preventDefault();
+          }, false);
+        }
+
+      }
+      else {
+        alert('Un problème est survenu avec la requête.');
+      }
+    }
+  }
+
+  function sendReqmerge(xhr, url, cam_pict) {
+    xhr.onreadystatechange = function() {
+      mergePict(xhr); 
+    };
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    
+    var filtre_name = ["canard", "chain", "chapka", "couronne", "glasses", "suit"];
+    var filtre_infos = {};
+
+    filtre_name.forEach(function(element) {
+      checkFiltre = document.getElementById("OK_"+element);
+      if (checkFiltre.checked == true)
+      {
+      var filtre = document.getElementById('filtre_'+element);
+      var index = filtre.classList[1].split('_')[1];
+      filtre_infos[`${index}`] = element;
+      }
+    });
+    filter = Object.values(filtre_infos);
+    var height = [];
+    var width = [];
+    var top = [];
+    var left = [];
+    var src = [];
+    filter.forEach(function(element) {
+      var img = new Image();
+      img.src = '../overlay/'+element+'.png';
+      filtre = document.getElementById('filtre_'+element);
+      h = filtre.height;
+      w = filtre.width;
+      t = filtre.offsetTop;
+      l = filtre.offsetLeft;
+      height.push(h);
+      width.push(w);
+      top.push(t);
+      left.push(l);
+      src.push(img.src);
+    });
+    var submit = document.getElementById("startbutton").value;
+    xhr.send("submit="+submit+"&top="+JSON.stringify(top)+"&height="+
+    JSON.stringify(height)+"&width="+JSON.stringify(width)+"&left="+
+    JSON.stringify(left)+"&src="+JSON.stringify(src)+"&camera="+cam_pict);
   }
 
   function makeRequest(url, id, action) {
@@ -239,13 +333,161 @@
       }
   }
 
+  function takepicture(){
+    console.log("take picture");
+    var canvas = document.getElementById('canvas');
+    var video = document.getElementById('video');
+    var context = canvas.getContext('2d');
+    var width = 320;
+    var height = 240;
+
+    if (width && height) {
+      canvas.width = width;
+      canvas.height = height;
+      context.drawImage(video, 0, 0, width, height);
+      var data = canvas.toDataURL('image/png');
+      makeRequest('../include/take_photo.php', data, 0);
+    }
+    else {
+      clearphoto();
+    }
+  }
+
+  function dnd(id, camera){
+		var flag = false,
+			filtre = document.getElementById('filtre_'+id);
+			filtreW = filtre.clientWidth,
+			filtreH = filtre.clientHeight
+			cameraL = camera.offsetLeft,
+			cameraT = camera.offsetTop;
+		console.log("W = "+filtreW, "H = "+filtreH);
+		console.log("camL = "+cameraL, "camT = "+cameraT);
+
+		camera.addEventListener('mousemove', function(e){
+			console.log('je passe la');
+			e = e || window.event;
+			if (!flag)
+				return;
+			var x = e.pageX,
+				y = e.pageY;
+			filtre.style.left = x - cameraL - filtreW/2 + 'px';
+			filtre.style.top = y - cameraT - filtreH/2 + 'px';
+			console.log("L = "+filtre.style.left, "T = "+filtre.style.top, "x = "+x, "y = "+y);
+			filtre.style.cursor = 'move';
+		});
+		filtre.addEventListener('mousedown', function(e){
+			console.log('je passe ici');
+			flag = true;
+		});
+		filtre.addEventListener('mouseup', function(e){
+			console.log('je passe par ici aussi');
+			flag = false;
+			if (filtre){
+			filtre.style.cursor = 'default';
+			}
+			var x = e.pageX, // ou clientX
+				y = e.pageY,
+				limitL = cameraL + filtreW/2,
+				limitT = cameraT + filtreH/2,
+				cameraW = camera.clientWidth - filtreW/2,
+				cameraH = camera.clientHeight - filtreH/2,
+				limitR = cameraL + cameraW,
+				limitB = cameraT + cameraH;
+			//console.log("filtre id  = "+filtre.id);
+			console.log("x = "+x, "y = "+y, "limitL = "+limitL, "limitT = "+limitT, "limitR = "+limitR, "limitB = "+limitB);
+			if (x >= limitL && x <= limitR && y >= limitT && y <= limitB){
+				//console.log("est-ce que je passe la ?");
+				filtre.style.left = x - cameraL - filtreW/2 +  'px';
+				filtre.style.top = y - cameraT - filtreH/2 + 'px';
+				console.log("filtreL = "+filtre.style.left, "filtreT = "+filtre.style.top);
+			}
+			else{
+				filtre.style.left = '10%';
+				filtre.style.top = '10%';
+			}
+		});
+  }
+  
+  function verif_check(){
+		var filtre_name = ["canard", "chain", "chapka", "couronne", "glasses", "suit"];
+		var a = 0;
+		filtre_name.forEach(function(element) {
+			checkFiltre = document.getElementById("OK_"+element);
+			if (checkFiltre.checked == true)
+			{
+				a = 1;
+				make_button(a);
+			}
+		})
+		return remove_button(a);
+	}
+
+	function make_button(a){
+		var startbutton = document.getElementById('startbutton');
+		var form = document.getElementById('button1');
+    	if (!startbutton && a === 1)
+    	{
+			console.log("je passe ici");
+			startbutton = document.createElement("input");
+			console.log (startbutton);
+			startbutton.setAttribute("id", 'startbutton');
+			startbutton.setAttribute("type", 'submit');
+			startbutton.setAttribute("name", 'submit');
+			startbutton.setAttribute("value", 'Prendre une photo');
+			form.appendChild(startbutton);
+		}
+		startbutton.addEventListener('click', function(ev){
+			takepicture();
+			ev.preventDefault();
+			console.log(startbutton);
+			}, false);
+	}
+
+	function remove_button(a){
+		var startbutton = document.getElementById('startbutton');
+		var form = document.getElementById('take_picture');
+		if (startbutton && a === 0)
+    	{
+			console.log("je remove");
+			form.removeChild(startbutton);
+		}
+  }
+
+  var index = 0;
+	function putFilter() {
+    verif_check();
+    console.log(this);
+		var id = this.id.split('_');
+		id = id[1];
+		var filtre_check = document.getElementById('filtre_'+id);
+		var camera = document.getElementById('camera');
+		if (!filtre_check) {
+			var filtre = new Image();
+			filtre.src = '../overlay/'+id+'.png';
+			filtre.setAttribute("id", 'filtre_'+id);
+			index++;
+			filtre.classList.add('filtre', 'index_'+index);
+			camera.appendChild(filtre);
+		}
+		else
+		{
+			camera.removeChild(filtre_check);
+		}
+		dnd(id, camera);
+	}
+
   function startup() {
     video = document.getElementById('video');
     canvas = document.getElementById('canvas');
     photo = document.getElementById('photo');
     action = document.getElementsByClassName('but_act');
     choose_file = document.getElementById('myFile');
-    preview = document.getElementById('preview');
+    preview = document.getElementById('preview'),
+    filter = document.getElementsByClassName('filter');
+
+    Array.from(filter).forEach(function(element) {
+      element.addEventListener('change', putFilter);
+    });
 
     console.log(choose_file);
     // ajouter fonction a l'action
@@ -295,6 +537,7 @@
 
 		navigator.mediaDevices.getUserMedia({ audio: false, video: true })
 		.then(function(stream) {
+      //console.log(stream);
 		  var video = document.querySelector('video');
 		  // Older browsers may not have srcObject
 		  if ("srcObject" in video) {
@@ -307,10 +550,10 @@
         video.play();
 		  };
 		})
-	/*	.catch(function(err) {
-		  console.log(err.name + ": " + err.message);
+		.catch(function(err) {
+		  console.log(err);
 		});
-  */
+  
 
     video.addEventListener('canplay', function(ev){
       if (!streaming) {
