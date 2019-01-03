@@ -73,8 +73,6 @@
 				<div id="preview">
 					<p>Aucun fichier sélectionné pour le moment</p>
 				</div>
-				<!--<input type="text" placeholder="Ajouter une description" name="descr" id="descr">
-				<input class="regist" type="submit" value="Enregistrer" name="submit">-->
 			</div>
 <?php
     		include_once 'user_galery.php';
@@ -340,6 +338,7 @@ function trashPict(xhr) {
 		})
 		return remove_button(a);
 	}
+
 	function make_button(a){
 		var startbutton = document.getElementById('startbutton');
 		var form = document.getElementById('button1');

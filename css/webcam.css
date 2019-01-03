@@ -205,3 +205,6 @@
   margin-left: 10; 
 }
 
+#img_upload {
+  max-width: 700;
+}

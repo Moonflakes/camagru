@@ -39,17 +39,14 @@
             {
 ?>
         <div class="item_photo" id="pict_<?php echo $id;?>">
-            <div class="content_item">
+            <div class="content_item" id="content_<?php echo $id;?>">
                 <figure>
                     <img class="my_photo" id="photo_<?php echo $id;?>" src="<?php echo $path;?>" alt="photo">
                     <figcaption><small><?php echo $descr;?></small></figcaption>
-                    <div class="action">
+                    <div class="action" id="action_<?php echo $id;?>">
                         <a href="<?php echo $path;?>" class="ref" download="img_galerie.png">
                             <img class="img_action" id="img_load_<?php echo $id;?>" src="../img_site/icones/icons8-télécharger-100.png" alt="load" title="Télécharger">
                         </a><br/>
-                        <!--<button type="submit" class="img_action load" id="load_<?php echo $id;?>" name="load" value="<?php echo $id;?>">
-                            <img id="img_load_<?php echo $id;?>" src="../img_site/icones/icons8-télécharger-100.png" 
-                                alt="load" title="Télécharger"></button>-->
                         <button type="submit" class="img_action but_act" id="trash_<?php echo $id;?>" name="trash" value="<?php echo $id;?>">
                             <img id="img_trash_<?php echo $id;?>" src="../img_site/icones/trash.png" alt="trash" title="Supprimer"></button>
                         <button type="submit" class="img_action but_act" id="share_<?php echo $id;?>" name="share" value="<?php echo $id;?>">
