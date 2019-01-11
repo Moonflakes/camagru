@@ -32,13 +32,9 @@ if (check_user_is_connect($connexion))
                 {
                     $id_com = $value['comment_id'];
                 }
-                if ($key === 1)
-                {
-                    $id_next = $value['comment_id'];
-                }
             }
 
-            $arr = array("author" => $_SESSION['u_uid'], "text" => $text_com, "time" => $time, "id" => $id_com, "id_next" => $id_next);
+            $arr = array("author" => $_SESSION['u_uid'], "text" => $text_com, "time" => $time, "id" => $id_com);
         }
         else
         {

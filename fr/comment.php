@@ -51,7 +51,7 @@
 <?PHP
     include_once 'footer.php';
 ?>
-    <script>
+    <!--<script>
         $(document).ready(function(){
             $("#button").click(function(e){
                 e.preventDefault();
@@ -82,7 +82,8 @@
                 $('#comment').css("height", "50");
             });
         });
-    </script> 
+    </script> -->
+    <script src="../js/comment.js"></script>
     <script type="text/javascript">
         function resize_area(obj,minRows){
             var txt = obj.value,
