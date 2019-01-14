@@ -13,25 +13,25 @@ if (isset($_POST['submit']))
     //Errors handlers
     //Check for first
     if (empty($first))
-        $_SESSION['erreur']['first'] = "Veuillez indiquer votre prénom!";
+        $error['first'] = "Veuillez indiquer votre prénom!";
     else if (!preg_match("/^[a-zA-Z]*$/", $first))
-        $_SESSION['erreur']['first'] = "Prénom invalide !";
+        $error['first'] = "Prénom invalide !";
 
     //Check for last
     if (empty($last))
-        $_SESSION['erreur']['last'] = "Veuillez indiquer votre nom!";
+        $error['last'] = "Veuillez indiquer votre nom!";
     else if (!preg_match("/^[a-zA-Z]*$/", $last))
-        $_SESSION['erreur']['last'] = "Nom invalide !";
+        $error['last'] = "Nom invalide !";
 
     //Check for email
     if (empty($email))
-        $_SESSION['erreur']['email'] = "Veuillez indiquer votre email!";
+        $error['email'] = "Veuillez indiquer votre email!";
     else if (!filter_var($email, FILTER_VALIDATE_EMAIL))
-        $_SESSION['erreur']['email'] = "E-mail invalide !";
+        $error['email'] = "E-mail invalide !";
 
     //Check for user name
     if (empty($uid))
-        $_SESSION['erreur']['uid'] = "Veuillez indiquer votre nom d'utilisateur!";
+        $error['uid'] = "Veuillez indiquer votre nom d'utilisateur!";
     else
     {
         // Check if there is an user with this uid
@@ -40,17 +40,16 @@ if (isset($_POST['submit']))
         $req->execute(array($uid));
         $uidexist = $req->rowCount();
         if ($uidexist > 0)
-            $_SESSION['erreur']['uid'] = "Nom d'utilisateur déjà utilisé !";
+            $error['uid'] = "Nom d'utilisateur déjà utilisé !";
     }
 
     //Check for first password
     if (empty($pwd))
-        $_SESSION['erreur']['pwd'] = "Veuillez indiquer votre mot de passe!";
+        $error['pwd'] = "Veuillez indiquer votre mot de passe!";
 
-    if (isset($_SESSION['erreur']))
+    if (isset($error))
     {
-        header("Location: ../fr/signup.php?signup=error");
-        exit();
+        $arr = array("error" => $error);
     }
     else
     {
@@ -78,21 +77,22 @@ if (isset($_POST['submit']))
         ';
         if ($mail = mail($email, "Confirmation de compte", $message, $header))
         {
-            $_SESSION['erreur']['success'] = 'Votre compte a bien été créé ! </br> Veuillez vérifier votre boîte de réception pour confirmer votre email.';
-            header("Location: ../fr/home.php?signup=success");
+            $error['success'] = 'Votre compte a bien été créé ! </br> Veuillez vérifier votre boîte de réception pour confirmer votre email.';
+            $arr = array("success" => $success);
         }
         else
         {
-            $_SESSION['success'] = "L'envoi de l'email à échoué !";
-            header("Location: ../fr/signup.php?signup=email_echec");
+            $success['echec'] = "L'envoi de l'email à échoué !";
+            $arr = array("success" => $success);
         }
         exit();
     }
 }
 else
 {
-    header("Location: ../fr/signup.php");
-    exit();
+    $error['post'] = "Une erreur s'est produite, veuillez réessayer !";
+    $arr = array("error" => $error);
 }
+echo json_encode($arr);
 
 ?>

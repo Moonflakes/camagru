@@ -89,7 +89,7 @@ if (isset($_POST['update']))
 }
 else
 {
-    $error['error'] = "Une erreur s'est produite, veuillez réessayer !";
+    $error[$update] = "Une erreur s'est produite, veuillez réessayer !";
     $arr = array("error" => $error);
 }
 echo json_encode($arr);

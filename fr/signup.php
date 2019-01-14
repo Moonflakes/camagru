@@ -16,12 +16,12 @@
     include_once 'header.php';
 ?>
     <section class="signup">
-            <h2 class="h2sign" >Sign Up</h2>
-            <form  action="../include/signup.inc.php" method="POST">
+            <h2 class="h2sign" >Créer un compte</h2>
+            
                 <table class="signup-form">
                     <tr id="first" >
                         <td>
-                            <input id="_first" type="text" name="first" placeholder="Fisrtname" 
+                            <input class="input" id="_first" type="text" name="first" placeholder="Fisrtname" 
                             value="<?php 
                                 if(isset($_SESSION['first']) && isset($_GET['signup'])) 
                                 { 
@@ -32,7 +32,7 @@
                     </tr>
                     <tr id="last" >
                         <td>
-                            <input id="_last" type="text" name="last" placeholder="Lastname" 
+                            <input class="input" id="_last" type="text" name="last" placeholder="Lastname" 
                             value="<?php 
                                 if(isset($_SESSION['last']) && isset($_GET['signup'])) 
                                 {
@@ -43,7 +43,7 @@
                     </tr>
                     <tr id="email">
                         <td>
-                            <input id="_email" type="text" name="email" placeholder="E-mail" 
+                            <input class="input" id="_email" type="text" name="email" placeholder="E-mail" 
                             value="<?php 
                                 if(isset($_SESSION['email']) && isset($_GET['signup'])) 
                                 {
@@ -54,7 +54,7 @@
                     </tr>
                     <tr id="uid">
                         <td>
-                            <input id="_uid" type="text"  name="uid" placeholder="Username" 
+                            <input class="input" id="_uid" type="text"  name="uid" placeholder="Username" 
                             value="<?php 
                                 if(isset($_SESSION['uid']) && isset($_GET['signup'])) 
                                 {
@@ -65,7 +65,7 @@
                     </tr>
                     <tr id="pwd">
                         <td>
-                            <input id="_pwd" type="password" name="pwd" placeholder="Password" 
+                            <input class="input" id="_pwd" type="password" name="pwd" placeholder="Password" 
                             value="<?php 
                                 if(isset($_SESSION['pwd']) && isset($_GET['signup'])) 
                                 {
@@ -76,13 +76,14 @@
                     </tr>
                     <tr>
                         <td>
-                            <button type="submit" name="submit">Sign up</button>
+                            <button id="signup_but" type="submit" name="submit">S'inscrire</button>
                         </td>
                     </tr>
                 </table>
-            </form>
+
     </section>
-    <script type="text/javascript">
+    <script src="../js/signup.js"></script>
+    <!-- <script type="text/javascript">
     var erreur = <?PHP if (isset($_SESSION['erreur'])) echo json_encode($_SESSION['erreur']);
                         else echo "null"; ?>;
     var get = <?PHP if (isset($_GET)) echo json_encode($_GET);
@@ -98,7 +99,7 @@
                 })
             }
         })
-    </script>
+    </script> -->
 <?PHP
     if(isset($_SESSION['erreur']))
         unset($_SESSION['erreur']);

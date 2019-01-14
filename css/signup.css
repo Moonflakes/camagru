@@ -39,7 +39,8 @@ section.signup
     font-size: 16px;
     color: white;
     cursor: pointer;
-	margin-top: 2em;
+    margin-top: 2em;
+    border-radius: 10px;
 }
 h2
 {
