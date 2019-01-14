@@ -20,7 +20,7 @@ function modif($modif)
         echo '
 <td>
     <button class="modifier"
-            type="submit" name="reset" value="'.$modif.'">Modifier</button>
+            type="submit" name="update" value="'.$modif.'">Modifier</button>
 </td>';
     }
 }

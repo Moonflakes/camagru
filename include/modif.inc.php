@@ -1,57 +1,51 @@
 <?PHP
 session_start();
 
-if (isset($_POST['reset']))
-{
-    header("Location: ../fr/account.php?modif=".$_POST['reset']);
-    exit();
-}
 if (isset($_POST['update']))
 {
-    include_once '../fr/config/setup.php';
+    include_once '../config/setup.php';
     $update = $_POST['update'];
-    $_SESSION['param'] = $param = htmlspecialchars($_POST[$update]);
     if ($update == "email")
     {
+        $new_val = $_POST['new_val'];
         $str_param = "e-mail";
-        if (empty($param))
-            $_SESSION['erreur']['email'] = "Veuillez indiquer votre nouvel e-mail!";
-        else if (!filter_var($param, FILTER_VALIDATE_EMAIL))
-            $_SESSION['erreur']['email'] = "E-mail invalide !";
-        else if ($param == $_SESSION['u_email'])
-            $_SESSION['erreur']['email'] = "Cet e-mail vous est déjà attribué !";
+        if (empty($new_val))
+            $error['email'] = "Veuillez indiquer votre nouvel e-mail!";
+        else if (!filter_var($new_val, FILTER_VALIDATE_EMAIL))
+            $error['email'] = "E-mail invalide !";
+        else if ($new_val == $_SESSION['u_email'])
+            $error['email'] = "Cet e-mail vous est déjà attribué !";
     }
     if ($update == "uid")
     {
+        $new_val = $_POST['new_val'];
         $str_param = "nom d'utilisateur";
-        if (empty($param))
-            $_SESSION['erreur']['uid'] = "Veuillez indiquer votre nouveau nom d'utilisateur!";
+        if (empty($new_val))
+            $error['uid'] = "Veuillez indiquer votre nouveau nom d'utilisateur!";
         else
         {
             // Check if there is an user with this uid
             $requid = 'SELECT * FROM users WHERE user_uid=?';
             $req = $connexion->prepare($requid);
-            $req->execute(array($param));
+            $req->execute(array($new_val));
             $uidexist = $req->rowCount();
             if ($uidexist > 0)
-                $_SESSION['erreur']['uid'] = "Ce nom d'utilisateur vous est déjà attribué !";
+                $error['uid'] = "Ce nom d'utilisateur vous est déjà attribué !";
         }
     }
     if ($update == "pwd")
     {
-        print_r($_POST);
         $str_param = "mot de passe";
-        $_SESSION['oldpwd'] = $oldpwd = htmlspecialchars($_POST['oldpwd']);
-        $_SESSION['newpwd'] = $newpwd = htmlspecialchars($_POST["newpwd"]);
+        $oldpwd = htmlspecialchars($_POST['oldpwd']);
+        $newpwd = htmlspecialchars($_POST["newpwd"]);
         if (empty($oldpwd))
-            $_SESSION['erreur']['oldpwd'] = "Veuillez indiquer votre ancien mot de passe!";
+            $error['oldpwd'] = "Veuillez indiquer votre ancien mot de passe!";
         if (empty($newpwd))
-            $_SESSION['erreur']['newpwd'] = "Veuillez indiquer votre nouveau mot de passe!";
+            $error['pwd'] = "Veuillez indiquer votre nouveau mot de passe!";
     }
-    if (isset($_SESSION['erreur']))
+    if (isset($error))
     {
-        header("Location: ../fr/account.php?modif=".$update."&error=".$update);
-        exit();
+        $arr = array("error" => $error);
     }
     else
     {
@@ -62,11 +56,10 @@ if (isset($_POST['update']))
         $req->execute(array($uid));
         $uidexist = $req->rowCount();
         if ($uidexist < 1)
-            $_SESSION['erreur']['uid'] = "Nom d'utilisateur incorrect !";
-        if (isset($_SESSION['erreur']))
+            $error['uid'] = "Nom d'utilisateur incorrect !";
+        if (isset($error))
         {
-            header("Location: ../fr/account.php?modif=uid");
-            exit();
+            $arr = array("error" => $error);
         }
         else
         {
@@ -76,29 +69,28 @@ if (isset($_POST['update']))
                 {
                     $hashpwdCheck = password_verify($oldpwd, $userinfo['user_pwd']);
                     if (!(password_verify($oldpwd, $userinfo['user_pwd'])))
-                        $_SESSION['erreur']['oldpwd'] = "Ancien mot de passe incorrect !";
+                        $error['oldpwd'] = "Ancien mot de passe incorrect !";
                 }
-                if (isset($_SESSION['erreur']))
+                if (isset($error))
                 {
-                    header("Location: ../fr/account.php?modif=oldpwd&error=oldpwd");
-                    exit();
+                    $arr = array("error" => $error);
                 }
                 else
-                    $param = password_hash($newpwd, PASSWORD_DEFAULT);
+                    $new_val = password_hash($newpwd, PASSWORD_DEFAULT);
             }
             $requpdate = "UPDATE users SET user_$update=? WHERE user_uid=?";
-            $connexion->prepare($requpdate)->execute(array($param, $uid));
-            $_SESSION['success'] = 'Votre '.$str_param.' a bien été modifié !';
+            $connexion->prepare($requpdate)->execute(array($new_val, $uid));
+            $success[$update] = 'Votre '.$str_param.' a bien été modifié !';
             if ($update != "pwd")
-                $_SESSION["u_".$update] = $param;
-            header("Location: ../fr/account.php?modif=success");
-            exit();
+                $_SESSION["u_".$update] = $new_val;
+            $arr = array("success" => $success);
         }
     }
 }
 else
 {
-    header("Location: ../fr/account.php");
-    exit();
+    $error['error'] = "Une erreur s'est produite, veuillez réessayer !";
+    $arr = array("error" => $error);
 }
+echo json_encode($arr);
 ?>
