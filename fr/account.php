@@ -61,42 +61,6 @@
             </form>
     </section>
     <script src="../js/account.js"></script>
-   <!-- <script type="text/javascript">
-    var erreur = <?PHP if (isset($_SESSION['erreur'])) echo json_encode($_SESSION['erreur']);
-                        else echo "null"; ?>;
-    var get = <?PHP if (isset($_GET)) echo json_encode($_GET);
-                        else echo "null"; ?>;
-        $(document).ready(function () 
-        {
-            if (get['modif'] && !erreur)
-            {
-                if (get['modif'] == "pwd")
-                {
-                    $("#_oldpwd").css('backgroundColor', 'rgba(255, 238, 181, 0.8)');
-                    $("#_newpwd").css('backgroundColor', 'rgba(255, 238, 181, 0.8)');
-                }
-                else
-                    $("#_"+get['modif']).css('backgroundColor', 'rgb(255, 238, 181, 0.8)');
-            }
-            if (erreur && get['error'])
-            {
-                $.each(erreur,function(index,element)
-                {
-                    $("#_"+index).css('backgroundColor', 'rgba(255, 238, 181, 0.8)');
-                    $("#"+index).after("<tr><td></td><td style='padding-left:12px' colspan='2'><font color='red'>"+ element +"</font></td></tr>");
-                })
-            }
-        })
-    </script> -->
-<?PHP
-    if(isset($_SESSION['erreur']))
-        unset($_SESSION['erreur']);
-    else if (isset($_SESSION['success']))
-    {
-        echo '<font color="red">'.$_SESSION['success'].'</font>';
-        unset($_SESSION['success']);
-    }
-?>
 <?PHP
     include_once 'footer.php';
 ?>
