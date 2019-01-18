@@ -10,8 +10,7 @@
         var logoutBut = '<a class="ic logout" href="../include/logout.inc.php"><img src="../img_site/icones/logout_3.png" alt="logout" title="Déconnexion"><h4>Déconnexion</h4></a>',
             accountBut = '<a class="ic account" href="account.php"><div class="compte"><img src="../img_site/icones/account_green.png" alt="account" title="Mon compte"><div class="name">'+name+'</div></div><h4>Mon compte</h4></a>',
             rightIcones = document.getElementsByClassName("icones-right");
-        
-            console.log("je passe la");
+
             rightIcones[0].innerHTML = logoutBut+accountBut;
     }
 
@@ -33,13 +32,19 @@
                     loginDiv.parentElement.removeChild(loginDiv);
                     var message = document.getElementsByClassName("message");
                     var logMsg = "<p class='msg'><font color='red'>"+ data['success'] +"</font></p>";
-                    message[0].innerHTML = logMsg;
+
+                    if (message[0])
+                        message[0].innerHTML = logMsg;
+                    else {
+                        header[0].insertAdjacentHTML('afterend', "<div class='message'>"+logMsg+"</div>");
+                    }
 
                     makeLogoutAccountBut(data['name']);
                 }
                 else if (error) {
                     var param = Object.keys(error),
                         str = Object.values(error);
+                    var flag = 0;
 
                     loginDiv.insertAdjacentHTML('afterbegin', "<div id='msgError'></div>");
                     var divError = document.getElementById("msgError");
@@ -47,13 +52,19 @@
                         var inputError = document.getElementById("_login_"+elem)
                             errorMsg = "<p class='msg'><font color='red'>"+ str[index] +"</font></p>";
                         
+                        if (str[index] === "Mot de passe incorrect !")
+                            flag = 1;
                         inputError.setAttribute('style', 'background-color: rgba(248, 207, 72, 0.3)');
                         divError.insertAdjacentHTML('beforeend', errorMsg);
                     })
+                    
                     var inscription = "<p class='msg'><font color='blue'>Si vous n'être pas encore inscrit, inscrivez-vous en cliquant sur Inscription !</font></p>",
                         forgotPwd = "<p class='msg'><font color='blue'><a href='forgot_pwd.php' id='fpwd-link'>Mot de passe oublié</a></font></p>";
 
-                    divError.insertAdjacentHTML('beforeend', inscription+forgotPwd);
+                    if (flag === 1)
+                        divError.insertAdjacentHTML('beforeend', forgotPwd);
+                    else
+                        divError.insertAdjacentHTML('beforeend', inscription);
                     loginDiv.setAttribute('style', 'justify-content: space-between');
                 }
             }
@@ -106,8 +117,7 @@
 
     function loginClick() {
         var divLogin = document.getElementById("loginDiv");
-        var message = document.getElementsByClassName("message"),
-            tableLog_uid = `<div class="login-div" id="loginDiv"><table class="login" ><tr><td><input id="_login_uid" type="text" name="uid" placeholder="Pseudo/e-mail"></td>`,
+        var tableLog_uid = `<div class="login-div" id="loginDiv"><table class="login" ><tr><td><input id="_login_uid" type="text" name="uid" placeholder="Pseudo/e-mail"></td>`,
             tableLog_pwd = '<td><input id="_login_pwd" type="password" name="pwd" placeholder="Mot de passe"></td>',
             tableLog_but = '<td><button id="butLog" type="submit" name="submit">Connexion</button></td></tr></table></div>';
 
@@ -116,7 +126,7 @@
         
         var logDiv = tableLog_uid+tableLog_pwd+tableLog_but;
 
-        message[0].insertAdjacentHTML('beforebegin', logDiv);
+        header[0].insertAdjacentHTML('afterend', logDiv);
 
         var butLog = document.getElementById("butLog");
 
@@ -124,7 +134,8 @@
         
     }
 
-    var login = document.getElementById("login");
+    var login = document.getElementById("login"),
+        header = document.getElementsByClassName("header");
 
     if (login)
         login.addEventListener('click', loginClick, false);

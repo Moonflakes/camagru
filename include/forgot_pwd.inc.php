@@ -3,29 +3,35 @@ session_start();
 if (isset($_POST['submit']))
 {
     include_once '../config/setup.php';
-    $_SESSION['email'] = $email = htmlspecialchars($_POST['email']);
+    $email = htmlspecialchars($_POST['email']);
+    $uid = (isset($_SESSION['u_uid'])) ? $_SESSION['u_uid'] : $_POST['uid'];
 
     //Errors handlers
     //Check for empty fields
     if (empty($email))
     {
-        header("Location: ../fr/forgot_pwd.php?forgot=empty");
-        $_SESSION['erreur']['email'] = "Veuillez indiquer votre e-mail !";
-        exit();
+        //header("Location: ../fr/forgot_pwd.php?forgot=empty");
+        $error = "Veuillez indiquer votre e-mail !";
+        //exit();
+    }
+    if (empty($uid))
+    {
+        $error['uid'] = "Veuillez indiquer votre Nom d'utilisateur";
     }
     else
     {
         // Check if there is an user with this email
         $requemail = "SELECT * FROM users WHERE user_email=? AND user_uid=?";
         $req = $connexion->prepare($requemail);
-        $req->execute(array($email, $_SESSION['u_uid']));
+        $req->execute(array($email, $uid));
         $emailexist = $req->rowCount();
         if ($emailexist < 1)
-            $_SESSION['erreur']['email'] = "E-mail incorrect !";
-        if (isset($_SESSION['erreur']))
+            $error = "E-mail incorrect !";
+        if (isset($error))
         {
-            header("Location: ../fr/forgot_pwd.php?forgot=error");
-            exit();
+            $arr = array("erreur" => $error);
+            //header("Location: ../fr/forgot_pwd.php?forgot=error");
+            //exit();
         }
         else
         {
@@ -57,13 +63,15 @@ if (isset($_POST['submit']))
             $mail = mail($email, "Réinitialisation de votre mot de passe", $message, $header);
             if ($mail == TRUE)
             {
-                $_SESSION['success'] = 'Un e-mail de réinisalisation vient de vous être envoyé ! </br> Veuillez vérifier votre boîte de réception.';
-                header("Location: ../fr/forgot_pwd.php?forgot=success");
+                $success = 'Un e-mail de réinisalisation vient de vous être envoyé ! </br> Veuillez vérifier votre boîte de réception.';
+                $arr = array("success" => $success);
+                //header("Location: ../fr/forgot_pwd.php?forgot=success");
             }
             else
             {
-                $_SESSION['success'] = "L'envoie de l'email à échoué !";
-                header("Location: ../fr/forgot_pwd.php?forgot=email_echec");
+                $success = "L'envoie de l'email à échoué !";
+                $arr = array("success" => $success);
+                //header("Location: ../fr/forgot_pwd.php?forgot=email_echec");
             }
             exit();
         }
@@ -71,8 +79,11 @@ if (isset($_POST['submit']))
 }
 else
 {
-    header("Location: ../fr/forgot_pwd.php");
-    exit();
+    $error = "Une erreur s'est produite, veuillez réessayer !";
+    $arr = array("erreur" => $error);
+    //header("Location: ../fr/forgot_pwd.php");
+    //exit();
 }
+echo json_encode($arr);
 
 ?>

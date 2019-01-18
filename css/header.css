@@ -1,3 +1,6 @@
+body {
+    font-family: monospace;
+}
 section
 {
     background-image: url("../img_site/points.png"), 
@@ -6,6 +9,14 @@ section
     background-repeat: repeat, no-repeat;
     background-size: 10%, 100%;
     border-radius: 20px;
+}
+
+.message
+{
+    background-color: /*rgba(223, 137, 137, 0.103)*/ /*#ffffef*/ #ffffef;
+    border-radius: 20px;
+    margin-top: 8px;
+    padding: 10px 30px; 
 }
 
 #copyright

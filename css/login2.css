@@ -34,6 +34,6 @@
     line-height:30px;
 }
 
-/*table.login {
-    margin-left: 50;
-}*/
+#msgError {
+    font-family: monospace;
+}

@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="../css/message.css">
+
 <div class="message">
     <?php
     //supprimer le message d'erreur de login

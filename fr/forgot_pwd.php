@@ -1,27 +1,44 @@
 <?PHP
     include_once 'header.php';
 ?>
-    <section class="main-container">
-        <div class="main-wrapper">
+    <link rel="stylesheet" type="text/css" href="../css/signup.css">
+    <section class="signup">
             <h2 class="h2sign" >Mot de passe oublié</h2>
-            <form  action="../include/forgot_pwd.inc.php" method="POST">
                 <table class="signup-form">
+                    <tr id="uid" >
+                        <td>
+                            <input id="_uid" type="text" name="uid" placeholder="Pseudo"
+                                value="<?php if(isset($_SESSION['u_uid'])) echo $_SESSION['u_uid']?>">
+                        </td>
+                    </tr>
                     <tr id="email" >
                         <td>
                             <input id="_email" type="text" name="email" placeholder="E-mail" 
-                            <?php if ($_SESSION['u_confirm'] == 0) echo "readonly"; ?>>
+                                value="<?php if(isset($_SESSION['u_email'])) echo $_SESSION['u_email']?>">
                         </td>
                     </tr>
+<?php   if (isset($_SESSION['u_confirm']) && $_SESSION['u_confirm'] === 0) 
+        {
+?>
                     <tr>
                         <td>
-                            <button type="submit" name="submit">Envoyer</button>
+                            <font color='red'>Attention votre adresse e-mail n'a pas été confirmée !</br></br>
+                            Vous ne pouvez pas procéder à la réinitialisation de votre mot de passe sans avoir validé votre adresse e-mail !</br></br>
+                            Veuillez vérifier votre boîte de réception ou <a href='send_confirm.php' id='fpwd-link'>cliquez ici </a>pour qu'un mail de confirmation vous soit envoyé.</font>
+                        </td>
+                    </tr>
+<?php
+        }
+?>
+                    <tr>
+                        <td>
+                            <button id="forgot" type="submit" name="submit">Envoyer</button>
                         </td>
                     </tr>
                 </table>
-            </form>
-        </div>
     </section>
-    <!-- <script type="text/javascript">
+    <script src="../js/forgotpwd.js"></script>
+  <!--  <script type="text/javascript">
     var erreur = <?PHP echo json_encode($_SESSION['erreur']); ?>;
     var confirm = <?PHP echo json_encode($_SESSION['u_confirm']); ?>;
     var get = <?PHP echo json_encode($_GET); ?>;
