@@ -168,12 +168,12 @@ div.nbcom
 {
     margin-left: 12px;
 }
-.desc .action form button
+.desc .action button
 {
     border:none; 
     padding: unset; 
 }
-.desc .action form button img
+.desc .action button img
 {
     width: 30; 
     cursor: pointer;

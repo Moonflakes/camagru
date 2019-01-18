@@ -264,17 +264,18 @@ function createColumns(largeur)
 }
 
 
-window.addEventListener('load',function(){
-    var largeur = document.body.clientWidth;
+var largeur = document.body.clientWidth;
        
-    createColumns(largeur);
+createColumns(largeur);
 
 //controler la largeur de la fenetre
-    this.addEventListener('resize',function(){
-        largeur = document.body.clientWidth;
-        createColumns(largeur);
-    });
+this.addEventListener('resize',function(){
+    largeur = document.body.clientWidth;
+    createColumns(largeur);
 });
+
+
+// PARTIE LIKE
 
 function modifLike(xhr) {
     if (xhr.readyState == XMLHttpRequest.DONE) {

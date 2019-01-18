@@ -71,11 +71,11 @@
                     </div>
                     <div class="vide"></div>
                     <div class="action">
-                        <form method="POST">
+                    
                             <button type="submit" class="coeur" id="coeur_<?php echo $id;?>" name="like" value="<?php echo $id;?>">
                                 <img id="img_coeur_<?php echo $id;?>" src="<?php if ($like === 1) echo "../img_site/icones/coeur_rose.png"; else echo "../img_site/icones/coeur.png"; ?>" 
                                     alt="like" title="<?php if ($like === 1) echo "Je n'aime pas"; else echo "J'aime"; ?>"></button>
-                        </form>
+                        
                     </div>
                     <div class="action">
                         <form action="../include/comment.inc.php" method="POST">
