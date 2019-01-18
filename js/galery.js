@@ -1,105 +1,5 @@
-<link rel="stylesheet" href="../css/galery2.css" type="text/css">
-<link rel="stylesheet" href="../css/pagination.css" type="text/css">
-<section class="galery">
-    <form name="nbitem_pg" action="../include/set_pag_infos.php?page=<?php if (isset($_GET['page'])) echo $_GET['page']; else echo '1';?>" method="POST">
-        Nombre d'items par pages :
-        <select name="nb_items" onchange='this.form.submit()'>
-            <option value="10" <?php if ((isset($_GET['limit']) && $_GET['limit'] == 10) || !isset($_GET['limit'])) echo "selected"?>>10</option>
-            <option value="20" <?php if (isset($_GET['limit']) && $_GET['limit'] == 20) echo "selected"?>>20</option>
-            <option value="30" <?php if (isset($_GET['limit']) && $_GET['limit'] == 30) echo "selected"?>>30</option>
-            <option value="40" <?php if (isset($_GET['limit']) && $_GET['limit'] == 40) echo "selected"?>>40</option>
-        </select>
-    </form>
-    <div class="grid" id="grid">
-<?php
-    include_once '../config/setup.php';
-    include_once '../include/paginator.php';
-    
-    $query = "SELECT * from pictures"; // requete sql
-    
-    $limit = (isset($_GET['limit'])) ? $_GET['limit'] : 10; // nombre de d'image par page (par defaut 5)
-    $page = (isset($_GET['page'])) ? $_GET['page'] : 1; // num de page
-    $links = 5; // links between ...
-    
-    $paginator = new Paginator($connexion, $query); // contructor called
-    $result = $paginator->getData($limit, $page); // set pictures infos
-    
-    //print_r($result->data);
-    if(isset($result->data))
-    {
-        $i = 0;
-        foreach ($result->data as $key => $array) 
-        {
-            $path = 0;
-            $descr = 0;
-            $nblike = 0;
-            $nbcom = 0;
-            $id = 0;
-            $like = 0;
-            if (is_array($array))
-            {
-                foreach ($array as $key => $value) 
-                {
-                    if ($key === 'picture_path')
-                        $path = str_replace(' ', '+', $value);
-                    if ($key === 'picture_description')
-                        $descr = $value;
-                    if ($key === 'picture_nb_like')
-                        $nblike = $value;
-                    if ($key === 'picture_nb_comment')
-                        $nbcom = $value;
-                    if ($key === 'picture_id')
-                        $id = $value;
-                    if ($key === 'picture_like')
-                        $like = $value;
-                }
-            }
-            if ($path)
-            {
-?>
-        <div class="item_photo" id="item<?php echo ++$i;?>">
-            <div class="content_item">
-            <!--    <img class="pince" src="../img_site/pince.png" alt="pince"> -->
-                <figure>
-                    <img src="<?php echo $path;?>" alt="photo">
-                    <figcaption><big><?php echo $descr;?></big></figcaption>
-                </figure>
-                <div class="desc">
-                    <div class="nb">
-                        <div class="nblike"><small><b id="nblike_<?php echo $id;?>"><?php echo $nblike;?></b> J'aime</small></div>
-                        <div class="nbcom"><small><b id="nbcom_<?php echo $id;?>"><?php echo $nbcom;?></b> Commentaires</small></div>
-                    </div>
-                    <div class="vide"></div>
-                    <div class="action">
-                        <form method="POST">
-                            <button type="submit" class="coeur" id="coeur_<?php echo $id;?>" name="like" value="<?php echo $id;?>">
-                                <img id="img_coeur_<?php echo $id;?>" src="<?php if ($like === 1) echo "../img_site/icones/coeur_rose.png"; else echo "../img_site/icones/coeur.png"; ?>" 
-                                    alt="like" title="<?php if ($like === 1) echo "Je n'aime pas"; else echo "J'aime"; ?>"></button>
-                        </form>
-                    </div>
-                    <div class="action">
-                        <form action="../include/comment.inc.php" method="POST">
-                            <button type="submit" name="comment" value="<?php echo $id;?>">
-                                <img src="../img_site/icones/bulle_dialogue.png" alt="comment" title="Commenter">
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-<?php
-            }
-        }
-    }
-?>
-    </div>
-    <div class="clearfix"></div>
-<?php
-    echo $paginator->createLinks($links, 'pagination');
-?>
-<script src="../js/galery.js"></script>
-<!-- <script type="text/javascript">
-
+(function() {
+  
 function smallH()
 {
     tab = Array.prototype.slice.call(arguments);
@@ -376,48 +276,89 @@ window.addEventListener('load',function(){
         createColumns(largeur);
     });
 });
-	</script>
-<script>
- 
-$(document).ready(function(){
+
+function modifLike(xhr) {
+    if (xhr.readyState == XMLHttpRequest.DONE) {
+        if (xhr.status == 200) {
+            //console.log(xhr.responseText);
+            data = JSON.parse(xhr.responseText);
+          
+            var nblike = data['nb_likes'];
+            var type = data['type'];
+            var id = data['id'];
+            var imgCoeur = document.getElementById("img_coeur_"+id),
+                nbLike_ = document.getElementById("nblike_"+id);
+                
+            if(type == 'like'){
+                // mettre le coeur en rose
+                imgCoeur.setAttribute('src', src_like);
+                imgCoeur.setAttribute('title', "Je n'aime pas");
+                nbLike_.innerHTML = nblike;
+            }
+            else if (type == 'unlike'){
+                // mettre le coeur vide
+                imgCoeur.setAttribute('src', src_unlike);
+                imgCoeur.setAttribute('title', "Je n'aime pas");
+                nbLike_.innerHTML = nblike;
+            }
+      }
+      else {
+        alert('Un problème est survenu avec la requête.');
+      }
+    }
+  }
+
+function sendLike(xhr, url, like) {
+    xhr.onreadystatechange = function() {
+        modifLike(xhr); 
+    };
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      
+    xhr.send("like="+like);
+}
+
+function makeRequest(url, like) {
+    var xhr = null;
+
+    if (window.XMLHttpRequest || window.ActiveXObject) {
+        if (window.ActiveXObject) {
+            try {
+                xhr = new ActiveXObject("Msxml2.XMLHTTP");
+            }
+            catch(e) {
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+        }
+        else {
+            xhr = new XMLHttpRequest(); 
+        }
+    }
+
+    if (!xhr) {
+        alert('Abandon :( Impossible de créer une instance XMLHTTP');
+        return false;
+    }
+    sendLike(xhr, url, like);
+}
+
+function coeurClick() {
+    var id = this.id;   // Getting Button id
+    var split_id = id.split("_");
+    var id = split_id[1];
+    var like = document.getElementById("coeur_"+id).value;
+
+    makeRequest('../include/like.php', like);
+
+
+}
+
 var src_like = '../img_site/icones/coeur_rose.png';
 var src_unlike = '../img_site/icones/coeur.png';
-var nblike = $('#nblike').text();
-    $(".coeur").click(function(e){
-        e.preventDefault();
-        var id = this.id;   // Getting Button id
-        var split_id = id.split("_");
-        var id = split_id[1];
-        
-        $.post(
-            '../include/like.php', 
-            {
-                like : $("#coeur_"+id).val()
-            },
-  
-            function(data){
-                var nblike = data['nb_likes'];
-                var type = data['type'];
-                var id = data['id'];
-                
-                if(type == 'like'){
-                    // mettre le coeur en rose
-                    $("#img_coeur_"+id).attr('src', src_like);
-                    $("#img_coeur_"+id).attr('title', "Je n'aime pas");
-                    $('#nblike_'+id).text(nblike);
-                }
-                else if (type == 'unlike'){
-                    // mettre le coeur vide
-                    $("#img_coeur_"+id).attr('src', src_unlike);
-                    $("#img_coeur_"+id).attr('title', "J'aime");
-                    $('#nblike_'+id).text(nblike);
-                }
-          
-            },
-            'json'
-        );
-    });
+var coeur = document.getElementsByClassName("coeur");
+
+Array.from(coeur).forEach(function(element) {
+    element.addEventListener('click', coeurClick, false);
 });
-  
-</script> -->
-</section>
+
+})();
