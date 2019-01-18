@@ -18,7 +18,7 @@
     <section class="signup">
             <h2 class="h2sign" >Créer un compte</h2>
             
-                <table class="signup-form">
+                <table class="signup-form" id="table">
                     <tr id="first" >
                         <td>
                             <input class="input" id="_first" type="text" name="first" placeholder="Fisrtname" 
@@ -83,32 +83,7 @@
 
     </section>
     <script src="../js/signup.js"></script>
-    <!-- <script type="text/javascript">
-    var erreur = <?PHP if (isset($_SESSION['erreur'])) echo json_encode($_SESSION['erreur']);
-                        else echo "null"; ?>;
-    var get = <?PHP if (isset($_GET)) echo json_encode($_GET);
-                        else echo "null";; ?>;
-        $(document).ready(function () 
-        {
-            if (erreur && get['signup'])
-            {
-                $.each(erreur,function(index,element)
-                {
-                    $("#"+index).after("<tr><td><font color='red'>"+ element +"</font></td></tr>");
-                    $("#_"+index).css('backgroundColor', 'rgba(255, 238, 181, 0.8)');
-                })
-            }
-        })
-    </script> -->
-<?PHP
-    if(isset($_SESSION['erreur']))
-        unset($_SESSION['erreur']);
-    else if (isset($_SESSION['success']))
-    {
-        echo '<font color="red">'.$_SESSION['success'].'</font>';
-        unset($_SESSION['success']);
-    }
-?>
+
 <?PHP
     include_once 'footer.php';
 ?>

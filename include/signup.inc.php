@@ -62,7 +62,8 @@ if (isset($_POST['submit']))
         //Inser the user into the database
         $reqinsert = 'INSERT INTO users (`user_id`, `user_first`, `user_last`, `user_email`, `user_uid`, `user_pwd`, `user_notif`, `user_key`, `user_confirm`)
                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
-        $connexion->prepare($reqinsert)->execute(array(0, $first, $last, $email, $uid, $hashpwd, 1, $key, 0));
+        $requete = $connexion->prepare($reqinsert);
+        $requete->execute(array(0, $first, $last, $email, $uid, $hashpwd, 1, $key, 0));
         $header="MIME-Version: 1.0\r\n";
         $header.='From: Camagru.com <support@camagru.com>'."\n";
         $header.='Content-Type:text/html; charset="uft-8"'."\n";
@@ -78,14 +79,13 @@ if (isset($_POST['submit']))
         if ($mail = mail($email, "Confirmation de compte", $message, $header))
         {
             $error['success'] = 'Votre compte a bien été créé ! </br> Veuillez vérifier votre boîte de réception pour confirmer votre email.';
-            $arr = array("success" => $success);
+            $arr = array("success" => $error);
         }
         else
         {
-            $success['echec'] = "L'envoi de l'email à échoué !";
-            $arr = array("success" => $success);
+            $error['email'] = "L'envoi de l'email de confirmation à échoué ! </br> Veuillez si votre adresse mail est valide et rééssayez.";
+            $arr = array("error" => $error);
         }
-        exit();
     }
 }
 else
