@@ -39,13 +39,16 @@ if (check_user_is_connect($connexion))
     {
         echo "error";
     }
-    echo json_encode($arr);
+    
 }
-/*else
+else
 {
-    $_SESSION['erreur']['connect'] = "Pour liker des photos à votre guise connectez vous !";
-    header("Location: ../fr/home.php?connect=error");
-    exit();
-}*/
+    //$_SESSION['erreur']['connect'] = "Pour liker des photos à votre guise connectez vous !";
+    //header("Location: ../fr/home.php?connect=error");
+    //exit();
+    $error = "Pour liker des photos à votre guise connectez vous !";
+    $arr = array("erreur" => $error);
+}
+echo json_encode($arr);
 
 ?>

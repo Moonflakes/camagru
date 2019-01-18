@@ -1,5 +1,6 @@
 (function() {
-  
+
+//MISE EN FORME DES COLONNES
 function smallH()
 {
     tab = Array.prototype.slice.call(arguments);
@@ -276,7 +277,6 @@ this.addEventListener('resize',function(){
 
 
 // PARTIE LIKE
-
 function modifLike(xhr) {
     if (xhr.readyState == XMLHttpRequest.DONE) {
         if (xhr.status == 200) {
@@ -288,6 +288,10 @@ function modifLike(xhr) {
             var id = data['id'];
             var imgCoeur = document.getElementById("img_coeur_"+id),
                 nbLike_ = document.getElementById("nblike_"+id);
+            var msgLog = document.getElementsByClassName("msg");
+
+            if (msgLog)
+                removeMsg(msgLog);
                 
             if(type == 'like'){
                 // mettre le coeur en rose
@@ -301,6 +305,11 @@ function modifLike(xhr) {
                 imgCoeur.setAttribute('title', "Je n'aime pas");
                 nbLike_.innerHTML = nblike;
             }
+            else if (data['erreur']) {
+                var message = document.getElementsByClassName("message");
+                var logMsg = "<p class='msg'><font color='red'>"+ data['erreur'] +"</font></p>";
+                message[0].innerHTML = logMsg;
+            }
       }
       else {
         alert('Un problème est survenu avec la requête.');
@@ -308,17 +317,17 @@ function modifLike(xhr) {
     }
   }
 
-function sendLike(xhr, url, like) {
+function sendLike(xhr, url, id_pict) {
     xhr.onreadystatechange = function() {
         modifLike(xhr); 
     };
     xhr.open('POST', url, true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
       
-    xhr.send("like="+like);
+    xhr.send("like="+id_pict);
 }
 
-function makeRequest(url, like) {
+function makeRequest(url, id_pict, action) {
     var xhr = null;
 
     if (window.XMLHttpRequest || window.ActiveXObject) {
@@ -339,7 +348,10 @@ function makeRequest(url, like) {
         alert('Abandon :( Impossible de créer une instance XMLHTTP');
         return false;
     }
-    sendLike(xhr, url, like);
+    if (action === "like")
+        sendLike(xhr, url, id_pict);
+    else if (action === "comment")
+        sendComment(xhr, url, id_pict)
 }
 
 function coeurClick() {
@@ -348,7 +360,13 @@ function coeurClick() {
     var id = split_id[1];
     var like = document.getElementById("coeur_"+id).value;
 
-    makeRequest('../include/like.php', like);
+    makeRequest('../include/like.php', like, "like");
+}
+
+function removeMsg(errorMsg) {
+    Array.from(errorMsg).forEach(function(element) {
+        element.parentElement.removeChild(element);
+    });
 }
 
 var src_like = '../img_site/icones/coeur_rose.png';
@@ -358,5 +376,56 @@ var coeur = document.getElementsByClassName("coeur");
 Array.from(coeur).forEach(function(element) {
     element.addEventListener('click', coeurClick, false);
 });
+
+// PARTIE COMMENTAIRE
+function goComment(xhr) {
+    if (xhr.readyState == XMLHttpRequest.DONE) {
+        if (xhr.status == 200) {
+            //console.log(xhr.responseText);
+            data = JSON.parse(xhr.responseText);
+          
+            var page = data['page'];
+            var error = data['erreur'];
+            
+            if (page) {
+                document.location.href="http://localhost:8100/camagru_git/fr/"+page;
+            }
+            else if (error) {
+                var msgLog = document.getElementsByClassName("msg");
+
+                if (msgLog)
+                    removeMsg(msgLog);
+                
+                var message = document.getElementsByClassName("message");
+                var logMsg = "<p class='msg'><font color='red'>"+ error +"</font></p>";
+                message[0].innerHTML = logMsg;
+            }
+      }
+      else {
+        alert('Un problème est survenu avec la requête.');
+      }
+    }
+  }
+
+function sendComment(xhr, url, id_pict) {
+    xhr.onreadystatechange = function() {
+        goComment(xhr); 
+    };
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      
+    xhr.send("comment="+id_pict);
+}
+
+function commentClick() {
+    makeRequest('../include/comment.inc.php', this.value, "comment");
+}
+
+var butCom = document.getElementsByClassName("comment");
+
+Array.from(butCom).forEach(function(element) {
+    element.addEventListener('click', commentClick, false);
+});
+
 
 })();
