@@ -8,7 +8,7 @@
     /*background-image: linear-gradient(to top, #ffcceb, #ffd8f0, #ffe4f5, #fff0fa, #fffcfe);*/
     background-image: linear-gradient(to top, #fff0de, #fff3e5, #fff6ec, #fff9f2, #fffcf9);
 }
-.login-div form button
+.login-div button
 {
     width: 140px;
     height: 30px;
@@ -21,7 +21,7 @@
     cursor: pointer;
     border-radius: 10px;
 }
-.login-div form input
+.login-div input
 {
     float: left;
     width: 140px;
@@ -33,3 +33,7 @@
     font-size: 14px;
     line-height:30px;
 }
+
+/*table.login {
+    margin-left: 50;
+}*/

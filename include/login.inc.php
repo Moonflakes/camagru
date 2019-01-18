@@ -3,23 +3,24 @@ session_start();
 if (isset($_POST['submit']))
 {
     include_once '../config/setup.php';
-    $_SESSION['uid'] = $uid = htmlspecialchars($_POST['uid']);
-    $_SESSION['pwd'] = $pwd = htmlspecialchars($_POST['pwd']);
+    $uid = htmlspecialchars($_POST['uid']);
+    $pwd = htmlspecialchars($_POST['pwd']);
 
     //Errors handlers
     //Check for empty fields
     if (empty($uid))
     {
-        $_SESSION['erreur']['uid'] = "Veuillez indiquer votre nom d'utilisateur !";
+        $error['uid'] = "Veuillez indiquer votre nom d'utilisateur !";
     }
     if (empty($pwd))
     {
-        $_SESSION['erreur']['pwd'] = "Veuillez indiquer votre nouveau mot de passe !";
+        $error['pwd'] = "Veuillez indiquer votre mot de passe !";
     }
-    if (isset($_SESSION['erreur']))
+    if (isset($error))
     {
-        header("Location: ../fr/home.php?login=error");
-        exit();
+        //header("Location: ../fr/home.php?login=error");
+        //exit();
+        $arr = array("error" => $error);
     }
     else
     {
@@ -29,7 +30,7 @@ if (isset($_POST['submit']))
         $req->execute(array($uid, $uid));
         $uidexist = $req->rowCount();
         if ($uidexist < 1)
-            $_SESSION['erreur']['uid'] = "Nom d'utilisateur/e-mail incorrect !";
+            $error['uid'] = "Nom d'utilisateur/e-mail incorrect !";
         else if ($userinfo = $req->fetch())
         {
             // fetch pour mettre toutes les informations de l'utilisateur dans un tableau de données
@@ -40,12 +41,13 @@ if (isset($_POST['submit']))
             $_SESSION['u_key'] = $userinfo['user_key'];
             $hashpwdCheck = password_verify($pwd, $userinfo['user_pwd']);
             if ($hashpwdCheck == false)
-                $_SESSION['erreur']['pwd'] = "Mot de passe incorrect !";
+                $error['pwd'] = "Mot de passe incorrect !";
         }
-        if (isset($_SESSION['erreur']))
+        if (isset($error))
         {
-            header("Location: ../fr/home.php?login=error");
-            exit();
+            //header("Location: ../fr/home.php?login=error");
+            //exit();
+            $arr = array("error" => $error);
         }
         else
         {
@@ -57,15 +59,19 @@ if (isset($_POST['submit']))
             $_SESSION['u_uid'] = $userinfo['user_uid'];
             $_SESSION['u_key'] = $userinfo['user_key'];
             $_SESSION['u_confirm'] = $userinfo['user_confirm'];
-            header("Location: ../fr/home.php?login=success");
-            exit();
+            //header("Location: ../fr/home.php?login=success");
+            //exit();
+            $arr = array("success" => "Vous vous êtes connecté avec succès", "name" => strtoupper($_SESSION['u_first']));
         }
     }
 }
 else
 {
-    header("Location: ../fr/home.php");
-    exit();
+    //header("Location: ../fr/home.php");
+    //exit();
+    $error['erreur'] = "Une erreur s'est produite, veuillez réessayer !";
+    $arr = array("error" => $error);
 }
+echo json_encode($arr);
 
 ?>

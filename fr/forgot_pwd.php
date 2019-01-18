@@ -21,7 +21,7 @@
             </form>
         </div>
     </section>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
     var erreur = <?PHP echo json_encode($_SESSION['erreur']); ?>;
     var confirm = <?PHP echo json_encode($_SESSION['u_confirm']); ?>;
     var get = <?PHP echo json_encode($_GET); ?>;
@@ -40,7 +40,7 @@
                 })
             }
         })
-    </script>
+    </script> -->
 <?PHP
     if(isset($_SESSION['erreur']))
         unset($_SESSION['erreur']);

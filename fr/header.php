@@ -2,6 +2,7 @@
     session_start();
 ?>
 <link rel="stylesheet" type="text/css" href="../css/header.css">
+<link rel="stylesheet" href="../css/login2.css" type="text/css">
     <div class="header">
         <div class="icones-left">
             <a class="ic photo" href="webcam.php">
@@ -46,7 +47,7 @@
     else
     {
 ?>
-            <a class="ic login" href="home.php?login=ask">
+            <a class="ic login" id="login" >
                 <img src="../img_site/icones/login_1.png" alt="login" title="Connexion">
                 <h4>Connexion</h4>
             </a>
@@ -59,3 +60,4 @@
 ?>
         </div>
     </div>
+    <script src="../js/header.js"></script>
