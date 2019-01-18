@@ -5,7 +5,6 @@ function smallH()
     tab = Array.prototype.slice.call(arguments);
     return (tab.indexOf(Math.min(...tab)) + 1);
 }
-        
 
 function organisation(nbcol)
 {
@@ -349,8 +348,6 @@ function coeurClick() {
     var like = document.getElementById("coeur_"+id).value;
 
     makeRequest('../include/like.php', like);
-
-
 }
 
 var src_like = '../img_site/icones/coeur_rose.png';
