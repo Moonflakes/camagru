@@ -388,7 +388,7 @@ function goComment(xhr) {
             var error = data['erreur'];
             
             if (page) {
-                document.location.href="http://localhost:8100/camagru_git/fr/"+page;
+                document.location.href = page;
             }
             else if (error) {
                 var msgLog = document.getElementsByClassName("msg");

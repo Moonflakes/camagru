@@ -9,7 +9,7 @@ if (isset($_POST['comment']))
     {
         //header("Location: ../fr/comment.php?img=".$_POST['comment']);
         //exit();
-        $page = "comment.php?img=".$_POST['comment'];
+        $page = "http://".$_SERVER['HTTP_HOST'].str_replace("/include/comment.inc.php", "", $_SERVER['PHP_SELF'])."/fr/comment.php?img=".$_POST['comment'];
         $arr = array("page" => $page);
     }
     else
