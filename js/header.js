@@ -119,7 +119,7 @@
         var divLogin = document.getElementById("loginDiv");
         var tableLog_uid = `<div class="login-div" id="loginDiv"><table class="login" ><tr><td><input id="_login_uid" type="text" name="uid" placeholder="Pseudo/e-mail"></td>`,
             tableLog_pwd = '<td><input id="_login_pwd" type="password" name="pwd" placeholder="Mot de passe"></td>',
-            tableLog_but = '<td><button id="butLog" type="submit" name="submit">Connexion</button></td></tr></table></div>';
+            tableLog_but = '<td><button id="but_Log" type="submit" name="submit">Connexion</button></td></tr></table></div>';
 
         if (divLogin)
             divLogin.parentElement.removeChild(divLogin);
@@ -128,7 +128,7 @@
 
         header[0].insertAdjacentHTML('afterend', logDiv);
 
-        var butLog = document.getElementById("butLog");
+        var butLog = document.getElementById("but_Log");
 
         butLog.addEventListener('click', connexionClick, false);
         
@@ -136,9 +136,13 @@
 
     var login = document.getElementById("login"),
         header = document.getElementsByClassName("header");
-
+    
+    var GET = location.search.substring(1).split('&');
+    
     if (login)
         login.addEventListener('click', loginClick, false);
+    if (GET && GET[0] === "login=ask")
+        loginClick()
     
     
 })();

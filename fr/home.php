@@ -13,10 +13,6 @@
     <body>     
 <?php
     include_once 'header.php';
-    if (isset($_GET['login']) && $_GET['login'] != "success")
-    {
-        include_once 'login2.php';
-    }
     include_once 'message.php';
     include_once 'galery2.php';
 ?>
