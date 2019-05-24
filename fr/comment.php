@@ -18,6 +18,11 @@
     include_once '../config/setup.php';
     include_once '../include/commentator.php';
 
+    if (!$_SESSION['u_uid']) {
+        $_SESSION['erreur']['connect'] = "Pour commenter des photos à votre guise connectez vous !";
+        header("Location: ../fr/home.php?login=ask");
+    }
+
     $id_pict = (isset($_GET['img'])) ? $_GET['img'] : null;
 
     $reqpath = "SELECT `picture_path` AS `path` FROM `pictures` WHERE `picture_id`=?";

@@ -66,8 +66,8 @@ if (check_user_is_connect($connexion))
 }
 else
 {
-    $_SESSION['erreur']['connect'] = "Pour commentr des photos à votre guise connectez vous !";
-    header("Location: ../fr/home.php?connect=error");
+    $_SESSION['erreur']['connect'] = "Pour commenter des photos à votre guise connectez vous !";
+    header("Location: ../fr/home.php?login=ask");
     exit();
 }
 

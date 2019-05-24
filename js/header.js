@@ -45,7 +45,6 @@
                     var param = Object.keys(error),
                         str = Object.values(error);
                     var flag = 0;
-
                     loginDiv.insertAdjacentHTML('afterbegin', "<div id='msgError'></div>");
                     var divError = document.getElementById("msgError");
                     param.forEach(function(elem, index) {
@@ -135,10 +134,9 @@
     }
 
     var login = document.getElementById("login"),
-        header = document.getElementsByClassName("header");
-    
-    var GET = location.search.substring(1).split('&');
-    
+        header = document.getElementsByClassName("header"),
+        GET = location.search.substring(1).split('&');
+
     if (login)
         login.addEventListener('click', loginClick, false);
     if (GET && GET[0] === "login=ask")

@@ -85,7 +85,7 @@
 	else
 	{
 		$_SESSION['erreur']['connect'] = "Vous ne pouvez pas accéder à cette page si vous n'êtes pas connecté";
-		header("Location: index.php?connect=error");
+		header("Location: index.php?login=ask");
 		exit();
 	}
 	include_once 'footer.php';
