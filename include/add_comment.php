@@ -41,12 +41,13 @@ if (check_user_is_connect($connexion))
             $requ->execute(array($id_pict));
             $author = $requ->fetchall();
 
-            $reqnotifexist = "SELECT `user_notif`, `user_email` FROM `users` WHERE `user_id` = ?"
+            $reqnotifexist = "SELECT `user_notif`, `user_email` FROM `users` WHERE `user_id` = ?";
             $reque = $connexion->prepare($reqnotifexist);
-            $reque->execute(array($author['picture_author']));
+            $reque->execute(array($_SESSION['u_id']));
             $notif = $reque->fetchall();
+            // echo '<pre>'; print_r($notif); print($_SESSION['u_id']); echo '</pre>';
 
-            if ($notif['user_notif'] === 1) {
+            if (isset($notif['user_notif']) && $notif['user_notif'] = 1 && $author != $_SESSION['u_id']) {
                 $header="MIME-Version: 1.0\r\n";
                 $header.='From: Camagru.com <support@camagru.com>'."\n";
                 $header.='Content-Type:text/html; charset="uft-8"'."\n";

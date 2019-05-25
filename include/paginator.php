@@ -77,9 +77,9 @@ class Paginator{
                 
                 if ($results['pict_'.$i]['picture_author'] = $_SESSION['u_id']) 
                 {
-                    $reqcomread = "SELECT * FROM comments WHERE comment_id_pict=? AND comment_read=?";
+                    $reqcomread = "SELECT * FROM comments WHERE comment_id_pict=? AND comment_read=? AND comment_author!=?";
                     $req = $this->_conn->prepare($reqcomread);
-                    $req->execute(array($results['pict_'.$i]['picture_id'], 1));
+                    $req->execute(array($results['pict_'.$i]['picture_id'], 1, $_SESSION['u_id']));
                     $results['pict_'.$i]['picture_nb_comment_unread'] = $req->rowCount();
                 }
                 else
