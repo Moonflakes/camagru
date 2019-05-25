@@ -36,6 +36,7 @@
             $nbcom = 0;
             $id = 0;
             $like = 0;
+            $nbunread = 0;
             if (is_array($array))
             {
                 foreach ($array as $key => $value) 
@@ -52,6 +53,8 @@
                         $id = $value;
                     if ($key === 'picture_like')
                         $like = $value;
+                    if ($key === 'picture_nb_comment_unread')
+                        $nbunread = $value;
                 }
             }
             if ($path)
@@ -79,6 +82,9 @@
                         
                             <button type="submit" class="comment" name="comment" value="<?php echo $id;?>">
                                 <img src="../img_site/icones/bulle_dialogue.png" alt="comment" title="Commenter">
+                                <?php if ($nbunread) {?>
+                                <span class="badge"><?php echo $nbunread;?></span>
+                                <?php }?>
                             </button>
                         
                     </div>

@@ -355,30 +355,6 @@ function makeRequest(url, id_pict, action) {
         sendComment(xhr, url, id_pict)
 }
 
-function makeRequestLogin(url, uid, pwd) {
-    var xhr = null;
-
-    if (window.XMLHttpRequest || window.ActiveXObject) {
-        if (window.ActiveXObject) {
-            try {
-                xhr = new ActiveXObject("Msxml2.XMLHTTP");
-            }
-            catch(e) {
-                xhr = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-        }
-        else {
-            xhr = new XMLHttpRequest(); 
-        }
-    }
-
-    if (!xhr) {
-        alert('Abandon :( Impossible de créer une instance XMLHTTP');
-        return false;
-    }
-    sendLogin(xhr, url, uid, pwd);
-}
-
 function coeurClick() {
     var id = this.id;   // Getting Button id
     var split_id = id.split("_");
@@ -454,6 +430,30 @@ Array.from(butCom).forEach(function(element) {
 });
 
 
+// PARTIE LOGIN
+function makeRequestLogin(url, uid, pwd) {
+    var xhr = null;
+
+    if (window.XMLHttpRequest || window.ActiveXObject) {
+        if (window.ActiveXObject) {
+            try {
+                xhr = new ActiveXObject("Msxml2.XMLHTTP");
+            }
+            catch(e) {
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+        }
+        else {
+            xhr = new XMLHttpRequest(); 
+        }
+    }
+
+    if (!xhr) {
+        alert('Abandon :( Impossible de créer une instance XMLHTTP');
+        return false;
+    }
+    sendLogin(xhr, url, uid, pwd);
+}
 
 function removeMsg(errorMsg) {
     Array.from(errorMsg).forEach(function(element) {

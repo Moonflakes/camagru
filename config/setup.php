@@ -49,7 +49,8 @@ if ($pdo = new PDO('mysql:host='.$DB_HOST, $DB_USER, $DB_PASSWORD))
             comment_author int(11) not null,
             comment_date DATETIME not null,
             comment_id_pict int(11) not null,
-            comment_text varchar(256) not null);";
+            comment_text varchar(256) not null,
+            comment_read int(1) not null DEFAULT '1');";
     
         // on prépare et on exécute la requête
         $connexion->prepare($reqcomtable)->execute();

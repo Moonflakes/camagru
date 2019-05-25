@@ -83,7 +83,7 @@ if (isset($_POST['submit']))
         }
         else
         {
-            $error['email'] = "L'envoi de l'email de confirmation à échoué ! </br> Veuillez si votre adresse mail est valide et rééssayez.";
+            $error['email'] = "L'envoi de l'email de confirmation à échoué ! </br> Veuillez vérifier si votre adresse mail est valide et rééssayez.";
             $arr = array("error" => $error);
         }
     }

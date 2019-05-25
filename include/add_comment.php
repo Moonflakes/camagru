@@ -14,9 +14,9 @@ if (check_user_is_connect($connexion))
         {
             $text_com = $_POST['text'];
             // insert comment
-            $reqinscom = 'INSERT INTO `comments`(`comment_id`, `comment_author`, `comment_date`, `comment_id_pict`, `comment_text`) 
-                            VALUES (?, ?, NOW(), ?, ?)';
-            $connexion->prepare($reqinscom)->execute(array(0, $_SESSION['u_id'], $id_pict, $text_com));
+            $reqinscom = 'INSERT INTO `comments`(`comment_id`, `comment_author`, `comment_date`, `comment_id_pict`, `comment_text`, `comment_read`) 
+                            VALUES (?, ?, NOW(), ?, ?, ?)';
+            $connexion->prepare($reqinscom)->execute(array(0, $_SESSION['u_id'], $id_pict, $text_com, 1));
             
             $reqtime = "SELECT `comment_date`, `comment_id` FROM `comments` WHERE `comment_id_pict`=? ORDER BY comment_date DESC";
             $req = $connexion->prepare($reqtime);
@@ -35,6 +35,33 @@ if (check_user_is_connect($connexion))
             }
 
             $arr = array("author" => $_SESSION['u_uid'], "text" => $text_com, "time" => $time, "id" => $id_com);
+
+            $reqauthpict = "SELECT `picture_author` FROM `pictures` WHERE `picture_id` = ?";
+            $requ = $connexion->prepare($reqauthpict);
+            $requ->execute(array($id_pict));
+            $author = $requ->fetchall();
+
+            $reqnotifexist = "SELECT `user_notif`, `user_email` FROM `users` WHERE `user_id` = ?"
+            $reque = $connexion->prepare($reqnotifexist);
+            $reque->execute(array($author['picture_author']));
+            $notif = $reque->fetchall();
+
+            if ($notif['user_notif'] === 1) {
+                $header="MIME-Version: 1.0\r\n";
+                $header.='From: Camagru.com <support@camagru.com>'."\n";
+                $header.='Content-Type:text/html; charset="uft-8"'."\n";
+                $message='
+                <html>
+                    <body>
+                        <div align="center">
+                            <a href="http://'.$_SERVER['HTTP_HOST'].str_replace("/include/add_comment.php", "", $_SERVER['PHP_SELF']).'/fr/comment.php?='.$id_pict.'">Une de vos photos a été commentée</a>
+                        </div>
+                    </body>
+                </html>
+                ';
+                if ($notif['user_email'])
+                    mail($notif['user_email'], "Nouveau commentaire", $message, $header);
+            }
         }
         else
         {
