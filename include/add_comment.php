@@ -39,19 +39,19 @@ if (check_user_is_connect($connexion))
             $reqauthpict = "SELECT `picture_author` FROM `pictures` WHERE `picture_id` = ?";
             $requ = $connexion->prepare($reqauthpict);
             $requ->execute(array($id_pict));
-            $author = $requ->fetchall();
+            $author = $requ->fetch();
 
             $reqnotifexist = "SELECT `user_notif`, `user_email` FROM `users` WHERE `user_id` = ?";
             $reque = $connexion->prepare($reqnotifexist);
-            $reque->execute(array($author[0]['picture_author']));
-            $notif = $reque->fetchall();
+            $reque->execute(array($author['picture_author']));
+            $notif = $reque->fetch();
             // echo '<pre>'; 
-            print_r($notif['user_notif']); 
+            print_r($notif); 
             print_r($author);
             print($_SESSION['u_id']); 
             // echo '</pre>';
 
-            if (isset($notif[0]['user_notif']) && $notif[0]['user_notif'] = 1 && $author != $_SESSION['u_id']) {
+            if (isset($notif['user_notif']) && $notif['user_notif'] = 1 && $author != $_SESSION['u_id']) {
                 $header="MIME-Version: 1.0\r\n";
                 $header.='From: Camagru.com <support@camagru.com>'."\n";
                 $header.='Content-Type:text/html; charset="uft-8"'."\n";
@@ -59,13 +59,13 @@ if (check_user_is_connect($connexion))
                 <html>
                     <body>
                         <div align="center">
-                            <a href="http://'.$_SERVER['HTTP_HOST'].str_replace("/include/add_comment.php", "", $_SERVER['PHP_SELF']).'/fr/comment.php?='.$id_pict.'">Une de vos photos a été commentée</a>
+                            <a href="http://'.$_SERVER['HTTP_HOST'].str_replace("/include/add_comment.php", "", $_SERVER['PHP_SELF']).'/fr/comment.php?img='.$id_pict.'">Une de vos photos a été commentée</a>
                         </div>
                     </body>
                 </html>
                 ';
-                if ($notif[0]['user_email'])
-                    mail($notif[0]['user_email'], "Nouveau commentaire", $message, $header);
+                if ($notif['user_email'])
+                    mail($notif['user_email'], "Nouveau commentaire", $message, $header);
             }
         }
         else
