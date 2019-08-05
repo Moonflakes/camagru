@@ -5,7 +5,8 @@
 <link rel="stylesheet" href="../css/login2.css" type="text/css">
     <div class="header">
         <div class="icones-left">
-            <a class="ic photo" href="webcam.php">
+            <!-- <a class="ic photo" href="webcam.php"> -->
+            <a class="ic photo" id="take_pict">
                 <img src="../img_site/icones/camera_1.png" alt="photo" title="Photo">
                 <h4>Prendre une photo</h4>
             </a>

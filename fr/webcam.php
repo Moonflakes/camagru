@@ -9,11 +9,11 @@
 <body>
 <?PHP
 	include_once 'header.php';
-	include_once '../config/setup.php';
-	include_once '../include/check_user.php';
+	// include_once '../config/setup.php';
+	// include_once '../include/check_user.php';
 
-	if (check_user_is_connect($connexion))
-	{
+	// if (check_user_is_connect($connexion))
+	// {
 ?>
 <section class="contentarea">
 	<div class="montage_page">
@@ -81,13 +81,17 @@
 	</div>
 </section>
 <?PHP
-	}
-	else
-	{
-		$_SESSION['erreur']['connect'] = "Vous ne pouvez pas accéder à cette page si vous n'êtes pas connecté";
-		header("Location: index.php?login=ask");
-		exit();
-	}
+	// }
+	// else
+	// {
+	// 	$error = "Vous ne pouvez pas accéder à cette page si vous n'êtes pas connecté";
+	// 	$arr = array("erreur" => $error);
+		
+	// 	// $_SESSION['erreur']['connect'] = "Vous ne pouvez pas accéder à cette page si vous n'êtes pas connecté";
+	// 	// header("Location: index.php?login=ask");
+	// 	// exit();
+	// 	echo json_encode($arr);
+	// }
 	include_once 'footer.php';
 ?>
 </body>
