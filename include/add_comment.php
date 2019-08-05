@@ -43,11 +43,15 @@ if (check_user_is_connect($connexion))
 
             $reqnotifexist = "SELECT `user_notif`, `user_email` FROM `users` WHERE `user_id` = ?";
             $reque = $connexion->prepare($reqnotifexist);
-            $reque->execute(array($_SESSION['u_id']));
+            $reque->execute(array($author[0]['picture_author']));
             $notif = $reque->fetchall();
-            // echo '<pre>'; print_r($notif); print($_SESSION['u_id']); echo '</pre>';
+            // echo '<pre>'; 
+            print_r($notif['user_notif']); 
+            print_r($author);
+            print($_SESSION['u_id']); 
+            // echo '</pre>';
 
-            if (isset($notif['user_notif']) && $notif['user_notif'] = 1 && $author != $_SESSION['u_id']) {
+            if (isset($notif[0]['user_notif']) && $notif[0]['user_notif'] = 1 && $author != $_SESSION['u_id']) {
                 $header="MIME-Version: 1.0\r\n";
                 $header.='From: Camagru.com <support@camagru.com>'."\n";
                 $header.='Content-Type:text/html; charset="uft-8"'."\n";
@@ -60,8 +64,8 @@ if (check_user_is_connect($connexion))
                     </body>
                 </html>
                 ';
-                if ($notif['user_email'])
-                    mail($notif['user_email'], "Nouveau commentaire", $message, $header);
+                if ($notif[0]['user_email'])
+                    mail($notif[0]['user_email'], "Nouveau commentaire", $message, $header);
             }
         }
         else
