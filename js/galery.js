@@ -460,7 +460,7 @@ function goToPage(xhr) {
     }
   }
 
-function sendTakePict(xhr, url, goTo) {
+function sendGoTo(xhr, url, goTo) {
     xhr.onreadystatechange = function() {
         goToPage(xhr); 
     };
@@ -491,7 +491,7 @@ function makeRequestGoTo(url, goTo) {
         alert('Abandon :( Impossible de créer une instance XMLHTTP');
         return false;
     }
-    sendTakePict(xhr, url, goTo);
+    sendGoTo(xhr, url, goTo);
 }
 
 function takePictClick() {

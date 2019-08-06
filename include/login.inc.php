@@ -59,6 +59,7 @@ if (isset($_POST['submit']))
             $_SESSION['u_uid'] = $userinfo['user_uid'];
             $_SESSION['u_key'] = $userinfo['user_key'];
             $_SESSION['u_confirm'] = $userinfo['user_confirm'];
+            $_SESSION['u_notif'] = $userinfo['user_notif'];
             //header("Location: ../fr/home.php?login=success");
             //exit();
             $arr = array("success" => "Vous vous êtes connecté avec succès", "name" => strtoupper($_SESSION['u_first']));

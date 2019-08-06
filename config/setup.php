@@ -25,7 +25,7 @@ if ($pdo = new PDO('mysql:host='.$DB_HOST, $DB_USER, $DB_PASSWORD))
             user_email varchar(256) not null,
             user_uid varchar(256) not null,
             user_pwd varchar(512) not null,
-            user_notif int(1) not null DEFAULT '1',
+            user_notif boolean not null DEFAULT 'true',
             user_key varchar(256) not null,
             user_confirm int(1) not null DEFAULT '0');";
     
