@@ -18,8 +18,6 @@ if (isset($_POST['submit']))
     }
     if (isset($error))
     {
-        //header("Location: ../fr/home.php?login=error");
-        //exit();
         $arr = array("error" => $error);
     }
     else
@@ -45,8 +43,6 @@ if (isset($_POST['submit']))
         }
         if (isset($error))
         {
-            //header("Location: ../fr/home.php?login=error");
-            //exit();
             $arr = array("error" => $error);
         }
         else
@@ -60,16 +56,13 @@ if (isset($_POST['submit']))
             $_SESSION['u_key'] = $userinfo['user_key'];
             $_SESSION['u_confirm'] = $userinfo['user_confirm'];
             $_SESSION['u_notif'] = $userinfo['user_notif'];
-            //header("Location: ../fr/home.php?login=success");
-            //exit();
+            
             $arr = array("success" => "Vous vous êtes connecté avec succès", "name" => strtoupper($_SESSION['u_first']));
         }
     }
 }
 else
 {
-    //header("Location: ../fr/home.php");
-    //exit();
     $error['erreur'] = "Une erreur s'est produite, veuillez réessayer !";
     $arr = array("error" => $error);
 }

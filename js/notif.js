@@ -1,39 +1,9 @@
 (function() {
 
-  function Lala(xhr) {
-    if (xhr.readyState == XMLHttpRequest.DONE) {
-        if (xhr.status == 200) {
-            console.log(xhr.responseText);
-            data = JSON.parse(xhr.responseText);
-          
-            // var page = data['page'];
-            // var error = data['erreur'];
-            
-            // if (page) {
-            //     document.location.href = page;
-            // }
-            // else if (error) {
-            //     var msgLog = document.getElementsByClassName("msg");
-
-            //     if (msgLog)
-            //         removeMsg(msgLog);
-            //     loginClick()
-            //     window.scrollTo(0, 0);
-            //     var message = document.getElementsByClassName("message");
-            //     var logMsg = "<p class='msg'><font color='red'>"+ error +"</font></p>";
-            //     message[0].innerHTML = logMsg;
-            // }
-      }
-      else {
-        alert('Un problème est survenu avec la requête.');
-      }
-    }
-  }
-
   function sendNotif(xhr, url, notifState) {
     console.log("notifState", notifState)
     xhr.onreadystatechange = function() {
-        Lala(xhr); 
+        // Lala(xhr); 
     };
     xhr.open('POST', url, true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -66,9 +36,7 @@
 }
 
   function notifClick() {
-    var notifState = document.getElementById("notif").checked;
-
-    // console.log(document.getElementById("notif").checked)
+    var notifState = notif.checked;
 
     makeRequestNotif("../include/notif.inc.php", notifState);
 }
@@ -76,6 +44,4 @@
     var notif = document.getElementById('notif');
 
     notif.addEventListener('change', notifClick, false);
-
-  
   })();

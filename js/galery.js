@@ -1,4 +1,5 @@
 (function() {
+    // import { removeMsg, loginClick } from './header.js';
 //MISE EN FORME DES COLONNES
 function smallH()
 {
@@ -428,91 +429,6 @@ var butCom = document.getElementsByClassName("comment");
 Array.from(butCom).forEach(function(element) {
     element.addEventListener('click', commentClick, false);
 });
-
-// PARTIE GO TO WEBCAM
-function goToPage(xhr) {
-    if (xhr.readyState == XMLHttpRequest.DONE) {
-        if (xhr.status == 200) {
-            // console.log(xhr.responseText);
-            data = JSON.parse(xhr.responseText);
-          
-            var page = data['page'];
-            var error = data['erreur'];
-            
-            if (page) {
-                document.location.href = page;
-            }
-            else if (error) {
-                var msgLog = document.getElementsByClassName("msg");
-
-                if (msgLog)
-                    removeMsg(msgLog);
-                loginClick()
-                window.scrollTo(0, 0);
-                var message = document.getElementsByClassName("message");
-                var logMsg = "<p class='msg'><font color='red'>"+ error +"</font></p>";
-                message[0].innerHTML = logMsg;
-            }
-      }
-      else {
-        alert('Un problème est survenu avec la requête.');
-      }
-    }
-  }
-
-function sendGoTo(xhr, url, goTo) {
-    xhr.onreadystatechange = function() {
-        goToPage(xhr); 
-    };
-    xhr.open('POST', url, true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-      
-    xhr.send("goTo="+goTo);
-}
-
-function makeRequestGoTo(url, goTo) {
-    var xhr = null;
-
-    if (window.XMLHttpRequest || window.ActiveXObject) {
-        if (window.ActiveXObject) {
-            try {
-                xhr = new ActiveXObject("Msxml2.XMLHTTP");
-            }
-            catch(e) {
-                xhr = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-        }
-        else {
-            xhr = new XMLHttpRequest(); 
-        }
-    }
-
-    if (!xhr) {
-        alert('Abandon :( Impossible de créer une instance XMLHTTP');
-        return false;
-    }
-    sendGoTo(xhr, url, goTo);
-}
-
-function takePictClick() {
-    makeRequestGoTo('../include/goto.inc.php', "webcam");
-}
-
-var butTakePict = document.getElementById("take_pict");
-
-if (butTakePict)
-    butTakePict.addEventListener('click', takePictClick, false);
-
-// PARTIE GO TO SETTINGS
-
-function settingsClick() {
-    makeRequestGoTo('../include/goto.inc.php', "settings");
-}
-
-var butSettings = document.getElementById("settings");
-
-if (butSettings)
-    butSettings.addEventListener('click', settingsClick, false);
 
 // PARTIE LOGIN
 function makeRequestLogin(url, uid, pwd) {
