@@ -1,5 +1,6 @@
 <?PHP
 session_start();
+date_default_timezone_set('Europe/Paris');
 if (isset($_POST['submit']))
 {
     include_once '../config/setup.php';
@@ -56,6 +57,7 @@ if (isset($_POST['submit']))
             $_SESSION['u_key'] = $userinfo['user_key'];
             $_SESSION['u_confirm'] = $userinfo['user_confirm'];
             $_SESSION['u_notif'] = $userinfo['user_notif'];
+            $_SESSION['time'] = time();
             
             $arr = array("success" => "Vous vous êtes connecté avec succès", "name" => strtoupper($_SESSION['u_first']));
         }

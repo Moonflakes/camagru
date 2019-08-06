@@ -1,6 +1,7 @@
 <?php
+
 if (!isset($_SESSION['u_id'])) {
-	$_SESSION['erreur']['page'] = "Pour accéder à toutes les pages du site connectez vous !";
+	// $_SESSION['erreur']['page'] = "Pour accéder à toutes les pages du site connectez vous !";
 	header('Location: ../fr/home.php');
 }
 ?>

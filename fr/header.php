@@ -1,5 +1,12 @@
 <?PHP
     session_start();
+    if (isset($_SESSION['time']))
+    {
+        $now = time();
+        $dif_time = $now - $_SESSION['time'];
+        if ($dif_time > 60)
+            header('Location: ../include/logout.inc.php');
+    }
 ?>
 <link rel="stylesheet" type="text/css" href="../css/header.css">
 <link rel="stylesheet" href="../css/login2.css" type="text/css">
