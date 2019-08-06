@@ -28,14 +28,14 @@
     if (xhr.readyState == XMLHttpRequest.DONE) {
       var button2 = document.getElementById('button2'),
         register = document.getElementById('register');
-      console.log(button2);
+      // console.log(button2);
       if (xhr.status == 200) {
         resultat = JSON.parse(xhr.responseText);
         var pict = document.getElementById('pict_'+resultat['id']);
         var grid = document.getElementById('grid');
 
         grid.removeChild(pict);
-        console.log(resultat);
+        // console.log(resultat);
       }
       else {
         alert('Un problème est survenu avec la requête.');
@@ -413,9 +413,9 @@
 		var form = document.getElementById('button1');
     	if (!startbutton && a === 1)
     	{
-			console.log("je passe ici");
+			// console.log("je passe ici");
 			startbutton = document.createElement("input");
-			console.log (startbutton);
+			// console.log (startbutton);
 			startbutton.setAttribute("id", 'startbutton');
 			startbutton.setAttribute("type", 'submit');
 			startbutton.setAttribute("name", 'submit');
@@ -425,7 +425,7 @@
 		startbutton.addEventListener('click', function(ev){
 			takepicture();
 			ev.preventDefault();
-			console.log(startbutton);
+			// console.log(startbutton);
 			}, false);
 	}
 
@@ -434,7 +434,7 @@
 		var form = document.getElementById('button1');
 		if (startbutton && a === 0)
     	{
-			console.log("je remove");
+			// console.log("je remove");
 			form.removeChild(startbutton);
 		}
   }
@@ -591,52 +591,6 @@
     var data = canvas.toDataURL('image/png');
     photo.setAttribute('src', data);
   }
-
-  // Capture a photo by fetching the current contents of the video
-  // and drawing it into a canvas, then converting that to a PNG
-  // format data URL. By drawing it on an offscreen canvas and then
-  // drawing that to the screen, we can change its size and/or apply
-  // other changes before drawing it.
-  
-  //merge picture en js
-/*  function takepicture() {
-    var context = canvas.getContext('2d');
-    if (width && height) {
-      canvas.width = width;
-      canvas.height = height;
-      context.drawImage(video, 0, 0, width, height);
-      var filtre_name = ["canard", "chain", "chapka", "couronne", "glasses"];
-      var filtre_infos = {};
-
-      filtre_name.forEach(function(element) {
-        checkFiltre = document.getElementById("OK_"+element);
-        if (checkFiltre.checked == true)
-        {
-          var filtre = document.getElementById('filtre_'+element);
-          var index = filtre.classList[1].split('_')[1];
-          filtre_infos[`${index}`] = element;
-        }
-      });
-      //console.log(filtre_infos);
-      filter = Object.values(filtre_infos);
-      filter.forEach(function(element) {
-        var img = new Image();
-        img.src = '../overlay/'+element+'.png';
-        filtre = document.getElementById('filtre_'+element);
-        h = filtre.height;
-        w = filtre.width;
-        t = filtre.offsetTop;
-        l = filtre.offsetLeft;
-        console.info(filtre.offsetTop);
-        context.drawImage(img, l, t, w, h);
-      });
-      var data = canvas.toDataURL('image/png');
-      console.log(data);
-      photo.setAttribute('src', data);
-    } else {
-      clearphoto();
-    }
-  }*/
 
   // Set up our event listener to run the startup process
   // once loading is complete.

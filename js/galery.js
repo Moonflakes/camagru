@@ -430,7 +430,7 @@ Array.from(butCom).forEach(function(element) {
 });
 
 // PARTIE GO TO WEBCAM
-function goWebcam(xhr) {
+function goToPage(xhr) {
     if (xhr.readyState == XMLHttpRequest.DONE) {
         if (xhr.status == 200) {
             // console.log(xhr.responseText);
@@ -460,17 +460,17 @@ function goWebcam(xhr) {
     }
   }
 
-function sendTakePict(xhr, url) {
+function sendTakePict(xhr, url, goTo) {
     xhr.onreadystatechange = function() {
-        goWebcam(xhr); 
+        goToPage(xhr); 
     };
     xhr.open('POST', url, true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
       
-    xhr.send();
+    xhr.send("goTo="+goTo);
 }
 
-function makeRequestTakePict(url) {
+function makeRequestGoTo(url, goTo) {
     var xhr = null;
 
     if (window.XMLHttpRequest || window.ActiveXObject) {
@@ -491,11 +491,11 @@ function makeRequestTakePict(url) {
         alert('Abandon :( Impossible de créer une instance XMLHTTP');
         return false;
     }
-    sendTakePict(xhr, url);
+    sendTakePict(xhr, url, goTo);
 }
 
 function takePictClick() {
-    makeRequestTakePict('../include/webcam.inc.php');
+    makeRequestGoTo('../include/goto.inc.php', "webcam");
 }
 
 var butTakePict = document.getElementById("take_pict");
@@ -503,6 +503,16 @@ var butTakePict = document.getElementById("take_pict");
 if (butTakePict)
     butTakePict.addEventListener('click', takePictClick, false);
 
+// PARTIE GO TO SETTINGS
+
+function settingsClick() {
+    makeRequestGoTo('../include/goto.inc.php', "settings");
+}
+
+var butSettings = document.getElementById("settings");
+
+if (butSettings)
+    butSettings.addEventListener('click', settingsClick, false);
 
 // PARTIE LOGIN
 function makeRequestLogin(url, uid, pwd) {

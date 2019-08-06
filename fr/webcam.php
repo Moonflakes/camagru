@@ -3,17 +3,11 @@
 	<title>Camagru: Montage photo</title>
 	<meta charset='utf-8'>
 	<link rel="stylesheet" href="../css/webcam.css" type="text/css" media="all">
-	<script src="../js/webcam.js">
-	</script>
+	<script src="../js/webcam.js"></script>
 </head>
 <body>
 <?PHP
 	include_once 'header.php';
-	// include_once '../config/setup.php';
-	// include_once '../include/check_user.php';
-
-	// if (check_user_is_connect($connexion))
-	// {
 ?>
 <section class="contentarea">
 	<div class="montage_page">
@@ -81,17 +75,6 @@
 	</div>
 </section>
 <?PHP
-	// }
-	// else
-	// {
-	// 	$error = "Vous ne pouvez pas accéder à cette page si vous n'êtes pas connecté";
-	// 	$arr = array("erreur" => $error);
-		
-	// 	// $_SESSION['erreur']['connect'] = "Vous ne pouvez pas accéder à cette page si vous n'êtes pas connecté";
-	// 	// header("Location: index.php?login=ask");
-	// 	// exit();
-	// 	echo json_encode($arr);
-	// }
 	include_once 'footer.php';
 ?>
 </body>

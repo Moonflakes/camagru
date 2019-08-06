@@ -14,7 +14,7 @@
                 <img src="../img_site/icones/home_1.png" alt="home" title="Acceuil">
                 <h4>Acceuil</h4>
             </a>
-            <a href="settings.php" class="ic">
+            <a class="ic" id="settings">
                 <img src="../img_site/icones/settings_green.png" alt="settings" title="Paramètres">
                 <h4>Paramètres</h4>
             </a>
