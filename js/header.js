@@ -4,7 +4,7 @@
 function goToPage(xhr) {
     if (xhr.readyState == XMLHttpRequest.DONE) {
         if (xhr.status == 200) {
-            console.log(xhr.responseText);
+            // console.log(xhr.responseText);
             data = JSON.parse(xhr.responseText);
           
             var page = data['page'];
@@ -228,8 +228,6 @@ if (butSettings)
     var login = document.getElementById("login"),
         header = document.getElementsByClassName("header"),
         GET = location.search.substring(1).split('&');
-
-        // console.log(GET)
 
     if (login)
         login.addEventListener('click', loginClick, false);
