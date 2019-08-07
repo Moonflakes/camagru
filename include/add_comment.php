@@ -46,9 +46,9 @@ if (check_user_is_connect($connexion))
             $reque->execute(array($author['picture_author']));
             $notif = $reque->fetch();
             // echo '<pre>'; 
-            print_r($notif); 
-            print_r($author);
-            print($_SESSION['u_id']); 
+            // print_r($notif); 
+            // print_r($author);
+            // print($_SESSION['u_id']); 
             // echo '</pre>';
 
             if (isset($notif['user_notif']) && $notif['user_notif'] = 1 && $author != $_SESSION['u_id']) {
