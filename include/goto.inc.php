@@ -7,7 +7,7 @@ if (isset($_POST['goTo']))
     if (check_user_is_connect($connexion))
     {
         $page = "http://".$_SERVER['HTTP_HOST'].str_replace("/include/goto.inc.php", "", $_SERVER['PHP_SELF'])."/fr/".$_POST['goTo'].".php";
-        $arr = array("page" => $page);
+        $arr = array("page" => $page, "session" => $_SESSION);
     }
     else
     {

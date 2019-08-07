@@ -4,14 +4,14 @@
 function goToPage(xhr) {
     if (xhr.readyState == XMLHttpRequest.DONE) {
         if (xhr.status == 200) {
-            // console.log(xhr.responseText);
+            console.log(xhr.responseText);
             data = JSON.parse(xhr.responseText);
           
             var page = data['page'];
             var error = data['erreur'];
             
             if (page) {
-                document.location.href = page;
+                document.location.href = page+"?session=ok";
             }
             else if (error) {
                 var msgLog = document.getElementsByClassName("msg");
@@ -104,7 +104,7 @@ if (butSettings)
     function Login(xhr) {
         if (xhr.readyState == XMLHttpRequest.DONE) {
             if (xhr.status == 200) {
-                //console.log(xhr.responseText);
+                console.log(xhr.responseText);
                 data = JSON.parse(xhr.responseText);
 
                 error = data['error'];
