@@ -46,6 +46,11 @@ if (isset($_POST['submit']))
     //Check for first password
     if (empty($pwd))
         $error['pwd'] = "Veuillez indiquer votre mot de passe!";
+    else {
+        $len = strlen($pwd);
+        if ($len < 8)
+            $error['pwd'] = "Votre mot de passe doit au minimum comporter 8 caractères.";
+    }
 
     if (isset($error))
     {

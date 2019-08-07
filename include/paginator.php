@@ -47,6 +47,7 @@ class Paginator{
 
         $i = 0;
         include_once 'check_user.php';
+        $results = null;
         while ($row = $rs->fetch(PDO::FETCH_ASSOC))
         {
             //store this arry in $result=>data below
