@@ -224,6 +224,8 @@ if (butSettings)
         header = document.getElementsByClassName("header"),
         GET = location.search.substring(1).split('&');
 
+        // console.log(GET)
+
     if (login)
         login.addEventListener('click', loginClick, false);
     if (GET && GET[0] === "login=ask")

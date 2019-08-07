@@ -16,7 +16,7 @@
     }
     else if (!isset($_SESSION['u_id']))
     {
-        echo '<p>Pour ajouter vos propres photos à la galerie et ajouter des commentaires et liker vos photos préférées connectez vous !</p>';
+        echo '<p>Pour ajouter vos propres photos à la galerie, ajouter des commentaires et liker vos photos préférées connectez vous !</p>';
     }
     ?>
 </div>
