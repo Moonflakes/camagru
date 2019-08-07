@@ -110,7 +110,7 @@
 
   function sendReqregister(xhr, url, cam_pict, descr) {
     xhr.onreadystatechange = function() {
-      console.log(xhr);
+      // console.log(xhr);
       registerPict(xhr); 
     };
     xhr.open('POST', url, true);
@@ -126,10 +126,10 @@
     if (xhr.readyState == XMLHttpRequest.DONE) {
       var button2 = document.getElementById('button2'),
         register = document.getElementById('register');
-      console.log(button2);
+      // console.log(button2);
       if (xhr.status == 200) {
         resultat = JSON.parse(xhr.responseText);
-        console.log(resultat);
+        // console.log(resultat);
         photo.setAttribute('src', resultat['data']); // afficher l'image mergée
         //console.log(xhr.responseText);
 
@@ -155,7 +155,7 @@
             var descr_val = document.getElementById("descr").value,
               path = resultat['data'];
             if (descr_val) {
-              console.log(descr_val);
+              // console.log(descr_val);
               makeRequest('../include/register_photo.php', path, descr_val);
             }
             ev.preventDefault();
@@ -227,7 +227,7 @@
       } else {
         xhr = new XMLHttpRequest(); 
       }
-      console.log(action);
+      // console.log(action);
 
     }
 
@@ -324,7 +324,7 @@
           var descr_val = document.getElementById("descr_upload").value,
               path = image.src;
           if (descr_val) {
-              console.log(descr_val);
+              // console.log(descr_val);
               makeRequest('../include/register_photo.php', path, descr_val);
               deleteUploadDiv();
           }
@@ -334,7 +334,7 @@
   }
 
   function takepicture(){
-    console.log("take picture");
+    // console.log("take picture");
     var canvas = document.getElementById('canvas');
     var video = document.getElementById('video');
     var context = canvas.getContext('2d');
@@ -355,57 +355,60 @@
 
   function dnd(id, camera){
 		var flag = false,
-			filtre = document.getElementById('filtre_'+id);
-			filtreW = filtre.clientWidth,
-			filtreH = filtre.clientHeight
-			cameraL = camera.offsetLeft,
-			cameraT = camera.offsetTop;
-		console.log("W = "+filtreW, "H = "+filtreH);
-		console.log("camL = "+cameraL, "camT = "+cameraT);
+      filtre = document.getElementById('filtre_'+id);
+    
+      if (filtre) {
+        filtreW = filtre.clientWidth,
+        filtreH = filtre.clientHeight
+        cameraL = camera.offsetLeft,
+        cameraT = camera.offsetTop;
+      // console.log("W = "+filtreW, "H = "+filtreH);
+      // console.log("camL = "+cameraL, "camT = "+cameraT);
 
-		camera.addEventListener('mousemove', function(e){
-			console.log('je passe la');
-			e = e || window.event;
-			if (!flag)
-				return;
-			var x = e.pageX,
-				y = e.pageY;
-			filtre.style.left = x - cameraL - filtreW/2 + 'px';
-			filtre.style.top = y - cameraT - filtreH/2 + 'px';
-			console.log("L = "+filtre.style.left, "T = "+filtre.style.top, "x = "+x, "y = "+y);
-			filtre.style.cursor = 'move';
-		});
-		filtre.addEventListener('mousedown', function(e){
-			console.log('je passe ici');
-			flag = true;
-		});
-		filtre.addEventListener('mouseup', function(e){
-			console.log('je passe par ici aussi');
-			flag = false;
-			if (filtre){
-			filtre.style.cursor = 'default';
-			}
-			var x = e.pageX, // ou clientX
-				y = e.pageY,
-				limitL = cameraL + filtreW/2,
-				limitT = cameraT + filtreH/2,
-				cameraW = camera.clientWidth - filtreW/2,
-				cameraH = camera.clientHeight - filtreH/2,
-				limitR = cameraL + cameraW,
-				limitB = cameraT + cameraH;
-			//console.log("filtre id  = "+filtre.id);
-			console.log("x = "+x, "y = "+y, "limitL = "+limitL, "limitT = "+limitT, "limitR = "+limitR, "limitB = "+limitB);
-			if (x >= limitL && x <= limitR && y >= limitT && y <= limitB){
-				//console.log("est-ce que je passe la ?");
-				filtre.style.left = x - cameraL - filtreW/2 +  'px';
-				filtre.style.top = y - cameraT - filtreH/2 + 'px';
-				console.log("filtreL = "+filtre.style.left, "filtreT = "+filtre.style.top);
-			}
-			else{
-				filtre.style.left = '10%';
-				filtre.style.top = '10%';
-			}
-		});
+      camera.addEventListener('mousemove', function(e){
+        // console.log('je passe la');
+        e = e || window.event;
+        if (!flag)
+          return;
+        var x = e.pageX,
+          y = e.pageY;
+        filtre.style.left = x - cameraL - filtreW/2 + 'px';
+        filtre.style.top = y - cameraT - filtreH/2 + 'px';
+        // console.log("L = "+filtre.style.left, "T = "+filtre.style.top, "x = "+x, "y = "+y);
+        filtre.style.cursor = 'move';
+      });
+      filtre.addEventListener('mousedown', function(e){
+        // console.log('je passe ici');
+        flag = true;
+      });
+      filtre.addEventListener('mouseup', function(e){
+        // console.log('je passe par ici aussi');
+        flag = false;
+        if (filtre){
+        filtre.style.cursor = 'default';
+        }
+        var x = e.pageX, // ou clientX
+          y = e.pageY,
+          limitL = cameraL + filtreW/2,
+          limitT = cameraT + filtreH/2,
+          cameraW = camera.clientWidth - filtreW/2,
+          cameraH = camera.clientHeight - filtreH/2,
+          limitR = cameraL + cameraW,
+          limitB = cameraT + cameraH;
+        //console.log("filtre id  = "+filtre.id);
+        // console.log("x = "+x, "y = "+y, "limitL = "+limitL, "limitT = "+limitT, "limitR = "+limitR, "limitB = "+limitB);
+        if (x >= limitL && x <= limitR && y >= limitT && y <= limitB){
+          //console.log("est-ce que je passe la ?");
+          filtre.style.left = x - cameraL - filtreW/2 +  'px';
+          filtre.style.top = y - cameraT - filtreH/2 + 'px';
+          // console.log("filtreL = "+filtre.style.left, "filtreT = "+filtre.style.top);
+        }
+        else{
+          filtre.style.left = '10%';
+          filtre.style.top = '10%';
+        }
+    });
+  }
   }
   
   function make_button(a){
@@ -456,7 +459,7 @@
   var index = 0;
 	function putFilter() {
     verif_check();
-    console.log(this);
+    // console.log(this);
 		var id = this.id.split('_');
 		id = id[1];
 		var filtre_check = document.getElementById('filtre_'+id);
@@ -489,7 +492,7 @@
       element.addEventListener('change', putFilter);
     });
 
-    console.log(choose_file);
+    // console.log(choose_file);
     // ajouter fonction a l'action
     Array.from(action).forEach(function(element) {
       element.addEventListener('click', function(ev){
