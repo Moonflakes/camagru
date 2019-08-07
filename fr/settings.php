@@ -29,7 +29,7 @@ if (!isset($_SESSION['u_id']) && !isset($_GET['session'])) {
             <td><label class="switch">
             <span><?php echo $_SESSION['u_notif']?></span>
 <?php 
-if ($_SESSION['u_notif'] === 1) {?>
+if (isset($_GET['notif']) && $_GET['notif'] === '1') {?>
                 <input type="checkbox" id="notif" checked>
 <?php }
     else {?>

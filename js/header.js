@@ -8,10 +8,15 @@ function goToPage(xhr) {
             data = JSON.parse(xhr.responseText);
           
             var page = data['page'];
+            var session = data['session'];
             var error = data['erreur'];
+            var goto = data['goto'];
             
             if (page) {
-                document.location.href = page+"?session=ok";
+                if (goto === "settings")
+                    document.location.href = page+"?session=ok&notif="+session['u_notif'];
+                else
+                    document.location.href = page+"?session=ok";
             }
             else if (error) {
                 var msgLog = document.getElementsByClassName("msg");
