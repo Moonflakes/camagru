@@ -476,6 +476,7 @@ function Login(xhr) {
             data = JSON.parse(xhr.responseText);
 
             error = data['error'];
+            pictAuth = data['pictAuth']
 
             var msgLog = document.getElementsByClassName("msg");
             var loginDiv = document.getElementById("loginDiv");
@@ -495,6 +496,16 @@ function Login(xhr) {
                 }
 
                 makeLogoutAccountBut(data['name']);
+
+                var commentBut = document.getElementsByClassName("comment");
+                console.log("commentbut", commentBut, pictAuth);
+
+                Array.from(commentBut).forEach(button => {
+                    console.log("button",button)
+                    // Array.from(pictAuth).forEach(pict => {
+                    //     console.log("a", pict)
+                    // });
+                });
             }
             else if (error) {
                 var param = Object.keys(error),

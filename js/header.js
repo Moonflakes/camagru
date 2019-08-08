@@ -149,7 +149,7 @@ if (butSettings)
                         divError.insertAdjacentHTML('beforeend', errorMsg);
                     })
                     
-                    var inscription = "<p class='msg'><font color='blue'>Si vous n'être pas encore inscrit, inscrivez-vous en cliquant sur Inscription !</font></p>",
+                    var inscription = "<p class='msg'><font color='blue'>Si vous n'êtes pas encore inscrit, inscrivez-vous en cliquant sur Inscription !</font></p>",
                         forgotPwd = "<p class='msg'><font color='blue'><a href='forgot_pwd.php' id='fpwd-link'>Mot de passe oublié</a></font></p>";
 
                     if (flag === 1)

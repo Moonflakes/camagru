@@ -58,8 +58,26 @@ if (isset($_POST['submit']))
             $_SESSION['u_confirm'] = $userinfo['user_confirm'];
             $_SESSION['u_notif'] = $userinfo['user_notif'];
             $_SESSION['time'] = time();
+
+            $reqpict = "SELECT picture_id FROM pictures WHERE picture_author=?";
+            $req = $connexion->prepare($reqpict);
+            $req->execute(array($userinfo['user_id']));
+            $pictauth = $req->fetch();
+
+            $arrPict = [];
+            if (isset($pictauth)) {
+                foreach ($pictauth as $key => $value) {
+                    if ($key === "picture_id") {
+                        $reqcom = "SELECT * FROM comments WHERE comment_id_pict=? AND comment_author!=? AND comment_read=1";
+                        $req = $connexion->prepare($reqcom);
+                        $req->execute(array($value, $userinfo['user_id']));
+                        $nbcomunread = $req->rowCount();
+                        $arrPict[$value] = $nbcomunread;
+                    }
+                }
+            }
             
-            $arr = array("success" => "Vous vous êtes connecté avec succès", "name" => strtoupper($_SESSION['u_first']), "session" => $_SESSION);
+            $arr = array("success" => "Vous vous êtes connecté avec succès", "name" => strtoupper($_SESSION['u_first']), "pictAuth" => $arrPict);
         }
     }
 }
