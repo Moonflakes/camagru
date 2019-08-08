@@ -1,5 +1,6 @@
 <?php
 if (!isset($_SESSION['u_id'])) {
+    $_SESSION['erreur']['connect'] = "Pour accéder aux paramètres de votre compte connectez vous !";
 	header('Location: ../fr/home.php?login=ask');
 }
 ?>

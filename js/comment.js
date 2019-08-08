@@ -1,26 +1,45 @@
 (function() {
+
+  function removeMsg(errorMsg) {
+    Array.from(errorMsg).forEach(function(element) {
+        element.parentElement.removeChild(element);
+    });
+  }
   
     function commentPict(xhr) {
       if (xhr.readyState == XMLHttpRequest.DONE) {
         if (xhr.status == 200) {
-            // console.log(xhr.responseText);
+            console.log(xhr.responseText);
             data = JSON.parse(xhr.responseText);
             
             var author = data['author'],
                 text = data['text'],
                 time = data['time'],
-                id = data['id'];
-            
-            text = text.replace(/\n/g,'<br />');
+                id = data['id'],
+                error = data['erreur'];
 
-            var old = document.getElementsByClassName("old");
-            var newMsg = '<div class="old-msg_'+id+'"><div class="msg"><b>'+author+'</b><span> : '+text+'</span></div><span class="time" id="time_'+id+'">il y a '+time[0]+'</span></div><br>';
-            old[0].insertAdjacentHTML('afterbegin', newMsg);
-            
-            $.each(time,function(index,element){
-                t = document.getElementById('time_'+index);
-                t.innerHTML = element;
-            });
+            if (error) {
+              var msgLog = document.getElementsByClassName("msg");
+
+                if (msgLog)
+                    removeMsg(msgLog);
+                window.scrollTo(0, 0);
+                var message = document.getElementsByClassName("message");
+                var logMsg = "<p class='msg'><font color='red'>"+ error +"</font></p>";
+                message[0].innerHTML = logMsg;
+            }
+            else {
+              text = text.replace(/\n/g,'<br />');
+
+              var old = document.getElementsByClassName("old");
+              var newMsg = '<div class="old-msg_'+id+'"><div class="msg_comment"><b>'+author+'</b><span> : '+text+'</span></div><span class="time" id="time_'+id+'">il y a '+time[0]+'</span></div><br>';
+              old[0].insertAdjacentHTML('afterbegin', newMsg);
+              
+              $.each(time,function(index,element){
+                  t = document.getElementById('time_'+index);
+                  t.innerHTML = element;
+              });
+            }
   
         }
         else {

@@ -36,7 +36,7 @@ class Commentator{
 
             $requid = "SELECT * FROM `users` WHERE `user_id`=?";
             $req = $this->_conn->prepare($requid);
-            $req->execute(array($_SESSION['u_id']));
+            $req->execute(array($results['comment_'.$i]['comment_author']));
             $userinfo = $req->fetch();
             $results['comment_'.$i]['comment_author'] = $userinfo['user_uid'];
            /* if (check_user_is_connect($this->_conn))

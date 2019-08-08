@@ -12,7 +12,7 @@ if (check_user_is_connect($connexion))
         $id_pict = $_POST['id_pict'];
         if (!empty($_POST['text'])) //text
         {
-            $text_com = $_POST['text'];
+            $text_com = htmlspecialchars($_POST['text']);
             // insert comment
             $reqinscom = 'INSERT INTO `comments`(`comment_id`, `comment_author`, `comment_date`, `comment_id_pict`, `comment_text`, `comment_read`) 
                             VALUES (?, ?, NOW(), ?, ?, ?)';
@@ -51,7 +51,7 @@ if (check_user_is_connect($connexion))
             // print($_SESSION['u_id']); 
             // echo '</pre>';
 
-            if (isset($notif['user_notif']) && $notif['user_notif'] = 1 && $author != $_SESSION['u_id']) {
+            if (isset($notif['user_notif']) && $notif['user_notif'] === 1 && $author['picture_author'] !== $_SESSION['u_id']) {
                 $header="MIME-Version: 1.0\r\n";
                 $header.='From: Camagru.com <support@camagru.com>'."\n";
                 $header.='Content-Type:text/html; charset="uft-8"'."\n";
@@ -70,9 +70,8 @@ if (check_user_is_connect($connexion))
         }
         else
         {
-            $_SESSION['erreur']['comment'] = "Vous n'avez pas écrit de commentaire !";
-            header("Location: ../fr/comment.php?img=".$id_pict."&comment=error");
-            exit();
+            $error = "Vous n'avez pas écrit de commentaire !";
+            $arr = array("erreur" => $error);
         }
     }
    /* else if (isset($_POST['uncomment']))
@@ -91,8 +90,8 @@ if (check_user_is_connect($connexion))
     }*/
     else
     {
-        header("Location: ../fr/home.php?img=".$id_pict."&comment=error");
-        exit();
+        $error = "Aucune image";
+        $arr = array("erreur" => $error);
     }
     echo json_encode($arr);
 }

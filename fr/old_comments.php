@@ -51,7 +51,7 @@ foreach ($tab_chat as $tab)
             {
 ?>
         <div class="old-msg_<?php echo $id;?>">
-            <div class="msg">
+            <div class="msg_comment">
                 <b><?php echo $author;?> </b>
                 <span> : <?php echo $text ?></span>
             </div>

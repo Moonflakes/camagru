@@ -116,28 +116,28 @@ function organisation(nbcol)
                 column = document.getElementById('column1');
                 column.appendChild(item);
                 h1 = item.offsetHeight + h1;
-                console.log("offsetH item", i," : ", h1, "colonne1");
+                // console.log("offsetH item", i," : ", h1, "colonne1");
             }
             else if (i === 2)
             {
                 column = document.getElementById('column2');
                 column.appendChild(item);
                 h2 = item.offsetHeight + h2;
-                console.log("offsetH item", i," : ", h2, "colonne2");
+                // console.log("offsetH item", i," : ", h2, "colonne2");
             }
             else if (i === 3)
             {
                 column = document.getElementById('column3');
                 column.appendChild(item);
                 h3 = item.offsetHeight + h3;
-                console.log("offsetH item", i," : ", h3, "colonne3");
+                // console.log("offsetH item", i," : ", h3, "colonne3");
             }
             else if (i === 4)
             {
                 column = document.getElementById('column4');
                 column.appendChild(item);
                 h4 = item.offsetHeight + h4;
-                console.log("offsetH item", i," : ", h4, "colonne4");
+                // console.log("offsetH item", i," : ", h4, "colonne4");
             }
             else
             {
@@ -146,22 +146,22 @@ function organisation(nbcol)
                 if (smallH(h1, h2, h3, h4) === 1)
                 {
                     h1 = item.offsetHeight + h1;
-                    console.log("offsetH item", i," : ", h1, "colonne1");
+                    // console.log("offsetH item", i," : ", h1, "colonne1");
                 }
                 else if (smallH(h1, h2, h3, h4) === 2)
                 {
                     h2 = item.offsetHeight + h2;
-                    console.log("offsetH item", i," : ", h2, "colonne2");
+                    // console.log("offsetH item", i," : ", h2, "colonne2");
                 }
                 else if (smallH(h1, h2, h3, h4) === 3)
                 {
                     h3 = item.offsetHeight + h3;
-                    console.log("offsetH item", i," : ", h3, "colonne3");
+                    // console.log("offsetH item", i," : ", h3, "colonne3");
                 }
                 else
                 {
                     h4 = item.offsetHeight + h4;
-                    console.log("offsetH item", i," : ", h4, "colonne4");
+                    // console.log("offsetH item", i," : ", h4, "colonne4");
                 }
             }
         }

@@ -6,6 +6,7 @@
     include_once '../include/paginator.php';
 
     if (!isset($_SESSION['u_id'])) {
+        $_SESSION['erreur']['connect'] = "Pour prendre vos propres photos à votre guise connectez vous !";
         header('Location: ../fr/home.php?login=ask');
     }
     
