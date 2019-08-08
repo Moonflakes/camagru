@@ -4,6 +4,10 @@
 <?php
     include_once '../config/setup.php';
     include_once '../include/paginator.php';
+
+    if (!isset($_SESSION['u_id'])) {
+        header('Location: ../fr/home.php?login=ask');
+    }
     
     $query = "SELECT * FROM pictures WHERE `picture_author`=".$_SESSION['u_id']; // requete sql
     

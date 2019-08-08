@@ -1,7 +1,7 @@
 <?php
-if (!isset($_SESSION['u_id']) && !isset($_GET['session'])) {
-	header('Location: ../fr/home.php?login=ask');
-}
+// if (!isset($_SESSION['u_id']) && !isset($_GET['session'])) {
+// 	header('Location: ../fr/home.php?login=ask');
+// }
 ?>
 <html>
 <head>

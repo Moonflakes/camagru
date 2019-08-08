@@ -13,10 +13,10 @@ function goToPage(xhr) {
             var goto = data['goto'];
             
             if (page) {
-                if (goto === "settings")
-                    document.location.href = page+"?session=ok&notif="+session['u_notif'];
-                else
-                    document.location.href = page+"?session=ok";
+                // if (goto === "settings")
+                //     document.location.href = page+"?session=ok&notif="+session['u_notif'];
+                // else
+                    document.location.href = page;
             }
             else if (error) {
                 var msgLog = document.getElementsByClassName("msg");

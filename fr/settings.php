@@ -1,8 +1,7 @@
 <?php
-
-if (!isset($_SESSION['u_id']) && !isset($_GET['session'])) {
-	header('Location: ../fr/home.php?login=ask');
-}
+// if (!isset($_SESSION['u_id']) && !isset($_GET['session'])) {
+// 	header('Location: ../fr/home.php?login=ask');
+// }
 ?>
 <html>
     <head>
@@ -20,28 +19,7 @@ if (!isset($_SESSION['u_id']) && !isset($_GET['session'])) {
     <body> 
 <?PHP
     include_once 'header.php';
-?>
-    <section class="settings">
-        <h2 class="titre">Notifications</h2>
-        <form>
-        <table>
-        <tr>
-            <td><label class="switch">
-            <span><?php echo $_SESSION['u_notif']?></span>
-<?php 
-if (isset($_GET['notif']) && $_GET['notif'] === '1') {?>
-                <input type="checkbox" id="notif" checked>
-<?php }
-    else {?>
-                <input type="checkbox" id="notif">
-<?php   }?>
-                <span class="slider round"></span>
-            </label></td>
-        </tr>
-        </table>
-        </form>
-    </section>
-<?PHP
+    include_once 'user_settings.php';
     include_once 'footer.php';
 ?>
     </body>
