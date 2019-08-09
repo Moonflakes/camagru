@@ -11,12 +11,15 @@ if (isset($_POST['submit']))
     if (empty($email))
     {
         //header("Location: ../fr/forgot_pwd.php?forgot=empty");
-        $error = "Veuillez indiquer votre e-mail !";
+        $error['email'] = "Veuillez indiquer votre e-mail !";
         //exit();
     }
     if (empty($uid))
     {
         $error['uid'] = "Veuillez indiquer votre Nom d'utilisateur";
+    }
+    if ($error) {
+        $arr = array("erreur" => $error);
     }
     else
     {

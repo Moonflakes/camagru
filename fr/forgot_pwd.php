@@ -1,5 +1,6 @@
 <?PHP
     include_once 'header.php';
+    include_once 'message.php';
 ?>
     <link rel="stylesheet" type="text/css" href="../css/signup.css">
     <section class="signup">
