@@ -4,37 +4,53 @@ if (isset($_POST['submit']))
 {
     include_once '../config/setup.php';
     $email = htmlspecialchars($_POST['email']);
-    $uid = (isset($_SESSION['u_uid'])) ? $_SESSION['u_uid'] : $_POST['uid'];
+    $uid = htmlspecialchars($_POST['uid']);
 
     //Errors handlers
     //Check for empty fields
-    if (empty($email))
-    {
-        //header("Location: ../fr/forgot_pwd.php?forgot=empty");
-        $error['email'] = "Veuillez indiquer votre e-mail !";
-        //exit();
-    }
     if (empty($uid))
     {
         $error['uid'] = "Veuillez indiquer votre Nom d'utilisateur";
     }
-    if ($error) {
+    else {
+        $requid = 'SELECT * FROM users WHERE user_uid=?';
+        $req = $connexion->prepare($requid);
+        $req->execute(array($uid));
+        $uidexist = $req->rowCount();
+        if ($uidexist < 1)
+            $error['uid'] = "Nom d'utilisateur invalide !";
+        
+        if (empty($email))
+        {
+            $error['email'] = "Veuillez indiquer votre e-mail !";
+        }
+        else {
+            $requemail = "SELECT * FROM users WHERE user_email=?";
+            $req = $connexion->prepare($requemail);
+            $req->execute(array($email));
+            $emailexist = $req->rowCount();
+
+            if ($emailexist < 1)
+                $error['email'] = "E-mail incorrect !";
+        }
+    }
+    if (isset($error)) {
         $arr = array("erreur" => $error);
     }
     else
     {
         // Check if there is an user with this email
-        $requemail = "SELECT * FROM users WHERE user_email=? AND user_uid=?";
-        $req = $connexion->prepare($requemail);
+        $reqall = "SELECT * FROM users WHERE user_email=? AND user_uid=?";
+        $req = $connexion->prepare($reqall);
         $req->execute(array($email, $uid));
-        $emailexist = $req->rowCount();
-        if ($emailexist < 1)
-            $error = "E-mail incorrect !";
-        if (isset($error))
+        $allexist = $req->rowCount();
+
+        if ($allexist < 1)
+            $errorall = "Votre nom d'utilisateur/E-mail est incorrecte";
+        if (isset($errorall))
         {
-            $arr = array("erreur" => $error);
-            //header("Location: ../fr/forgot_pwd.php?forgot=error");
-            //exit();
+            $arr = array("success" => $errorall);
+           
         }
         else
         {
@@ -76,7 +92,6 @@ if (isset($_POST['submit']))
                 $arr = array("success" => $success);
                 //header("Location: ../fr/forgot_pwd.php?forgot=email_echec");
             }
-            exit();
         }
     }
 }

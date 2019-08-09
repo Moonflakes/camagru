@@ -18,7 +18,7 @@
                     var errorMsg = document.getElementsByClassName("msg");
 
                     if (errorMsg)
-                            removeMsg(errorMsg);
+                        removeMsg(errorMsg);
 
                     if (error){
                         var param = Object.keys(error),
@@ -34,11 +34,9 @@
                     }
 
                 if (success) {
-
-                    if (msgLog)
-                        removeMsg(msgLog);
-                    window.scrollTo(0, 0);
                     var message = document.getElementsByClassName("message");
+                    window.scrollTo(0, 0);
+                    
                     var logMsg = "<p class='msg'><font color='red'>"+ success +"</font></p>";
                     message[0].innerHTML = logMsg;
                 }
@@ -49,7 +47,7 @@
         }
       }
 
-    function sendForgot(xhr, url, email) {
+    function sendForgot(xhr, url, email, uid) {
         xhr.onreadystatechange = function() {
             Forgot(xhr); 
         };
@@ -94,5 +92,10 @@
 var forgotBut = document.getElementById("forgot");
 
 forgotBut.addEventListener('click', clickForgot, false);
+
+var message = document.getElementsByClassName("message");
+
+message[0].innerHTML = "<p></p>";
+
     
 })();
