@@ -46,12 +46,12 @@ if (check_user_is_connect($connexion))
             $reque->execute(array($author['picture_author']));
             $notif = $reque->fetch();
             // echo '<pre>'; 
-            // print_r($notif); 
-            // print_r($author);
+            // print($notif['user_notif']); 
+            // print($author['picture_author']);
             // print($_SESSION['u_id']); 
             // echo '</pre>';
 
-            if (isset($notif['user_notif']) && $notif['user_notif'] === 1 && $author['picture_author'] !== $_SESSION['u_id']) {
+            if (isset($notif['user_notif']) && $notif['user_notif'] == 1 && $author['picture_author'] != $_SESSION['u_id']) {
                 $header="MIME-Version: 1.0\r\n";
                 $header.='From: Camagru.com <support@camagru.com>'."\n";
                 $header.='Content-Type:text/html; charset="uft-8"'."\n";
@@ -64,16 +64,14 @@ if (check_user_is_connect($connexion))
                     </body>
                 </html>
                 ';
-                if ($notif['user_email']) {
+                if (isset($notif['user_email'])) {
                     if ($mail = mail($notif['user_email'], "Nouveau commentaire", $message, $header))
                     {
-                        // $error['success'] = 'Votre compte a bien été créé ! </br> Veuillez vérifier votre boîte de réception pour confirmer votre email.';
-                        $arr = array("success" => "mail ok");
+                        $arr = array("author" => $_SESSION['u_uid'], "text" => $text_com, "time" => $time, "id" => $id_com, "mail" => "ok");
                     }
                     else
                     {
-                        // $error['email'] = "L'envoi de l'email de confirmation à échoué ! </br> Veuillez vérifier si votre adresse mail est valide et rééssayez.";
-                        $arr = array("erreur" => "notification non envoyée");
+                        $arr = array("erreur" => "Notification non envoyée");
                     }
                 }
             }
