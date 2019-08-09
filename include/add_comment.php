@@ -64,8 +64,18 @@ if (check_user_is_connect($connexion))
                     </body>
                 </html>
                 ';
-                if ($notif['user_email'])
-                    mail($notif['user_email'], "Nouveau commentaire", $message, $header);
+                if ($notif['user_email']) {
+                    if ($mail = mail($notif['user_email'], "Nouveau commentaire", $message, $header))
+                    {
+                        // $error['success'] = 'Votre compte a bien été créé ! </br> Veuillez vérifier votre boîte de réception pour confirmer votre email.';
+                        $arr = array("success" => "mail ok");
+                    }
+                    else
+                    {
+                        // $error['email'] = "L'envoi de l'email de confirmation à échoué ! </br> Veuillez vérifier si votre adresse mail est valide et rééssayez.";
+                        $arr = array("erreur" => "notification non envoyée");
+                    }
+                }
             }
         }
         else

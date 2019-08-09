@@ -113,6 +113,9 @@ if (butSettings)
                 data = JSON.parse(xhr.responseText);
 
                 error = data['error'];
+                pictAuth = data['pictAuth']
+
+                // console.log("ici",data['pictAuth'])
 
                 var msgLog = document.getElementsByClassName("msg");
                 var loginDiv = document.getElementById("loginDiv");
@@ -132,6 +135,20 @@ if (butSettings)
                     }
 
                     makeLogoutAccountBut(data['name']);
+
+                    var commentBut = document.getElementsByClassName("comment");
+                    // console.log("commentbut", commentBut, pictAuth);
+    
+                    Array.from(commentBut).forEach(button => {
+                        // console.log("button",button)
+                        Array.from(pictAuth).forEach(pict => {
+                            // console.log(button.value)
+                            if (button.value === pict[0]) {
+                                var span = "<span class='badge'>"+pict[1]+"</span>";
+                                button.insertAdjacentHTML('beforeend', span);
+                            }
+                        });
+                    });
                 }
                 else if (error) {
                     var param = Object.keys(error),

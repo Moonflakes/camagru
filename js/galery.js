@@ -498,13 +498,16 @@ function Login(xhr) {
                 makeLogoutAccountBut(data['name']);
 
                 var commentBut = document.getElementsByClassName("comment");
-                console.log("commentbut", commentBut, pictAuth);
+                // console.log("commentbut", commentBut, pictAuth);
 
                 Array.from(commentBut).forEach(button => {
-                    console.log("button",button)
-                    // Array.from(pictAuth).forEach(pict => {
-                    //     console.log("a", pict)
-                    // });
+                    // console.log("button",button)
+                    Array.from(pictAuth).forEach(pict => {
+                        if (button.value === pict[0]) {
+                            var span = "<span class='badge'>"+pict[1]+"</span>";
+                            button.insertAdjacentHTML('beforeend', span);
+                        }
+                    });
                 });
             }
             else if (error) {

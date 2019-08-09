@@ -62,18 +62,16 @@ if (isset($_POST['submit']))
             $reqpict = "SELECT picture_id FROM pictures WHERE picture_author=?";
             $req = $connexion->prepare($reqpict);
             $req->execute(array($userinfo['user_id']));
-            $pictauth = $req->fetch();
+            $pictauth = $req->fetchall();
 
-            $arrPict = [];
-            if (isset($pictauth)) {
+            $arrPict = array();
+            if (isset($pictauth) && $pictauth[0]) {
                 foreach ($pictauth as $key => $value) {
-                    if ($key === "picture_id") {
-                        $reqcom = "SELECT * FROM comments WHERE comment_id_pict=? AND comment_author!=? AND comment_read=1";
-                        $req = $connexion->prepare($reqcom);
-                        $req->execute(array($value, $userinfo['user_id']));
-                        $nbcomunread = $req->rowCount();
-                        $arrPict[$value] = $nbcomunread;
-                    }
+                    $reqcom = "SELECT * FROM comments WHERE comment_id_pict=? AND comment_author!=? AND comment_read=1";
+                    $req = $connexion->prepare($reqcom);
+                    $req->execute(array($value['picture_id'], $userinfo['user_id']));
+                    $nbcomunread = $req->rowCount();
+                    array_push($arrPict, array($value['picture_id'], $nbcomunread));
                 }
             }
             
