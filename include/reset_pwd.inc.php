@@ -11,19 +11,22 @@ if (isset($_POST['submit']))
     //Check for empty fields
     if (empty($uid))
     {
-        $_SESSION['erreur']['uid'] = "Veuillez indiquer votre nom d'utilisateur !";
+        $error['uid'] = "Veuillez indiquer votre nom d'utilisateur !";
+        // $_SESSION['erreur']['uid'] = "Veuillez indiquer votre nom d'utilisateur !";
     }
     if (empty($pwd))
     {
-        $_SESSION['erreur']['pwd'] = "Veuillez indiquer votre nouveau mot de passe !";
+        $error['pwd'] = "Veuillez indiquer votre nouveau mot de passe !";
+        // $_SESSION['erreur']['pwd'] = "Veuillez indiquer votre nouveau mot de passe !";
     }
-    if (isset($_SESSION['erreur']))
+    if (isset($error))
     {
         //print_r($_SESSION);
     //print_r($_POST);
     //die();
-        header("Location: ../fr/reset_pwd.php?reset=error&key=".$key);
-        exit();
+        // header("Location: ../fr/reset_pwd.php?reset=error&key=".$key);
+        // exit();
+        $arr = array("error" => $error);
     }
     else
     {
@@ -33,11 +36,12 @@ if (isset($_POST['submit']))
         $req->execute(array($uid));
         $uidexist = $req->rowCount();
         if ($uidexist < 1)
-            $_SESSION['erreur']['uid'] = "Nom d'utilisateur incorrect !";
+            $error['uid'] = "Nom d'utilisateur incorrect !";
         if (isset($_SESSION['erreur']))
         {
-            header("Location: ../fr/reset_pwd.php?reset=error&key=".$key);
-            exit();
+            $arr = array("error" => $error);
+            // header("Location: ../fr/reset_pwd.php?reset=error&key=".$key);
+            // exit();
         }
         else
         {
@@ -47,14 +51,15 @@ if (isset($_POST['submit']))
             $req->execute(array($uid, $key, 2));
             $keyexist = $req->rowCount();
             if ($keyexist < 1)
-                $_SESSION['erreur']['key'] = "Utilisateur invalide ! </br> 
+                $error['key'] = "Utilisateur invalide ! </br> 
                                                 Veuillez vérifier si vous avez bien reçu votre mail de réinitialisation ! </br>
                                                 Si vous n'avez pas reçu votre mail de réinitialisation 
                                                 <a href='forgot_pwd.php' id='fpwd-link'>cliquez ici !</a>";
-            if (isset($_SESSION['erreur']))
+            if (isset($error))
             {
-                header("Location: ../fr/reset_pwd.php?reset=error&key=".$key);
-                exit();
+                // header("Location: ../fr/reset_pwd.php?reset=error&key=".$key);
+                // exit();
+                $arr = array("error" => $error);
             }
             else
             {
@@ -68,17 +73,22 @@ if (isset($_POST['submit']))
                 $requpdate = 'UPDATE users SET user_pwd=?, user_key=?, user_confirm=? WHERE user_uid=?';
                 $connexion->prepare($requpdate)->execute(array($hashpwd, $key, 1, $uid));
                 $_SESSION['u_confirm'] = 1;
-                $_SESSION['success'] = 'Votre mot de passe a bien été réinitialiser !';
-                header("Location: ../fr/reset_pwd.php?reset=success");
-            exit();
+                // $_SESSION['success'] = 'Votre mot de passe a bien été réinitialiser !';
+
+                $arr = array("success" => 'Votre mot de passe a bien été réinitialiser !');
+                // header("Location: ../fr/reset_pwd.php?reset=success");
+                // exit();
             }
         }
     }
 }
 else
 {
-    header("Location: ../fr/reset_pwd.php");
-    exit();
+    // header("Location: ../fr/reset_pwd.php");
+    // exit();
+    $error['post'] = "Une erreur s'est produite, veuillez rééssayer en cliquant sur le lien de réinitialisation de votre mail !";
+    $arr = array("error" => $error);
 }
+echo json_encode($arr);
 
 ?>

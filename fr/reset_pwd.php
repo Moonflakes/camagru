@@ -1,6 +1,8 @@
 <?PHP
     include_once 'header.php';
+    include_once 'message.php';
 ?>
+    <link rel="stylesheet" type="text/css" href="../css/signup.css">
     <section class="main-container">
         <div class="main-wrapper">
             <h2 class="h2sign" >Réinitialisation du mot de passe</h2>
@@ -16,7 +18,7 @@
                                 }
                                 if(isset($_SESSION['uid'])) 
                                 { 
-                                    if ($_GET['reset'] == 'error') 
+                                    if (isset($_GET['reset']) && $_GET['reset'] == 'error') 
                                         echo $_SESSION['uid']; 
                                     $_SESSION['uid'] = "";
                                 } ?>">
@@ -29,7 +31,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <button type="submit" name="submit" 
+                            <button type="submit" name="submit" id="reinitpwd"
                             value="<?php 
                                 if(isset($_GET['key']))
                                     echo $_GET['key']; ?>">Réinitialiser</button>
@@ -39,7 +41,8 @@
             </form>
         </div>
     </section>
-    <script type="text/javascript">
+    <script src="../js/resetpwd.js"></script>
+    <!-- <script type="text/javascript">
     var erreur = <?PHP echo json_encode($_SESSION['erreur']); ?>;
         $(document).ready(function () 
         {
@@ -52,20 +55,20 @@
                 })
             }
         })
-    </script>
-<?PHP
-    if(isset($_SESSION['erreur']))
-    {
-        if ($_SESSION['erreur']['key'])
-            echo "<font color='red'>".$_SESSION['erreur']['key']."</font>";
-        unset($_SESSION['erreur']);
-    }
-    else if (isset($_SESSION['success']))
-    {
-        echo '<font color="red">'.$_SESSION['success'].'</font>';
-        unset($_SESSION['success']);
-    }
-?>
+    </script> -->
+<!-- <?PHP
+    // if(isset($_SESSION['erreur']))
+    // {
+    //     if ($_SESSION['erreur']['key'])
+    //         echo "<font color='red'>".$_SESSION['erreur']['key']."</font>";
+    //     unset($_SESSION['erreur']);
+    // }
+    // else if (isset($_SESSION['success']))
+    // {
+    //     echo '<font color="red">'.$_SESSION['success'].'</font>';
+    //     unset($_SESSION['success']);
+    // }
+?> -->
 <?PHP
     include_once 'footer.php';
 ?>
