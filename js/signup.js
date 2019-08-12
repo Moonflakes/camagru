@@ -3,7 +3,7 @@
     function signMsg(xhr) {
       if (xhr.readyState == XMLHttpRequest.DONE) {
         if (xhr.status == 200) {
-            console.log(xhr.responseText);
+            // console.log(xhr.responseText);
             data = JSON.parse(xhr.responseText);
             var errorMsg = document.getElementsByClassName("msg");
 

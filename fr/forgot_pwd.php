@@ -18,7 +18,7 @@
                                 value="<?php if(isset($_SESSION['u_email'])) echo $_SESSION['u_email']?>">
                         </td>
                     </tr>
-<?php   if (isset($_SESSION['u_confirm']) && $_SESSION['u_confirm'] === 0) 
+<?php   if (isset($_SESSION['u_confirm']) && $_SESSION['u_confirm'] == 0) 
         {
 ?>
                     <tr>

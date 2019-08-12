@@ -1,7 +1,7 @@
 (function() {
 
   function sendNotif(xhr, url, notifState) {
-    console.log("notifState", notifState)
+    // console.log("notifState", notifState)
     xhr.onreadystatechange = function() {
         // Lala(xhr); 
     };

@@ -65,7 +65,7 @@ if (isset($_POST['submit']))
             $pictauth = $req->fetchall();
 
             $arrPict = array();
-            if (isset($pictauth) && $pictauth[0]) {
+            if (isset($pictauth) && isset($pictauth[0])) {
                 foreach ($pictauth as $key => $value) {
                     $reqcom = "SELECT * FROM comments WHERE comment_id_pict=? AND comment_author!=? AND comment_read=1";
                     $req = $connexion->prepare($reqcom);

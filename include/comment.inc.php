@@ -5,14 +5,15 @@ include_once 'check_user.php';
 
 if (isset($_POST['comment']))
 {
+    $comment = htmlspecialchars($_POST['comment']);
     if (check_user_is_connect($connexion))
     {
-        $page = "http://".$_SERVER['HTTP_HOST'].str_replace("/include/comment.inc.php", "", $_SERVER['PHP_SELF'])."/fr/comment.php?img=".$_POST['comment'];
+        $page = "http://".$_SERVER['HTTP_HOST'].str_replace("/include/comment.inc.php", "", $_SERVER['PHP_SELF'])."/fr/comment.php?img=".$comment;
         $arr = array("page" => $page);
 
         //update comment read
         $reqcomread = 'UPDATE `comments` SET `comment_read`=? WHERE `comment_id_pict`=?';
-        $connexion->prepare($reqcomread)->execute(array(0, $_POST['comment']));
+        $connexion->prepare($reqcomread)->execute(array(0, $comment));
     }
     else
     {

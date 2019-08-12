@@ -4,7 +4,7 @@
 function goToPage(xhr) {
     if (xhr.readyState == XMLHttpRequest.DONE) {
         if (xhr.status == 200) {
-            console.log(xhr.responseText);
+            // console.log(xhr.responseText);
             data = JSON.parse(xhr.responseText);
           
             var page = data['page'];
@@ -109,7 +109,7 @@ if (butSettings)
     function Login(xhr) {
         if (xhr.readyState == XMLHttpRequest.DONE) {
             if (xhr.status == 200) {
-                console.log(xhr.responseText);
+                // console.log(xhr.responseText);
                 data = JSON.parse(xhr.responseText);
 
                 error = data['error'];
@@ -137,12 +137,9 @@ if (butSettings)
                     makeLogoutAccountBut(data['name']);
 
                     var commentBut = document.getElementsByClassName("comment");
-                    // console.log("commentbut", commentBut, pictAuth);
     
                     Array.from(commentBut).forEach(button => {
-                        // console.log("button",button)
                         Array.from(pictAuth).forEach(pict => {
-                            // console.log(button.value)
                             if (button.value === pict[0] && pict[1] > 0) {
                                 var span = "<span class='badge'>"+pict[1]+"</span>";
                                 button.insertAdjacentHTML('beforeend', span);

@@ -50,7 +50,19 @@ if (isset($_POST['submit']))
         if (isset($errorall))
         {
             $arr = array("success" => $errorall);
-           
+        }
+        else {
+            $reqall = "SELECT * FROM users WHERE user_email=? AND user_uid=? AND user_confirm=?";
+            $req = $connexion->prepare($reqall);
+            $req->execute(array($email, $uid, 1));
+            $allexist = $req->rowCount();
+        }
+
+        if ($allexist < 1)
+            $errorall = "Votre adresse E-mail n'a pas été confirmée, veuillez vérifier dans vos mails le message de confirmation de votre adresse et procédez à la confirmation afin de pouvoir procéder à la réinitialisation de votre mot de passe !";
+        if (isset($errorall))
+        {
+            $arr = array("success" => $errorall);
         }
         else
         {

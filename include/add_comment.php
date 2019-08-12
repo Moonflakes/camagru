@@ -9,14 +9,15 @@ if (check_user_is_connect($connexion))
 {
     if (isset($_POST['id_pict'])) //id-pict
     {
-        $id_pict = $_POST['id_pict'];
+        $id_pict = htmlspecialchars($_POST['id_pict']);
+        $id = htmlspecialchars($_SESSION['u_id']);
         if (!empty($_POST['text'])) //text
         {
             $text_com = htmlspecialchars($_POST['text']);
             // insert comment
             $reqinscom = 'INSERT INTO `comments`(`comment_id`, `comment_author`, `comment_date`, `comment_id_pict`, `comment_text`, `comment_read`) 
                             VALUES (?, ?, NOW(), ?, ?, ?)';
-            $connexion->prepare($reqinscom)->execute(array(0, $_SESSION['u_id'], $id_pict, $text_com, 1));
+            $connexion->prepare($reqinscom)->execute(array(0, $id, $id_pict, $text_com, 1));
             
             $reqtime = "SELECT `comment_date`, `comment_id` FROM `comments` WHERE `comment_id_pict`=? ORDER BY comment_date DESC";
             $req = $connexion->prepare($reqtime);
