@@ -42,7 +42,7 @@ section.signup
     margin-top: 2em;
     border-radius: 10px;
 }
-.signup-form #reinitpwd {
+.signup-form #resetpwd {
     display: block;
     margin: 0 auto;
     width: 35%;

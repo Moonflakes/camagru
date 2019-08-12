@@ -3,10 +3,9 @@
     include_once 'message.php';
 ?>
     <link rel="stylesheet" type="text/css" href="../css/signup.css">
-    <section class="main-container">
+    <section class="signup">
         <div class="main-wrapper">
             <h2 class="h2sign" >Réinitialisation du mot de passe</h2>
-            <form  action="../include/reset_pwd.inc.php" method="POST">
                 <table class="signup-form">
                     <tr id="uid">
                         <td>
@@ -15,12 +14,6 @@
                                 if(isset($_GET['uid'])) 
                                 { 
                                     echo $_GET['uid']; 
-                                }
-                                if(isset($_SESSION['uid'])) 
-                                { 
-                                    if (isset($_GET['reset']) && $_GET['reset'] == 'error') 
-                                        echo $_SESSION['uid']; 
-                                    $_SESSION['uid'] = "";
                                 } ?>">
                         </td>
                     </tr>
@@ -31,44 +24,16 @@
                     </tr>
                     <tr>
                         <td>
-                            <button type="submit" name="submit" id="reinitpwd"
+                            <button type="submit" name="submit" id="resetpwd"
                             value="<?php 
                                 if(isset($_GET['key']))
                                     echo $_GET['key']; ?>">Réinitialiser</button>
                         </td>
                     </tr>
                 </table>
-            </form>
         </div>
     </section>
     <script src="../js/resetpwd.js"></script>
-    <!-- <script type="text/javascript">
-    var erreur = <?PHP echo json_encode($_SESSION['erreur']); ?>;
-        $(document).ready(function () 
-        {
-            if (erreur)
-            {
-                $.each(erreur,function(index,element)
-                {
-                    $("#"+index).after("<tr><td><font color='red'>"+ element +"</font></td></tr>");
-                    $("#_"+index).css('backgroundColor', 'rgba(248, 207, 72, 0.3)');
-                })
-            }
-        })
-    </script> -->
-<!-- <?PHP
-    // if(isset($_SESSION['erreur']))
-    // {
-    //     if ($_SESSION['erreur']['key'])
-    //         echo "<font color='red'>".$_SESSION['erreur']['key']."</font>";
-    //     unset($_SESSION['erreur']);
-    // }
-    // else if (isset($_SESSION['success']))
-    // {
-    //     echo '<font color="red">'.$_SESSION['success'].'</font>';
-    //     unset($_SESSION['success']);
-    // }
-?> -->
 <?PHP
     include_once 'footer.php';
 ?>

@@ -6,7 +6,8 @@
             console.log(xhr.responseText);
             data = JSON.parse(xhr.responseText);
             var errorMsg = document.getElementsByClassName("msg"),
-                error = data['error'];
+                error = data['error'],
+                erKey = data['key'];
 
             if (errorMsg)
                     removeMsg(errorMsg);
@@ -21,16 +22,24 @@
                     trParam.insertAdjacentHTML('afterend', trMsg);
                 })
             }
+            if (erKey) {
+                var logMsg = "<p class='msg'><font color='red'>"+ erKey +"</font></p>";
+
+                if (message[0])
+                    message[0].innerHTML = logMsg;
+                else {
+                    header[0].insertAdjacentHTML('afterend', "<div class='message'>"+logMsg+"</div>");
+                }
+            }
             if (data['success'])
             {
-                var str_v = Object.values(data['success']);
-                
-                var table = document.getElementById("table"),
-                    h2 = document.getElementsByClassName("h2sign"),
-                    successMsg = "<font color='red'>"+str_v[0]+"</font>";
+                var logMsg = "<p class='msg'><font color='red'>"+ data['success'] +"</font></p>";
 
-                table.parentElement.removeChild(table);
-                h2[0].innerHTML = successMsg;
+                if (message[0])
+                    message[0].innerHTML = logMsg;
+                else {
+                    header[0].insertAdjacentHTML('afterend', "<div class='message'>"+logMsg+"</div>");
+                }
             }
         }
         else {
