@@ -84,7 +84,7 @@
                 var h_load = (element.clientHeight * 40/100);
                 if (element.clientHeight > 190)
                     h_load = 71;
-                console.log(h_load, element)
+                // console.log(h_load, element)
                 element.style.paddingTop = ((element.clientHeight - (2 * h_load)) / 2) - 7;
             });
         }
