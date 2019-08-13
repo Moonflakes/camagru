@@ -24,7 +24,7 @@
     margin : 30px 10px 20px;
 }
 .talkbubble {
-    
+    min-height: 100px;
     max-height: min-content;
     background: #d3ffee93;
     position: relative;
