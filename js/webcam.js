@@ -296,6 +296,7 @@
         var descr = document.createElement('div');
         var text = document.createElement('input');
         var register_but = document.createElement('input');
+        var rotate_but = document.createElement('button');
 
         para.textContent = 'Nom du fichier ' + curFiles[0].name + ', taille du fichier ' + returnFileSize(curFiles[0].size) + '.';
         // src en base64
@@ -331,7 +332,20 @@
               deleteUploadDiv();
           }
             ev.preventDefault();
-				}, false);
+        }, false);
+
+        "<button class='rotate' id='rotation'><img src='../img_site/icones/rotate.png' alt='rotation' title='rotation'></button>";
+        rotate_but.setAttribute("id", "rotation");
+        rotate_but.setAttribute("class", "rotate");
+        var icon_rot = document.createElement('img');
+        icon_rot.setAttribute("title", "rotation");
+        icon_rot.setAttribute("src", "../img_site/icones/rotate.png");
+        rotate_but.appendChild(icon_rot);
+        descr.appendChild(rotate_but);
+        
+        rotate_but.addEventListener('click', function(ev){
+          console.log("je rotationne");
+        }, false);
       }
   }
 

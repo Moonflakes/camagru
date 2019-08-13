@@ -78,3 +78,13 @@ figure:hover .action {
 .img_action:hover {
     transform: scale(1.2);
 }
+
+.rotate {
+    background: ghostwhite;
+    border-radius: 50px;
+    margin-left: 20;
+}
+.rotate img {
+    width: 18px;
+    cursor: pointer;
+}
