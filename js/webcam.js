@@ -277,12 +277,13 @@
   }
 
   function updateImageDisplay() {
-    if (preview.firstChild) {
+    // console.log(preview.firstChild)
+    while (preview.firstChild) {
       preview.removeChild(preview.firstChild);
     }
   
     var curFiles = choose_file.files;
-    //console.log(curFiles[0].name);
+    // console.log(curFiles);
     if(curFiles.length === 0) {
       var para = document.createElement('p');
       para.textContent = 'Aucun fichier sélectionné pour le moment';
@@ -300,6 +301,7 @@
         // src en base64
         readFile(curFiles, image);
         image.setAttribute('id', 'img_upload');
+        // console.log(image)
         
         item_img.appendChild(para);
         item_img.appendChild(image);
