@@ -334,7 +334,6 @@
             ev.preventDefault();
         }, false);
 
-        "<button class='rotate' id='rotation'><img src='../img_site/icones/rotate.png' alt='rotation' title='rotation'></button>";
         rotate_but.setAttribute("id", "rotation");
         rotate_but.setAttribute("class", "rotate");
         var icon_rot = document.createElement('img');
@@ -345,6 +344,7 @@
         
         rotate_but.addEventListener('click', function(ev){
           console.log("je rotationne");
+          image.style.transform = 'rotate(90deg)';
         }, false);
       }
   }

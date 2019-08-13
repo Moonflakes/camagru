@@ -67,10 +67,19 @@ a.ref {
     text-decoration:none;
     padding-left: 7%;
 }
-.action img {
+.action a img {
     height: 40%;
     max-height: 68;
 }
+.action button {
+    height: 25%;
+    max-height: 39px;
+    max-width: 73px;
+}
+.action button img {
+    max-height: 160%;
+}
+
 figure:hover .action {
     opacity: 1;
 }
