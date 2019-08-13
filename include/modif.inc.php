@@ -3,11 +3,12 @@ session_start();
 
 if (isset($_POST['update']))
 {
+    print_r($_POST);
     include_once '../config/setup.php';
-    $update = $_POST['update'];
+    $update = htmlspecialchars($_POST['update']);
     if ($update == "email")
     {
-        $new_val = $_POST['new_val'];
+        $new_val = htmlspecialchars($_POST['new_val']);
         $str_param = "e-mail";
         if (empty($new_val))
             $error['email'] = "Veuillez indiquer votre nouvel e-mail!";
@@ -18,7 +19,7 @@ if (isset($_POST['update']))
     }
     if ($update == "uid")
     {
-        $new_val = $_POST['new_val'];
+        $new_val = htmlspecialchars($_POST['new_val']);
         $str_param = "nom d'utilisateur";
         if (empty($new_val))
             $error['uid'] = "Veuillez indiquer votre nouveau nom d'utilisateur!";
@@ -67,6 +68,7 @@ if (isset($_POST['update']))
             {
                 if ($userinfo = $req->fetch())
                 {
+                    print($oldpwd);
                     $hashpwdCheck = password_verify($oldpwd, $userinfo['user_pwd']);
                     if (!(password_verify($oldpwd, $userinfo['user_pwd'])))
                         $error['oldpwd'] = "Ancien mot de passe incorrect !";
@@ -75,8 +77,9 @@ if (isset($_POST['update']))
                 {
                     $arr = array("error" => $error);
                 }
-                else
+                else {
                     $new_val = password_hash($newpwd, PASSWORD_DEFAULT);
+                }
             }
             $requpdate = "UPDATE users SET user_$update=? WHERE user_uid=?";
             $connexion->prepare($requpdate)->execute(array($new_val, $uid));
