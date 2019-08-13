@@ -39,19 +39,6 @@ class Commentator{
             $req->execute(array($results['comment_'.$i]['comment_author']));
             $userinfo = $req->fetch();
             $results['comment_'.$i]['comment_author'] = $userinfo['user_uid'];
-           /* if (check_user_is_connect($this->_conn))
-            {
-                $reqlike = "SELECT * FROM likes WHERE like_author=? AND like_id_pict=?";
-                $req = $this->_conn->prepare($reqlike);
-                $req->execute(array($_SESSION['uid'], $results['pict_'.$i]['picture_id']));
-
-                if ($likinfo = $req->fetch())
-                    $results['pict_'.$i]['picture_like'] = 1;
-                else
-                    $results['pict_'.$i]['picture_like'] = 0;
-            }
-            else
-                $results['pict_'.$i]['picture_like'] = 0;*/
         }
 
         //return data as object, new stdClass() creates new empty object

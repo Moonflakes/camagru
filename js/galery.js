@@ -329,7 +329,7 @@ function sendLike(xhr, url, id_pict) {
     xhr.send("like="+id_pict);
 }
 
-function makeRequest(url, id_pict, action) {
+function makeRequest(url, id_pict, action, key) {
     var xhr = null;
 
     if (window.XMLHttpRequest || window.ActiveXObject) {
@@ -353,7 +353,7 @@ function makeRequest(url, id_pict, action) {
     if (action === "like")
         sendLike(xhr, url, id_pict);
     else if (action === "comment")
-        sendComment(xhr, url, id_pict)
+        sendComment(xhr, url, id_pict, key)
 }
 
 function coeurClick() {
@@ -362,7 +362,7 @@ function coeurClick() {
     var id = split_id[1];
     var like = document.getElementById("coeur_"+id).value;
 
-    makeRequest('../include/like.php', like, "like");
+    makeRequest('../include/like.php', like, "like", 1);
 }
 
 function removeMsg(errorMsg) {
@@ -410,18 +410,18 @@ function goComment(xhr) {
     }
   }
 
-function sendComment(xhr, url, id_pict) {
+function sendComment(xhr, url, id_pict, key) {
     xhr.onreadystatechange = function() {
         goComment(xhr); 
     };
     xhr.open('POST', url, true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
       
-    xhr.send("comment="+id_pict);
+    xhr.send("comment="+id_pict+"&key="+key);
 }
 
 function commentClick() {
-    makeRequest('../include/comment.inc.php', this.value, "comment");
+    makeRequest('../include/comment.inc.php', this.value, "comment", 2);
 }
 
 var butCom = document.getElementsByClassName("comment");

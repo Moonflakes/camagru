@@ -42,7 +42,7 @@ if (check_user_is_connect($connexion))
             $requ->execute(array($id_pict));
             $author = $requ->fetch();
 
-            $reqnotifexist = "SELECT `user_notif`, `user_email` FROM `users` WHERE `user_id` = ?";
+            $reqnotifexist = "SELECT `user_notif`, `user_email`, `user_key` FROM `users` WHERE `user_id` = ?";
             $reque = $connexion->prepare($reqnotifexist);
             $reque->execute(array($author['picture_author']));
             $notif = $reque->fetch();
@@ -60,7 +60,7 @@ if (check_user_is_connect($connexion))
                 <html>
                     <body>
                         <div align="center">
-                            <a href="http://'.$_SERVER['HTTP_HOST'].str_replace("/include/add_comment.php", "", $_SERVER['PHP_SELF']).'/fr/comment.php?img='.$id_pict.'">Une de vos photos a été commentée</a>
+                            <a href="http://'.$_SERVER['HTTP_HOST'].str_replace("/include/add_comment.php", "", $_SERVER['PHP_SELF']).'/fr/comment.php?img='.urlencode($id_pict).'&key='.urlencode($notif['user_key']).'">Une de vos photos a été commentée</a>
                         </div>
                     </body>
                 </html>

@@ -18,6 +18,11 @@
     include_once '../config/setup.php';
     include_once '../include/commentator.php';
 
+    if (isset($_GET['key']) && isset($_SESSION['u_key']) && $_GET['key'] != $_SESSION['u_key']) {
+        $_SESSION['erreur']['connect'] = "";
+        header('Location: ../include/logout.inc.php');
+    }
+
     if (!$_SESSION['u_uid']) {
         $_SESSION['erreur']['connect'] = "Pour commenter des photos à votre guise connectez vous !";
         header("Location: ../fr/home.php?login=ask");
@@ -56,38 +61,6 @@
 <?PHP
     include_once 'footer.php';
 ?>
-    <!--<script>
-        $(document).ready(function(){
-            $("#button").click(function(e){
-                e.preventDefault();
-                
-                $.post(
-                    '../include/add_comment.php', 
-                    {
-                        text : $("#comment").val(),
-                        id_pict : $("#button").val()
-                    },
-        
-                    function(data){
-                        var author = data['author'];
-                        var text = data['text'];
-                        text = text.replace(/\n/g,'<br />');
-                        var time = data['time'];
-                        var id = data['id']
-                        var id_next = data['id_next'];
-                        $(".old-msg_"+id_next).before('<div class="old-msg_'+id+'"><div class="msg"><b>'+author+'</b><span> : '+text+'</span></div><span class="time" id="time_'+id+'">il y a '+time[0]+'</span></div><br>');
-                        $.each(time,function(index,element){
-                            $('#time_'+index).text(element);
-                        });
-                
-                    },
-                    'json'
-                );
-                $('#comment').val('');
-                $('#comment').css("height", "50");
-            });
-        });
-    </script> -->
     <script src="../js/comment.js"></script>
     <script type="text/javascript">
         function resize_area(obj,minRows){
