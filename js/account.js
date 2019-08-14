@@ -5,6 +5,11 @@
         if (xhr.status == 200) {
             console.log(xhr.responseText);
             data = JSON.parse(xhr.responseText);
+
+            var msgLog = document.getElementsByClassName("msg");
+
+            if (msgLog)
+                removeMsg(msgLog);
             
             if (data['error']){
                 var param = Object.keys(data['error']),

@@ -3,7 +3,6 @@ session_start();
 
 if (isset($_POST['update']))
 {
-    print_r($_POST);
     include_once '../config/setup.php';
     $update = htmlspecialchars($_POST['update']);
     if ($update == "email")
@@ -59,16 +58,13 @@ if (isset($_POST['update']))
         if ($uidexist < 1)
             $error['uid'] = "Nom d'utilisateur incorrect !";
         if (isset($error))
-        {
             $arr = array("error" => $error);
-        }
         else
         {
             if ($update == "pwd")
             {
                 if ($userinfo = $req->fetch())
                 {
-                    print($oldpwd);
                     $hashpwdCheck = password_verify($oldpwd, $userinfo['user_pwd']);
                     if (!(password_verify($oldpwd, $userinfo['user_pwd'])))
                         $error['oldpwd'] = "Ancien mot de passe incorrect !";
@@ -78,15 +74,23 @@ if (isset($_POST['update']))
                     $arr = array("error" => $error);
                 }
                 else {
-                    $new_val = password_hash($newpwd, PASSWORD_DEFAULT);
+                    $len = strlen($newpwd);
+                    if ($len < 8) {
+                        $error['pwd'] = "Votre mot de passe doit au minimum comporter 8 caractères.";
+                        $arr = array("error" => $error);
+                    }
+                    else
+                        $new_val = password_hash($newpwd, PASSWORD_DEFAULT);
                 }
             }
-            $requpdate = "UPDATE users SET user_$update=? WHERE user_uid=?";
-            $connexion->prepare($requpdate)->execute(array($new_val, $uid));
-            $success[$update] = 'Votre '.$str_param.' a bien été modifié !';
-            if ($update != "pwd")
-                $_SESSION["u_".$update] = $new_val;
-            $arr = array("success" => $success);
+            if (isset($new_val)) {
+                $requpdate = "UPDATE users SET user_$update=? WHERE user_uid=?";
+                $connexion->prepare($requpdate)->execute(array($new_val, $uid));
+                $success[$update] = 'Votre '.$str_param.' a bien été modifié !';
+                if ($update != "pwd")
+                    $_SESSION["u_".$update] = $new_val;
+                $arr = array("success" => $success);
+            }
         }
     }
 }
