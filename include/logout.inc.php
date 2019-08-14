@@ -1,11 +1,11 @@
 <?PHP
-/*if (isset($_POST['submit']))
-{*/
+    $msg = null;
+    if (isset($_GET['delete']))
+        $msg = "?msg=delete";
     session_start();
     session_unset();
     session_destroy();
-    header('Location: ../fr/home.php');
+    header('Location: ../fr/home.php'.$msg);
     exit();
-//}
 
 ?>

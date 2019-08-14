@@ -58,12 +58,11 @@
                     </td>
                 </tr>
             </table>
-            </form>
             <table style="width: 50%;" class="account-form">
                 <tr id="pwd">
                     <td style="width: 40%;"></td>
                     <td id="delete">
-                        <button class="delete" type="submit" name="delete" value="delete">Supprimer mon compte</button>
+                        <a href="delete_account.php"><button class="delete" type="submit" name="delete" value="delete">Supprimer mon compte</button></a>
                     </td>
                 </tr>
             </table>

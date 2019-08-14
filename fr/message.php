@@ -2,6 +2,9 @@
 <div class="message">
     <?php
     //supprimer le message d'erreur de login
+    if (isset($_GET['msg']) && $_GET['msg'] == "delete") {
+        echo '<p><font color="red">Votre compte à bien été supprimé.</font></p>';
+    }
     if (isset($_SESSION['erreur']))
     {
         foreach ($_SESSION['erreur'] as $key => $value)
