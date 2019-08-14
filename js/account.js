@@ -3,7 +3,7 @@
     function modifMsg(xhr) {
       if (xhr.readyState == XMLHttpRequest.DONE) {
         if (xhr.status == 200) {
-            console.log(xhr.responseText);
+            // console.log(xhr.responseText);
             data = JSON.parse(xhr.responseText);
 
             var msgLog = document.getElementsByClassName("msg");
@@ -172,10 +172,27 @@
         }, false);
     }
 
+    function deleteClick() {
+        if (confirm("Voulez-vous vraiment supprimer votre compte ?\n Si vous faites cela toutes vos données et photos personnelles seront supprimées."))
+          {
+              console.log("oui je le veux !");
+            // var id = this.id;   // Getting Button id
+            // var split_id = id.split("_");
+            // var id = split_id[1];
+            // var action_img = split_id[0];
+            // if (action_img === "trash")
+            //   makeRequest('../include/trash_img.php', id, action_img);
+            //console.log(split_id);
+          }
+    }
+
 
     var modif = document.getElementsByClassName("modifier"),
     email = document.getElementById("_email").value,
-    uid = document.getElementById("_uid").value;
+    uid = document.getElementById("_uid").value,
+    deleteAccount = document.getElementsByClassName("delete");
+
+    deleteAccount[0].addEventListener('click', deleteClick, false);
 
     Array.from(modif).forEach(function(element) {
         element.addEventListener('click', modifClick, false);
