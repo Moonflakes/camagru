@@ -29,6 +29,8 @@
                 message[0].innerHTML = logMsg;
             }
             else {
+              var textarea = document.getElementsByClassName("form-control");
+              textarea[0].value = "";
               text = text.replace(/\n/g,'<br />');
 
               var old = document.getElementsByClassName("old");
