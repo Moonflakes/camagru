@@ -41,6 +41,8 @@ if (isset($_POST['submit']))
         $uidexist = $req->rowCount();
         if ($uidexist > 0)
             $error['uid'] = "Nom d'utilisateur déjà utilisé !";
+        else if (!preg_match("/^[-a-zA-Z0-9_.]*$/", $uid))
+            $error['uid'] = "Votre nom d'utilisateur ne peut comporter que des caractères alphanumériques, -, _ ou .";
     }
 
     //Check for first password

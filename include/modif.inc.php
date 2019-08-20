@@ -31,6 +31,8 @@ if (isset($_POST['update']))
             $uidexist = $req->rowCount();
             if ($uidexist > 0)
                 $error['uid'] = "Ce nom d'utilisateur vous est déjà attribué !";
+            if(!preg_match("/^[-a-zA-Z0-9_.]*$/", $new_val))
+                $error['uid'] = "Votre nom d'utilisateur ne peut comporter que des caractères alphanumériques, -, _ ou .";
         }
     }
     if ($update == "pwd")
