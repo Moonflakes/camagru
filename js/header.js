@@ -159,6 +159,8 @@ if (butSettings)
                         
                         if (str[index] === "Mot de passe incorrect !")
                             flag = 1;
+                        if (str[index] === "Vous n'avez pas confirmeé votre adresse mail, veuillez vérifier votre boître de réception.")
+                            flag = 2;
                         inputError.setAttribute('style', 'background-color: rgba(248, 207, 72, 0.3)');
                         divError.insertAdjacentHTML('beforeend', errorMsg);
                     })
@@ -168,7 +170,7 @@ if (butSettings)
 
                     if (flag === 1)
                         divError.insertAdjacentHTML('beforeend', forgotPwd);
-                    else
+                    else if (flag === 0)
                         divError.insertAdjacentHTML('beforeend', inscription);
                     loginDiv.setAttribute('style', 'justify-content: space-between');
                 }

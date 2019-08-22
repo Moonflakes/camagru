@@ -46,6 +46,21 @@ if (isset($_POST['submit']))
         {
             $arr = array("error" => $error);
         }
+        else {
+            $reqconfirm = "SELECT * FROM users WHERE user_confirm > ? AND user_uid=?";
+            $req = $connexion->prepare($reqconfirm);
+            $req->execute(array(0, $_SESSION['u_uid']));
+            $confirm = $req->rowCount();
+
+            if (!$confirm) {
+                $error['uid'] = "Vous n'avez pas confirmeé votre adresse mail, veuillez vérifier votre boître de réception.";
+            }
+        }
+
+        if (isset($error))
+        {
+            $arr = array("error" => $error);
+        }
         else
         {
             //Log in the user here
