@@ -522,17 +522,22 @@ function Login(xhr) {
                     
                     if (str[index] === "Mot de passe incorrect !")
                         flag = 1;
+                    if (str[index] === "Vous n'avez pas confirmeé votre adresse mail, veuillez vérifier votre boître de réception.")
+                        flag = 2;
                     inputError.setAttribute('style', 'background-color: rgba(248, 207, 72, 0.3)');
                     divError.insertAdjacentHTML('beforeend', errorMsg);
                 })
                 
-                var inscription = "<p class='msg'><font color='blue'>Si vous n'être pas encore inscrit, inscrivez-vous en cliquant sur Inscription !</font></p>",
-                    forgotPwd = "<p class='msg'><font color='blue'><a href='forgot_pwd.php' id='fpwd-link'>Mot de passe oublié</a></font></p>";
+                var inscription = "<p class='msg'><font color='blue'>Si vous n'êtes pas encore inscrit, inscrivez-vous en cliquant sur Inscription !</font></p>",
+                    forgotPwd = "<p class='msg'><font color='blue'><a href='forgot_pwd.php' id='fpwd-link'>Mot de passe oublié</a></font></p>",
+                    resendConfirm = "<p class='msg'><font color='blue'><a href='../include/resend_confirm.php' id='resend-confirm'>Renvoyer un mail de confirmation</a></font></p>";
 
                 if (flag === 1)
                     divError.insertAdjacentHTML('beforeend', forgotPwd);
-                else
+                else if (flag === 0)
                     divError.insertAdjacentHTML('beforeend', inscription);
+                else if (flag === 2)
+                    divError.insertAdjacentHTML('beforeend', resendConfirm);
                 loginDiv.setAttribute('style', 'justify-content: space-between');
             }
         }

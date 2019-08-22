@@ -109,7 +109,7 @@ if (butSettings)
     function Login(xhr) {
         if (xhr.readyState == XMLHttpRequest.DONE) {
             if (xhr.status == 200) {
-                // console.log(xhr.responseText);
+                console.log(xhr.responseText);
                 data = JSON.parse(xhr.responseText);
 
                 error = data['error'];
@@ -166,12 +166,16 @@ if (butSettings)
                     })
                     
                     var inscription = "<p class='msg'><font color='blue'>Si vous n'êtes pas encore inscrit, inscrivez-vous en cliquant sur Inscription !</font></p>",
-                        forgotPwd = "<p class='msg'><font color='blue'><a href='forgot_pwd.php' id='fpwd-link'>Mot de passe oublié</a></font></p>";
+                        forgotPwd = "<p class='msg'><font color='blue'><a href='forgot_pwd.php' id='fpwd-link'>Mot de passe oublié</a></font></p>",
+                        resendConfirm = "<p class='msg'><font color='blue'><a href='../include/resend_confirm.php' id='fpwd-link'>Renvoyer un mail de confirmation</a></font></p>";
 
                     if (flag === 1)
                         divError.insertAdjacentHTML('beforeend', forgotPwd);
                     else if (flag === 0)
                         divError.insertAdjacentHTML('beforeend', inscription);
+                    else if (flag === 2)
+                        divError.insertAdjacentHTML('beforeend', resendConfirm);
+                    
                     loginDiv.setAttribute('style', 'justify-content: space-between');
                 }
             }
