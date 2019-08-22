@@ -349,6 +349,23 @@
       }
   }
 
+  function updateImageFilterDisplay() {
+
+    // console.log(video);
+    var image_filtre = document.createElement('img');
+  
+    var curFilesFilter = choose_file_filter.files;
+    // console.log(curFiles);
+    if(curFilesFilter.length) {
+        // src en base64
+        readFile(curFilesFilter, image_filtre);
+        var video = document.getElementById('video');
+        camera.removeChild(video);
+        image_filtre.setAttribute('id', 'video');
+        camera.appendChild(image_filtre);
+    }
+  }
+
   function takepicture(){
     // console.log("take picture");
     var canvas = document.getElementById('canvas');
@@ -501,6 +518,7 @@
     photo = document.getElementById('photo');
     action = document.getElementsByClassName('but_act');
     choose_file = document.getElementById('myFile');
+    choose_file_filter = document.getElementById('myFileFilter');
     preview = document.getElementById('preview'),
     filter = document.getElementsByClassName('filter');
 
@@ -525,6 +543,7 @@
 
     //fonction choose file
     choose_file.addEventListener('change', updateImageDisplay);
+    choose_file_filter.addEventListener('change', updateImageFilterDisplay);
 
     
     // Older browsers might not implement mediaDevices at all, so we set an empty object first
@@ -556,7 +575,6 @@
 
 		navigator.mediaDevices.getUserMedia({ audio: false, video: true })
 		.then(function(stream) {
-      //console.log(stream);
 		  var video = document.querySelector('video');
 		  // Older browsers may not have srcObject
 		  if ("srcObject" in video) {

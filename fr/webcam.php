@@ -50,6 +50,10 @@
 					</label>
 				</form>
 				<div class="take_photo">
+					<div class="upload">
+						<label for="myFileFilter" class="label-file">Choisir une image</label>
+						<input type="file" id="myFileFilter" class="upl_file" accept=".jpg, .jpeg, .png"><br/>
+					</div>
 					<div class="camera" id="camera">
 						<video id="video">Video stream not available.</video>
 					</div>
